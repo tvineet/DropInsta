@@ -199,6 +199,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             progress.setVisibility(View.GONE);
             Log.d("Response: ", response.toString());
             showSnackbar(response.toString());
+            login_btn.setClickable(true);
         }
     };
 

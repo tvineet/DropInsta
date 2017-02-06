@@ -35,6 +35,7 @@ import java.util.Calendar;
 public class SignActivity extends Activity implements SignaturePad.OnSignedListener, View.OnClickListener {
     public static final String FOLDERNAME = ".SignaturePad";
     public static final String INTENT_FILENAME = "filename";
+    public static final String INTENT_RECEIVER_NAME = "receivername";
     private static final String DATEIME_FORMAT = "yyyy.MM.dd_HH.mm.ss ";
     private SignaturePad mSignaturePad;
     private Button mClearButton;
@@ -63,7 +64,19 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
         mSignaturePad.setOnSignedListener(this);
 
         receiver_name = (EditText) findViewById(R.id.receiver_name);
+        setData();
+    }
 
+    private void setData(){
+        if(isReceiverNameRequired()){
+            receiver_name.setVisibility(View.VISIBLE);
+        }else{
+            receiver_name.setVisibility(View.GONE);
+        }
+    }
+
+    public boolean isReceiverNameRequired() {
+        return false;
     }
 
     @Override
@@ -93,7 +106,14 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.save:
-
+                String receiverName = "";
+                    if(isReceiverNameRequired()){
+                        receiverName = ""+receiver_name.getText();
+                        if(receiverName == null || receiverName.length() == 0){
+                            Toast.makeText(this,R.string.error_receiver_name,Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
 
                     Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                     if (addJpgSignatureToGallery(signatureBitmap)) {
@@ -102,7 +122,9 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
 
                             Intent intent = new Intent();
                             intent.putExtra(INTENT_FILENAME, filepath);
-
+                            if(isReceiverNameRequired()){
+                                intent.putExtra(INTENT_RECEIVER_NAME, receiverName);
+                            }
                             setResult(RESULT_OK, intent);
                             finish();
                         }

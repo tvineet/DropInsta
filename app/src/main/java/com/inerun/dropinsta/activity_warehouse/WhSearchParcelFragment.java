@@ -176,7 +176,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
                         selectedparcelDataArrayList.set(i, parceldata);
                     }
 
-                    startActivityForResult(new Intent(getActivity(), SignActivity.class), SIGN_REQUEST);
+                    startActivityForResult(new Intent(getActivity(), WhSignActivity.class), SIGN_REQUEST);
 
 
                 } else {

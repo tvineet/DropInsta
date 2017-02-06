@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:hint="Collected By"
         android:layout_margin="@dimen/layout_margin5dp"
-        android:visibility="gone"
+        android:visibility="visible"
         />
 
     <com.github.gcacace.signaturepad.views.SignaturePad
