@@ -12,4 +12,7 @@ public class WhSignActivity extends SignActivity {
     public boolean isReceiverNameRequired() {
         return true;
     }
+
+
+    //This is test change
 }
