@@ -367,5 +367,13 @@ public class ParcelListingData implements Serializable {
         public void setColumn_id(int column_id) {
             this.column_id = column_id;
         }
+
+        public void setTransaction_timestamp(String transaction_timestamp) {
+            this.transaction_timestamp = transaction_timestamp;
+        }
+
+        public void setDeliverystatus(int deliverystatus) {
+            this.deliverystatus = deliverystatus;
+        }
     }
 }

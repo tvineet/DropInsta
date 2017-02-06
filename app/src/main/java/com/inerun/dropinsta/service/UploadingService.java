@@ -30,6 +30,7 @@ import cz.msebera.android.httpclient.Header;
 public class UploadingService extends Service {
 
     private static final String TAG = "ImageUploadingServices";
+    public static final String DIRECT_UPLOAD = "direct_upload";
 
     private Queue<MyImageUplodingThread> myQueue;
 
@@ -45,13 +46,17 @@ public class UploadingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        ArrayList<POD> model= new ArrayList<>();
         if (intent == null) {
             Log.i(TAG, "Getting Intent null");
             return START_NOT_STICKY;
         }
 
 
-        ArrayList<POD> model = DIDbHelper.getPendingPODs(context);
+
+            model = DIDbHelper.getPendingPODs(context);
+
+
 
 
         Log.i(TAG, "POD_queue_size ::" + model.size());
@@ -127,10 +132,10 @@ public class UploadingService extends Service {
             try {
 
 //                uploadFile(context, poddata, UrlConstants.URL_POD_UPLOAD);
-                String url = "http://192.168.1.130/dropinsta/app/uploadpod";
+                String url = UrlConstants.URL_POD_UPLOAD;
 //                uploadFile(context, poddata, UrlConstants.URL_POD_UPLOAD);
 
-                uploadFile(context, poddata, UrlConstants.URL_POD_UPLOAD);
+                uploadFile(context, poddata, url);
 
 //                manageQueue();
             } catch (Exception e) {

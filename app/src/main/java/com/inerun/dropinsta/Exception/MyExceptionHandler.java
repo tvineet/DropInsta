@@ -53,7 +53,7 @@ public class MyExceptionHandler implements
             e.printStackTrace();
         }
 
-//        System.exit(1); // kill off the crashed app
+        System.exit(1); // kill off the crashed app
     }
 
 

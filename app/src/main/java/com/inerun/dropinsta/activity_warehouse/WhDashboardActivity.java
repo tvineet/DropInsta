@@ -15,7 +15,7 @@ public class WhDashboardActivity extends BaseActivity {
     @Override
     public int customSetContentView() {
 
-//        setWarehouse(true);
+        setWarehouse(true);
         return R.layout.activity_cordinator_container;
     }
 
@@ -44,6 +44,10 @@ public class WhDashboardActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void whDeliveryUpdated() {
+       showSnackbar(R.string.parcel_updated_msg);
 
-
+        hideProgress();
+    }
 }

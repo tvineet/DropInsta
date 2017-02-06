@@ -22,6 +22,7 @@ public class AppConstant {
     //    public static final String DB_NAME = "database.db";
     public static final String DB_NAME = "/mnt/sdcard/example.db";
     public static final String ACTION_POD = "action_pod";
+    public static final String ACTION_WHPOD = "action_whpod";
     public static final int DEFAULT_TIMEOUT = 20 * 1000;
     public static final String USER_PREFRENCES_NAME = "user_preferences";
     public static final String APP_PREFRENCES_NAME = "lang_preferences";

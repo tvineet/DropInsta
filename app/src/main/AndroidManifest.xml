@@ -153,6 +153,7 @@
         </activity>
 
         <service android:name=".service.UploadingService" />
+        <service android:name=".service.whParcelUploadService" />
 
 
         <receiver android:name=".service.NetworkChangeReceiver">

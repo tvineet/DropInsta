@@ -156,6 +156,28 @@ public class DeviceInfoUtil {
 			device_version = "KITKAT";
 			break;
 
+			case Build.VERSION_CODES.KITKAT_WATCH:
+
+			device_version = "KITKAT_WATCH";
+			break;case Build.VERSION_CODES.LOLLIPOP:
+
+			device_version = "LOLLIPOP";
+			break;case Build.VERSION_CODES.LOLLIPOP_MR1:
+
+			device_version = "LOLLIPOP_MR1";
+			break;case Build.VERSION_CODES.M:
+
+			device_version = "MARSHMALLOW";
+			break;case Build.VERSION_CODES.N:
+
+			device_version = "NOUGAT";
+			break;case Build.VERSION_CODES.N_MR1:
+
+			device_version = "NOUGAT_MR";
+			break;
+
+
+
 		default:
 			device_version = "NOT FOUND";
 			break;

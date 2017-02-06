@@ -7,8 +7,8 @@ public class UrlConstants {
 
 
 //    public static final String BASE_ADDRESS = "http://192.168.1.129/dropinsta/app/";
-//    public static final String BASE_ADDRESS = "http://192.168.1.129/dropinsta/app/";
-    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
+    public static final String BASE_ADDRESS = "http://192.168.1.117/dropinsta/app/";
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.109/dropinsta/app/";
 
 
@@ -20,6 +20,7 @@ public class UrlConstants {
     public static final String URL_SYNC_AND_UPDATE = BASE_ADDRESS + "index";
     public static final String URL_EXCEPTION = BASE_ADDRESS + "exception";
     public static final String URL_POD_UPLOAD = BASE_ADDRESS + "uploadpod";
+    public static final String URL_WH_POD_UPLOAD = BASE_ADDRESS + "uploadpodwarehouse";
     public static final String URL_SEARCH = BASE_ADDRESS + "search";
     public static final String URL_ADD = BASE_ADDRESS + "warehouse";
 
@@ -76,4 +77,5 @@ public class UrlConstants {
     public static final String KEY_versioncode = "versioncode";
     public static final String KEY_exception = "exception";
 
+    public static final String KEY_POD = "pod";
 }

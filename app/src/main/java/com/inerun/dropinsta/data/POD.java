@@ -1,10 +1,12 @@
 package com.inerun.dropinsta.data;
 
+import java.io.Serializable;
+
 /**
  * Created by vineet on 12/10/2016.
  */
 
-public class POD {
+public class POD implements Serializable {
     private int id;
     private String path;
     private int status;

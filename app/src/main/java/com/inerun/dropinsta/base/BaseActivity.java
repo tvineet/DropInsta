@@ -693,6 +693,7 @@ abstract public class BaseActivity extends AppCompatActivity {
         public void proccessDIReceiver(boolean warehouse) {
             if (warehouse) {
                 //process warehouse delivery broadcast
+                whDeliveryUpdated();
             } else {
                 performRequestSyncData();
             }
@@ -703,6 +704,10 @@ abstract public class BaseActivity extends AppCompatActivity {
             syncData();
         }
     };
+
+    public void whDeliveryUpdated() {
+
+    }
 
     private void performRequestSyncData() {
         showProgress();

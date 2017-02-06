@@ -30,13 +30,16 @@ import com.inerun.dropinsta.activity.SignActivity;
 import com.inerun.dropinsta.adapter.WhSearchAdapter;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.BaseFragment;
+import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.data.POD;
 import com.inerun.dropinsta.data.ParcelListingData;
+import com.inerun.dropinsta.data.UpdatedParcelData;
 import com.inerun.dropinsta.data.WhSearchParcelData;
+import com.inerun.dropinsta.helper.DIHelper;
 import com.inerun.dropinsta.scanner.CameraTestActivity;
 import com.inerun.dropinsta.service.DIRequestCreator;
-import com.inerun.dropinsta.sql.DIDbHelper;
+import com.inerun.dropinsta.service.whParcelUploadService;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -63,6 +66,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     private RelativeLayout selectall_layout;
     private Button updatebtn;
     private ArrayList<ParcelListingData.ParcelData> selectedparcelDataArrayList;
+    private ArrayList<UpdatedParcelData> updatedArrayList;
 
     public static Fragment newInstance() {
         WhSearchParcelFragment fragment = new WhSearchParcelFragment();
@@ -160,8 +164,9 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
 
 
                 selectedparcelDataArrayList = new ArrayList<>();
+                updatedArrayList = new ArrayList<>();
                 for (int i = 0; i < adapter.getParcelDataList().size(); i++) {
-                    if(!adapter.getParcelDataList().get(i).isDelivered()) {
+                    if(adapter.getParcelDataList().get(i).isselected()) {
                         selectedparcelDataArrayList.add(adapter.getParcelDataList().get(i));
                     }
                 }
@@ -171,10 +176,15 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
 
                     for (int i = 0; i < selectedparcelDataArrayList.size(); i++) {
                         ParcelListingData.ParcelData parceldata = selectedparcelDataArrayList.get(i);
-                        int id = DIDbHelper.getColumnIdFromBarcode(parceldata.getBarcode(), getActivity());
-                        parceldata.setColumn_id(id);
+                        UpdatedParcelData updateparcel= new UpdatedParcelData(parceldata.getBarcode(),ParcelListingData.ParcelData.DELIVERED,parceldata.getDeliverycomments(),parceldata.getPayment_status(),DIHelper.getDateTime(AppConstant.DATEIME_FORMAT),"","");
+
+
+//                        int id = DIDbHelper.getColumnIdFromBarcode(parceldata.getBarcode(), getActivity());
+//                        parceldata.setColumn_id(id);
                         selectedparcelDataArrayList.set(i, parceldata);
+                        updatedArrayList.add(updateparcel);
                     }
+
 
                     startActivityForResult(new Intent(getActivity(), WhSignActivity.class), SIGN_REQUEST);
 
@@ -200,7 +210,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
         if (isStringValid(parcel_no) || isStringValid(parcel_name) || isStringValid(parcel_email) || isStringValid(parcel_phone) || isStringValid(parcel_custid)) {
             Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getSearchMapParams(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid);
 
-            DropInsta.serviceManager().postRequest(UrlConstants.URL_SEARCH, params, response_listener, response_errorlistener, SEARCH);
+            DropInsta.serviceManager().postRequest(UrlConstants.URL_SEARCH, params,getProgress(), response_listener, response_errorlistener, SEARCH);
 
 //            setSearchData(null);
 
@@ -240,6 +250,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     Response.Listener<String> response_listener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
+            hideProgress();
             Gson gson = new Gson();
 
             WhSearchParcelData data = gson.fromJson(response, WhSearchParcelData.class);
@@ -249,6 +260,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     Response.ErrorListener response_errorlistener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
+            hideProgress();
             setSearchData(null);
             showSnackbar(error.getMessage());
 
@@ -260,17 +272,17 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
         @Override
         public void onClick(View view) {
             int pos = (int) view.getTag();
-            ParcelListingData.ParcelData parceldata = adapter.getParcelDataList().get(pos);
-            ArrayList<ParcelListingData.ParcelData> parcelDataArrayList = new ArrayList<>();
-            parcelDataArrayList.add(parceldata);
-
-//            DIDbHelper.deleteDeliveryTable(getActivity());
-            DIDbHelper.insertDeliveryInfoListIntoDb(getActivity(), parcelDataArrayList);
-            int id = DIDbHelper.getColumnIdFromBarcode(parceldata.getBarcode(), getActivity());
-
-            parceldata.setColumn_id(id);
-
-            deliverParcel(parceldata);
+//            ParcelListingData.ParcelData parceldata = adapter.getParcelDataList().get(pos);
+//            ArrayList<ParcelListingData.ParcelData> parcelDataArrayList = new ArrayList<>();
+//            parcelDataArrayList.add(parceldata);
+//
+////            DIDbHelper.deleteDeliveryTable(getActivity());
+//            DIDbHelper.insertDeliveryInfoListIntoDb(getActivity(), parcelDataArrayList);
+//            int id = DIDbHelper.getColumnIdFromBarcode(parceldata.getBarcode(), getActivity());
+//
+//            parceldata.setColumn_id(id);
+//
+//            deliverParcel(parceldata);
 
 
         }
@@ -291,20 +303,31 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
             case SIGN_REQUEST:
 
                 if (resultCode == Activity.RESULT_OK && data.hasExtra(SignActivity.INTENT_FILENAME)) {
+                    showProgress();
                     String path = data.getStringExtra(SignActivity.INTENT_FILENAME);
-                    String receiver_name = data.getStringExtra(UrlConstants.KEY_RECEIVER_NAME);
+                    String receiver_name = data.getStringExtra(SignActivity.INTENT_RECEIVER_NAME);
 //                    setImage(path);
                     Log.i("POD_path", path);
-                    Log.i("Receiver_Name", receiver_name);
+                    Log.i("Receiver_Name", ""+receiver_name);
                     String pod_name = path.substring(path.lastIndexOf("/") + 1);
-                    Log.i("POD_Name", pod_name);
+                    Log.i("POD_Name", ""+pod_name);
+                    Log.i("Size", ""+selectedparcelDataArrayList.size());
                     POD pod = new POD(pod_name, receiver_name);
+                    Intent i = new Intent(getActivity(), whParcelUploadService.class);
+                    i.putExtra(UrlConstants.KEY_POD,pod);
+                    i.putExtra(UrlConstants.KEY_DATA,updatedArrayList);
+                    getActivity().startService(i);
 
-                    for (int i = 0; i < selectedparcelDataArrayList.size(); i++) {
-//                        DIDbHelper.insertPODInfo(pod, selectedparcelDataArrayList.get(i).getColumn_id(), getActivity());
-//                    Toast.makeText(this, "Saved at"+ path, Toast.LENGTH_SHORT).show();
-                    }
-                    ((BaseActivity) getActivity()).syncData();
+//                    for (int i = 0; i < selectedparcelDataArrayList.size(); i++) {
+////                        DIDbHelper.insertPODInfo(pod, selectedparcelDataArrayList.get(i).getColumn_id(), getActivity());
+////                    Toast.makeText(this, "Saved at"+ path, Toast.LENGTH_SHORT).show();
+//                    }
+
+
+
+//                    ((BaseActivity) getActivity()).syncData();
+
+
                 }
                 break;
 
@@ -337,4 +360,8 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
 //        }
         return false;
     }
+
+
+
+
 }
