@@ -166,8 +166,8 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
                     }
                 }
                 if (selectedparcelDataArrayList.size() > 0) {
-                    DIDbHelper.deleteDeliveryTable(getActivity());
-                    DIDbHelper.insertDeliveryInfoListIntoDb(getActivity(), selectedparcelDataArrayList);
+//                    DIDbHelper.deleteDeliveryTable(getActivity());
+//                    DIDbHelper.insertDeliveryInfoListIntoDb(getActivity(), selectedparcelDataArrayList);
 
                     for (int i = 0; i < selectedparcelDataArrayList.size(); i++) {
                         ParcelListingData.ParcelData parceldata = selectedparcelDataArrayList.get(i);
@@ -301,7 +301,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
                     POD pod = new POD(pod_name, receiver_name);
 
                     for (int i = 0; i < selectedparcelDataArrayList.size(); i++) {
-                        DIDbHelper.insertPODInfo(pod, selectedparcelDataArrayList.get(i).getColumn_id(), getActivity());
+//                        DIDbHelper.insertPODInfo(pod, selectedparcelDataArrayList.get(i).getColumn_id(), getActivity());
 //                    Toast.makeText(this, "Saved at"+ path, Toast.LENGTH_SHORT).show();
                     }
                     ((BaseActivity) getActivity()).syncData();
