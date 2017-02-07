@@ -11,8 +11,7 @@ public class UrlConstants {
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.109/dropinsta/app/";
 
-
-
+    
     /* BaseURL + service_name*/
     public static final String URL_LOGIN = BASE_ADDRESS + "login";
 
