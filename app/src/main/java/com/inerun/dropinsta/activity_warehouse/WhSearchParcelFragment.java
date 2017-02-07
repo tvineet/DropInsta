@@ -272,6 +272,14 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
         @Override
         public void onClick(View view) {
             int pos = (int) view.getTag();
+
+            ParcelListingData.ParcelData parceldata = adapter.getParcelDataList().get(pos);
+            ArrayList<ParcelListingData.ParcelData> parcelDataArrayList = new ArrayList<>();
+            parcelDataArrayList.add(parceldata);
+
+            deliverParcel(parceldata);
+
+
 //            ParcelListingData.ParcelData parceldata = adapter.getParcelDataList().get(pos);
 //            ArrayList<ParcelListingData.ParcelData> parcelDataArrayList = new ArrayList<>();
 //            parcelDataArrayList.add(parceldata);

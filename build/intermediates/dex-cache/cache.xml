@@ -3,237 +3,237 @@
 
     <item
         is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/transition/25.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0c6d948e6cb9ea6f535d175fb61ba2930719c0e9">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.0.0_66ae31aa99cf498b36797a0f86604db07c6663c4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.0.1_926d67ab3bd034a9d74f55a0cf8685c0cc7b16e1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.0.1_14af98b8b5ea9fa0b7f223840370fa5279aad8d3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/libs/android-async-http-1.4.9.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.9_ff2c1cbe65f979496d8455a74a22fbc97680e224.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.5/7a15a7db50f86c4b64aa3367424a60e3a325b8f1/okhttp-2.7.5.jar"
+        jar="C:\Users\vineet\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.7.5\7a15a7db50f86c4b64aa3367424a60e3a325b8f1\okhttp-2.7.5.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="7a15a7db50f86c4b64aa3367424a60e3a325b8f1">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/okhttp-2.7.5_7660da6963313355d44c9da8a5817eb62fb8cd4f.jar" />
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\okhttp-2.7.5_7b1ef75f71f5ef83af0fddcfd9f3c5c6b441c100.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/classes.jar"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.0.0_71483df920d25c1df23022658157a9c1926ded91.jar" />
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.0.1_21df26164163c770b02d2d17f11f06359dc263f2.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vinay/Documents/Android/SDK/android-sdks/extras/android/m2repository/com/android/support/support-annotations/25.0.1/support-annotations-25.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/support-annotations-25.0.1_785c6aaa4fa88adb3b6fbdcf6ff3bf210d632370.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.0.0_c86fee6fc8db425c39e86e9449f92f3c49dc766d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_598d91a815f05b5e21edf60ea4a575058a6fd944.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.volley-volley-1.0.0_04c722ff037cc64fae7b704d47879b2ca02b4ffb.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.0.0_b6a131e0328fb1a6f3cb86f4139179beeb8a46a9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_030b68601a62ce44006ac40fc61e4986b6c02e9f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.0.0_6e6cac48034c81ec6ba5f11191a6a5e682e44075.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/libs/internal_impl-25.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_3a67b157e5e1155d19843750511bd794d050368b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="98476622f10715998eacf9240d6b479f12c66143">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/okio-1.6.0_1880bd388bdba3c52ef56e4d84e361419aaf03fa.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/design/25.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="26384be22ddc74cfe197ebda9edbc7d1fd8bd537">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-design-25.0.0_5f45b11ea8d96e16efaa01c10c898c3c33df9cd6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.0.1_dd3a678967d415e8b2c51d94370fb56907a6931f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.0.0_df3fdfc05e5a04ff71d37dc21209d0f93d26309b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/libs/httpclient-4.3.6.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="526a9f794eab830eae4f23a62c572878b3f491ab">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/httpclient-4.3.6_206341c1d5b828d37c800eb461e69dca1b9ec59c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.0.0_1ba625fb0913d32b0bd6254c02a83a33877e4ab9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.github.gcacace/signature-pad/1.2.0/jars/classes.jar"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.github.gcacace\signature-pad\1.2.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="7e38ceffed1fb752b3ab4f4b3678697ff1924c57">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.github.gcacace-signature-pad-1.2.0_f15a67086aff1977fcee6f86f75ecdf059830906.jar" />
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.github.gcacace-signature-pad-1.2.0_611bb1770d5f04a3d9eec7ff4894b4734c2154dc.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/libs/zbar.jar"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="7bbdf7ba57a8a157c0cad51e455609c70887812e">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/zbar_f36b29129a0b44fd915b572db44eb8adde8ae9b2.jar" />
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.0.0_06eee7d07a9c718eb970c65bec864949418b1d27.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vinay/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/gson-2.7_53ea665485d98e430a6fb4d5066d80eac4654b7b.jar" />
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.0.0_59067183d9ced1ff0234fce6de5f07099783832e.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\libs\internal_impl-25.0.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_5ec89e571716c35233c628562f1839f08eecc345.jar" />
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_e9a3255716d926c93521246ba10063ff86bd9494.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/jars/classes.jar"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\libs\internal_impl-25.0.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.0.0_bbbd2cabfda82fdfda795d95d265ecb7a050afeb.jar" />
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_8f45de1ff5781cdc63ad0d7d7529479104b59ebc.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.0.0_d502898092823a9bdea92de351bf82dda1658853.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.0.0_1066b39ceb50c8d8ecc82a96594ab6fe5c1a96da.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\vineet\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\gson-2.7_c56c528c3385481916efa6adcad8200ebe0b834a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
-        <dex dex="/Users/vinay/Documents/F Drive/AndroidStudioWorkSpace/DropInsta/DropInstaGithub/DropInsta/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_b7513be8fb7b840e456abca58fb28c2e5bf4da3b.jar" />
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_c93521e6d7a1424b42e9340c26f18c422e42caf1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\design\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26384be22ddc74cfe197ebda9edbc7d1fd8bd537">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.0.0_c97d61b084bc658fecfd126de8f0ca58a9607ac5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_59241312d21d1901efd159ad7bc3c224d6dfd0b7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.0.0_4fb20308fe07ef111828c33213d5c093fa1caf46.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\libs\httpclient-4.3.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="526a9f794eab830eae4f23a62c572878b3f491ab">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\httpclient-4.3.6_57f8c6cf0e32a8b7279a73acb30ad756f80a3430.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.volley\volley\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.volley-volley-1.0.0_de2da9a58d9c6e582703f6b67824375c422ad9fa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\vineet\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\okio-1.6.0_c6317883716210233beb19ade93051bac9189097.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0c6d948e6cb9ea6f535d175fb61ba2930719c0e9">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.0.0_a08c9ca20ed5e2751d598f849576f7fe2f249e59.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\libs\android-async-http-1.4.9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.9_9f9bdb70921d9293bac8c08e827f50b15553df3e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.0.0_9a07dc86303ddc24c6e5b11a25816eb8c1312015.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\libs\zbar.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7bbdf7ba57a8a157c0cad51e455609c70887812e">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\zbar_d657fa77f18789161c08035b5b552f887d82a0cd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.0.1_b2531f3256e15cc949f337a2399fa19787ef2263.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.0.0_28919a9bd6b10e1138ebe4ea7d2eecf860446d29.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_433432ef62e788b0e1f3ad9a7a9ee1a77fe6ac67.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\Android\android-sdks\android-sdks\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\support-annotations-25.0.1_19aee866243e913e41c6de91850305d93c542f0d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Vineet\DropInsta31Jan\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="D:\Vineet\DropInsta31Jan\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.0.1_f3665f5c4bb28d0bc20dbf7a8f0f2fc464dfec3c.jar" />
     </item>
 
 </items>
