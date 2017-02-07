@@ -149,23 +149,21 @@ public class WhAddParcelFragment extends BaseFragment implements View.OnClickLis
         }
     }
 
-    Response.Listener<String> response_listener= new Response.Listener<String>() {
+    Response.Listener<String> response_listener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            Gson gson= new Gson();
+            Gson gson = new Gson();
             ServiceResponse serviceResponse = gson.fromJson(response, ServiceResponse.class);
-            if(serviceResponse.getStatus())
-            {
-               clearData();
-            }else
-            {
-                List<String> failed_parcel= null;
+            if (serviceResponse.getStatus()) {
+                clearData();
+            } else {
+                List<String> failed_parcel = null;
                 try {
                     failed_parcel = getFailedParcels(serviceResponse
-                    .getParcels());
-                    if(failed_parcel!=null&&failed_parcel.size()>0) {
+                            .getParcels());
+                    if (failed_parcel != null && failed_parcel.size() > 0) {
                         adapter.setParcellist(failed_parcel);
-                    }else{
+                    } else {
                         clearData();
                     }
                 } catch (JSONException e) {
@@ -182,12 +180,12 @@ public class WhAddParcelFragment extends BaseFragment implements View.OnClickLis
     };
 
     private List<String> getFailedParcels(ArrayList<ServiceResponse.AddData> response) throws JSONException {
-        List<String> failed_parcel= new ArrayList<>();
-if(response!=null) {
-    for (int i = 0; i < response.size(); i++) {
-        failed_parcel.add(response.get(i).getParcelno());
-    }
-}
+        List<String> failed_parcel = new ArrayList<>();
+        if (response != null) {
+            for (int i = 0; i < response.size(); i++) {
+                failed_parcel.add(response.get(i).getParcelno());
+            }
+        }
         return failed_parcel;
     }
 
@@ -197,12 +195,13 @@ if(response!=null) {
         adapter.notifyDataSetChanged();
     }
 
-    Response.ErrorListener response_errorlistener=new Response.ErrorListener() {
+    Response.ErrorListener response_errorlistener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
             showSnackbar(error.getMessage());
         }
     };
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
