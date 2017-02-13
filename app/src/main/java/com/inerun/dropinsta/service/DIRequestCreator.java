@@ -147,7 +147,7 @@ public class DIRequestCreator {
         return mapParams;
 
     }
-    public Map<String, String> getSearchMapParams(String parcelnum, String name, String email, String contact,String customerid) {
+    public Map<String, String> getSearchMapParams(String parcelnum, String name, String email, String contact, String customerid, String parcel_invoice_no) {
 
 
         if(Utils.isUserLoggedIn(context)){
@@ -159,7 +159,7 @@ public class DIRequestCreator {
         mapParams.put(UrlConstants.KEY_BARCODE, parcelnum);
         mapParams.put(UrlConstants.KEY_PHONE_NO, contact);
         mapParams.put(UrlConstants.KEY_CUSTOMER_ID, customerid);
-
+        mapParams.put(UrlConstants.KEY_INVOICE_NUMBER, parcel_invoice_no);
 
 
 

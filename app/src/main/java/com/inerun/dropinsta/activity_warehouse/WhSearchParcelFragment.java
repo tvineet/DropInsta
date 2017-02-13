@@ -59,7 +59,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     private RecyclerView detaillistview;
     WhSearchAdapter adapter;
     private ImageView parcel_scan;
-    private EditText custid_edittext;
+    private EditText custid_edittext, invoice_edttext;
 
     private CheckBox selectall_checkbox;
     private Snackbar mySnackbar;
@@ -99,6 +99,8 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
         email_edittext = (EditText) getViewById(R.id.email_edt);
         custid_edittext = (EditText) getViewById(R.id.custid_edt);
         phone_edittext = (EditText) getViewById(R.id.phone_edt);
+        invoice_edttext = (EditText) getViewById(R.id.invoice_edt);
+
         selectall_checkbox = (CheckBox) getViewById(R.id.search_checkbox_selected);
         selectall_layout = (RelativeLayout) getViewById(R.id.checkbox_layout);
         detaillistview = (RecyclerView) getViewById(R.id.detail_listview);
@@ -207,8 +209,9 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
         String parcel_email = "" + email_edittext.getText();
         String parcel_phone = "" + phone_edittext.getText();
         String parcel_custid = "" + custid_edittext.getText();
-        if (isStringValid(parcel_no) || isStringValid(parcel_name) || isStringValid(parcel_email) || isStringValid(parcel_phone) || isStringValid(parcel_custid)) {
-            Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getSearchMapParams(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid);
+        String parcel_invoice_no = "" + invoice_edttext.getText();
+        if (isStringValid(parcel_no) || isStringValid(parcel_name) || isStringValid(parcel_email) || isStringValid(parcel_phone) || isStringValid(parcel_custid) || isStringValid(parcel_invoice_no)) {
+            Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getSearchMapParams(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid, parcel_invoice_no);
 
             DropInsta.serviceManager().postRequest(UrlConstants.URL_SEARCH, params,getProgress(), response_listener, response_errorlistener, SEARCH);
 

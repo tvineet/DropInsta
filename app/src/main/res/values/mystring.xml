@@ -21,4 +21,5 @@
     <string name="title_pending_parcel">Pending</string>
     <string name="title_parcel_detail">Parcel Detail</string>
     <string name="special_instructions_title">Special Instructions: %1$s</string>
+    <string name="search_parcel_invoice">Invoice No.</string>
 </resources>

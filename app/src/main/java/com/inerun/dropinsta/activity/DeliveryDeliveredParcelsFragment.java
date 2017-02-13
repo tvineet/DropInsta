@@ -15,9 +15,9 @@ public class DeliveryDeliveredParcelsFragment extends DeliveryAllParcelsFragment
 
 
     public static DeliveryDeliveredParcelsFragment newInstance() {
-        
+
         Bundle args = new Bundle();
-        
+
         DeliveryDeliveredParcelsFragment fragment = new DeliveryDeliveredParcelsFragment();
         fragment.setArguments(args);
         return fragment;

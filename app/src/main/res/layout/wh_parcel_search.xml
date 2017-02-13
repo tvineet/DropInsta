@@ -108,12 +108,25 @@
             android:singleLine="true"
             android:hint="@string/search_parcel_custid" />
 
+        <EditText
+            android:id="@+id/invoice_edt"
+            style="@style/search_edittext_view_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/custid_edt"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:hint="@string/search_parcel_invoice"
+            android:visibility="gone"
+            />
+
         <com.inerun.dropinsta.fontlib.CustomFontButton
             android:id="@+id/search_button"
             style="@style/button_view_style"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/custid_edt"
+            android:layout_below="@+id/invoice_edt"
             android:layout_marginTop="@dimen/layout_margin10dp"
 
 
