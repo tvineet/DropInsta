@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/error_layout"/>
+
+    <RelativeLayout
+        android:id="@+id/checkbox_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_button"
+        android:layout_marginTop="@dimen/layout_margin5dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+
+        <CheckBox
+            android:id="@+id/search_checkbox_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+
+
+            />
+
+        <TextView
+            android:id="@+id/search_txt_selected"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/search_checkbox_selected"
+            android:layout_toLeftOf="@+id/search_updatebtn"
+            android:layout_marginLeft="@dimen/layout_margin5dp"
+            android:gravity="left"
+            android:text="@string/select_all"
+            android:textSize="@dimen/text_size18sp"
+
+
+            />
+        <Button
+            android:id="@+id/search_updatebtn"
+            style="@style/button_view_style"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_margin5dp"
+            android:gravity="center"
+
+
+            android:text="@string/submit"
+            android:textSize="@dimen/text_size18sp"
+
+
+            />
+
+    </RelativeLayout>
+
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/detail_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkbox_layout"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/layout_margin5dp"
+
+
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/searcherror"
+        style="@style/heading_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detail_listview"
+        android:layout_marginTop="@dimen/layout_margin10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/search_error"
+        android:textSize="@dimen/text_size18sp"
+        android:visibility="gone"
+
+
+        />
+
+
+</LinearLayout>
