@@ -24,10 +24,9 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
-import com.inerun.dropinsta.activity.ParcelDetailActivity;
+import com.inerun.dropinsta.activity.ParcelDetailFragment;
 import com.inerun.dropinsta.activity.SignActivity;
 import com.inerun.dropinsta.adapter.WhSearchAdapter;
-import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.BaseFragment;
 import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
@@ -37,7 +36,6 @@ import com.inerun.dropinsta.data.ParcelSearchData;
 import com.inerun.dropinsta.data.UpdatedParcelData;
 import com.inerun.dropinsta.data.WhSearchParcelData;
 import com.inerun.dropinsta.helper.DIHelper;
-import com.inerun.dropinsta.scanner.CameraTestActivity;
 import com.inerun.dropinsta.service.DIRequestCreator;
 import com.inerun.dropinsta.service.whParcelUploadService;
 
@@ -218,10 +216,12 @@ public class WhSearchParcelListingFragment extends BaseFragment implements View.
 
     private void deliverParcel(ParcelListingData.ParcelData parceldata) {
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(UrlConstants.KEY_DATA, parceldata);
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable(UrlConstants.KEY_DATA, parceldata);
+//
+//        ((BaseActivity) getActivity()).goToActivity(ParcelDetailActivity.class, bundle);
 
-        ((BaseActivity) getActivity()).goToActivity(ParcelDetailActivity.class, bundle);
+        navigateToFragment(getActivity(), ParcelDetailFragment.newInstance(parceldata));
     }
 
 
