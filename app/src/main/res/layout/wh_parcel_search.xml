@@ -118,7 +118,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:hint="@string/search_parcel_invoice"
-            android:visibility="gone"
+            android:visibility="visible"
             />
 
         <com.inerun.dropinsta.fontlib.CustomFontButton

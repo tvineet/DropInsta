@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.inerun.dropinsta.base.DeviceInfoUtil;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
+import com.inerun.dropinsta.data.ParcelSearchData;
 import com.inerun.dropinsta.data.TransactionData;
 import com.inerun.dropinsta.data.UpdatedParcelData;
 import com.loopj.android.http.RequestParams;
@@ -160,6 +161,27 @@ public class DIRequestCreator {
         mapParams.put(UrlConstants.KEY_PHONE_NO, contact);
         mapParams.put(UrlConstants.KEY_CUSTOMER_ID, customerid);
         mapParams.put(UrlConstants.KEY_INVOICE_NUMBER, parcel_invoice_no);
+
+
+
+
+        return mapParams;
+
+    }
+
+    public Map<String, String> getSearchMapParamsNew(ParcelSearchData parcelSearchData) {
+
+
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+        mapParams.put(UrlConstants.KEY_NAME, parcelSearchData.getParcel_name());
+        mapParams.put(UrlConstants.KEY_EMAIL, parcelSearchData.getParcel_email());
+        mapParams.put(UrlConstants.KEY_BARCODE, parcelSearchData.getParcel_no());
+        mapParams.put(UrlConstants.KEY_PHONE_NO, parcelSearchData.getParcel_phone());
+        mapParams.put(UrlConstants.KEY_CUSTOMER_ID, parcelSearchData.getParcel_custid());
+        mapParams.put(UrlConstants.KEY_INVOICE_NUMBER, parcelSearchData.getParcel_invoice_no());
 
 
 

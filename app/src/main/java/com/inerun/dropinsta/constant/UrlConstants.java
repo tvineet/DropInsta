@@ -6,10 +6,13 @@ package com.inerun.dropinsta.constant;
 public class UrlConstants {
 
 
-//    public static final String BASE_ADDRESS = "http://192.168.1.129/dropinsta/app/";
+    public static final String BASE_ADDRESS = "http://192.168.1.129/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.117/dropinsta/app/";
-    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.118/dropinsta/app/";
+
+
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta2/app/";
 
 
 
@@ -79,4 +82,5 @@ public class UrlConstants {
 
     public static final String KEY_POD = "pod";
     public static final String KEY_INVOICE_NUMBER = "invoice_no";
+
 }

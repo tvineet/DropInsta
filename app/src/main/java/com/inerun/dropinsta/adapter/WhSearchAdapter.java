@@ -37,6 +37,13 @@ public class WhSearchAdapter extends RecyclerView.Adapter<WhSearchAdapter.ViewHo
         this.fragment = fragment;
     }
 
+    public WhSearchAdapter( Context context, List<ParcelListingData.ParcelData> parcelDataList, View.OnClickListener onclickListener) {
+        this.parcelDataList = parcelDataList;
+        this.onclickListener = onclickListener;
+        this.context = context;
+        fragment = new WhSearchParcelFragment();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;

@@ -34,6 +34,7 @@ import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.data.POD;
 import com.inerun.dropinsta.data.ParcelListingData;
+import com.inerun.dropinsta.data.ParcelSearchData;
 import com.inerun.dropinsta.data.UpdatedParcelData;
 import com.inerun.dropinsta.data.WhSearchParcelData;
 import com.inerun.dropinsta.helper.DIHelper;
@@ -211,9 +212,14 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
         String parcel_custid = "" + custid_edittext.getText();
         String parcel_invoice_no = "" + invoice_edttext.getText();
         if (isStringValid(parcel_no) || isStringValid(parcel_name) || isStringValid(parcel_email) || isStringValid(parcel_phone) || isStringValid(parcel_custid) || isStringValid(parcel_invoice_no)) {
-            Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getSearchMapParams(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid, parcel_invoice_no);
 
-            DropInsta.serviceManager().postRequest(UrlConstants.URL_SEARCH, params,getProgress(), response_listener, response_errorlistener, SEARCH);
+            ParcelSearchData parcelSearchData = new ParcelSearchData(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid, parcel_invoice_no);
+
+            navigateToFragment(context, WhSearchParcelListingFragment.newInstance(parcelSearchData));
+
+//            Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getSearchMapParams(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid, parcel_invoice_no);
+
+//            DropInsta.serviceManager().postRequest(UrlConstants.URL_SEARCH, params,getProgress(), response_listener, response_errorlistener, SEARCH);
 
 //            setSearchData(null);
 
