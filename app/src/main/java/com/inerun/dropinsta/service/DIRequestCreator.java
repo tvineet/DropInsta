@@ -314,6 +314,13 @@ public class DIRequestCreator {
         return mapParams;
     }
 
+    public Map<String,String> getReadyInvoiceMapParams() {
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+        return mapParams;
+    }
 
 
 //    public RequestParams getGcmRegistrationParams(Context context,String gcm_id) {
