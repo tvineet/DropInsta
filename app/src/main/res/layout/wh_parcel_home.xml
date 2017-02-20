@@ -75,7 +75,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_toLeftOf="@+id/addparcel_imgstyle"
                 android:textColor="@android:color/white"
-                android:text="Stock In"
+                android:text="@string/add_parcel_title"
                 android:textSize="@dimen/home_text_size"
 
 

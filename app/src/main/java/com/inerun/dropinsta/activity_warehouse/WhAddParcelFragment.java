@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +65,10 @@ public class WhAddParcelFragment extends BaseFragment implements View.OnClickLis
         setShowBackArrow(true);
         context = getActivity();
         initView();
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.mipmap.back_arrow3);
+        setToolBarTitle(R.string.add_parcel_title);
+//        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+//        toolbar.setNavigationIcon(R.mipmap.back_arrow3);
+//        toolbar.setTitle(R.string.add_parcel_title);
 
         setListeners();
         setData();

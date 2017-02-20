@@ -59,6 +59,12 @@ abstract public class FragmentBaseActivity extends BaseActivity {
         if (toolbar != null) {
             toolbar.setTitle(toolBarTitle());
         }
+    } private void setToolbarTitle(int resid) {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (toolbar != null) {
+            toolbar.setTitle(resid);
+        }
     }
 
     public int toolBarTitle() {

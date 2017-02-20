@@ -3,6 +3,7 @@ package com.inerun.dropinsta.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -62,6 +63,7 @@ public class SplashActivity extends BaseActivity {
         setSplash(true);
 
         setDataToApplication();
+        Log.i("SplashActivity",""+getIntent().getExtras());
         if (!NotiHelper.isNotificationIntent(getIntent())) {
             timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -126,8 +128,10 @@ public class SplashActivity extends BaseActivity {
         Intent newIntent= new Intent();
         if((""+Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_DELIVERY))
         {
+            Log.i("getNotificationIntent","USER_TYPE_DELIVERY");
              newIntent = new Intent(SplashActivity.this, DeliveryDashBoardActivity.class);
         }else {
+            Log.i("getNotificationIntent","USER_TYPE_WAREHOUSE");
              newIntent = new Intent(SplashActivity.this, WhDashboardActivity.class);
         }
 

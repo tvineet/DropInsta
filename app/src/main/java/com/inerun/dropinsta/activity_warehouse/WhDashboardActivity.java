@@ -1,9 +1,11 @@
 package com.inerun.dropinsta.activity_warehouse;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.base.BaseActivity;
+import com.inerun.dropinsta.gcm.NotiHelper;
 
 /**
  * Created by vinay on 15/12/16.
@@ -33,6 +35,10 @@ public class WhDashboardActivity extends BaseActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,
                 WhDashboardFragment.newInstance()).commit();
+        if (NotiHelper.isNotificationIntent(getIntent())) {
+            Log.i("WhDashboardActivity","isNotificationIntent");
+           processNotiIntent(WhDashboardActivity.this);
+        }
 
     }
 

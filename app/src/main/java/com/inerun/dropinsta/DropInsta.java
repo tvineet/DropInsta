@@ -41,7 +41,7 @@ public class DropInsta extends Application {
 
     private void updateGcmIdToServer() {
         String gcmid = Utils.getGcmId(appcontext);
-        Log.d("updateGcmIdToServer", "Gcm id"+gcmid);
+        Log.d("updateGcmIdToServer", "Gcm id: "+gcmid);
         if (Utils.isUserLoggedIn(appcontext) && gcmid != null && gcmid.length() > 0) {
 
             Log.i("updateGcmIdToServer", "Updating Gcm id To Server");

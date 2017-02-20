@@ -23,7 +23,13 @@ public class DropInstaFirebaseMessagingService extends FirebaseMessagingService 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
         Log.d("Notification", "data: " + remoteMessage.getData());
+
         Map<String, String> params = remoteMessage.getData();
+        params.put(UrlConstants.KEY_DATA,"{'type':101}");
+        params.put(UrlConstants.KEY_Title,"Notification Title");
+        params.put(UrlConstants.KEY_IMAGE,"");
+        params.put(UrlConstants.KEY_Text,"This is the Notification text which must be shown on Notification");
+        Log.d("params", " " + remoteMessage.getData());
         if(params!=null) {
             try {
                 String string = params.get(UrlConstants.KEY_DATA);
@@ -34,6 +40,7 @@ public class DropInstaFirebaseMessagingService extends FirebaseMessagingService 
                     big_picture = params.get(UrlConstants.KEY_IMAGE);
                 }
                 String text = params.get(UrlConstants.KEY_Text);
+
                 NotiHelper.processNotification(getApplicationContext(), title, text, string, big_picture);
             } catch (Exception e) {
                 e.printStackTrace();

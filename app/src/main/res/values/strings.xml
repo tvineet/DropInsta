@@ -32,6 +32,9 @@
     <string name="cancel">Cancel</string>
     <string name="error_transcid_error">Cannot Insert Transaction into database.</string>
     <string name="permissions_missing">Some of permissions are not Granted</string>
+    <string name="add_parcel_title">Stock In</string>
+    <string name="ready_for_delivery">Ready For Delivery</string>
+    <string name="invoices">Invoices</string>
 
 
 </resources>

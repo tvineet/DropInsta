@@ -39,11 +39,9 @@ import com.inerun.dropinsta.data.UpdatedParcelData;
 import com.inerun.dropinsta.data.WhSearchParcelData;
 import com.inerun.dropinsta.helper.DIHelper;
 import com.inerun.dropinsta.scanner.CameraTestActivity;
-import com.inerun.dropinsta.service.DIRequestCreator;
 import com.inerun.dropinsta.service.whParcelUploadService;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Created by vinay on 16/12/16.
@@ -84,7 +82,8 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     public void customOnCreateView(View root, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setShowBackArrow(true);
         context = getActivity();
-        initView();
+initView();
+        setToolBarTitle(R.string.search_parcel);
         setListeners();
 
 

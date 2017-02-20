@@ -11,10 +11,7 @@ import android.support.v4.app.TaskStackBuilder;
 
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.SplashActivity;
-import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
 import com.inerun.dropinsta.constant.UrlConstants;
-
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -88,44 +85,11 @@ public class NotiHelper {
 
     public static boolean isNotificationIntent(Intent intent) {
 
-        return intent.hasExtra(UrlConstants.KEY_IS_NOTIFICATION);
+        return intent.getExtras()!=null||intent.hasExtra(UrlConstants.KEY_IS_NOTIFICATION);
 
     }
 
-    /*
-    Used to process
-     */
-    public static void handleNotificationIntent(Context context, Intent intent) {
-        Intent noti_intent = null;
-        try {
 
-
-            String jsonstring = intent.getStringExtra(UrlConstants.KEY_DATA);
-            JSONObject jsonObject = new JSONObject(jsonstring);
-            String type = jsonObject.getString(UrlConstants.KEY_TYPE);
-            switch (Integer.parseInt(type)) {
-                case NOTI_INVOICE_GENERATED:
-//                    String catid = jsonObject.getString(UrlConstants.KEY_CATID);
-                    noti_intent = new Intent(context, WhDashboardActivity.class);
-//                    noti_intent.putExtra(UrlConstants.KEY_CATID, catid);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString(UrlConstants.KEY_CATEGORY_ID, catid);
-//                    bundle.putString(UrlConstants.KEY_SUBCATEGORY_ID, catid);
-//
-//
-//                    noti_intent.putExtra(UrlConstants.KEY_DATA, bundle);
-
-
-                    context.startActivity(noti_intent);
-
-                    break;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
     public static int createID(){
         Date now = new Date();
         int id = Integer.parseInt(new SimpleDateFormat("ddHHmmss",  Locale.US).format(now));

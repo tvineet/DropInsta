@@ -51,6 +51,7 @@ public class CustomRequest extends Request<String>{
 
     @Override
     protected void deliverResponse(String response) {
+        if(listener!=null)
         listener.onResponse(response);
     }
 

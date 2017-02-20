@@ -43,12 +43,14 @@ import com.inerun.dropinsta.Exception.ExceptionMessages;
 import com.inerun.dropinsta.Exception.MyExceptionHandler;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.LoginActivity;
+import com.inerun.dropinsta.activity_warehouse.WhReadyInvoiceFragment;
 import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.TransactionData;
 import com.inerun.dropinsta.data.UpdatedParcelData;
+import com.inerun.dropinsta.gcm.NotiHelper;
 import com.inerun.dropinsta.helper.DIHelper;
 import com.inerun.dropinsta.service.DIReceiver;
 import com.inerun.dropinsta.service.DIRequestCreator;
@@ -711,7 +713,7 @@ abstract public class BaseActivity extends AppCompatActivity {
 
     private void performRequestSyncData() {
         showProgress();
-        Log.i("performRequestSyncData","start"+System.currentTimeMillis());
+        Log.i("performRequestSyncData", "start" + System.currentTimeMillis());
         ArrayList<UpdatedParcelData> parcelDatas = DIDbHelper.getDeliveryInfoForUpdateAndSYNC(this);
         ArrayList<TransactionData> transcDatas = DIDbHelper.getInvoices(this);
         Map<String, String> params = DIRequestCreator.getInstance(this).getSyncDataMapParams(parcelDatas, transcDatas);
@@ -721,20 +723,19 @@ abstract public class BaseActivity extends AppCompatActivity {
 
     public void showProgress() {
         if (progress != null) {
-            Log.i("Base","Progress is visible");
+            Log.i("Base", "Progress is visible");
             progress.setVisibility(View.VISIBLE);
-        }else {
-            Log.i("Base","Progress is null");
+        } else {
+            Log.i("Base", "Progress is null");
         }
     }
 
     public void hideProgress() {
         if (progress != null) {
-            Log.i("Base","Progress is invisible");
+            Log.i("Base", "Progress is invisible");
             progress.setVisibility(View.GONE);
-        }else
-        {
-            Log.i("Base","Progress is null");
+        } else {
+            Log.i("Base", "Progress is null");
         }
     }
 
@@ -764,17 +765,17 @@ abstract public class BaseActivity extends AppCompatActivity {
                 showSnackbar(DIHelper.getMessage(jsonObject));
                 if (DIHelper.getStatus(jsonObject)) {
                     Gson gson = new Gson();
-                    Log.i("DB","starttime: "+System.currentTimeMillis() );
+                    Log.i("DB", "starttime: " + System.currentTimeMillis());
                     ParcelListingData parcelListingData = gson.fromJson(response, ParcelListingData.class);
-                    Log.i("gson","starttime: "+System.currentTimeMillis() );
+                    Log.i("gson", "starttime: " + System.currentTimeMillis());
                     DIDbHelper.deleteTables(BaseActivity.this);
-                    Log.i("deleteTables","starttime: "+System.currentTimeMillis() );
+                    Log.i("deleteTables", "starttime: " + System.currentTimeMillis());
                     if (parcelListingData != null) {
 
                         DIDbHelper.insertDeliveryAndStatusInfoListIntoDb(BaseActivity.this, parcelListingData.getDeliveryData());
-                        Log.i("DIDbHelper","starttime: "+System.currentTimeMillis() );
+                        Log.i("DIDbHelper", "starttime: " + System.currentTimeMillis());
                         DIDbHelper.insertTransactionInfoToDatabase(BaseActivity.this, parcelListingData.getTransdata());
-                        Log.i("DB","endtime: "+System.currentTimeMillis() );
+                        Log.i("DB", "endtime: " + System.currentTimeMillis());
                     }
 
                     response();
@@ -930,7 +931,6 @@ abstract public class BaseActivity extends AppCompatActivity {
         public void dialogClicklistener(int button) {
 
 
-
         }
     };
 
@@ -1021,6 +1021,55 @@ abstract public class BaseActivity extends AppCompatActivity {
 //    private void gotCameraPermission() {
 //
 //    }
+
+    public void processNotiIntent(Context context) {
+        try {
+            if (NotiHelper.isNotificationIntent(getIntent())) {
+                handleNotificationIntent(context, getIntent());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            AlertDialogUtil.showDialogwithNeutralButton(context, getString(R.string.exception), e.getMessage(), getString(R.string.ok), dailog_listener).show();
+        }
+    }
+
+    /*
+Used to process
+ */
+    public  void handleNotificationIntent(Context context, Intent intent) {
+        Intent noti_intent = null;
+        try {
+
+            Log.i("BaseActivity","handleNotificationIntent");
+            String jsonstring = intent.getStringExtra(UrlConstants.KEY_DATA);
+            JSONObject jsonObject = new JSONObject(jsonstring);
+            String type = jsonObject.getString(UrlConstants.KEY_TYPE);
+            switch (Integer.parseInt(type)) {
+                case NotiHelper.NOTI_INVOICE_GENERATED:
+                    Log.i("Noti","NOTI_INVOICE_GENERATED");
+                    navigateToFragment(WhReadyInvoiceFragment.newInstance());
+
+//                    String catid = jsonObject.getString(UrlConstants.KEY_CATID);
+//                    noti_intent = new Intent(context, WhDashboardActivity.class);
+//                    noti_intent.putExtra(UrlConstants.KEY_CATID, catid);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString(UrlConstants.KEY_CATEGORY_ID, catid);
+//                    bundle.putString(UrlConstants.KEY_SUBCATEGORY_ID, catid);
+//
+//
+//                    noti_intent.putExtra(UrlConstants.KEY_DATA, bundle);
+
+
+
+
+                    break;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private AlertDialogUtil.ConnectionDialogClickListener permissiondialoglistener = new AlertDialogUtil.ConnectionDialogClickListener() {
         @Override

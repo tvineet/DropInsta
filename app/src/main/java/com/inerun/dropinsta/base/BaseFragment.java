@@ -28,8 +28,7 @@ abstract public class BaseFragment extends Fragment {
     View root;
 
 
-
-    boolean showBackArrow=false;
+    boolean showBackArrow = false;
     private AlertDialogUtil.ConnectionDialogClickListener dailog_listener = new AlertDialogUtil.ConnectionDialogClickListener() {
         @Override
         public void dialogClicklistener(int button) {
@@ -37,6 +36,7 @@ abstract public class BaseFragment extends Fragment {
         }
     };
     private ProgressBar progress;
+    private Toolbar toolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,21 +50,21 @@ abstract public class BaseFragment extends Fragment {
             root = inflater.inflate(layout_id, null);
             try {
 
-                customOnCreateView(root, inflater, container, savedInstanceState);
-                Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+                toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
                 progress = (ProgressBar) getActivity().findViewById(R.id.progressBar);
-                if(toolbar!=null) {
-                    if(showBackArrow) {
+                customOnCreateView(root, inflater, container, savedInstanceState);
+                if (toolbar != null) {
+                    if (showBackArrow) {
 
 
                         toolbar.setNavigationIcon(R.mipmap.back_arrow_white);
-                    }else {
+                    } else {
                         toolbar.setNavigationIcon(null);
                         toolbar.setNavigationOnClickListener(backarrowclick);
                     }
-                }else
-                {
-                    Log.e("BaseFragment","toolbar is not available in activity ,cannot set back arrow");
+                } else {
+                    Log.e("BaseFragment", "toolbar is not available in activity ,cannot set back arrow");
                 }
 
             } catch (Exception e) {
@@ -76,7 +76,6 @@ abstract public class BaseFragment extends Fragment {
         }
         return root;
     }
-
 
 
     abstract public int inflateView();
@@ -117,7 +116,7 @@ abstract public class BaseFragment extends Fragment {
 //        } else {
 //            return getResources().getDrawable(id);
 //        }
-        return  ContextCompat.getDrawable( getActivity(), id);
+        return ContextCompat.getDrawable(getActivity(), id);
     }
 
     protected void gotoActivity(Class classobj, Bundle bundle) {
@@ -127,13 +126,15 @@ abstract public class BaseFragment extends Fragment {
             intent.putExtra(UrlConstants.KEY_DATA, bundle);
         }
         startActivity(intent);
-    }protected void gotoActivityForResult(Class classobj, Bundle bundle,int requestcode) {
+    }
+
+    protected void gotoActivityForResult(Class classobj, Bundle bundle, int requestcode) {
 
         Intent intent = new Intent(getActivity(), classobj);
         if (bundle != null) {
             intent.putExtra(UrlConstants.KEY_DATA, bundle);
         }
-        startActivityForResult(intent,requestcode);
+        startActivityForResult(intent, requestcode);
     }
 
     public void setBackground(View view, Drawable d) {
@@ -183,6 +184,7 @@ abstract public class BaseFragment extends Fragment {
             progress.setVisibility(View.GONE);
         }
     }
+
     public void navigateToFragment(Context context, Fragment fragment) {
         String backStateName = fragment.getClass().getName();
 
@@ -201,27 +203,31 @@ abstract public class BaseFragment extends Fragment {
             ft.commit();
         }
     }
-    public  void showSnackbar( int msg){
 
-        Snackbar snackbar =Snackbar.make(   (CoordinatorLayout) getActivity().findViewById(R.id.root_appbar), msg, Snackbar.LENGTH_LONG);
-//        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this,  R.color.colorPrimary));
-//        snackbar.getView().setBackgroundResource(R.color.colorPrimary);
-        snackbar.show();
-    }public  void showSnackbar( String msg){
+    public void showSnackbar(int msg) {
 
-        Snackbar snackbar =Snackbar.make(   (CoordinatorLayout) getActivity().findViewById(R.id.root_appbar), msg, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make((CoordinatorLayout) getActivity().findViewById(R.id.root_appbar), msg, Snackbar.LENGTH_LONG);
 //        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this,  R.color.colorPrimary));
 //        snackbar.getView().setBackgroundResource(R.color.colorPrimary);
         snackbar.show();
     }
+
+    public void showSnackbar(String msg) {
+
+        Snackbar snackbar = Snackbar.make((CoordinatorLayout) getActivity().findViewById(R.id.root_appbar), msg, Snackbar.LENGTH_LONG);
+//        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this,  R.color.colorPrimary));
+//        snackbar.getView().setBackgroundResource(R.color.colorPrimary);
+        snackbar.show();
+    }
+
     public boolean isStringValid(String string) {
         if (string != null && string.length() > 0) {
             return true;
         }
         return false;
     }
-    public CoordinatorLayout getCordinatorLayout()
-    {
+
+    public CoordinatorLayout getCordinatorLayout() {
         return (CoordinatorLayout) getActivity().findViewById(R.id.root_appbar);
     }
 
@@ -234,19 +240,25 @@ abstract public class BaseFragment extends Fragment {
         this.showBackArrow = showBackArrow;
     }
 
+    public void setToolBarTitle(int resid) {
+        if (toolbar != null) {
+            toolbar.setTitle(resid);
+        }
+    }
 
-    View.OnClickListener backarrowclick= new View.OnClickListener() {
+
+    View.OnClickListener backarrowclick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((BaseActivity)getActivity()).handleFragmentBackPressed();
+            ((BaseActivity) getActivity()).handleFragmentBackPressed();
         }
     };
 
     public void syncData() {
-        ((BaseActivity)getActivity()).syncData();
+        ((BaseActivity) getActivity()).syncData();
     }
 
-    public  int getColor( int id) {
+    public int getColor(int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return getActivity().getColor(id);
         } else {
@@ -254,6 +266,7 @@ abstract public class BaseFragment extends Fragment {
             return getActivity().getResources().getColor(id);
         }
     }
+
     public ProgressBar getProgress() {
         return progress;
     }
