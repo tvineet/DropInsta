@@ -20,17 +20,17 @@ import java.util.List;
 
 public class InvoiceAdapter extends BaseRecyclerViewAdapter {
     private Context context;
-    private ArrayList<WhInvoiceParcelData.Invoice> parcelDataList;
+    private ArrayList<WhInvoiceParcelData.Invoice> invoiceArrayList;
     private static OnItemClickListener mItemClickListener;
 
     public class ViewHolder extends BaseRecyclerViewAdapter.ViewHolder implements View.OnClickListener {
-        public TextView barcode, payment;
+        public TextView invoice_no, no_of_parcel;
 
 
         public ViewHolder(View view) {
             super(view);
-            barcode = (TextView) view.findViewById(R.id.barcode);
-            payment = (TextView) view.findViewById(R.id.payment);
+            invoice_no = (TextView) view.findViewById(R.id.invoice_no);
+            no_of_parcel = (TextView) view.findViewById(R.id.no_of_parcel);
             view.setOnClickListener(this);
         }
 
@@ -44,8 +44,8 @@ public class InvoiceAdapter extends BaseRecyclerViewAdapter {
     }
 
 
-    public InvoiceAdapter(Context context, ArrayList<WhInvoiceParcelData.Invoice> parcelDataList) {
-        this.parcelDataList = parcelDataList;
+    public InvoiceAdapter(Context context, ArrayList<WhInvoiceParcelData.Invoice> invoiceArrayList) {
+        this.invoiceArrayList = invoiceArrayList;
         this.context = context;
     }
 
@@ -61,18 +61,29 @@ public class InvoiceAdapter extends BaseRecyclerViewAdapter {
     protected View oncreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
 
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.payment_list_item, parent, false);
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.invoice_list_item, parent, false);
         return itemView;
     }
 
     @Override
     public void onbindViewHolder(BaseRecyclerViewAdapter.ViewHolder viewholder, int position) {
         ViewHolder holder= (ViewHolder) viewholder.holder;
-        WhInvoiceParcelData.Invoice data = parcelDataList.get(position);
+        WhInvoiceParcelData.Invoice data = invoiceArrayList.get(position);
 
-        holder.barcode.setText(data.getInvoiceNo());
+        holder.invoice_no.setText(data.getInvoiceNo());
+        if(data.getParcelDatas() != null && data.getParcelDatas().size() >= 0) {
+            holder.no_of_parcel.setText(data.getParcelDatas().size());
+        }else{
+            holder.no_of_parcel.setText("0");
+        }
+        if(position % 2 == 0){
+            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.colorlightyellow));
+            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
 
-        holder.payment.setText(context.getString(R.string.payment_prepaid));
+        }else{
+            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.sideMenuOptionDark));
+            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+        }
 
     }
 
@@ -93,7 +104,7 @@ public class InvoiceAdapter extends BaseRecyclerViewAdapter {
 
     @Override
     public ArrayList initObjectList() {
-        return parcelDataList;
+        return invoiceArrayList;
     }
 
     public interface OnItemClickListener {
@@ -104,13 +115,11 @@ public class InvoiceAdapter extends BaseRecyclerViewAdapter {
         InvoiceAdapter.mItemClickListener = mItemClickListener;
     }
 
-
-    public List<WhInvoiceParcelData.Invoice> getParcelDataList() {
-        return parcelDataList;
+    public ArrayList<WhInvoiceParcelData.Invoice> getInvoiceArrayList() {
+        return invoiceArrayList;
     }
 
-    public void setParcelDataList(ArrayList<WhInvoiceParcelData.Invoice> parcelDataList) {
-        this.parcelDataList = parcelDataList;
+    public void setInvoiceArrayList(ArrayList<WhInvoiceParcelData.Invoice> invoiceArrayList) {
+        this.invoiceArrayList = invoiceArrayList;
     }
-
 }

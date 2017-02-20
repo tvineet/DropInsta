@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.constant.AppConstant;
@@ -172,7 +173,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         DropInsta.setUser(loginData);
                         startActivity(new Intent(context, WhDashboardActivity.class));
                         finish();
-                    } else {
+//                    }  else if (loginData.isCustomerCareUser()) {
+                    }  else if (loginData.isWarehouseUser()) {
+                        DropInsta.setUser(loginData);
+                        startActivity(new Intent(context, CustomerDashboardActivity.class));
+                        finish();
+                    }else {
 //                     showLongToast(context, R.string.error_invalid_email_field);
                         showSnackbar(R.string.error_invalid_email_field);
                     }

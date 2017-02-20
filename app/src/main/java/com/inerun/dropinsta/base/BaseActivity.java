@@ -43,7 +43,7 @@ import com.inerun.dropinsta.Exception.ExceptionMessages;
 import com.inerun.dropinsta.Exception.MyExceptionHandler;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.LoginActivity;
-import com.inerun.dropinsta.activity_warehouse.WhReadyInvoiceFragment;
+import com.inerun.dropinsta.activity_warehouse.WhInvoiceFragment;
 import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
@@ -1047,7 +1047,7 @@ Used to process
             switch (Integer.parseInt(type)) {
                 case NotiHelper.NOTI_INVOICE_GENERATED:
                     Log.i("Noti","NOTI_INVOICE_GENERATED");
-                    navigateToFragment(WhReadyInvoiceFragment.newInstance());
+                    navigateToFragment(WhInvoiceFragment.newInstance());
 
 //                    String catid = jsonObject.getString(UrlConstants.KEY_CATID);
 //                    noti_intent = new Intent(context, WhDashboardActivity.class);
