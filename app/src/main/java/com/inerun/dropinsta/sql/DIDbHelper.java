@@ -625,7 +625,9 @@ public class DIDbHelper {
                 DataUtils.TRANS_TOTAL_AMOUNT,
                 DataUtils.TRANS_TOTAL_AMOUNT + " TEXT ",
                 DataUtils.TRANS_CURRENCY,
-                DataUtils.TRANS_CURRENCY + " TEXT "};
+                DataUtils.TRANS_CURRENCY + " TEXT ",
+                DataUtils.TRANS_NATIONAL_ID,
+                DataUtils.TRANS_NATIONAL_ID + "TEXT "};
 
 
         OpenHelper.validateDatabase(context, tablename, params);

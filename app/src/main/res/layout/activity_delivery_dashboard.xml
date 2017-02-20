@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:orientation="horizontal"
                 android:weightSum="2"
 
@@ -218,6 +218,33 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/return_parcel_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorGray">
+
+                <TextView
+                    android:id="@+id/return_title"
+                    style="@style/dash_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:text="@string/return_parcel_title" />
+
+                <TextView
+                    android:id="@+id/return_count"
+                    style="@style/dash_count_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/return_title"
+                    android:text="10"
+                    android:textSize="@dimen/text_size28sp" />
+
+
+            </RelativeLayout>
 
         </LinearLayout>
 

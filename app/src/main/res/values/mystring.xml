@@ -27,4 +27,6 @@
     <string name="select_all_parcel">Select all parcels</string>
     <string name="customer_care_error">Please Select customer care.</string>
     <string name="customer_executive_hint">Customer Care Executive *</string>
+    <string name="return_parcel_title">Return Parcel</string>
+    <string name="title_return_parcel">Return Parcels</string>
 </resources>

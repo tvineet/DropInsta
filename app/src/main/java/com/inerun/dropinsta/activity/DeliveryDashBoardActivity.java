@@ -47,6 +47,7 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
     private RelativeLayout search, all_parcels, payments;
     private TextView all_parcelscount;
     private TextView deliveredparcelscount,pendingparcelscount,paymentparcelscount;
+    private RelativeLayout return_parcel_lay;
 
     @Override
     public int customSetContentView() {
@@ -151,11 +152,15 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
         delivery_parcel_lay = (LinearLayout) findViewById(R.id.delivery_parcel_lay);
         pending_parcel_lay = (LinearLayout) findViewById(R.id.pending_parcel_lay);
 
+        return_parcel_lay = (RelativeLayout) findViewById(R.id.return_parcel_layout);
+
         search.setOnClickListener(this);
         all_parcels.setOnClickListener(this);
         payments.setOnClickListener(this);
         delivery_parcel_lay.setOnClickListener(this);
         pending_parcel_lay.setOnClickListener(this);
+
+        return_parcel_lay.setOnClickListener(this);
     }
 
 
@@ -386,6 +391,10 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.pending_parcel_lay:
                 goToActivity(DeliveryPendingParcelsActivity.class);
+
+                break;
+            case R.id.return_parcel_layout:
+                goToActivity(DeliveryReturnParcelActivity.class);
 
                 break;
         }

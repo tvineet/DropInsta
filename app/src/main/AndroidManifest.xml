@@ -136,7 +136,11 @@
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait">
         </activity>
-
+        <activity
+            android:name=".activity.DeliveryReturnParcelActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait">
+        </activity>
         <activity
             android:name=".activity.PodDeleteActivity"
             android:configChanges="orientation|screenSize"

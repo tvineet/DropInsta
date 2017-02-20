@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.inerun.dropinsta.base.DeviceInfoUtil;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
+import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ParcelSearchData;
 import com.inerun.dropinsta.data.ReadyParcelData;
 import com.inerun.dropinsta.data.TransactionData;
@@ -137,8 +138,6 @@ public class DIRequestCreator {
         mapParams.put(UrlConstants.KEY_VERSION_CODE, version_code);
 
 
-
-
         if(parcelDatas != null && parcelDatas.size() > 0) {
 
             Gson gson = new Gson();
@@ -215,8 +214,6 @@ public class DIRequestCreator {
         }
 
         mapParams.put(UrlConstants.KEY_INVOICE_NUMBER, parcel_invoice_no);
-
-
 
 
         return mapParams;
@@ -297,6 +294,26 @@ public class DIRequestCreator {
             mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
         }
     }
+
+    public Map<String, String> getReturnParcelMapParams(ArrayList<ParcelListingData.ParcelData> selectedparcellist) throws JSONException {
+        JSONArray jsonArray= new JSONArray();
+
+        for (ParcelListingData.ParcelData parcel : selectedparcellist  ) {
+            JSONObject json= new JSONObject();
+            json.put(UrlConstants.KEY_PARCEL_NO, parcel.getBarcode());
+            jsonArray.put(json);
+        }
+
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+
+        mapParams.put(UrlConstants.KEY_PARCELS, jsonArray.toString());
+
+        return mapParams;
+    }
+
 
 
 //    public RequestParams getGcmRegistrationParams(Context context,String gcm_id) {
