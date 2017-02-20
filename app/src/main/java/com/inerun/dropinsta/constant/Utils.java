@@ -205,22 +205,22 @@ public class Utils {
 
 
 
-//    public static String getGcmId(Context context) {
-//        SharedPreferences sharedPref = context.getSharedPreferences(
-//                AppConstant.APP_PREFRENCES_NAME,
-//                Context.MODE_PRIVATE);
-//        String value = sharedPref.getString(UrlConstants.GCM_REGID, null);
-//        return value;
-//    }
-//
-//    public static void saveGcmId(Context context, String gcm_regid) {
-//        SharedPreferences sharedPref = context.getSharedPreferences(
-//                AppConstant.APP_PREFRENCES_NAME,
-//                Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPref.edit();
-//        editor.putString(UrlConstants.GCM_REGID, "" + gcm_regid);
-//        editor.commit();
-//    }
+    public static String getGcmId(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                AppConstant.APP_PREFRENCES_NAME,
+                Context.MODE_PRIVATE);
+        String value = sharedPref.getString(UrlConstants.KEY_GCM_REGID, null);
+        return value;
+    }
+
+    public static void saveGcmId(Context context, String gcm_regid) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                AppConstant.APP_PREFRENCES_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(UrlConstants.KEY_GCM_REGID, "" + gcm_regid);
+        editor.commit();
+    }
 //
 
 

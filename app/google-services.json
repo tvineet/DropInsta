@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "935112107720",
+    "firebase_url": "https://dropinsta-f9301.firebaseio.com",
+    "project_id": "dropinsta-f9301",
+    "storage_bucket": "dropinsta-f9301.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935112107720:android:a05895afb684b7a7",
+        "android_client_info": {
+          "package_name": "com.inerun.dropinsta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935112107720-g942totqojpl50054rthpua7f8cv6mds.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inerun.dropinsta",
+            "certificate_hash": "47D18ECDFBCC5370EF5B6C61F5E8622B4B87F981"
+          }
+        },
+        {
+          "client_id": "935112107720-atflcda50sh8tugspt6aabks5e795nql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1xeKz_8LHLsfWXzUE6gjat5nTXLC2_dY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935112107720-atflcda50sh8tugspt6aabks5e795nql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

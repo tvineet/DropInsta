@@ -28,6 +28,7 @@ public class UrlConstants {
     public static final String URL_ADD = BASE_ADDRESS + "warehouse" ;
     public static final String URL_INVOICE_SEARCH = BASE_ADDRESS + "invoicesearch";
     public static final String URL_INVOICE_DELIVERY = BASE_ADDRESS + "invoicedelivery";
+    public static final String URL_GCM = BASE_ADDRESS + "invoicedelivery";
 
 
 
@@ -86,4 +87,11 @@ public class UrlConstants {
     public static final String KEY_INVOICE_NUMBER = "invoice_no";
 
     public static final String KEY_CUSTOMER_CARE_ID = "customer_care_id";
+    public static final String KEY_GCM_REGID = "Gcmid";
+    public static final String KEY_Title = "Title";
+    public static final String KEY_IMAGE = "Image";
+    public static final String KEY_Text = "Text";
+    public static final String KEY_IS_NOTIFICATION = "APP_NOTIFICATION";
+
+
 }

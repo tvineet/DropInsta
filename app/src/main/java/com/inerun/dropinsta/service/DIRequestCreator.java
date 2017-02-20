@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.inerun.dropinsta.base.DeviceInfoUtil;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
-import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ParcelSearchData;
 import com.inerun.dropinsta.data.ReadyParcelData;
 import com.inerun.dropinsta.data.TransactionData;
@@ -97,12 +96,26 @@ public class DIRequestCreator {
     public Map<String, String> getLoginMapParams(String email, String pass) {
 
 
-
+        String gcmid=Utils.getGcmId(context);
         mapParams.put(UrlConstants.KEY_Usename, email);
         mapParams.put(UrlConstants.KEY_Password, pass);
+        if(gcmid!=null&&gcmid.length()>0) {
+            mapParams.put(UrlConstants.KEY_GCM_REGID, gcmid);
+        }
+        mapParams.put(UrlConstants.KEY_ANDROID_ID, DeviceInfoUtil.getAndroidID(context));
 
         return mapParams;
 
+    }
+    public Map<String, String> getGcmRegistrationParams(Context context,String gcm_id) {
+
+        mapParams.put(UrlConstants.KEY_GCM_REGID, gcm_id);
+        if (Utils.isUserLoggedIn(context) ) {
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+
+        }
+        mapParams.put(UrlConstants.KEY_ANDROID_ID, DeviceInfoUtil.getAndroidID(context));
+        return mapParams;
     }
     public Map<String, String> getSyncDataMapParams(ArrayList<UpdatedParcelData> parcelDatas, ArrayList<TransactionData> transcDatas) {
 

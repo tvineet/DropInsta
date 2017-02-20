@@ -13,7 +13,10 @@ import com.inerun.dropinsta.base.AlertUtil;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.CheckConnectionUtil;
 import com.inerun.dropinsta.constant.AppConstant;
+import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
+import com.inerun.dropinsta.data.LoginData;
+import com.inerun.dropinsta.gcm.NotiHelper;
 import com.inerun.dropinsta.sql.DIDbHelper;
 
 import java.util.Timer;
@@ -52,32 +55,32 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void customOnCreate(Bundle savedInstanceState) {
-        context=SplashActivity.this;
+        context = SplashActivity.this;
 
         handleExitintent();
 
         setSplash(true);
 
         setDataToApplication();
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+        if (!NotiHelper.isNotificationIntent(getIntent())) {
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
 
-            @Override
-            public void run() {
+                @Override
+                public void run() {
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
 
+                            if (CheckConnectionUtil.checkMyConnectivity(SplashActivity.this)) {
 
-                        if (CheckConnectionUtil.checkMyConnectivity(SplashActivity.this)) {
-
-                            if (hasPermissions(context, AppConstant.requiredPermissions())) {
-                                DIDbHelper.ensureDatabaseIsCorrect(context);
-                            }
+                                if (hasPermissions(context, AppConstant.requiredPermissions())) {
+                                    DIDbHelper.ensureDatabaseIsCorrect(context);
+                                }
 //
-                            gotoPodDeleteActivity();
+                                gotoPodDeleteActivity();
 
 //                            if (Utils.isUserLoggedIn(SplashActivity.this)) {
 //                                if (DropInsta.getUser().isDeliveryUser()) {
@@ -90,16 +93,21 @@ public class SplashActivity extends BaseActivity {
 //
 //                            }
 
-                        } else {
-                            AlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                            } else {
+                                AlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                            }
+
                         }
-
-                    }
-                });
+                    });
 
 
-            }
-        }, 2500);
+                }
+            }, 2500);
+        } else {
+            startActivity(getNotificationIntent(getIntent()));
+            finish();
+        }
+
 
     }
 
@@ -113,6 +121,21 @@ public class SplashActivity extends BaseActivity {
             DropInsta.setUser(Utils.getLoginData(context));
         }
 
+    }
+    private Intent getNotificationIntent(Intent intent) {
+        Intent newIntent= new Intent();
+        if((""+Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_DELIVERY))
+        {
+             newIntent = new Intent(SplashActivity.this, DeliveryDashBoardActivity.class);
+        }else {
+             newIntent = new Intent(SplashActivity.this, WhDashboardActivity.class);
+        }
+
+        newIntent.putExtra(UrlConstants.KEY_IS_NOTIFICATION, true);
+        newIntent.putExtra(UrlConstants.KEY_DATA, intent.getSerializableExtra(UrlConstants.KEY_DATA));
+
+
+        return newIntent;
     }
 
 
@@ -183,7 +206,8 @@ public class SplashActivity extends BaseActivity {
         startActivity(intent);
 
     }
-private void gotoWarehouseActivity() {
+
+    private void gotoWarehouseActivity() {
 
         Intent intent = new Intent(SplashActivity.this,
                 WhDashboardActivity.class);
