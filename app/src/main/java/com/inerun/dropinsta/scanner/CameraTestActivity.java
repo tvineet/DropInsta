@@ -105,6 +105,9 @@ public class CameraTestActivity extends Activity
         scanner.setConfig(100, Config.X_DENSITY, 3);
         scanner.setConfig(100, Config.Y_DENSITY, 3);
 
+//        scanner.setConfig(0, Config.X_DENSITY, 3);
+//        scanner.setConfig(0, Config.Y_DENSITY, 3);
+
         mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
 
         FrameLayout preview = (FrameLayout)findViewById(R.id.cameraPreview);

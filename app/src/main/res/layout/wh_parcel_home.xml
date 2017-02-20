@@ -75,7 +75,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_toLeftOf="@+id/addparcel_imgstyle"
                 android:textColor="@android:color/white"
-                android:text="Add Parcels"
+                android:text="Stock In"
                 android:textSize="@dimen/home_text_size"
 
 
@@ -151,6 +151,73 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/readyparcel_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+
+            <ImageView
+                android:id="@+id/readyparcel_image"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+
+
+                android:src="@mipmap/add_parcel_home"
+
+
+
+                />
+            <ImageView
+                android:id="@+id/readyparcel_image_opacity"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+
+                android:background="@color/homeaddparcel_back"
+
+
+
+                />
+
+
+            <ImageView
+                android:id="@+id/readyparcel_imgstyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="30dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/arrow_white"
+
+
+                />
+
+            <TextView
+                android:id="@+id/tv_readyparcel"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_toLeftOf="@+id/readyparcel_imgstyle"
+                android:textColor="@android:color/white"
+                android:text="Ready For Delivery"
+                android:textSize="@dimen/home_text_size"
+
+
+                />
+
+
+        </RelativeLayout>
 
 
     </LinearLayout>

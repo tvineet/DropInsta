@@ -6,7 +6,7 @@ package com.inerun.dropinsta.data;
 
 public class TransactionData {
     boolean iscard;
-    String totalamount, transcid, collectedby,currency;
+    String totalamount, transcid, collectedby,currency, nationalId;
     String barcode;
     String transtype;
     String transTimeStamp;
@@ -21,6 +21,18 @@ public class TransactionData {
         this.transtype = transtype;
         this.transTimeStamp = transTimeStamp;
 
+    }
+
+    public TransactionData(boolean iscard, String totalamount, String transcid, String collectedby, String currency, String barcode,String transtype,String transTimeStamp, String nationalId) {
+        this.iscard = iscard;
+        this.totalamount = totalamount;
+        this.transcid = transcid;
+        this.collectedby = collectedby;
+        this.currency = currency;
+        this.barcode = barcode;
+        this.transtype = transtype;
+        this.transTimeStamp = transTimeStamp;
+        this.nationalId = nationalId;
     }
 
     public String getCurrency() {
@@ -39,12 +51,13 @@ public class TransactionData {
         return transTimeStamp;
     }
 
-    public TransactionData(boolean iscard, String totalamount, String transcid, String collectedby) {
+    public TransactionData(boolean iscard, String totalamount, String transcid, String collectedby, String nationalId) {
         this.iscard = iscard;
         this.totalamount = totalamount;
         this.transcid = transcid;
 
         this.collectedby = collectedby;
+        this.nationalId = nationalId;
     }
 
     public boolean iscard() {
@@ -79,5 +92,13 @@ public class TransactionData {
 
     public void setCollectedby(String collectedby) {
         this.collectedby = collectedby;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
     }
 }

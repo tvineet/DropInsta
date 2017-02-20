@@ -39,7 +39,7 @@ public class TranscDao {
     }
 
     // code to insert the Delivery Info
-    public long insertTransaction(int transtype, String transid, String receivername, String totalamt,String currency) {
+    public long insertTransaction(int transtype, String transid, String receivername, String totalamt,String currency, String nationalId) {
 
         mSQLiteDatabase = lOpenHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -50,6 +50,7 @@ public class TranscDao {
             values.put(DataUtils.TRANS_RECEIVER_NAME, receivername);
             values.put(DataUtils.TRANS_TOTAL_AMOUNT, totalamt);
             values.put(DataUtils.TRANS_CURRENCY, currency);
+            values.put(DataUtils.TRANS_NATIONAL_ID, nationalId);
 //        values.put(DataUtils.TR, pod.getReceiverName() );
 
             Log.i("values", values.toString());
@@ -103,7 +104,7 @@ public class TranscDao {
                     Log.i("POD_ROW_ID", "" + cursor.getInt(0));
 //                UpdatedParcelData updatedParcelData = new UpdatedParcelData(cursor.getString(1),Integer.parseInt(cursor.getString(5)),cursor.getString(6),Integer.parseInt(cursor.getString(8)),cursor.getString(26));
                     boolean iscard=(cursor.getInt(2)==TRANSTYPE_CARD);
-                    TransactionData transactionData = new TransactionData(iscard, cursor.getString(5), cursor.getString(1), cursor.getString(4), cursor.getString(6), cursor.getString(7),cursor.getString(2),cursor.getString(3));
+                    TransactionData transactionData = new TransactionData(iscard, cursor.getString(5), cursor.getString(1), cursor.getString(4), cursor.getString(6), cursor.getString(8),cursor.getString(2),cursor.getString(3), cursor.getString(7));
                     list.add(transactionData);
                 } while (cursor.moveToNext());
             }
@@ -185,8 +186,8 @@ public class TranscDao {
 //                if(iscash)
 //                {
                     ParcelListingData p = new ParcelListingData();
-                    String barcode=cursor.getString(7);
-                    String amount=cursor.getString(8);
+                    String barcode=cursor.getString(8);
+                    String amount=cursor.getString(9);
                     String currency=cursor.getString(6);
                     ParcelListingData.ParcelData pp = p.new ParcelData(barcode, amount, currency);
                     list.add(pp);

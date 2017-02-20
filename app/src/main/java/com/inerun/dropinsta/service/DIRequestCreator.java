@@ -6,7 +6,9 @@ import com.google.gson.Gson;
 import com.inerun.dropinsta.base.DeviceInfoUtil;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
+import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ParcelSearchData;
+import com.inerun.dropinsta.data.ReadyParcelData;
 import com.inerun.dropinsta.data.TransactionData;
 import com.inerun.dropinsta.data.UpdatedParcelData;
 import com.loopj.android.http.RequestParams;
@@ -184,6 +186,49 @@ public class DIRequestCreator {
         mapParams.put(UrlConstants.KEY_INVOICE_NUMBER, parcelSearchData.getParcel_invoice_no());
 
 
+
+
+        return mapParams;
+
+    }
+
+
+    public Map<String, String> getInvoiceSearchMapParams(String parcel_invoice_no) {
+
+
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+
+        mapParams.put(UrlConstants.KEY_INVOICE_NUMBER, parcel_invoice_no);
+
+
+
+
+        return mapParams;
+
+    }
+
+    public Map<String, String> getReadyParcelDeliveredMapParams(ArrayList<ReadyParcelData> readyParcelDataArrayList, String CustomerCareId) {
+
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+
+        mapParams.put(UrlConstants.KEY_CUSTOMER_CARE_ID, CustomerCareId);
+
+        if(readyParcelDataArrayList != null && readyParcelDataArrayList.size() > 0) {
+
+            Gson gson = new Gson();
+            String json = gson.toJson(readyParcelDataArrayList);
+
+            mapParams.put(UrlConstants.KEY_UPDATE_DATA, json);
+        }else{
+
+            mapParams.put(UrlConstants.KEY_UPDATE_DATA, "[]");
+        }
 
 
         return mapParams;

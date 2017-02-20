@@ -307,15 +307,15 @@ public class DIDbHelper {
         }
     }
 
-    public static void deliverParcelandUpdateTransaction(Context ctx, ArrayList<ParcelListingData.ParcelData> arrayList, ParcelStatus parcelStatus, boolean iscard, String transcid, String receivername, String totalamt, String currency, POD pod) {
+    public static void deliverParcelandUpdateTransaction(Context ctx, ArrayList<ParcelListingData.ParcelData> arrayList, ParcelStatus parcelStatus, boolean iscard, String transcid, String receivername, String totalamt, String currency, POD pod, String nationalId) {
 
 
         TranscDao transcDao = new TranscDao(ctx);
         long transcrowid = -1;
         if (iscard) {
-            transcrowid = transcDao.insertTransaction(TranscDao.TRANSTYPE_CARD, transcid, receivername, totalamt, currency);
+            transcrowid = transcDao.insertTransaction(TranscDao.TRANSTYPE_CARD, transcid, receivername, totalamt, currency, nationalId);
         } else {
-            transcrowid = transcDao.insertTransaction(TranscDao.TRANSTYPE_CASH, "", receivername, totalamt, currency);
+            transcrowid = transcDao.insertTransaction(TranscDao.TRANSTYPE_CASH, "", receivername, totalamt, currency, nationalId);
         }
         PODDao podDao = new PODDao(ctx);
 
@@ -391,7 +391,7 @@ public class DIDbHelper {
     public static void insertTransactionInfoToDatabase(Context ctx, ArrayList<TransactionData> transdata) {
         TranscDao transcDao = new TranscDao(ctx);
         for (TransactionData transactionData : transdata) {
-            long id = transcDao.insertTransaction(Integer.parseInt(transactionData.getTranstype()), transactionData.getTranscid(), transactionData.getCollectedby(), transactionData.getTotalamount(), transactionData.getCurrency());
+            long id = transcDao.insertTransaction(Integer.parseInt(transactionData.getTranstype()), transactionData.getTranscid(), transactionData.getCollectedby(), transactionData.getTotalamount(), transactionData.getCurrency(), transactionData.getNationalId());
 //            Log.i("insertTransaction", "id " + id);
 //            String barcodearray[] = transactionData.getBarcode().split(",");
 //            Log.i("insertTransacInfo2Db", "barcodearray" + barcodearray.toString());

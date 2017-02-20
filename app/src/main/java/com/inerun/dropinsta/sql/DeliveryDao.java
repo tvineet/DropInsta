@@ -298,7 +298,7 @@ public class DeliveryDao {
         ArrayList<UpdatedParcelData> list = new ArrayList<>();
 
         // Select All Query
-        String selectQuery = "SELECT P.*,POD.pod_name_on_server,T.receiver_name FROM PARCEL AS P LEFT JOIN PROOF_OF_DELIVERY AS POD ON P.pod_id=POD.id LEFT JOIN TRANSCTABLE AS T ON T.id==P.trans_row_id WHERE update_status = 1";
+        String selectQuery = "SELECT P.*,POD.pod_name_on_server,T.receiver_name, T.national_id FROM PARCEL AS P LEFT JOIN PROOF_OF_DELIVERY AS POD ON P.pod_id=POD.id LEFT JOIN TRANSCTABLE AS T ON T.id==P.trans_row_id WHERE update_status = 1";
         //Log.i("DeliveryForUpdateSYNC", selectQuery);
 
         mSQLiteDatabase = lOpenHelper.getWritableDatabase();
@@ -326,7 +326,8 @@ public class DeliveryDao {
 //                //Log.i("podonServer", pod.getPodNameOnServer()+ " receverName : "+pod.getReceiverName());
                 ArrayList<ParcelStatus> statusDataList= DIDbHelper.getStatusbyParcelId(context,barcode);
 
-                UpdatedParcelData updatedParcelData = new UpdatedParcelData(barcode, Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(8)), cursor.getString(26), cursor.getString(30), cursor.getString(31),statusDataList);
+//                UpdatedParcelData updatedParcelData = new UpdatedParcelData(barcode, Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(8)), cursor.getString(26), cursor.getString(30), cursor.getString(31),statusDataList);
+                UpdatedParcelData updatedParcelData = new UpdatedParcelData(barcode, Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(8)), cursor.getString(26), cursor.getString(30), cursor.getString(31),statusDataList, cursor.getString(32));
 
                 list.add(updatedParcelData);
             } while (cursor.moveToNext());

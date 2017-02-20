@@ -158,8 +158,9 @@ public class OpenHelper extends SQLiteOpenHelper {
             + DataUtils.TRANS_TIME_STAMP + " TEXT ,"
             + DataUtils.TRANS_RECEIVER_NAME + " TEXT ,"
             + DataUtils.TRANS_TOTAL_AMOUNT + " TEXT ,"
-            + DataUtils.TRANS_CURRENCY + " TEXT " +
-            ")";
+            + DataUtils.TRANS_CURRENCY + " TEXT ,"
+            + DataUtils.TRANS_NATIONAL_ID + " TEXT "
+            + ")";
 
 
     // =====Create Status Table====

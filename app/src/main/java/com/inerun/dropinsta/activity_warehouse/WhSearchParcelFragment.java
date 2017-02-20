@@ -205,12 +205,12 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     }
 
     private void searchParcel() {
-        String parcel_no = "" + parcel_edittext.getText();
-        String parcel_name = "" + name_edittext.getText();
-        String parcel_email = "" + email_edittext.getText();
-        String parcel_phone = "" + phone_edittext.getText();
-        String parcel_custid = "" + custid_edittext.getText();
-        String parcel_invoice_no = "" + invoice_edttext.getText();
+        String parcel_no = ("" + parcel_edittext.getText()).trim();
+        String parcel_name = ("" + name_edittext.getText()).trim();
+        String parcel_email = ("" + email_edittext.getText()).trim();
+        String parcel_phone = ("" + phone_edittext.getText()).trim();
+        String parcel_custid = ("" + custid_edittext.getText()).trim();
+        String parcel_invoice_no = ("" + invoice_edttext.getText()).trim();
         if (isStringValid(parcel_no) || isStringValid(parcel_name) || isStringValid(parcel_email) || isStringValid(parcel_phone) || isStringValid(parcel_custid) || isStringValid(parcel_invoice_no)) {
 
             ParcelSearchData parcelSearchData = new ParcelSearchData(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid, parcel_invoice_no);

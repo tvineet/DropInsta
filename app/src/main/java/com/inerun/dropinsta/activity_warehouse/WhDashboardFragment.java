@@ -37,6 +37,8 @@ public class WhDashboardFragment extends BaseFragment implements View.OnClickLis
 //        getViewById(R.id.addparcel_image).setOnClickListener(this);
 //        getViewById(R.id.searchparcel_layout).setOnClickListener(this);
         getViewById(R.id.searchparcel_image_opacity).setOnClickListener(this);
+
+        getViewById(R.id.readyparcel_image_opacity).setOnClickListener(this);
 //        getViewById(R.id.searchparcel_image).setOnClickListener(this);
 
 
@@ -67,6 +69,11 @@ public class WhDashboardFragment extends BaseFragment implements View.OnClickLis
                 break;
             case R.id.searchparcel_image_opacity:
                 navigateToFragment(context,WhSearchParcelFragment.newInstance());
+
+                break;
+
+            case R.id.readyparcel_image_opacity:
+                navigateToFragment(context, WhReadyParcelFragment.newInstance());
 
                 break;
 //            case R.id.addparcel_image:

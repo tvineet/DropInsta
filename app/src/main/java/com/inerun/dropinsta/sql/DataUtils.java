@@ -59,6 +59,7 @@ public class DataUtils {
     public static final String TRANS_TYPE = "transType";
     public static final String TRANS_TIME_STAMP = "transTimeStamp";
     public static final String TRANS_RECEIVER_NAME = "receiver_name";
+    public static final String TRANS_NATIONAL_ID = "national_id";
     public static final String TRANS_TOTAL_AMOUNT = "total_amt";
     public static final String TRANS_CURRENCY = "currency";
 

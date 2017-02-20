@@ -122,6 +122,22 @@
 
         android:padding="10dp" />
 
+    <EditText
+        android:id="@+id/payment_national_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:maxLines="1"
+        android:layout_below="@+id/payment_collectedby"
+        android:layout_marginTop="@dimen/layout_margin20dp"
+        android:imeOptions="actionDone"
+
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:hint="@string/national_id"
+
+        android:padding="10dp" />
+
     <LinearLayout
         android:id="@+id/btn_layout"
         android:layout_width="match_parent"

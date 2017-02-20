@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.BaseFragment;
@@ -37,7 +38,7 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
     private Button cardpayment, cashpayment;
     private float amount;
     private EditText transcid;
-    private EditText collectedby;
+    private EditText collectedby, national_id;
     boolean iscard;
     private TransactionData transcdata;
     private final int SIGN_REQUEST = 102;
@@ -73,6 +74,7 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
     private void setData() {
         amount = getTotalFromParcels();
         payment.setText("" + amount);
+        collectedby.setText(DropInsta.getUser().getName());
     }
 
     private float getTotalFromParcels() {
@@ -89,6 +91,7 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
         progress=getProgress();
         transcid = (EditText) root.findViewById(R.id.payment_transcid);
         collectedby = (EditText) root.findViewById(R.id.payment_collectedby);
+        national_id = (EditText) root.findViewById(R.id.payment_national_id);
         cashpayment.setOnClickListener(this);
         cardpayment.setOnClickListener(this);
         root.findViewById(R.id.parcel_cancel).setOnClickListener(this);
@@ -122,10 +125,12 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
                 getActivity().finish();
                 break;
             case R.id.parcel_deliver:
-                String transid=""+transcid.getText();
-                String collectdby=""+collectedby.getText();
-                if(validatePayment(iscard,transid,collectdby)) {
-                     transcdata = new TransactionData(iscard, "" + amount, transid, collectdby);
+                String transid=(""+transcid.getText()).trim();
+                String collectdby=(""+collectedby.getText()).trim();
+                String nationalId=(""+ national_id.getText()).trim();
+
+                if(validatePayment(iscard, transid, collectdby, nationalId)) {
+                     transcdata = new TransactionData(iscard, "" + amount, transid, collectdby, nationalId);
 //                    got
                     startActivityForResult(new Intent(getActivity(), SignActivity.class), SIGN_REQUEST);
 
@@ -135,7 +140,7 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
         }
     }
 
-    private boolean validatePayment(boolean iscard, String transid, String collectdby) {
+    private boolean validatePayment(boolean iscard, String transid, String collectdby, String nationalId) {
         if(!isStringValid(collectdby))
         {
             showSnackbar(R.string.error_receiver_name);
@@ -146,6 +151,15 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
             showSnackbar(R.string.error_transid);
             return false;
         }
+
+        if(!(collectdby.equalsIgnoreCase(DropInsta.getUser().getName()))){
+            if(!isStringValid(nationalId))
+            {
+                showSnackbar(R.string.error_national_id);
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -167,7 +181,7 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
                         Log.i("POD_Name", pod_name);
 
                         POD pod = new POD(pod_name, transcdata.getCollectedby());
-                        deliverParcel(transcdata.iscard(),arrayList,transcdata.getTotalamount(),transcdata.getTranscid(),transcdata.getCollectedby(),pod);
+                        deliverParcel(transcdata.iscard(),arrayList,transcdata.getTotalamount(),transcdata.getTranscid(),transcdata.getCollectedby(), pod, transcdata.getNationalId());
                         //getActivity().finish();
 //                    Toast.makeText(this, "Saved at"+ path, Toast.LENGTH_SHORT).show();
 //                        syncData();
@@ -182,9 +196,9 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
 
     }
 
-    private void deliverParcel(boolean iscard, ArrayList<ParcelListingData.ParcelData> parcelDatas, String totalamount, String transcid, String collectedby, POD pod) {
+    private void deliverParcel(boolean iscard, ArrayList<ParcelListingData.ParcelData> parcelDatas, String totalamount, String transcid, String collectedby, POD pod, String nationalId) {
 
-        DIDbHelper.deliverParcelandUpdateTransaction(getActivity(),parcelDatas,new ParcelStatus(""+ParcelListingData.ParcelData.DELIVERED,"DELIVERED"),iscard,transcid,collectedby,totalamount,parcelDatas.get(0).getCurrency(),pod);
+        DIDbHelper.deliverParcelandUpdateTransaction(getActivity(),parcelDatas,new ParcelStatus(""+ParcelListingData.ParcelData.DELIVERED,"DELIVERED"),iscard,transcid,collectedby,totalamount,parcelDatas.get(0).getCurrency(),pod,nationalId);
         ((BaseActivity)getActivity()).syncData();
 
 

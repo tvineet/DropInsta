@@ -86,6 +86,7 @@ public class WhSearchParcelListingFragment extends BaseFragment implements View.
 
     @Override
     public void customOnCreateView(View root, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) throws Exception {
+        Log.i("fragment","WhSearchParcelListingFragment");
         setShowBackArrow(true);
         context = getActivity();
 

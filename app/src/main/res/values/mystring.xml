@@ -22,4 +22,9 @@
     <string name="title_parcel_detail">Parcel Detail</string>
     <string name="special_instructions_title">Special Instructions: %1$s</string>
     <string name="search_parcel_invoice">Invoice No</string>
+    <string name="national_id">NATIONAL ID</string>
+    <string name="error_national_id">National id cannnot be empty</string>
+    <string name="select_all_parcel">Select all parcels</string>
+    <string name="customer_care_error">Please Select customer care.</string>
+    <string name="customer_executive_hint">Customer Care Executive *</string>
 </resources>

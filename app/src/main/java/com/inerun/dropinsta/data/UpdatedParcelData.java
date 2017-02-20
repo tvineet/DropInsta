@@ -16,6 +16,7 @@ public class UpdatedParcelData implements Serializable {
     private String update_date;
     private String pod_name_on_server;
     private String receiver_name;
+    private String national_id;
     private ArrayList<ParcelStatus> statusdata;
 
     public UpdatedParcelData(String barcode, int deliverystatus, String deliverycomments, int payment_status, String update_date, String pod_name_on_server, String receiver_name,ArrayList<ParcelStatus> statusdata) {
@@ -26,6 +27,18 @@ public class UpdatedParcelData implements Serializable {
         this.update_date = update_date;
         this.pod_name_on_server = pod_name_on_server;
         this.receiver_name = receiver_name;
+        this.statusdata = statusdata;
+    }
+
+    public UpdatedParcelData(String barcode, int deliverystatus, String deliverycomments, int payment_status, String update_date, String pod_name_on_server, String receiver_name,ArrayList<ParcelStatus> statusdata, String national_id) {
+        this.barcode = barcode;
+        this.deliverystatus = deliverystatus;
+        this.deliverycomments = deliverycomments;
+        this.payment_status = payment_status;
+        this.update_date = update_date;
+        this.pod_name_on_server = pod_name_on_server;
+        this.receiver_name = receiver_name;
+        this.national_id = national_id;
         this.statusdata = statusdata;
     }
     public UpdatedParcelData(String barcode, int deliverystatus, String deliverycomments, int payment_status, String update_date, String pod_name_on_server, String receiver_name) {
