@@ -36,16 +36,19 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
     public static final String FOLDERNAME = ".SignaturePad";
     public static final String INTENT_FILENAME = "filename";
     public static final String INTENT_RECEIVER_NAME = "receivername";
+    public static final String INTENT_NATIONAL_ID = "nationalid";
     private static final String DATEIME_FORMAT = "yyyy.MM.dd_HH.mm.ss ";
     private SignaturePad mSignaturePad;
     private Button mClearButton;
     private Button mSaveButton;
     private String TAG = "SignActivity";
+    private String RECIEVERNAME = "";
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private String filepath;
     private Button cancelSign;
     private EditText receiver_name;
+    private EditText national_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,18 +67,36 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
         mSignaturePad.setOnSignedListener(this);
 
         receiver_name = (EditText) findViewById(R.id.receiver_name);
+        national_id = (EditText) findViewById(R.id.nationalid);
         setData();
     }
 
-    private void setData(){
-        if(isReceiverNameRequired()){
+    private void setData() {
+
+        if (isReceiverNameRequired()) {
             receiver_name.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             receiver_name.setVisibility(View.GONE);
         }
+
+        if (isNationalIdRequired()) {
+
+            national_id.setVisibility(View.VISIBLE);
+        } else {
+            national_id.setVisibility(View.GONE);
+        }
+        if (getIntent().hasExtra(INTENT_RECEIVER_NAME)) {
+            RECIEVERNAME = "" + getIntent().getStringExtra(INTENT_RECEIVER_NAME);
+            receiver_name.setText(RECIEVERNAME);
+        }
+
     }
 
     public boolean isReceiverNameRequired() {
+        return false;
+    }
+
+    public boolean isNationalIdRequired() {
         return false;
     }
 
@@ -107,30 +128,44 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
         switch (view.getId()) {
             case R.id.save:
                 String receiverName = "";
-                    if(isReceiverNameRequired()){
-                        receiverName = ""+receiver_name.getText();
-                        if(receiverName == null || receiverName.length() == 0){
-                            Toast.makeText(this,R.string.error_receiver_name,Toast.LENGTH_LONG).show();
+                String nationalid = "";
+                if (isReceiverNameRequired()) {
+                    receiverName = "" + receiver_name.getText();
+                    if (receiverName == null || receiverName.length() == 0) {
+                        Toast.makeText(this, R.string.error_receiver_name, Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+                if(isNationalIdRequired())
+                {
+                    nationalid=""+national_id.getText();
+                    if(!RECIEVERNAME.equalsIgnoreCase(receiverName))
+                    {
+                        if (nationalid == null || nationalid.length() == 0) {
+                            Toast.makeText(this, R.string.error_national_id, Toast.LENGTH_LONG).show();
                             return;
                         }
                     }
+                }
 
-                    Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
-                    if (addJpgSignatureToGallery(signatureBitmap)) {
-                        Log.i(TAG, "Signature saved into the Gallery");
-                        if (filepath != null && filepath.length() > 0) {
+                Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
+                if (addJpgSignatureToGallery(signatureBitmap)) {
+                    Log.i(TAG, "Signature saved into the Gallery");
+                    if (filepath != null && filepath.length() > 0) {
 
-                            Intent intent = new Intent();
-                            intent.putExtra(INTENT_FILENAME, filepath);
-                            if(isReceiverNameRequired()){
-                                intent.putExtra(INTENT_RECEIVER_NAME, receiverName);
-                            }
-                            setResult(RESULT_OK, intent);
-                            finish();
+                        Intent intent = new Intent();
+                        intent.putExtra(INTENT_FILENAME, filepath);
+                        if (isReceiverNameRequired()) {
+                            intent.putExtra(INTENT_RECEIVER_NAME, receiverName);
+                        }if (isNationalIdRequired()) {
+                            intent.putExtra(INTENT_NATIONAL_ID, nationalid);
                         }
-                    } else {
-                        Toast.makeText(SignActivity.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK, intent);
+                        finish();
                     }
+                } else {
+                    Toast.makeText(SignActivity.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
+                }
 
 
                 break;

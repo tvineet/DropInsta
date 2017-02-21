@@ -16,6 +16,7 @@ public abstract class DIReceiver extends BroadcastReceiver {
     public static final int TYPE_NETWORK_CHANGE = 112;
     public static final int TYPE_WAREHOUSE_PARCEL_DELIVERED = 113;
     public static final int TYPE_WH_POD_UPDATED = 114;
+    public static final int TYPE_CUSTOMER_PARCEL_DELIVERED = 115;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -27,11 +28,14 @@ public abstract class DIReceiver extends BroadcastReceiver {
             proccessDIReceiver(true);
         }else if( type == TYPE_WAREHOUSE_PARCEL_DELIVERED){
             proccessDIReceiver(true);
+        }else if( type == TYPE_CUSTOMER_PARCEL_DELIVERED){
+            proccessDIReceiver(true);
         }else if( type == TYPE_NETWORK_CHANGE){
             proccessNetworkChange();
         }
     }
 
     abstract public void proccessDIReceiver(boolean warehouse);
+    abstract public void proccessCustParcelDelivered();
     abstract public void proccessNetworkChange();
 }

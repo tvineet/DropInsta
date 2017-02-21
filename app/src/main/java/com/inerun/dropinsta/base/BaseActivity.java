@@ -702,6 +702,11 @@ abstract public class BaseActivity extends AppCompatActivity {
         }
 
         @Override
+        public void proccessCustParcelDelivered() {
+            Log.i("proccessCustDelivered","Delivered");
+        }
+
+        @Override
         public void proccessNetworkChange() {
             syncData();
         }

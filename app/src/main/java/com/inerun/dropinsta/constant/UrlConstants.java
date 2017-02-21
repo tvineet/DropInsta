@@ -68,6 +68,7 @@ public class UrlConstants {
 
     public static final String KEY_PHONE_NO = "phoneno";
     public static final String KEY_RECEIVER_NAME = "receiver_name";
+    public static final String KEY_NATIONAL_ID = "nationalid";
     public static final String KEY_COMMENT = "comment";
 
 

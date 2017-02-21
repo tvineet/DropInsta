@@ -12,6 +12,7 @@
     <string name="submit">submit</string>
     <string name="comment_hint">Comment</string>
     <string name="error_receiver_name">Receiver name cannnot be empty</string>
+
     <string name="error_transid">Transaction id cannnot be empty</string>
     <string name="error_status">Status cannot be empty.</string>
     <string name="error_comment">Comment cannot be empty.</string>

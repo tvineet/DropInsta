@@ -109,6 +109,10 @@ public class whParcelUploadService extends Service {
 //            intent.putExtra(UrlConstants.KEY_TYPE, DIReceiver.TYPE_WAREHOUSE_PARCEL_DELIVERED);
             //Keeping Same Flow As POS UPDATED
             intent.putExtra(UrlConstants.KEY_TYPE, DIReceiver.TYPE_WH_POD_UPDATED);
+        }else if (DropInsta.getUser().isCustomerCareUser()) {
+//            intent.putExtra(UrlConstants.KEY_TYPE, DIReceiver.TYPE_WAREHOUSE_PARCEL_DELIVERED);
+            //Keeping Same Flow As POS UPDATED
+            intent.putExtra(UrlConstants.KEY_TYPE, DIReceiver.TYPE_CUSTOMER_PARCEL_DELIVERED);
         } else {
             intent.putExtra(UrlConstants.KEY_TYPE, DIReceiver.TYPE_POD_UPDATED);
         }
@@ -164,6 +168,9 @@ public class whParcelUploadService extends Service {
             params.put(UrlConstants.KEY_ANDROID_ID, DeviceInfoUtil.getAndroidID(context));
             params.put(UrlConstants.KEY_UPDATE_DATA, data);
             params.put(UrlConstants.KEY_RECEIVER_NAME, poddata.getReceiverName());
+            if(poddata.getNationalid()!=null&&poddata.getNationalid().length()>0) {
+                params.put(UrlConstants.KEY_NATIONAL_ID, poddata.getNationalid());
+            }
             String android_version= DeviceInfoUtil.getDeviceAndroidVersionName(context);
             String brand=DeviceInfoUtil.getBrandName(context);
             String model=DeviceInfoUtil.getModelName(context);

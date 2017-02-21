@@ -179,7 +179,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         finish();
                     }else {
 //                     showLongToast(context, R.string.error_invalid_email_field);
-                        showSnackbar(R.string.error_invalid_email_field);
+                        showSnackbar(R.string.error_invalid_usertype);
                     }
 
 

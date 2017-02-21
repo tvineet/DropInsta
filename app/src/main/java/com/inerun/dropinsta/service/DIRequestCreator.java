@@ -244,6 +244,30 @@ public class DIRequestCreator {
         return mapParams;
 
     }
+    public Map<String, String> getReadyParcelDeliveredMapParamsForCustSupport(ArrayList<ReadyParcelData> readyParcelDataArrayList) {
+
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+
+
+
+        if(readyParcelDataArrayList != null && readyParcelDataArrayList.size() > 0) {
+
+            Gson gson = new Gson();
+            String json = gson.toJson(readyParcelDataArrayList);
+
+            mapParams.put(UrlConstants.KEY_UPDATE_DATA, json);
+        }else{
+
+            mapParams.put(UrlConstants.KEY_UPDATE_DATA, "[]");
+        }
+
+
+        return mapParams;
+
+    }
 
 
     public Map<String, String> getAddParcelMapParams(String rack, List<String> parcellist) throws JSONException {

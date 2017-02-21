@@ -48,6 +48,7 @@
 
     <string name="error_email_field">Email cannot be empty.</string>
     <string name="error_invalid_email_field">Invalid email, Please enter valid email id.</string>
+    <string name="error_invalid_usertype">Invalid UserType, Please contact Administrator.</string>
 
     <string name="error_password_field">Password cannot be empty.</string>
     <string name="error_password_field_length">Please enter minimum 6-character password.</string>

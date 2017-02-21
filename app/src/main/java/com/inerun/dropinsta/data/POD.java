@@ -13,6 +13,7 @@ public class POD implements Serializable {
     private String name;
     private String receiverName;
     private String podNameOnServer;
+    private String nationalid;
 
     public POD() {
     }
@@ -31,6 +32,11 @@ public class POD implements Serializable {
     public POD(String name, String receiverName) {
         this.name = name;
         this.receiverName = receiverName;
+    }
+    public POD(String name, String receiverName,String nationalid) {
+        this.name = name;
+        this.receiverName = receiverName;
+        this.nationalid = nationalid;
     }
 
     public POD(int id, String receiverName, String podNameOnServer, String name) {
@@ -55,6 +61,10 @@ public class POD implements Serializable {
 
     public String getPath() {
         return path;
+    }
+
+    public String getNationalid() {
+        return nationalid;
     }
 
     public void setPath(String path) {
