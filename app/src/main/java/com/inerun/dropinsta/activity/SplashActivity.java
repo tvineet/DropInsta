@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
 import com.inerun.dropinsta.base.AlertUtil;
 import com.inerun.dropinsta.base.BaseActivity;
@@ -63,7 +64,7 @@ public class SplashActivity extends BaseActivity {
         setSplash(true);
 
         setDataToApplication();
-        Log.i("SplashActivity",""+getIntent().getExtras());
+        Log.i("SplashActivity", "" + getIntent().getExtras());
         if (!NotiHelper.isNotificationIntent(getIntent())) {
             timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -124,15 +125,17 @@ public class SplashActivity extends BaseActivity {
         }
 
     }
+
     private Intent getNotificationIntent(Intent intent) {
-        Intent newIntent= new Intent();
-        if((""+Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_DELIVERY))
-        {
-            Log.i("getNotificationIntent","USER_TYPE_DELIVERY");
-             newIntent = new Intent(SplashActivity.this, DeliveryDashBoardActivity.class);
-        }else {
-            Log.i("getNotificationIntent","USER_TYPE_WAREHOUSE");
-             newIntent = new Intent(SplashActivity.this, WhDashboardActivity.class);
+        Intent newIntent = new Intent();
+        if (("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_DELIVERY)) {
+            Log.i("getNotificationIntent", "USER_TYPE_DELIVERY");
+            newIntent = new Intent(SplashActivity.this, DeliveryDashBoardActivity.class);
+        } else if (("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_CUSTOMER_CARE)) {
+            newIntent = new Intent(SplashActivity.this, CustomerDashboardActivity.class);
+        } else {
+            Log.i("getNotificationIntent", "USER_TYPE_WAREHOUSE");
+            newIntent = new Intent(SplashActivity.this, WhDashboardActivity.class);
         }
 
         newIntent.putExtra(UrlConstants.KEY_IS_NOTIFICATION, true);

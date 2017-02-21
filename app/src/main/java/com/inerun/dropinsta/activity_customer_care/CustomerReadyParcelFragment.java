@@ -230,7 +230,9 @@ public class CustomerReadyParcelFragment extends BaseFragment implements View.On
 //                selectedparcelDataArrayList.set(i, parceldata);
                     updatedArrayList.add(readyParcelData);
                 }
-            startActivityForResult(new Intent(getActivity(), SignActivity.class), SIGN_REQUEST);
+            Intent intent=new Intent(getActivity(), CustSignActivity.class);
+            intent.putExtra(SignActivity.INTENT_RECEIVER_NAME,selectedparcelDataArrayList.get(0).getName());
+            startActivityForResult(intent, SIGN_REQUEST);
 //
 //            }else{
 //                showSnackbar(R.string.customer_care_error);
@@ -270,6 +272,7 @@ public class CustomerReadyParcelFragment extends BaseFragment implements View.On
 
             case SIGN_REQUEST:
                 if (resultCode == Activity.RESULT_OK && data.hasExtra(SignActivity.INTENT_FILENAME)) {
+                    showProgress();
                     String path = data.getStringExtra(SignActivity.INTENT_FILENAME);
 
 //                    setImage(path);

@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.inerun.dropinsta.R;
-import com.inerun.dropinsta.activity_warehouse.WhInvoiceFragment;
-import com.inerun.dropinsta.activity_warehouse.WhSearchParcelFragment;
 import com.inerun.dropinsta.base.BaseFragment;
 
 /**
@@ -54,12 +52,12 @@ public class CustomerDashboardFragment extends BaseFragment implements View.OnCl
 
 
             case R.id.searchparcel_image_opacity:
-                navigateToFragment(context,CustomerReadyParcelFragment.newInstance());
+                navigateToFragment(context,CustomerSearchParcelFragment.newInstance());
 
                 break;
 
             case R.id.readyparcel_image_opacity:
-                navigateToFragment(context, WhInvoiceFragment.newInstance());
+                navigateToFragment(context, CustomerReadyParcelFragment.newInstance());
 
                 break;
 

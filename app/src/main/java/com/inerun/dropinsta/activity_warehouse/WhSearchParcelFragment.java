@@ -82,7 +82,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     public void customOnCreateView(View root, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setShowBackArrow(true);
         context = getActivity();
-initView();
+        initView();
         setToolBarTitle(R.string.search_parcel);
         setListeners();
 
@@ -168,7 +168,7 @@ initView();
                 selectedparcelDataArrayList = new ArrayList<>();
                 updatedArrayList = new ArrayList<>();
                 for (int i = 0; i < adapter.getParcelDataList().size(); i++) {
-                    if(adapter.getParcelDataList().get(i).isselected()) {
+                    if (adapter.getParcelDataList().get(i).isselected()) {
                         selectedparcelDataArrayList.add(adapter.getParcelDataList().get(i));
                     }
                 }
@@ -178,7 +178,7 @@ initView();
 
                     for (int i = 0; i < selectedparcelDataArrayList.size(); i++) {
                         ParcelListingData.ParcelData parceldata = selectedparcelDataArrayList.get(i);
-                        UpdatedParcelData updateparcel= new UpdatedParcelData(parceldata.getBarcode(),ParcelListingData.ParcelData.DELIVERED,parceldata.getDeliverycomments(),parceldata.getPayment_status(),DIHelper.getDateTime(AppConstant.DATEIME_FORMAT),"","");
+                        UpdatedParcelData updateparcel = new UpdatedParcelData(parceldata.getBarcode(), ParcelListingData.ParcelData.DELIVERED, parceldata.getDeliverycomments(), parceldata.getPayment_status(), DIHelper.getDateTime(AppConstant.DATEIME_FORMAT), "", "");
 
 
 //                        int id = DIDbHelper.getColumnIdFromBarcode(parceldata.getBarcode(), getActivity());
@@ -324,21 +324,20 @@ initView();
                     String receiver_name = data.getStringExtra(SignActivity.INTENT_RECEIVER_NAME);
 //                    setImage(path);
                     Log.i("POD_path", path);
-                    Log.i("Receiver_Name", ""+receiver_name);
+                    Log.i("Receiver_Name", "" + receiver_name);
                     String pod_name = path.substring(path.lastIndexOf("/") + 1);
-                    Log.i("POD_Name", ""+pod_name);
-                    Log.i("Size", ""+selectedparcelDataArrayList.size());
+                    Log.i("POD_Name", "" + pod_name);
+                    Log.i("Size", "" + selectedparcelDataArrayList.size());
                     POD pod = new POD(pod_name, receiver_name);
                     Intent i = new Intent(getActivity(), whParcelUploadService.class);
-                    i.putExtra(UrlConstants.KEY_POD,pod);
-                    i.putExtra(UrlConstants.KEY_DATA,updatedArrayList);
+                    i.putExtra(UrlConstants.KEY_POD, pod);
+                    i.putExtra(UrlConstants.KEY_DATA, updatedArrayList);
                     getActivity().startService(i);
 
 //                    for (int i = 0; i < selectedparcelDataArrayList.size(); i++) {
 ////                        DIDbHelper.insertPODInfo(pod, selectedparcelDataArrayList.get(i).getColumn_id(), getActivity());
 ////                    Toast.makeText(this, "Saved at"+ path, Toast.LENGTH_SHORT).show();
 //                    }
-
 
 
 //                    ((BaseActivity) getActivity()).syncData();
@@ -376,8 +375,6 @@ initView();
 //        }
         return false;
     }
-
-
 
 
 }
