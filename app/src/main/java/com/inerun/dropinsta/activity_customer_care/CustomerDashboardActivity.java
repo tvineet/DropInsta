@@ -44,9 +44,11 @@ public class CustomerDashboardActivity extends BaseActivity {
 
 
     @Override
-    public void whDeliveryUpdated() {
-       showSnackbar(R.string.parcel_updated_msg);
-
+    public void custParcelDelivered() {
+        super.custParcelDelivered();
         hideProgress();
+        showSnackbar(R.string.delivered);
+
+
     }
 }

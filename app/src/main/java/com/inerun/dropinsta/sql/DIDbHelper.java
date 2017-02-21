@@ -306,6 +306,14 @@ public class DIDbHelper {
             parcelDao.updateDeliveryComment(parcelData.getColumn_id(), ParcelListingData.ParcelData.ATTEMPTED, parcelStatus.getStatus_comment());
         }
     }
+  public static void updateReturnParcelStatus(Context ctx, ArrayList<ParcelListingData.ParcelData> arrayList) {
+        for (ParcelListingData.ParcelData parcelData : arrayList) {
+//            StatusDao statusDao = new StatusDao(ctx);
+//            statusDao.insertDeliveryStatus(parcelData, parcelStatus);
+            ParcelDao parcelDao = new ParcelDao(ctx);
+            parcelDao.updateReturnStatus(parcelData.getColumn_id(), ParcelListingData.ParcelData.RETURN);
+        }
+    }
 
     public static void deliverParcelandUpdateTransaction(Context ctx, ArrayList<ParcelListingData.ParcelData> arrayList, ParcelStatus parcelStatus, boolean iscard, String transcid, String receivername, String totalamt, String currency, POD pod, String nationalId) {
 

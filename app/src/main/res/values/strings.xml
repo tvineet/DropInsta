@@ -35,6 +35,7 @@
     <string name="add_parcel_title">Stock In</string>
     <string name="ready_for_delivery">Ready For Delivery</string>
     <string name="invoices">Invoices</string>
+    <string name="payment">Payment</string>
 
 
 </resources>

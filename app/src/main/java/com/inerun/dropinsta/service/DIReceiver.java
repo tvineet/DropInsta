@@ -29,7 +29,7 @@ public abstract class DIReceiver extends BroadcastReceiver {
         }else if( type == TYPE_WAREHOUSE_PARCEL_DELIVERED){
             proccessDIReceiver(true);
         }else if( type == TYPE_CUSTOMER_PARCEL_DELIVERED){
-            proccessDIReceiver(true);
+            proccessCustParcelDelivered();
         }else if( type == TYPE_NETWORK_CHANGE){
             proccessNetworkChange();
         }

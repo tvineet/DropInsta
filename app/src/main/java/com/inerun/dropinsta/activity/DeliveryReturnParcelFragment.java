@@ -50,7 +50,7 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
     private RecyclerView recyclerView;
     private DeliverySearchAdapter mAdapter;
     private CheckBox selectall_checkbox;
-
+    ArrayList<ParcelListingData.ParcelData> returnselectedparcellist;
     public static Fragment newInstance() {
         DeliveryReturnParcelFragment fragment = new DeliveryReturnParcelFragment();
         return fragment;
@@ -125,8 +125,10 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
     public void onClick(View view) {
 
         ArrayList<ParcelListingData.ParcelData> selectedparcellist;
+
         switch (view.getId()) {
             case R.id.parcel_return_submit:
+
                 selectedparcellist = mAdapter.getSelectedParcels();
                 if (validateParcels(selectedparcellist)) {
                     returnParcel(selectedparcellist);
@@ -148,6 +150,8 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
     private void returnParcel(ArrayList<ParcelListingData.ParcelData> selectedparcellist) {
 
         try {
+            returnselectedparcellist= new ArrayList<>();
+            returnselectedparcellist.addAll(selectedparcellist);
             Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReturnParcelMapParams(selectedparcellist);
             DropInsta.serviceManager().postRequest(UrlConstants.URL_RETURN_PARCEL, params, response_listener, response_errorlistener, "RETURN_PARCEL");
         } catch (JSONException e) {
@@ -171,6 +175,9 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
                 if (DIHelper.getStatus(jsonObject)) {
 
                     Log.i("DB", "DeliveryReturnParcelFragment: " + System.currentTimeMillis());
+                    DIDbHelper.updateReturnParcelStatus(getActivity(),returnselectedparcellist);
+                    getData();
+                    setdata();
 
                 } else {
 

@@ -28,12 +28,14 @@ import com.inerun.dropinsta.activity.SignActivity;
 import com.inerun.dropinsta.adapter.CustomerExecutiveAdapter;
 import com.inerun.dropinsta.adapter.CustomerReadyAdapter;
 import com.inerun.dropinsta.base.BaseFragment;
+import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.data.CustomerExecutiveData;
 import com.inerun.dropinsta.data.POD;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ReadyParcelData;
 import com.inerun.dropinsta.data.WhInvoiceSearchParcelData;
+import com.inerun.dropinsta.helper.DIHelper;
 import com.inerun.dropinsta.service.DIRequestCreator;
 import com.inerun.dropinsta.service.whParcelUploadService;
 
@@ -228,6 +230,7 @@ public class CustomerReadyParcelFragment extends BaseFragment implements View.On
                     ParcelListingData.ParcelData parceldata = selectedparcelDataArrayList.get(i);
                     ReadyParcelData readyParcelData = new ReadyParcelData(parceldata.getBarcode());
 //                selectedparcelDataArrayList.set(i, parceldata);
+                    selectedparcelDataArrayList.get(i).setUpdate_date(DIHelper.getDateTime(AppConstant.DATEIME_FORMAT));
                     updatedArrayList.add(readyParcelData);
                 }
             Intent intent=new Intent(getActivity(), CustSignActivity.class);
@@ -266,6 +269,7 @@ public class CustomerReadyParcelFragment extends BaseFragment implements View.On
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
 
 
         switch (requestCode) {

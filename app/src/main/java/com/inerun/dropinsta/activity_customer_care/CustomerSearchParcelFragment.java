@@ -27,7 +27,6 @@ import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.ParcelDetailActivity;
 import com.inerun.dropinsta.activity.SignActivity;
-import com.inerun.dropinsta.activity_warehouse.WhSearchParcelListingFragment;
 import com.inerun.dropinsta.activity_warehouse.WhSignActivity;
 import com.inerun.dropinsta.adapter.CustomerReadyAdapter;
 import com.inerun.dropinsta.base.BaseActivity;
@@ -216,7 +215,7 @@ public class CustomerSearchParcelFragment extends BaseFragment implements View.O
 
             ParcelSearchData parcelSearchData = new ParcelSearchData(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid, parcel_invoice_no);
 
-            navigateToFragment(context, WhSearchParcelListingFragment.newInstance(parcelSearchData));
+            navigateToFragment(context, CustSearchListingFragment.newInstance(parcelSearchData));
 
 //            Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getSearchMapParams(parcel_no, parcel_name, parcel_email, parcel_phone, parcel_custid, parcel_invoice_no);
 
@@ -310,7 +309,7 @@ public class CustomerSearchParcelFragment extends BaseFragment implements View.O
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        setShowBackArrow(true);
         switch (requestCode) {
             case BARCODE_SCAN:
 
@@ -319,6 +318,7 @@ public class CustomerSearchParcelFragment extends BaseFragment implements View.O
                 }
                 break;
             case SIGN_REQUEST:
+
 
                 if (resultCode == Activity.RESULT_OK && data.hasExtra(SignActivity.INTENT_FILENAME)) {
                     showProgress();

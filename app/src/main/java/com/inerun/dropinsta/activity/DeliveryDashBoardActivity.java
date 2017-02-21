@@ -48,6 +48,7 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
     private TextView all_parcelscount;
     private TextView deliveredparcelscount,pendingparcelscount,paymentparcelscount;
     private RelativeLayout return_parcel_lay;
+    private TextView returnparcelscount;
 
     @Override
     public int customSetContentView() {
@@ -146,6 +147,7 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
         all_parcelscount = (TextView) findViewById(R.id.total_parcel_count);
         deliveredparcelscount = (TextView) findViewById(R.id.dash_delivered_num);
         pendingparcelscount = (TextView) findViewById(R.id.dash_pending_num);
+        returnparcelscount = (TextView) findViewById(R.id.return_count);
         paymentparcelscount = (TextView) findViewById(R.id.payment_count);
         payments = (RelativeLayout) findViewById(R.id.payment_layout);
 
@@ -417,6 +419,7 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
         all_parcelscount.setText(""+parcelListingData.getDeliveryData().size());
         deliveredparcelscount.setText(""+parcelListingData.getDelivered_num());
         pendingparcelscount.setText(""+parcelListingData.getPending_num());
+        returnparcelscount.setText(""+parcelListingData.getPending_num());
 
         paymentparcelscount.setText(""+DIDbHelper.getPaymentTotal(this));
 

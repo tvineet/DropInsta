@@ -91,7 +91,12 @@ public class WhSearchParcelListingFragment extends BaseFragment implements View.
         context = getActivity();
 
         initView();
+        setView();
         getData();
+    }
+
+    private void setView() {
+
     }
 
     private void initView() {
@@ -105,6 +110,9 @@ public class WhSearchParcelListingFragment extends BaseFragment implements View.
         updatebtn.setOnClickListener(this);
         selectall_checkbox.setOnCheckedChangeListener(this);
     }
+
+
+
 
     private void getData() {
 

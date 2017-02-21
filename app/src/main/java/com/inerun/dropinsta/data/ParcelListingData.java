@@ -60,6 +60,7 @@ public class ParcelListingData implements Serializable {
         private String amount;
         private String currency;
         private String date;
+        private String update_date;
 
         private String source_address1;
         private String source_address2;
@@ -89,11 +90,19 @@ public class ParcelListingData implements Serializable {
         private String rackno;
         private String binno;
 
+        public String getUpdate_date() {
+            return update_date;
+        }
+
+        public void setUpdate_date(String update_date) {
+            this.update_date = update_date;
+        }
 
         private boolean isselected;
 
 
         public final static int DELIVERED = 9;
+        public final static int RETURN = 15;
 
 
         public final static int PENDING = 12;

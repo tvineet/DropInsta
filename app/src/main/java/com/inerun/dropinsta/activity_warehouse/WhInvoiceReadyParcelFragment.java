@@ -12,25 +12,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.ParcelDetailFragment;
 import com.inerun.dropinsta.adapter.CustomerExecutiveAdapter;
 import com.inerun.dropinsta.adapter.WhSearchAdapter;
 import com.inerun.dropinsta.base.BaseFragment;
+import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.data.CustomerExecutiveData;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ReadyParcelData;
 import com.inerun.dropinsta.data.WhInvoiceSearchParcelData;
+import com.inerun.dropinsta.helper.DIHelper;
 import com.inerun.dropinsta.scanner.CameraTestActivity;
 import com.inerun.dropinsta.service.DIRequestCreator;
 
@@ -182,6 +182,7 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
                 for (int i = 0; i < selectedparcelDataArrayList.size(); i++) {
                     ParcelListingData.ParcelData parceldata = selectedparcelDataArrayList.get(i);
                     ReadyParcelData readyParcelData = new ReadyParcelData(parceldata.getBarcode());
+
 //                selectedparcelDataArrayList.set(i, parceldata);
                     updatedArrayList.add(readyParcelData);
                 }

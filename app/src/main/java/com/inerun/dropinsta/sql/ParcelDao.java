@@ -290,6 +290,26 @@ public class ParcelDao {
 
         return value;
 
+    }// code to update the delivery Comment
+    public int updateReturnStatus(int id,int status) {
+
+        mSQLiteDatabase = lOpenHelper.getWritableDatabase();
+        //Log.i("id", "" + id);
+        //Log.i("delivery_comment", "" + delivery_comment);
+        ContentValues values = new ContentValues();
+        values.put(DataUtils.PARCEL_DELIVERY_STATUS, status);
+
+        values.put(DataUtils.UPDATE_DATE, DIHelper.getDateTime(AppConstant.DATEIME_FORMAT));
+
+
+        // updating row
+        int value = mSQLiteDatabase.update(DataUtils.TABLE_NAME_PARCEL, values, DataUtils.COLUMN_ID + " = " + id, null);
+        //Log.i("values", "" + values.toString());
+
+        mSQLiteDatabase.close();
+
+        return value;
+
     }
     public int giveDelivery(int id,int status,int transrowid,String updateDate) {
 

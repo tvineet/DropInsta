@@ -35,6 +35,7 @@ public class CustomerDashboardFragment extends BaseFragment implements View.OnCl
         getViewById(R.id.searchparcel_image_opacity).setOnClickListener(this);
 
         getViewById(R.id.readyparcel_image_opacity).setOnClickListener(this);
+        setToolBarTitle(R.string.app_name);
 
 
     }

@@ -69,7 +69,6 @@ public class DeliveryDao {
         values.put(DataUtils.CONSIGNEE_ID, parcelData.getCustid());
 
 
-
         //Log.i("values", values.toString());
 
 //        // Inserting Row
@@ -79,9 +78,8 @@ public class DeliveryDao {
     }
 
 
-    public void insertMultipleParcels(String multiplevalues)
-    {
-      String parcelmasterquery=  " INSERT INTO "  +DataUtils.TABLE_NAME_PARCEL +getParcelColumns()+multiplevalues+" ;";
+    public void insertMultipleParcels(String multiplevalues) {
+        String parcelmasterquery = " INSERT INTO " + DataUtils.TABLE_NAME_PARCEL + getParcelColumns() + multiplevalues + " ;";
         mSQLiteDatabase = lOpenHelper.getWritableDatabase();
         //Log.i("StatusDao","Deleting Table"+  DataUtils.TABLE_NAME_STATUS);
 //        Log.i("insertDeliveryStatus", "execSQL " + System.currentTimeMillis());
@@ -89,7 +87,8 @@ public class DeliveryDao {
 
 
     }
-    private  String getParcelColumns() {
+
+    private String getParcelColumns() {
 
         String columns = "(" + DataUtils.PARCEL_BARCODE
                 + "," + DataUtils.CONSIGNEE_NAME + ","
@@ -123,13 +122,12 @@ public class DeliveryDao {
     }
 
 
-
     // code to get all Delivery Info for Delivery Listing
     public ArrayList<ParcelListingData.ParcelData> getDeliveryInfoForListing() {
         ArrayList<ParcelListingData.ParcelData> list = new ArrayList<>();
 
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + DataUtils.TABLE_NAME_PARCEL+ " ORDER BY "+DataUtils.PARCEL_DELIVERY_STATUS + " DESC";
+        String selectQuery = "SELECT  * FROM " + DataUtils.TABLE_NAME_PARCEL + " ORDER BY " + DataUtils.PARCEL_DELIVERY_STATUS + " DESC";
         //Log.i("DeliveryInfoForList", selectQuery);
 
         mSQLiteDatabase = lOpenHelper.getWritableDatabase();
@@ -145,7 +143,7 @@ public class DeliveryDao {
                         Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(7)), Integer.parseInt(cursor.getString(8)),
                         cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12),
                         cursor.getString(13), cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),
-                        cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23), cursor.getString(24),cursor.getString(27));
+                        cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23), cursor.getString(24), cursor.getString(27));
                 list.add(v);
             } while (cursor.moveToNext());
         }
@@ -173,7 +171,7 @@ public class DeliveryDao {
                         Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(7)), Integer.parseInt(cursor.getString(8)),
                         cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12),
                         cursor.getString(13), cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),
-                        cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23), cursor.getString(24),cursor.getString(27));
+                        cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23), cursor.getString(24), cursor.getString(27));
                 list.add(v);
             } while (cursor.moveToNext());
         }
@@ -186,7 +184,9 @@ public class DeliveryDao {
         ArrayList<ParcelListingData.ParcelData> list = new ArrayList<>();
 
         // Select All Query
-        String selectQuery = "SELECT * FROM " + DataUtils.TABLE_NAME_PARCEL + " WHERE " + DataUtils.PARCEL_DELIVERY_STATUS + " != " + ParcelListingData.ParcelData.DELIVERED;
+        String selectQuery = "SELECT * FROM " + DataUtils.TABLE_NAME_PARCEL + " WHERE " + DataUtils.PARCEL_DELIVERY_STATUS + " != " + ParcelListingData.ParcelData.DELIVERED
+
+                + " AND " + DataUtils.PARCEL_DELIVERY_STATUS + " != " + AppConstant.StatusKeys.RETURN_STATUS;
         //Log.i("DeliveryInfoForList", selectQuery);
 
         mSQLiteDatabase = lOpenHelper.getWritableDatabase();
@@ -201,7 +201,7 @@ public class DeliveryDao {
                         Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(7)), Integer.parseInt(cursor.getString(8)),
                         cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12),
                         cursor.getString(13), cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),
-                        cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23), cursor.getString(24),cursor.getString(27));
+                        cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23), cursor.getString(24), cursor.getString(27));
                 list.add(v);
             } while (cursor.moveToNext());
         }
@@ -212,10 +212,10 @@ public class DeliveryDao {
 
     // code to get column id for Delivery from barcode
     public int getColumnIdFromBarcode(String barcode) {
-        int columnid=-1;
+        int columnid = -1;
 
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + DataUtils.TABLE_NAME_PARCEL+ " WHERE " + DataUtils.PARCEL_BARCODE + " = '"+ barcode +"' ";
+        String selectQuery = "SELECT  * FROM " + DataUtils.TABLE_NAME_PARCEL + " WHERE " + DataUtils.PARCEL_BARCODE + " = '" + barcode + "' ";
         //Log.i("DeliveryInfoForList", selectQuery);
 
         mSQLiteDatabase = lOpenHelper.getWritableDatabase();
@@ -225,7 +225,7 @@ public class DeliveryDao {
         if (cursor.moveToFirst()) {
             do {
                 //Log.i("Parcel_ID", "" + cursor.getInt(0));
-                columnid=cursor.getInt(0);
+                columnid = cursor.getInt(0);
 
 //
             } while (cursor.moveToNext());
@@ -324,10 +324,10 @@ public class DeliveryDao {
                 //Log.i("podonserver", ""+cursor.getString(30));
                 //Log.i("receiver", ""+cursor.getString(31));
 //                //Log.i("podonServer", pod.getPodNameOnServer()+ " receverName : "+pod.getReceiverName());
-                ArrayList<ParcelStatus> statusDataList= DIDbHelper.getStatusbyParcelId(context,barcode);
+                ArrayList<ParcelStatus> statusDataList = DIDbHelper.getStatusbyParcelId(context, barcode);
 
 //                UpdatedParcelData updatedParcelData = new UpdatedParcelData(barcode, Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(8)), cursor.getString(26), cursor.getString(30), cursor.getString(31),statusDataList);
-                UpdatedParcelData updatedParcelData = new UpdatedParcelData(barcode, Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(8)), cursor.getString(26), cursor.getString(30), cursor.getString(31),statusDataList, cursor.getString(32));
+                UpdatedParcelData updatedParcelData = new UpdatedParcelData(barcode, Integer.parseInt(cursor.getString(5)), cursor.getString(6), Integer.parseInt(cursor.getString(8)), cursor.getString(26), cursor.getString(30), cursor.getString(31), statusDataList, cursor.getString(32));
 
                 list.add(updatedParcelData);
             } while (cursor.moveToNext());
@@ -361,7 +361,8 @@ public class DeliveryDao {
     // code to get all Pending Parcels
     public int getPendingParcelCount() {
 
-        String selectQuery = "SELECT count(*) FROM " + DataUtils.TABLE_NAME_PARCEL + " WHERE " + DataUtils.PARCEL_DELIVERY_STATUS + " != " + AppConstant.StatusKeys.DELIVERED_STATUS;
+        String selectQuery = "SELECT count(*) FROM " + DataUtils.TABLE_NAME_PARCEL + " WHERE " + DataUtils.PARCEL_DELIVERY_STATUS + " != " + AppConstant.StatusKeys.DELIVERED_STATUS
+                + " AND " + DataUtils.PARCEL_DELIVERY_STATUS + " != " + AppConstant.StatusKeys.RETURN_STATUS;
         //Log.i("getPendingParcelCount", selectQuery);
 
         mSQLiteDatabase = lOpenHelper.getWritableDatabase();

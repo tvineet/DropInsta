@@ -115,6 +115,7 @@ abstract public class BaseActivity extends AppCompatActivity {
     private boolean forCart;
 
     private boolean isWarehouse = false;
+    private boolean isCustomerSupport = false;
 
 
     private boolean isSplash = false;
@@ -704,6 +705,7 @@ abstract public class BaseActivity extends AppCompatActivity {
         @Override
         public void proccessCustParcelDelivered() {
             Log.i("proccessCustDelivered","Delivered");
+            custParcelDelivered();
         }
 
         @Override
@@ -713,6 +715,9 @@ abstract public class BaseActivity extends AppCompatActivity {
     };
 
     public void whDeliveryUpdated() {
+
+    }
+    public void custParcelDelivered() {
 
     }
 
