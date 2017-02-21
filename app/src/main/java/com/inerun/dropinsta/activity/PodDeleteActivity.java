@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.constant.AppConstant;
@@ -67,7 +68,8 @@ public class PodDeleteActivity extends BaseActivity {
             if (DropInsta.getUser().isDeliveryUser()) {
                 gotoHomeActivity();
             } else {
-                gotoWarehouseActivity();
+//                gotoWarehouseActivity();
+                gotoCustomreCareActivity();
             }
         } else {
             gotoLoginActivity();
@@ -96,6 +98,14 @@ public class PodDeleteActivity extends BaseActivity {
 
         Intent intent = new Intent(this,
                 WhDashboardActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void gotoCustomreCareActivity() {
+
+        Intent intent = new Intent(this,
+                CustomerDashboardActivity.class);
         startActivity(intent);
 
     }

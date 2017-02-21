@@ -25,19 +25,13 @@ public class CustomerDashboardActivity extends BaseActivity {
     @Override
     public void customOnCreate(Bundle savedInstanceState) {
 
-
-
-
-
-
-
 //        getSupportActionBar().setIcon(R.mipmap.toolbaricon);
 
-
+        Log.i("CustomerDashboard","customOnCreate");
         getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                WhDashboardFragment.newInstance()).commit();
+                CustomerDashboardFragment.newInstance()).commit();
         if (NotiHelper.isNotificationIntent(getIntent())) {
-            Log.i("WhDashboardActivity","isNotificationIntent");
+            Log.i("CustomerDashboard","isNotificationIntent");
            processNotiIntent(CustomerDashboardActivity.this);
         }
 
