@@ -244,25 +244,16 @@ public class DIRequestCreator {
         return mapParams;
 
     }
-    public Map<String, String> getReadyParcelDeliveredMapParamsForCustSupport(ArrayList<ReadyParcelData> readyParcelDataArrayList) {
+    public Map<String, String> getReadyParcelDeliveredMapParamsForCustSupport(String invoice_number, String customerCareId) {
 
         if(Utils.isUserLoggedIn(context)){
             mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
             mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
         }
+        mapParams.put(UrlConstants.KEY_CUSTOMER_CARE_ID, customerCareId);
+        mapParams.put(UrlConstants.KEY_INVOICE_NUMBER, invoice_number);
 
 
-
-        if(readyParcelDataArrayList != null && readyParcelDataArrayList.size() > 0) {
-
-            Gson gson = new Gson();
-            String json = gson.toJson(readyParcelDataArrayList);
-
-            mapParams.put(UrlConstants.KEY_UPDATE_DATA, json);
-        }else{
-
-            mapParams.put(UrlConstants.KEY_UPDATE_DATA, "[]");
-        }
 
 
         return mapParams;

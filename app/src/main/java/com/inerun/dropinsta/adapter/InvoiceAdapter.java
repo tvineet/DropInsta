@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.inerun.dropinsta.R;
-import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.WhInvoiceParcelData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by vineet on 11/29/2016.
@@ -22,16 +20,19 @@ public class InvoiceAdapter extends BaseRecyclerViewAdapter {
     private Context context;
     private ArrayList<WhInvoiceParcelData.Invoice> invoiceArrayList;
     private static OnItemClickListener mItemClickListener;
+    View.OnClickListener onclickListener;
 
     public class ViewHolder extends BaseRecyclerViewAdapter.ViewHolder implements View.OnClickListener {
         public TextView invoice_no, no_of_parcel;
+        public View parentView;
 
 
         public ViewHolder(View view) {
             super(view);
+            parentView = view;
             invoice_no = (TextView) view.findViewById(R.id.invoice_no);
             no_of_parcel = (TextView) view.findViewById(R.id.no_of_parcel);
-            view.setOnClickListener(this);
+            view.setOnClickListener(onclickListener);
         }
 
         @Override
@@ -44,9 +45,10 @@ public class InvoiceAdapter extends BaseRecyclerViewAdapter {
     }
 
 
-    public InvoiceAdapter(Context context, ArrayList<WhInvoiceParcelData.Invoice> invoiceArrayList) {
+    public InvoiceAdapter(Context context, ArrayList<WhInvoiceParcelData.Invoice> invoiceArrayList, View.OnClickListener searchlickListener) {
         this.invoiceArrayList = invoiceArrayList;
         this.context = context;
+        this.onclickListener = searchlickListener;
     }
 
 
@@ -70,9 +72,10 @@ public class InvoiceAdapter extends BaseRecyclerViewAdapter {
         ViewHolder holder= (ViewHolder) viewholder.holder;
         WhInvoiceParcelData.Invoice data = invoiceArrayList.get(position);
 
-        holder.invoice_no.setText(data.getInvoiceNo());
-        if(data.getParcelDatas() != null && data.getParcelDatas().size() >= 0) {
-            holder.no_of_parcel.setText(data.getParcelDatas().size());
+        holder.invoice_no.setText(data.getInvoice_number());
+        holder.parentView.setTag(position);
+        if(data.getParcelData() != null && data.getParcelData().size() >= 0) {
+            holder.no_of_parcel.setText("" + data.getParcelData().size());
         }else{
             holder.no_of_parcel.setText("0");
         }

@@ -9,10 +9,15 @@ import java.util.ArrayList;
 
 public class WhInvoiceParcelData implements Serializable {
     private boolean status;
-    private ArrayList<Invoice> invoices;
+    private ArrayList<Invoice> invoiceData;
+    private ArrayList<CustomerExecutiveData> executivedata;
 
-    public WhInvoiceParcelData(ArrayList<Invoice> invoices) {
-        this.invoices = invoices;
+    public ArrayList<CustomerExecutiveData> getExecutivedata() {
+        return executivedata;
+    }
+
+    public WhInvoiceParcelData(ArrayList<Invoice> invoiceData) {
+        this.invoiceData = invoiceData;
     }
 
     public WhInvoiceParcelData() {
@@ -22,25 +27,25 @@ public class WhInvoiceParcelData implements Serializable {
         return status;
     }
 
-    public ArrayList<Invoice> getInvoices() {
-        return invoices;
+    public ArrayList<Invoice> getInvoiceData() {
+        return invoiceData;
     }
 
     public class Invoice implements Serializable{
-        private String invoiceNo;
-        private ArrayList<ParcelListingData.ParcelData> parcelDatas;
+        private String invoice_number;
+        private ArrayList<ParcelListingData.ParcelData> parcelData;
 
-        public Invoice(String invoiceNo, ArrayList<ParcelListingData.ParcelData> parcelDatas) {
-            this.invoiceNo = invoiceNo;
-            this.parcelDatas = parcelDatas;
+        public Invoice(String invoice_number, ArrayList<ParcelListingData.ParcelData> parcelData) {
+            this.invoice_number = invoice_number;
+            this.parcelData = parcelData;
         }
 
-        public String getInvoiceNo() {
-            return invoiceNo;
+        public String getInvoice_number() {
+            return invoice_number;
         }
 
-        public ArrayList<ParcelListingData.ParcelData> getParcelDatas() {
-            return parcelDatas;
+        public ArrayList<ParcelListingData.ParcelData> getParcelData() {
+            return parcelData;
         }
     }
 

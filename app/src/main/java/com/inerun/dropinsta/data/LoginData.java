@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 
 public class LoginData implements Serializable {
-    public static String USER_TYPE_WAREHOUSE = "4";
+    public static String USER_TYPE_WAREHOUSE = "11";
     public static String USER_TYPE_DELIVERY = "8";
     public static String USER_TYPE_CUSTOMER_CARE = "6";
     private boolean status;

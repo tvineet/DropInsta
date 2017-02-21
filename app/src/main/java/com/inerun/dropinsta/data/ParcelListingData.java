@@ -384,5 +384,10 @@ public class ParcelListingData implements Serializable {
         public void setDeliverystatus(int deliverystatus) {
             this.deliverystatus = deliverystatus;
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            return getBarcode().equals(((ParcelData)obj).getBarcode());
+        }
     }
 }

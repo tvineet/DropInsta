@@ -951,6 +951,9 @@ abstract public class BaseActivity extends AppCompatActivity {
                     return false;
                 }
             }
+        }else
+        {
+            return false;
         }
         return true;
     }

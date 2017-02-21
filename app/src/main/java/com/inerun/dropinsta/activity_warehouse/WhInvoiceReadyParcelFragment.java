@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +21,11 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.inerun.dropinsta.DropInsta;
+import com.inerun.dropinsta.Exception.ExceptionMessages;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.ParcelDetailFragment;
 import com.inerun.dropinsta.adapter.CustomerExecutiveAdapter;
+import com.inerun.dropinsta.adapter.WhReadyParcelAdapter;
 import com.inerun.dropinsta.adapter.WhSearchAdapter;
 import com.inerun.dropinsta.base.BaseFragment;
 import com.inerun.dropinsta.constant.AppConstant;
@@ -29,10 +33,14 @@ import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.data.CustomerExecutiveData;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ReadyParcelData;
+import com.inerun.dropinsta.data.WhInvoiceParcelData;
 import com.inerun.dropinsta.data.WhInvoiceSearchParcelData;
 import com.inerun.dropinsta.helper.DIHelper;
 import com.inerun.dropinsta.scanner.CameraTestActivity;
 import com.inerun.dropinsta.service.DIRequestCreator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -45,21 +53,34 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
 
     private static final int PARCEL_SCAN = 102;
     private static final String SEARCH = "SEARCH_SERVICE";
-    private static final String DELIVERED = "delivered";
+    private static final String DELIVERED = "customer_support_delivered";
     private Context context;
     private LinearLayout submit_layout, parcel_scan_layout;
     private TextView error_txt;
     private RecyclerView detaillistview;
-    private WhSearchAdapter adapter;
+    private WhReadyParcelAdapter adapter;
     private Button delivery_button;
     private ArrayList<ParcelListingData.ParcelData> selectedparcelDataArrayList;
     private ArrayList<ReadyParcelData> updatedArrayList;
     private Spinner executiveSpinner;
     private CustomerExecutiveAdapter customerExecutiveAdapter;
+    private WhInvoiceParcelData.Invoice invoice;
+    private ArrayList<CustomerExecutiveData> executivedata;
 
-    public static Fragment newInstance() {
+    public static Fragment newInstance(WhInvoiceParcelData.Invoice invoice, ArrayList<CustomerExecutiveData> executivedata) {
         WhInvoiceReadyParcelFragment fragment = new WhInvoiceReadyParcelFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(UrlConstants.KEY_DATA, invoice);
+        bundle.putSerializable("EXECUTIVE_KEY", executivedata);
+        fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        invoice  = (WhInvoiceParcelData.Invoice) getArguments().getSerializable(UrlConstants.KEY_DATA);
+        executivedata  = (ArrayList<CustomerExecutiveData>) getArguments().getSerializable("EXECUTIVE_KEY");
     }
 
     @Override
@@ -73,6 +94,7 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
         context = getActivity();
 
         intView();
+        setSearchData(invoice, executivedata);
     }
 
     private void intView() {
@@ -110,11 +132,12 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
     }
 
 
-    private void setSearchData(WhInvoiceSearchParcelData searchParcelData) {
+    private void setSearchData(WhInvoiceParcelData.Invoice searchParcelData, ArrayList<CustomerExecutiveData> executivedata) {
 
-        if (searchParcelData != null && searchParcelData.getDeliverydata() != null && searchParcelData.getDeliverydata().size() > 0) {
+        if (searchParcelData != null && searchParcelData.getParcelData() != null && searchParcelData.getParcelData().size() > 0) {
             detaillistview.setVisibility(View.VISIBLE);
-            adapter = new WhSearchAdapter(getActivity(), searchParcelData.getDeliverydata(), searchlickListener);
+            parcel_scan_layout.setVisibility(View.VISIBLE);
+            adapter = new WhReadyParcelAdapter(getActivity(), searchParcelData.getParcelData(), searchlickListener);
 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
             detaillistview.setLayoutManager(mLayoutManager);
@@ -122,13 +145,13 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
             detaillistview.setAdapter(adapter);
             submit_layout.setVisibility(View.VISIBLE);
 
-            setExecutiveData(searchParcelData.getExecutivedata());
-
+            setExecutiveData(executivedata);
 
         } else {
             error_txt.setVisibility(View.VISIBLE);
             detaillistview.setVisibility(View.GONE);
             submit_layout.setVisibility(View.GONE);
+            parcel_scan_layout.setVisibility(View.GONE);
             showSnackbar(R.string.search_error);
 
         }
@@ -187,9 +210,10 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
                     updatedArrayList.add(readyParcelData);
                 }
 
-                Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyParcelDeliveredMapParams(updatedArrayList, customerCareId);
+                Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyParcelDeliveredMapParamsForCustSupport(invoice.getInvoice_number(), customerCareId);
 
-                DropInsta.serviceManager().postRequest(UrlConstants.URL_INVOICE_DELIVERY, params, getProgress(), response_listener_delivery, response_errorlistener_delivery, DELIVERED);
+                DropInsta.serviceManager().postRequest(UrlConstants.URL_INVOICE_DELIVERED_CUSTOMER, params, getProgress(), response_listener_delivery, response_errorlistener_delivery, DELIVERED);
+
             }else{
                 showSnackbar(R.string.customer_care_error);
             }
@@ -203,9 +227,27 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
     Response.Listener<String> response_listener_delivery = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            hideProgress();
 
-            showSnackbar("");
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+
+                showSnackbar(DIHelper.getMessage(jsonObject));
+                if (DIHelper.getStatus(jsonObject)) {
+
+                   navigateToFragment(context, WhInvoiceFragment.newInstance());
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                showSnackbar(ExceptionMessages.getMessageFromException(getActivity(), -1, e));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+                showSnackbar(ExceptionMessages.getMessageFromException(getActivity(), -1, e));
+            }
+            hideProgress();
         }
     };
 
@@ -228,7 +270,20 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
             case PARCEL_SCAN:
 
                 if (resultCode == Activity.RESULT_OK && data.hasExtra(CameraTestActivity.INTENT_BARCODE_VALUE)) {
-//                    adapter.addParcelToList(data.getStringExtra(CameraTestActivity.INTENT_BARCODE_VALUE));
+
+                    String barcode = data.getStringExtra(CameraTestActivity.INTENT_BARCODE_VALUE);
+//                    for(ParcelListingData.ParcelData parcelData:invoice.getParcelData()){
+//                        if(parcelData.getBarcode().equalsIgnoreCase(barcode)){
+//                            parcelData.setIsselected(true);
+//                        }
+//                    }
+
+                    for(ParcelListingData.ParcelData parcelData : adapter.getParcelDataList()){
+                        if(parcelData.getBarcode().equalsIgnoreCase(barcode)){
+                            parcelData.setIsselected(true);
+                        }
+                    }
+
                 }
                 break;
         }

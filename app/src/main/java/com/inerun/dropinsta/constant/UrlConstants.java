@@ -30,8 +30,9 @@ public class UrlConstants {
     public static final String URL_INVOICE_DELIVERY = BASE_ADDRESS + "invoicedelivery";
     public static final String URL_RETURN_PARCEL = BASE_ADDRESS + "returnparcel";
 
-    public static final String URL_READY_INVOICE = BASE_ADDRESS + "readyinvoice";
+    public static final String URL_READY_INVOICE_LIST = BASE_ADDRESS + "invoicelist";
     public static final String URL_GCM = BASE_ADDRESS + "updategcim";
+    public static final String URL_INVOICE_DELIVERED_CUSTOMER = BASE_ADDRESS + "invoicedelivery";
 
 
 

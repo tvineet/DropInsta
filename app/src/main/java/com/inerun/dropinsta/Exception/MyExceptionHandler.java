@@ -45,15 +45,15 @@ public class MyExceptionHandler implements
         intent.putExtra(UrlConstants.KEY_EXCEPTION, s); // required when starting from Application
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); // required when starting from Application
         myContext.startActivity(intent);
-        try {
+//        try {
+//
+//
+//            ((Activity) myContext).finish();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-
-            ((Activity) myContext).finish();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.exit(1); // kill off the crashed app fhdjfhdf
+//        System.exit(1); // kill off the crashed app fhdjfhdf
     }
 
 

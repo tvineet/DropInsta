@@ -38,6 +38,7 @@ public class WhInvoiceFragment extends BaseFragment {
     private TextView error_txt;
     private RecyclerView detaillistview;
     private InvoiceAdapter adapter;
+    private WhInvoiceParcelData whInvoiceParcelData;
 
     public static Fragment newInstance() {
         WhInvoiceFragment fragment = new WhInvoiceFragment();
@@ -52,14 +53,11 @@ public class WhInvoiceFragment extends BaseFragment {
     @Override
     public void customOnCreateView(View root, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) throws Exception {
         setShowBackArrow(true);
-        context = getActivity();
-        WhInvoiceParcelData data = new WhInvoiceParcelData();
-        intView();
-
-//        getData();
-        data = getDataNew();
-        setData(data);
         setToolBarTitle(R.string.invoices);
+        context = getActivity();
+        intView();
+        getData();
+
     }
 
 
@@ -72,7 +70,7 @@ public class WhInvoiceFragment extends BaseFragment {
     private void getData() {
         Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyInvoiceMapParams();
 
-        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_INVOICE, params, getProgress(), response_listener, response_errorlistener, READY_INVOICE);
+        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_INVOICE_LIST, params, getProgress(), response_listener, response_errorlistener, READY_INVOICE);
     }
 
     Response.Listener<String> response_listener = new Response.Listener<String>() {
@@ -81,9 +79,9 @@ public class WhInvoiceFragment extends BaseFragment {
             hideProgress();
             Gson gson = new Gson();
 
-            WhInvoiceParcelData data = gson.fromJson(response, WhInvoiceParcelData.class);
+            whInvoiceParcelData = gson.fromJson(response, WhInvoiceParcelData.class);
 
-            setData(data);
+            setData(whInvoiceParcelData);
         }
     };
 
@@ -98,9 +96,9 @@ public class WhInvoiceFragment extends BaseFragment {
     };
 
 
-    private void setData(WhInvoiceParcelData whInvoiceParcelData) {
-        if (whInvoiceParcelData != null && whInvoiceParcelData.getInvoices() != null && whInvoiceParcelData.getInvoices().size() > 0) {
-            adapter = new InvoiceAdapter(getActivity(), whInvoiceParcelData.getInvoices());
+    private void setData(final WhInvoiceParcelData whInvoiceParcelData) {
+        if (whInvoiceParcelData != null && whInvoiceParcelData.getInvoiceData() != null && whInvoiceParcelData.getInvoiceData().size() > 0) {
+            adapter = new InvoiceAdapter(getActivity(), whInvoiceParcelData.getInvoiceData(), searchlickListener);
             detaillistview.setHasFixedSize(true);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
             detaillistview.setLayoutManager(mLayoutManager);
@@ -110,13 +108,6 @@ public class WhInvoiceFragment extends BaseFragment {
 
             detaillistview.setAdapter(adapter);
 
-            adapter.setOnItemClickListener(new InvoiceAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View v, int position) {
-
-                    navigateToFragment(getActivity(),WhInvoiceReadyParcelFragment.newInstance());
-                }
-            });
 
         }else {
             error_txt.setVisibility(View.VISIBLE);
@@ -126,30 +117,14 @@ public class WhInvoiceFragment extends BaseFragment {
         }
     }
 
+    View.OnClickListener searchlickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int pos = (int) view.getTag();
+            navigateToFragment(getActivity(),WhInvoiceReadyParcelFragment.newInstance(whInvoiceParcelData.getInvoiceData().get(pos), whInvoiceParcelData.getExecutivedata()));
 
-    private WhInvoiceParcelData getDataNew() {
-        ArrayList<WhInvoiceParcelData.Invoice> invoiceArrayList = new ArrayList<>();
-
-        WhInvoiceParcelData whInvoiceParcelData = new WhInvoiceParcelData();
-        WhInvoiceParcelData.Invoice invoice = whInvoiceParcelData.new Invoice("TI00052",null);
-
-        invoiceArrayList.add(invoice);
-
-
-        WhInvoiceParcelData.Invoice invoice1 = whInvoiceParcelData.new Invoice("TI00044",null);
-
-        invoiceArrayList.add(invoice1);
-
-        WhInvoiceParcelData.Invoice invoice2 = whInvoiceParcelData.new Invoice("TI00066",null);
-
-        invoiceArrayList.add(invoice2);
-
-        WhInvoiceParcelData whInv = new WhInvoiceParcelData(invoiceArrayList);
-
-        return whInv;
-
-    }
-
+        }
+    };
 
 
     @Override
