@@ -171,8 +171,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         finish();
                     } else if (loginData.isWarehouseUser()) {
                         DropInsta.setUser(loginData);
-//                        startActivity(new Intent(context, WhDashboardActivity.class));
-                        startActivity(new Intent(context, CustomerDashboardActivity.class));
+                        startActivity(new Intent(context, WhDashboardActivity.class));
                         finish();
                     }  else if (loginData.isCustomerCareUser()) {
                         DropInsta.setUser(loginData);
