@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -81,6 +83,8 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
         super.onCreate(savedInstanceState);
         invoice  = (WhInvoiceParcelData.Invoice) getArguments().getSerializable(UrlConstants.KEY_DATA);
         executivedata  = (ArrayList<CustomerExecutiveData>) getArguments().getSerializable("EXECUTIVE_KEY");
+        CustomerExecutiveData executiveData_hint = new CustomerExecutiveData("", getString(R.string.customer_executive_hint));
+        executivedata.add(executiveData_hint);
     }
 
     @Override
@@ -160,8 +164,6 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
     }
 
     private void setExecutiveData(ArrayList<CustomerExecutiveData> executivedata) {
-        CustomerExecutiveData executiveData_hint = new CustomerExecutiveData("", getString(R.string.customer_executive_hint));
-        executivedata.add(executiveData_hint);
 
         customerExecutiveAdapter = new CustomerExecutiveAdapter(getActivity(), android.R.layout.simple_spinner_item, executivedata);
         customerExecutiveAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -278,11 +280,25 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
 //                        }
 //                    }
 
-                    for(ParcelListingData.ParcelData parcelData : adapter.getParcelDataList()){
+                    for(int i=0;i<adapter.getParcelDataList().size();i++)
+                    {
+                        ParcelListingData.ParcelData parcelData= adapter.getParcelDataList().get(i);
                         if(parcelData.getBarcode().equalsIgnoreCase(barcode)){
-                            parcelData.setIsselected(true);
+                            adapter.getParcelDataList().get(i).setIsselected(true);
                         }
                     }
+//                    for(ParcelListingData.ParcelData parcelData : adapter.getParcelDataList()){
+//                        if(parcelData.getBarcode().equalsIgnoreCase(barcode)){
+//                            parcelData.setIsselected(true);
+//                        }
+//                    }
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+
 
                 }
                 break;

@@ -23,7 +23,7 @@
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
             android:weightSum="10"
-
+            android:layout_marginBottom="@dimen/text_size12sp"
             >
 
             <ImageView

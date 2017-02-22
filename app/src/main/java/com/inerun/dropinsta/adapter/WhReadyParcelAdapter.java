@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.inerun.dropinsta.R;
@@ -63,6 +64,13 @@ public class WhReadyParcelAdapter extends RecyclerView.Adapter<WhReadyParcelAdap
         holder.racknumtxt.setText((parcelData.getRackno()));
         holder.binnumtxt.setText((parcelData.getBinno()));
         holder.parentView.setTag(position);
+        if(parcelData.isselected()) {
+            holder.search_num_radio.setChecked(true);
+//            holder.opacity_layout.setVisibility(View.VISIBLE);
+        }else{
+//            holder.opacity_layout.setVisibility(View.GONE);
+            holder.search_num_radio.setChecked(false);
+        }
 //        holder.search_num_radio.setTag(position);
 //        if (!parcelData.isDelivered()) {
 //            holder.search_num_radio.setVisibility(View.VISIBLE);
@@ -103,7 +111,8 @@ public class WhReadyParcelAdapter extends RecyclerView.Adapter<WhReadyParcelAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nametxt, parcelnumtxt, racknumtxt, binnumtxt;
         public View parentView;
-//        public CheckBox search_num_radio;
+        private LinearLayout opacity_layout;
+        public CheckBox search_num_radio;
 
 
         public ViewHolder(View view) {
@@ -113,7 +122,8 @@ public class WhReadyParcelAdapter extends RecyclerView.Adapter<WhReadyParcelAdap
             parcelnumtxt = (TextView) view.findViewById(R.id.search_num);
             racknumtxt = (TextView) view.findViewById(R.id.search_rack_num);
             binnumtxt = (TextView) view.findViewById(R.id.search_bin_num);
-//            search_num_radio = (CheckBox) view.findViewById(R.id.search_num_cb);
+            opacity_layout = (LinearLayout) view.findViewById(R.id.opacity_layout);
+            search_num_radio = (CheckBox) view.findViewById(R.id.search_num_cb);
 //            search_num_radio.setOnCheckedChangeListener(WhReadyParcelAdapter.this);
 
             view.setOnClickListener(onclickListener);

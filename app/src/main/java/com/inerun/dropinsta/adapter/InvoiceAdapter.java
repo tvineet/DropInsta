@@ -79,14 +79,14 @@ public class InvoiceAdapter extends BaseRecyclerViewAdapter {
         }else{
             holder.no_of_parcel.setText("0");
         }
-        if(position % 2 == 0){
-            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.colorlightyellow));
-            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-
-        }else{
-            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.sideMenuOptionDark));
-            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-        }
+//        if(position % 2 == 0){
+//            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.colorlightyellow));
+//            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+//
+//        }else{
+//            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.sideMenuOptionDark));
+//            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+//        }
 
     }
 
