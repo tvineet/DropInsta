@@ -102,7 +102,7 @@ public class ParcelListingData implements Serializable {
 
 
         public final static int DELIVERED = 9;
-        public final static int RETURN = 15;
+        public final static int RETURN = 18;
 
 
         public final static int PENDING = 12;

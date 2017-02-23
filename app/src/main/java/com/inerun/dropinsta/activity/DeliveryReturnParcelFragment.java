@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -51,6 +54,9 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
     private DeliverySearchAdapter mAdapter;
     private CheckBox selectall_checkbox;
     ArrayList<ParcelListingData.ParcelData> returnselectedparcellist;
+    private RelativeLayout checkbox_layout;
+    private LinearLayout btn_layout;
+
     public static Fragment newInstance() {
         DeliveryReturnParcelFragment fragment = new DeliveryReturnParcelFragment();
         return fragment;
@@ -68,6 +74,7 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
     }
 
     private void initView() {
+        checkbox_layout = (RelativeLayout) getViewById(R.id.checkbox_layout);
         recyclerView = (RecyclerView) getViewById(R.id.return_parcel_listview);
         submit = (Button) getViewById(R.id.parcel_return_submit);
 
@@ -75,6 +82,7 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
 
         selectall_checkbox = (CheckBox) getViewById(R.id.checkbox_allselected);
         selectall_checkbox.setOnCheckedChangeListener(this);
+        btn_layout = (LinearLayout) getViewById(R.id.btn_layout);
     }
 
 
@@ -91,6 +99,7 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
     }
 
     private void setdata() {
+
         mAdapter = new DeliverySearchAdapter(getActivity(), parcellist);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -113,6 +122,14 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
                 getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
             }
         });
+
+        if(parcellist != null && parcellist.size() > 0) {
+            checkbox_layout.setVisibility(View.VISIBLE);
+            btn_layout.setVisibility(View.VISIBLE);
+        }else{
+            checkbox_layout.setVisibility(View.GONE);
+            btn_layout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -153,7 +170,7 @@ public class DeliveryReturnParcelFragment extends BaseFragment implements View.O
             returnselectedparcellist= new ArrayList<>();
             returnselectedparcellist.addAll(selectedparcellist);
             Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReturnParcelMapParams(selectedparcellist);
-            DropInsta.serviceManager().postRequest(UrlConstants.URL_RETURN_PARCEL, params, response_listener, response_errorlistener, "RETURN_PARCEL");
+            DropInsta.serviceManager().postRequest(UrlConstants.URL_RETURN_PARCEL, params, getProgress(), response_listener, response_errorlistener, "RETURN_PARCEL");
         } catch (JSONException e) {
             e.printStackTrace();
             showSnackbar(R.string.exception_alert_message_parsing_exception);

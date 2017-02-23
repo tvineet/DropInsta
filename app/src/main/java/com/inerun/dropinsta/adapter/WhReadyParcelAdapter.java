@@ -66,9 +66,9 @@ public class WhReadyParcelAdapter extends RecyclerView.Adapter<WhReadyParcelAdap
         holder.parentView.setTag(position);
         if(parcelData.isselected()) {
             holder.search_num_radio.setChecked(true);
-//            holder.opacity_layout.setVisibility(View.VISIBLE);
+            holder.opacity_layout.setVisibility(View.VISIBLE);
         }else{
-//            holder.opacity_layout.setVisibility(View.GONE);
+            holder.opacity_layout.setVisibility(View.GONE);
             holder.search_num_radio.setChecked(false);
         }
 //        holder.search_num_radio.setTag(position);
@@ -77,9 +77,9 @@ public class WhReadyParcelAdapter extends RecyclerView.Adapter<WhReadyParcelAdap
 //        } else {
 //            holder.search_num_radio.setVisibility(View.GONE);
 //        }
-        onBind = true;
+//        onBind = true;
 //        holder.search_num_radio.setChecked(parcelData.isselected());
-        onBind = false;
+//        onBind = false;
 
 
 //        holder.search_num_radio.setOnCheckedChangeListener(this);

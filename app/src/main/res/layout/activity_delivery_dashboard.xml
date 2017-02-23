@@ -193,7 +193,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@color/colorGray">
 
                 <TextView
@@ -222,8 +222,8 @@
                 android:id="@+id/return_parcel_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1.5"
                 android:background="@color/colorGray">
 
                 <TextView
