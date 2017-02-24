@@ -11,8 +11,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/submit_layout"
         android:layout_margin="@dimen/layout_margin5dp"
-        android:paddingBottom="@dimen/fragment_layout_margin10dp"
         android:paddingLeft="@dimen/fragment_layout_margin10dp"
         android:paddingRight="@dimen/fragment_layout_margin10dp">
 
@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
 
         <Spinner

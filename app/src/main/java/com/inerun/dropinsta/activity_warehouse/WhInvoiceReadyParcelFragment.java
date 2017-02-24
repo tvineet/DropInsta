@@ -279,12 +279,14 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
 //                            parcelData.setIsselected(true);
 //                        }
 //                    }
+                    int selectedPosition = 0;
 
                     for(int i=0;i<adapter.getParcelDataList().size();i++)
                     {
                         ParcelListingData.ParcelData parcelData= adapter.getParcelDataList().get(i);
                         if(parcelData.getBarcode().equalsIgnoreCase(barcode)){
                             adapter.getParcelDataList().get(i).setIsselected(true);
+                            selectedPosition = i;
                         }
                     }
 //                    for(ParcelListingData.ParcelData parcelData : adapter.getParcelDataList()){
@@ -299,6 +301,7 @@ public class WhInvoiceReadyParcelFragment extends BaseFragment implements View.O
                         }
                     });
 
+                    detaillistview.scrollToPosition(selectedPosition);
 
                 }
                 break;

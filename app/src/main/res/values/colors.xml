@@ -35,6 +35,7 @@
 
     <color name="homeaddparcel_back">#B31B9F8D</color>
     <color name="homesearchparcel_back">#B3283C55</color>
+    <color name="homereadyparcel_back">#B3A52A2A</color>
     <color name="colorlightyellow">#F1F0C7</color>
     <color name="text_color">#7C7C7C</color>
 

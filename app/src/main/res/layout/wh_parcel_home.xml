@@ -167,22 +167,24 @@
                 android:scaleType="centerCrop"
 
 
-                android:src="@mipmap/add_parcel_home"
+                android:src="@mipmap/readyforparcel"
 
 
 
                 />
+
             <ImageView
                 android:id="@+id/readyparcel_image_opacity"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:scaleType="centerCrop"
 
-                android:background="@color/homeaddparcel_back"
+                android:background="@color/homereadyparcel_back"
 
 
-
-                />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
 
             <ImageView
@@ -198,6 +200,8 @@
 
 
                 />
+
+
 
             <TextView
                 android:id="@+id/tv_readyparcel"
@@ -215,6 +219,8 @@
 
 
                 />
+
+
 
 
         </RelativeLayout>
