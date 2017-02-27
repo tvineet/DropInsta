@@ -298,6 +298,11 @@ public class CustomerReadyParcelFragment extends BaseFragment implements View.On
 
                     Intent i = new Intent(getActivity(), whParcelUploadService.class);
                     i.putExtra(UrlConstants.KEY_POD,pod);
+                    for(int j =0;j<selectedparcelDataArrayList.size();j++)
+                    {
+                        selectedparcelDataArrayList.get(j).setDeliverystatus(ParcelListingData.ParcelData.DELIVERED);
+                    }
+
                     i.putExtra(UrlConstants.KEY_DATA,selectedparcelDataArrayList);
                     getActivity().startService(i);
 //                    Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyParcelDeliveredMapParamsForCustSupport(updatedArrayList);

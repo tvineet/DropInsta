@@ -153,13 +153,14 @@ public class WhAddParcelFragment extends BaseFragment implements View.OnClickLis
     Response.Listener<String> response_listener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
+            try {
             Gson gson = new Gson();
             ServiceResponse serviceResponse = gson.fromJson(response, ServiceResponse.class);
             if (serviceResponse.getStatus()) {
                 clearData();
             } else {
                 List<String> failed_parcel = null;
-                try {
+
                     failed_parcel = getFailedParcels(serviceResponse
                             .getParcels());
                     if (failed_parcel != null && failed_parcel.size() > 0) {
@@ -167,14 +168,17 @@ public class WhAddParcelFragment extends BaseFragment implements View.OnClickLis
                     } else {
                         clearData();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    showSnackbar(e.getMessage());
-                }
+
 
             }
             showSnackbar(serviceResponse.getMessage());
-
+            } catch (JSONException e) {
+                e.printStackTrace();
+                showSnackbar(e.getMessage());
+            }catch (Exception e) {
+                e.printStackTrace();
+                showSnackbar(e.getMessage());
+            }
         }
 
 

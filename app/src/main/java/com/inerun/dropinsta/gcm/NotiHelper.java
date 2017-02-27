@@ -4,9 +4,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
@@ -45,13 +45,15 @@ public class NotiHelper {
 //        ImageLoader imgloader = ImageLoader.getInstance();
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context);
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             mBuilder.setSmallIcon(R.mipmap.notification_icon_trans);
-        } else {
-            mBuilder.setSmallIcon(R.mipmap.notification_icon);
-
-        }
+        mBuilder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                R.mipmap.notification_icon_trans));
+//        } else {
+//            mBuilder.setSmallIcon(R.mipmap.notification_icon);
+//
+//        }
 
 //        if (bigpicture != null && bigpicture .length()>0) {
 //            mBuilder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(imgloader.loadImageSync(bigpicture)).setSummaryText(text));

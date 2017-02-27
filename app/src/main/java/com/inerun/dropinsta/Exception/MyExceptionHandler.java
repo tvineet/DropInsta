@@ -1,6 +1,5 @@
 package com.inerun.dropinsta.Exception;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -52,7 +51,7 @@ public class MyExceptionHandler implements
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
+//
 //        System.exit(1); // kill off the crashed app fhdjfhdf
     }
 

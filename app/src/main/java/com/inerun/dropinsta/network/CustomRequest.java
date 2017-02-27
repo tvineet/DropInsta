@@ -70,6 +70,8 @@ public class CustomRequest extends Request<String>{
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
+        }catch (Exception e) {
+            return Response.error(new ParseError(e));
         }
     }
 
