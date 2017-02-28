@@ -28,7 +28,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/include"
         android:layout_alignLeft="@+id/wh_save_all"
-        android:layout_alignStart="@+id/wh_save_all">
+        android:layout_alignStart="@+id/wh_save_all"
+        android:layout_above="@+id/wh_save_all"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
