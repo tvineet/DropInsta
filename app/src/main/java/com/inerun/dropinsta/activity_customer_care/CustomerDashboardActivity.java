@@ -48,6 +48,7 @@ public class CustomerDashboardActivity extends BaseActivity {
         super.custParcelDelivered();
         hideProgress();
         showSnackbar(R.string.delivered);
+        handleFragmentBackPressed();
 
 
     }

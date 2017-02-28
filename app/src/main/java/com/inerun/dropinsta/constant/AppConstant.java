@@ -19,8 +19,8 @@ public class AppConstant {
     public static final int LISTING_PAGING_LIMIT = 30;
     public static final int SLIDER_DURATION = 3000;
     public static final int DB_VERSION = 1;
-    //    public static final String DB_NAME = "database.db";
-    public static final String DB_NAME = "/mnt/sdcard/example.db";
+        public static final String DB_NAME = "database.db";
+//    public static final String DB_NAME = "/mnt/sdcard/example.db";
     public static final String ACTION_POD = "action_pod";
     public static final String ACTION_WHPOD = "action_whpod";
     public static final int DEFAULT_TIMEOUT = 20 * 1000;
