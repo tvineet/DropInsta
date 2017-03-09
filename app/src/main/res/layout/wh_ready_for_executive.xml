@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="2dp">
+
+    <include layout="@layout/error_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/layout_margin5dp"
+        android:paddingBottom="@dimen/fragment_layout_margin10dp"
+        android:paddingLeft="@dimen/fragment_layout_margin10dp"
+        android:paddingRight="@dimen/fragment_layout_margin10dp">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ready_request_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="@dimen/layout_margin5dp"
+
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/searcherror"
+            style="@style/heading_text_view_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_listview"
+            android:layout_marginTop="@dimen/layout_margin10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/search_error"
+            android:textSize="@dimen/text_size18sp"
+            android:visibility="gone"
+
+            />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

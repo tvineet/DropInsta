@@ -73,7 +73,8 @@ public class WhDashboardFragment extends BaseFragment implements View.OnClickLis
                 break;
 
             case R.id.readyparcel_image_opacity:
-                navigateToFragment(context, WhInvoiceFragment.newInstance());
+//                navigateToFragment(context, WhInvoiceFragment.newInstance());
+                navigateToFragment(context, WhReadyForExecutiveFragment.newInstance());
 
                 break;
 //            case R.id.addparcel_image:

@@ -30,4 +30,6 @@
     <string name="customer_executive_hint">Customer Care Executive *</string>
     <string name="return_parcel_title">Return Parcel</string>
     <string name="title_return_parcel">Return Parcels</string>
+    <string name="ready_parcel">Ready Parcel</string>
+    <string name="not_delivered">Parcel not Delivered</string>
 </resources>

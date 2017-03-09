@@ -42,14 +42,26 @@ public class CustomerDashboardActivity extends BaseActivity {
 
     }
 
-
     @Override
-    public void custParcelDelivered() {
-        super.custParcelDelivered();
+    public void custParcelDelivered(boolean isSuccess) {
+        super.custParcelDelivered(isSuccess);
+
         hideProgress();
-        showSnackbar(R.string.delivered);
+        if(isSuccess) {
+            showSnackbar(R.string.delivered);
+        }else{
+            showSnackbar(R.string.not_delivered);
+        }
         handleFragmentBackPressed();
-
-
     }
+
+    //    @Override
+//    public void custParcelDelivered() {
+//        super.custParcelDelivered();
+//        hideProgress();
+//        showSnackbar(R.string.delivered);
+//        handleFragmentBackPressed();
+//
+//
+//    }
 }

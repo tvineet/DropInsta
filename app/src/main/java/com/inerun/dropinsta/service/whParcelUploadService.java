@@ -30,6 +30,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class whParcelUploadService extends Service {
 
+    private static boolean isSuccess = false;
     private static final String TAG = "ImageUploadingServices";
 
 
@@ -57,6 +58,7 @@ public class whParcelUploadService extends Service {
         ArrayList<POD> arraylist = new ArrayList<>();
         arraylist.add((POD) intent.getSerializableExtra(UrlConstants.KEY_POD));
         ArrayList<ParcelListingData.ParcelData> selectedparcelDataArrayList = (ArrayList<ParcelListingData.ParcelData>) intent.getSerializableExtra(UrlConstants.KEY_DATA);
+        String invoice_no = intent.getStringExtra(UrlConstants.KEY_INVOICE_NUMBER);
         model = arraylist;
 
 
@@ -66,7 +68,7 @@ public class whParcelUploadService extends Service {
                 myQueue = new LinkedList<MyImageUplodingThread>();
             }
             for (POD pod : model) {
-                MyImageUplodingThread tempThread = new MyImageUplodingThread(pod, selectedparcelDataArrayList);
+                MyImageUplodingThread tempThread = new MyImageUplodingThread(pod, selectedparcelDataArrayList, invoice_no);
                 myQueue.add(tempThread);
 
             }
@@ -113,6 +115,7 @@ public class whParcelUploadService extends Service {
 //            intent.putExtra(UrlConstants.KEY_TYPE, DIReceiver.TYPE_WAREHOUSE_PARCEL_DELIVERED);
             //Keeping Same Flow As POS UPDATED
             intent.putExtra(UrlConstants.KEY_TYPE, DIReceiver.TYPE_CUSTOMER_PARCEL_DELIVERED);
+            intent.putExtra(UrlConstants.KEY_DELIVERY_STATUS_FLAG, isSuccess);
         } else {
             intent.putExtra(UrlConstants.KEY_TYPE, DIReceiver.TYPE_POD_UPDATED);
         }
@@ -123,12 +126,14 @@ public class whParcelUploadService extends Service {
     class MyImageUplodingThread extends Thread {
         private POD poddata;
         ArrayList<ParcelListingData.ParcelData> selectedparcelDataArrayList;
+        String invoice_no;
 
 
-        public MyImageUplodingThread(POD poddata, ArrayList<ParcelListingData.ParcelData> selectedparcelDataArrayList) {
+        public MyImageUplodingThread(POD poddata, ArrayList<ParcelListingData.ParcelData> selectedparcelDataArrayList, String invoice_no) {
 
             this.poddata = poddata;
             this.selectedparcelDataArrayList = selectedparcelDataArrayList;
+            this.invoice_no = invoice_no;
 
 
         }
@@ -164,12 +169,15 @@ public class whParcelUploadService extends Service {
             Gson gson = new Gson();
             String data = gson.toJson(selectedparcelDataArrayList);
             RequestParams params = new RequestParams();
+            params.put(UrlConstants.KEY_INVOICE_NUMBER, "" + invoice_no);
             params.put(UrlConstants.KEY_USERTYPE, "" + DropInsta.getUser().getUsertype());
             params.put(UrlConstants.KEY_ANDROID_ID, DeviceInfoUtil.getAndroidID(context));
             params.put(UrlConstants.KEY_UPDATE_DATA, data);
             params.put(UrlConstants.KEY_RECEIVER_NAME, poddata.getReceiverName());
-            if(poddata.getNationalid()!=null&&poddata.getNationalid().length()>0) {
+            if(poddata.getNationalid()!=null && poddata.getNationalid().length()>0) {
                 params.put(UrlConstants.KEY_NATIONAL_ID, poddata.getNationalid());
+            }else{
+                params.put(UrlConstants.KEY_NATIONAL_ID, "");
             }
             String android_version= DeviceInfoUtil.getDeviceAndroidVersionName(context);
             String brand=DeviceInfoUtil.getBrandName(context);
@@ -244,6 +252,7 @@ public class whParcelUploadService extends Service {
                                       Throwable arg3) {
                     Log.i("Failure", new String(arg2));
 //                    DIDbHelper.updatePODStatus(context, poddata.getId(), null, PODDao.POD_STATUS_FAILED);
+                    isSuccess = false;
                     ((whParcelUploadService) context).manageQueue();
 
                 }
@@ -254,6 +263,7 @@ public class whParcelUploadService extends Service {
                     Log.d("SystemTime_onSuccess", new SimpleDateFormat("hh:mm:ss").format(new Date(System.currentTimeMillis())));
                     Log.d("onSuccessResponse", new String(arg2));
 //                    DIDbHelper.updatePODStatus(context, poddata.getId(), new String(arg2), PODDao.POD_STATUS_UPLOADED);
+                    isSuccess = true;
                     ((whParcelUploadService) context).manageQueue();
 //                    MainActivity.this.progress.setProgress(0);
 //                    try {
@@ -269,6 +279,7 @@ public class whParcelUploadService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
 //            DIDbHelper.updatePODStatus(context, poddata.getId(), null, PODDao.POD_STATUS_FAILED);
+            isSuccess = false;
             ((whParcelUploadService) context).manageQueue();
 //            BTChatHelper.getInstance(context).updateMessageStatus(model.getId(), MessageModel.STATUS_FAILED, model.getId());
         }

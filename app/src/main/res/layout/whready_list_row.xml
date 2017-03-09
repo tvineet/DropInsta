@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-
     >
 
     <LinearLayout
@@ -15,129 +14,147 @@
         android:weightSum="10"
 
 
-
         >
+
         <CheckBox
             android:id="@+id/search_num_cb"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="top"
             android:background="@color/colorlightyellow"
-            android:enabled="false"
             android:clickable="false"
+            android:enabled="false"
+            android:gravity="top"
+            android:layout_marginBottom="2dp"
             />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4.5"
-            android:orientation="vertical"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="10">
 
-            >
+            <RelativeLayout
+                android:id="@+id/search_num_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/search_num_title"
-                style="@style/search_text_view_style"
+                <TextView
+                    android:id="@+id/search_num_title"
+                    style="@style/search_text_view_style"
+                    android:layout_width="@dimen/space120"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="2dp"
+                    android:text="@string/search_parcel_num"
+                    android:textSize="@dimen/text_size18sp"
+                    />
+
+                <TextView
+                    android:id="@+id/search_num"
+                    style="@style/search_text_view_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/search_num_title"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size18sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/search_name_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/search_parcel_num"
-                android:textSize="@dimen/text_size18sp"
+                android:layout_below="@+id/search_num_lay">
+
+                <TextView
+                    android:id="@+id/search_name_title"
+                    style="@style/search_text_view_style"
+                    android:layout_width="@dimen/space120"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignTop="@+id/search_name"
+                    android:layout_alignBottom="@+id/search_name"
+                    android:layout_marginRight="2dp"
+                    android:text="@string/search_parcel_nameonly"
+                    android:textSize="@dimen/text_size18sp" />
+
+                <TextView
+                    android:id="@+id/search_name"
+                    style="@style/search_text_view_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_toRightOf="@+id/search_name_title"
+                    android:maxLines="2"
+                    android:textSize="@dimen/text_size18sp" />
 
 
-                />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/search_name_title"
-                style="@style/search_text_view_style"
+            <RelativeLayout
+                android:id="@+id/search_rack_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/search_parcel_nameonly"
-                android:textSize="@dimen/text_size18sp"
+                android:layout_below="@+id/search_name_lay">
+
+                <TextView
+                    android:id="@+id/search_rack_title"
+                    style="@style/search_text_view_style"
+                    android:layout_width="@dimen/space120"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="2dp"
+                    android:text="@string/search_parcel_rack"
+                    android:textSize="@dimen/text_size18sp" />
+
+                <TextView
+                    android:id="@+id/search_rack_num"
+                    style="@style/search_text_view_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_toRightOf="@+id/search_rack_title"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size18sp" />
 
 
-                />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/search_rack_title"
-                style="@style/search_text_view_style"
+            <RelativeLayout
+                android:id="@+id/search_bin_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/search_parcel_rack"
-                android:textSize="@dimen/text_size18sp"
+                android:layout_below="@+id/search_rack_lay">
+
+                <TextView
+                    android:id="@+id/search_bin_title"
+                    style="@style/search_text_view_style"
+                    android:layout_width="@dimen/space120"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="2dp"
+                    android:text="@string/search_parcel_bin"
+                    android:textSize="@dimen/text_size18sp" />
+
+                <TextView
+                    android:id="@+id/search_bin_num"
+                    style="@style/search_text_view_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_toRightOf="@+id/search_bin_title"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size18sp" />
 
 
-                />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/search_bin_title"
-                style="@style/search_text_view_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/search_parcel_bin"
-                android:textSize="@dimen/text_size18sp"
-
-
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5.5"
-            android:orientation="vertical"
-
-
-            >
-
-            <TextView
-                android:id="@+id/search_num"
-                style="@style/search_text_view_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:textSize="@dimen/text_size18sp"
-
-
-                />
-
-            <TextView
-                android:id="@+id/search_name"
-                style="@style/search_text_view_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:textSize="@dimen/text_size18sp"
-
-
-                />
-
-            <TextView
-                android:id="@+id/search_rack_num"
-                style="@style/search_text_view_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:textSize="@dimen/text_size18sp"
-
-
-                />
-
-            <TextView
-                android:id="@+id/search_bin_num"
-                style="@style/search_text_view_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:textSize="@dimen/text_size18sp"
-
-
-                />
-
-
-        </LinearLayout>
-
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -150,7 +167,6 @@
 
         android:background="@color/selectedaccent"
         android:orientation="horizontal"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 </RelativeLayout>

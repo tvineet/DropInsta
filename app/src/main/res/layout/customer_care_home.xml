@@ -148,6 +148,74 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/return_parcel_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <ImageView
+                android:id="@+id/returnparcel_image"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+
+
+                android:src="@mipmap/add_parcel_home"
+
+
+
+                />
+            <ImageView
+                android:id="@+id/returnparcel_image_opacity"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+
+                android:background="@color/homesearchparcel_back"
+
+
+
+                />
+
+
+            <ImageView
+                android:id="@+id/returnparcel_imgstyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="30dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/arrow_white"
+
+
+                />
+
+            <TextView
+                android:id="@+id/tv_returnparcel"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_toLeftOf="@+id/returnparcel_imgstyle"
+                android:textColor="@android:color/white"
+                android:text="Return Parcels"
+                android:textSize="@dimen/home_text_size"
+
+
+                />
+
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 </LinearLayout>

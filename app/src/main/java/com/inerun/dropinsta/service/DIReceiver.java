@@ -22,6 +22,7 @@ public abstract class DIReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i("MArk","DIReceiver Called");
         int type = intent.getIntExtra(UrlConstants.KEY_TYPE, -1);
+        boolean isSuccess = intent.getBooleanExtra(UrlConstants.KEY_DELIVERY_STATUS_FLAG, false);
         if(type == TYPE_POD_UPDATED){
             proccessDIReceiver(false);
         }else if(type == TYPE_WH_POD_UPDATED){
@@ -29,13 +30,13 @@ public abstract class DIReceiver extends BroadcastReceiver {
         }else if( type == TYPE_WAREHOUSE_PARCEL_DELIVERED){
             proccessDIReceiver(true);
         }else if( type == TYPE_CUSTOMER_PARCEL_DELIVERED){
-            proccessCustParcelDelivered();
+            proccessCustParcelDelivered(isSuccess);
         }else if( type == TYPE_NETWORK_CHANGE){
             proccessNetworkChange();
         }
     }
 
     abstract public void proccessDIReceiver(boolean warehouse);
-    abstract public void proccessCustParcelDelivered();
+    abstract public void proccessCustParcelDelivered(boolean isSuccess);
     abstract public void proccessNetworkChange();
 }

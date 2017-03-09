@@ -44,6 +44,7 @@ import com.inerun.dropinsta.Exception.MyExceptionHandler;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.LoginActivity;
 import com.inerun.dropinsta.activity_warehouse.WhInvoiceFragment;
+import com.inerun.dropinsta.activity_warehouse.WhReadyForExecutiveFragment;
 import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
@@ -703,10 +704,11 @@ abstract public class BaseActivity extends AppCompatActivity {
         }
 
         @Override
-        public void proccessCustParcelDelivered() {
+        public void proccessCustParcelDelivered(boolean isSuccess) {
             Log.i("proccessCustDelivered","Delivered");
-            custParcelDelivered();
+            custParcelDelivered(isSuccess);
         }
+
 
         @Override
         public void proccessNetworkChange() {
@@ -717,7 +719,7 @@ abstract public class BaseActivity extends AppCompatActivity {
     public void whDeliveryUpdated() {
 
     }
-    public void custParcelDelivered() {
+    public void custParcelDelivered(boolean isSuccess) {
 
     }
 
@@ -1060,7 +1062,8 @@ Used to process
             switch (Integer.parseInt(type)) {
                 case NotiHelper.NOTI_INVOICE_GENERATED:
                     Log.i("Noti","NOTI_INVOICE_GENERATED");
-                    navigateToFragment(WhInvoiceFragment.newInstance());
+//                    navigateToFragment(WhInvoiceFragment.newInstance());
+                    navigateToFragment(WhReadyForExecutiveFragment.newInstance());
 
 //                    String catid = jsonObject.getString(UrlConstants.KEY_CATID);
 //                    noti_intent = new Intent(context, WhDashboardActivity.class);

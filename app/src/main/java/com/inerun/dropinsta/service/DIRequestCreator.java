@@ -260,6 +260,22 @@ public class DIRequestCreator {
 
     }
 
+    public Map<String, String> getRequestedParcelHandoverMapParamsForCustSupport(String request_id, String customerCareId) {
+
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+        mapParams.put(UrlConstants.KEY_CUSTOMER_CARE_ID, customerCareId);
+        mapParams.put(UrlConstants.KEY_REQUEST_ID, request_id);
+
+
+
+
+        return mapParams;
+
+    }
+
 
     public Map<String, String> getAddParcelMapParams(String rack, List<String> parcellist) throws JSONException {
         JSONArray jsonArray= new JSONArray();
@@ -330,6 +346,22 @@ public class DIRequestCreator {
     }
 
     public Map<String,String> getReadyInvoiceMapParams() {
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+        return mapParams;
+    }
+
+    public Map<String,String> getReadyForExecutiveMapParams() {
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+        return mapParams;
+    }
+
+    public Map<String,String> getReturnParcelMapParams() {
         if(Utils.isUserLoggedIn(context)){
             mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
             mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));

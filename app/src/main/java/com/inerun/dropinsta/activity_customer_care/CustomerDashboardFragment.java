@@ -35,6 +35,9 @@ public class CustomerDashboardFragment extends BaseFragment implements View.OnCl
         getViewById(R.id.searchparcel_image_opacity).setOnClickListener(this);
 
         getViewById(R.id.readyparcel_image_opacity).setOnClickListener(this);
+
+        getViewById(R.id.returnparcel_image_opacity).setOnClickListener(this);
+
         setToolBarTitle(R.string.app_name);
 
 
@@ -58,7 +61,13 @@ public class CustomerDashboardFragment extends BaseFragment implements View.OnCl
                 break;
 
             case R.id.readyparcel_image_opacity:
-                navigateToFragment(context, CustomerReadyParcelFragment.newInstance());
+//                navigateToFragment(context, CustomerReadyParcelFragment.newInstance());
+                navigateToFragment(context, CustReadyInvoiceDeliveryFragment.newInstance());
+
+                break;
+
+            case R.id.returnparcel_image_opacity:
+                navigateToFragment(context, CustReturnParcelFragment.newInstance());
 
                 break;
 

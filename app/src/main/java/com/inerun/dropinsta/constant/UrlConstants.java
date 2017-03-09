@@ -9,9 +9,10 @@ public class UrlConstants {
 //    public static final String BASE_ADDRESS = "http://192.168.1.129/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.117/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
-    public static final String BASE_ADDRESS = "http://www.tigmooshopnship.com/app/";
-//    public static final String BASE_ADDRESS = "http://192.168.1.118/dropinsta/app/";
-//    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta1/app/";
+//    public static final String BASE_ADDRESS = "http://tigmooshopnship.com/app/";
+    public static final String BASE_ADDRESS = "http://192.168.1.118/dropinsta/app/"; // Prabhat
+//    public static final String BASE_ADDRESS = "http://192.168.1.113/dropinsta/app/";  // Sumit
 
 
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta2/app/";
@@ -35,6 +36,9 @@ public class UrlConstants {
     public static final String URL_READY_INVOICE_LIST = BASE_ADDRESS + "invoicelist";
     public static final String URL_GCM = BASE_ADDRESS + "updategcim";
     public static final String URL_INVOICE_DELIVERED_CUSTOMER = BASE_ADDRESS + "invoicedelivery";
+
+    public static final String URL_READY_FOR_EXECUTIVE_LIST = BASE_ADDRESS + "requestlist";
+    public static final String URL_RETURN_PARCEL_LIST = BASE_ADDRESS + "invoicelist";
 
 
 
@@ -101,4 +105,7 @@ public class UrlConstants {
     public static final String KEY_IS_NOTIFICATION = "APP_NOTIFICATION";
 
 
+    public static final String KEY_EXECUTIVE_DATA = "executive_data";
+    public static final String KEY_REQUEST_ID = "request_id";
+    public static final String KEY_DELIVERY_STATUS_FLAG = "Delivery_flag";
 }
