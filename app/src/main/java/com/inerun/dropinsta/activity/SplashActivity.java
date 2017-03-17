@@ -29,18 +29,6 @@ public class SplashActivity extends BaseActivity {
     Context context;
 
     private static final int FORCE_UPDATE_DAILOG = 101;
-    //    ServiceClient.ServiceCallBack login_callback = new ServiceClient.ServiceCallBack() {
-//        @Override
-//        public void performThisWhenServiceEnds(String message, Object response) {
-//            if ((Boolean) response) {
-//                gotoHomeActivity();
-//
-//            } else {
-//                gotoLandingActivity();
-//            }
-//        }
-//    };
-
     private Timer timer;
 
 
@@ -65,7 +53,7 @@ public class SplashActivity extends BaseActivity {
 
         setDataToApplication();
         Log.i("SplashActivity", "" + getIntent().getExtras());
-        if (!NotiHelper.isNotificationIntent(getIntent())) {
+//        if (!NotiHelper.isNotificationIntent(getIntent())) {
             timer = new Timer();
             timer.schedule(new TimerTask() {
 
@@ -106,10 +94,29 @@ public class SplashActivity extends BaseActivity {
 
                 }
             }, 2500);
-        } else {
-            startActivity(getNotificationIntent(getIntent()));
-            finish();
-        }
+//        } else {
+//            timer = new Timer();
+//            timer.schedule(new TimerTask() {
+//
+//                @Override
+//                public void run() {
+//
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Log.i("Timer_else","Splash");
+//                            startActivity(getNotificationIntent(getIntent()));
+//                            finish();
+//
+//                        }
+//                    });
+//
+//
+//                }
+//            }, 2500);
+////            startActivity(getNotificationIntent(getIntent()));
+////            finish();
+//        }
 
 
     }
@@ -132,6 +139,7 @@ public class SplashActivity extends BaseActivity {
             Log.i("getNotificationIntent", "USER_TYPE_DELIVERY");
             newIntent = new Intent(SplashActivity.this, DeliveryDashBoardActivity.class);
         } else if (("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_CUSTOMER_CARE)) {
+            Log.i("getNotificationIntent", "USER_TYPE_CUSTOMER_CARE");
             newIntent = new Intent(SplashActivity.this, CustomerDashboardActivity.class);
         } else {
             Log.i("getNotificationIntent", "USER_TYPE_WAREHOUSE");

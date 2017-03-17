@@ -11,8 +11,11 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.activity.NotiHandlerActivity;
 import com.inerun.dropinsta.activity.SplashActivity;
 import com.inerun.dropinsta.constant.UrlConstants;
+import com.inerun.dropinsta.constant.Utils;
+import com.inerun.dropinsta.data.LoginData;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +38,11 @@ public class NotiHelper {
 
             resultIntent.putExtra(UrlConstants.KEY_DATA, data);
             resultIntent.putExtra(UrlConstants.KEY_IS_NOTIFICATION, true);
-            showNotification(context, resultIntent, title, text, big_picture);
+
+            if(Utils.isUserLoggedIn(context) && ("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_DELIVERY)) {
+                showNotification(context, resultIntent, title, text, big_picture);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,7 +85,7 @@ public class NotiHelper {
 // your application to the Home screen.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
 // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(SplashActivity.class);
+        stackBuilder.addParentStack(NotiHandlerActivity.class);
 // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(intent);
         PendingIntent resultPendingIntent =

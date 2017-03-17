@@ -251,7 +251,7 @@ abstract public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        invalidateOptionsMenu();
+//        invalidateOptionsMenu();
     }
 
     @Override

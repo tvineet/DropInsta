@@ -54,6 +54,7 @@ abstract public class BaseFragment extends Fragment {
                 toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
                 progress = (ProgressBar) getActivity().findViewById(R.id.progressBar);
                 customOnCreateView(root, inflater, container, savedInstanceState);
+                Log.i("showBackArrow",""+showBackArrow);
                 if (toolbar != null) {
                     if (showBackArrow) {
 

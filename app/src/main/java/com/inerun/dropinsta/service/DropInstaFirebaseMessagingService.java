@@ -25,15 +25,15 @@ public class DropInstaFirebaseMessagingService extends FirebaseMessagingService 
         Log.d("Notification", "data: " + remoteMessage.getData());
 
         Map<String, String> params = remoteMessage.getData();
-        params.put(UrlConstants.KEY_DATA,"{'type':101}");
-        params.put(UrlConstants.KEY_Title,"Notification Title");
-        params.put(UrlConstants.KEY_IMAGE,"");
-        params.put(UrlConstants.KEY_Text,"This is the Notification text which must be shown on Notification");
+//        params.put(UrlConstants.KEY_DATA,"{'type':101}");
+//        params.put(UrlConstants.KEY_Title,"Notification Title");
+//        params.put(UrlConstants.KEY_IMAGE,"");
+//        params.put(UrlConstants.KEY_Text,"This is the Notification text which must be shown on Notification");
         Log.d("params", " " + remoteMessage.getData());
         if(params!=null) {
             try {
                 String string = params.get(UrlConstants.KEY_DATA);
-//
+
                 String title = params.get(UrlConstants.KEY_Title);
                 String big_picture = null;
                 if (params.containsKey(UrlConstants.KEY_IMAGE)) {

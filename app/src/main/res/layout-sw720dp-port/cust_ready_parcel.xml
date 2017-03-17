@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="2dp">
+
+    <include layout="@layout/error_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/layout_margin5dp"
+        android:paddingBottom="@dimen/fragment_layout_margin10dp"
+        android:paddingLeft="@dimen/fragment_layout_margin10dp"
+        android:paddingRight="@dimen/fragment_layout_margin10dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ready_parcel_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_margin10dp"
+            android:layout_marginTop="@dimen/layout_margin5dp"
+
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/searcherror"
+            style="@style/heading_text_view_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_listview"
+            android:layout_marginTop="@dimen/layout_margin10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/search_error"
+            android:textSize="@dimen/text_size18sp"
+            android:visibility="gone"
+
+            />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/submit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <Spinner
+            android:id="@+id/customer_care_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawSelectorOnTop="false"
+            android:spinnerMode="dialog"
+            android:visibility="gone"
+            />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/customer_care_spinner"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/darkGray"
+            android:visibility="gone"/>
+
+
+        <com.inerun.dropinsta.fontlib.CustomFontButton
+            android:id="@+id/delivery_button"
+            style="@style/button_view_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="2dp"
+            android:background="@color/buttonColor"
+
+            android:text="@string/deliver"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size18sp"
+            android:paddingTop="@dimen/layout_margin5dp"
+            android:paddingBottom="@dimen/layout_margin5dp"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

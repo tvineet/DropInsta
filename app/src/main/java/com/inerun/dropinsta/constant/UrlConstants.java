@@ -9,9 +9,9 @@ public class UrlConstants {
 //    public static final String BASE_ADDRESS = "http://192.168.1.129/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.117/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
-//    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta1/app/";
+    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta1/app/";
 //    public static final String BASE_ADDRESS = "http://tigmooshopnship.com/app/";
-    public static final String BASE_ADDRESS = "http://192.168.1.118/dropinsta/app/"; // Prabhat
+//    public static final String BASE_ADDRESS = "http://192.168.1.118/dropinsta/app/"; // Prabhat
 //    public static final String BASE_ADDRESS = "http://192.168.1.113/dropinsta/app/";  // Sumit
 
 
