@@ -10,8 +10,10 @@ import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.data.POD;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ParcelStatus;
+import com.inerun.dropinsta.data.PickupParcelData;
 import com.inerun.dropinsta.data.TransactionData;
 import com.inerun.dropinsta.data.UpdatedParcelData;
+import com.inerun.dropinsta.data.UpdatedPickupParcelData;
 import com.inerun.dropinsta.helper.DIHelper;
 
 import java.util.ArrayList;
@@ -53,8 +55,8 @@ public class DIDbHelper {
     public static void insertDeliveryAndStatusInfoListIntoDb(Context context, ArrayList<ParcelListingData.ParcelData> list) {
         String parcelmastervalues = "";
         Log.i("insert", "start " + System.currentTimeMillis());
-        for (int i=0;i< list.size();i++) {
-            ParcelListingData.ParcelData parcelData =list.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            ParcelListingData.ParcelData parcelData = list.get(i);
             parcelmastervalues += appendParcelValue(parcelData);
             if (i + 1 != list.size()) {
                 parcelmastervalues += ",";
@@ -164,11 +166,16 @@ public class DIDbHelper {
         int pending_count = deliveryDao.getPendingParcelCount();
         int delivered_count = deliveryDao.getDeliveredParcelCount();
 
-        ParcelListingData parcelListingData = new ParcelListingData(delivered_count, pending_count, getDeliveryInfoForListing2(context));
+        PickupDao pickupDao = new PickupDao(context);
+        int pickup_pending_count = pickupDao.getPickupPendingParcelCount();
+
+//        ParcelListingData parcelListingData = new ParcelListingData(delivered_count, pending_count, getDeliveryInfoForListing2(context));
+        ParcelListingData parcelListingData = new ParcelListingData(delivered_count, pending_count, getDeliveryInfoForListing2(context), getPickupInfoForListing(context), pickup_pending_count);
 
 
         return parcelListingData;
     }
+
 
 
     public static ArrayList<UpdatedParcelData> getDeliveryInfoForUpdateAndSYNC(Context context) {
@@ -201,7 +208,7 @@ public class DIDbHelper {
     }
 
     public static void deleteTables(Context context) {
-      //        DeliveryDao deliveryDao = new DeliveryDao(context);
+        //        DeliveryDao deliveryDao = new DeliveryDao(context);
 //        deliveryDao.deleteDeliveryTable();
 //        TranscDao transcDao = new TranscDao(context);
 //        transcDao.deleteTransactionTable();
@@ -219,11 +226,13 @@ public class DIDbHelper {
         mSQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DataUtils.TABLE_NAME_PARCEL);
         mSQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DataUtils.TABLE_NAME_STATUS);
         mSQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DataUtils.TABLE_NAME_TRANSACTION);
+        mSQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DataUtils.TABLE_NAME_PICKUP_DATA);
 
         //recreate Tables
-        mSQLiteDatabase.execSQL( OpenHelper.CREATE_PARCEL_TABLE);
-        mSQLiteDatabase.execSQL( OpenHelper.CREATE_STATUS_TABLE);
+        mSQLiteDatabase.execSQL(OpenHelper.CREATE_PARCEL_TABLE);
+        mSQLiteDatabase.execSQL(OpenHelper.CREATE_STATUS_TABLE);
         mSQLiteDatabase.execSQL(OpenHelper.CREATE_TRANSACTION_TABLE);
+        mSQLiteDatabase.execSQL(OpenHelper.CREATE_PICKUP_DATA_TABLE);
 
 
         mSQLiteDatabase.close();
@@ -249,6 +258,7 @@ public class DIDbHelper {
 
         podDao.deleteOldPodsData(podArrayList);
     }
+
     // Insert POD DATA
     public static void insertPODInfo(POD pod, int parcel_id, Context context) {
         PODDao podDao = new PODDao(context);
@@ -306,7 +316,8 @@ public class DIDbHelper {
             parcelDao.updateDeliveryComment(parcelData.getColumn_id(), ParcelListingData.ParcelData.ATTEMPTED, parcelStatus.getStatus_comment());
         }
     }
-  public static void updateReturnParcelStatus(Context ctx, ArrayList<ParcelListingData.ParcelData> arrayList) {
+
+    public static void updateReturnParcelStatus(Context ctx, ArrayList<ParcelListingData.ParcelData> arrayList) {
         for (ParcelListingData.ParcelData parcelData : arrayList) {
 //            StatusDao statusDao = new StatusDao(ctx);
 //            statusDao.insertDeliveryStatus(parcelData, parcelStatus);
@@ -502,6 +513,7 @@ public class DIDbHelper {
         validatePODTable(context);
         validateStatusTable(context);
         validateTransactionTable(context);
+        validatePickupParcelTable(context);
         Log.i("Db", "ensureDatabaseIsCorrect Done");
 
     }
@@ -510,7 +522,13 @@ public class DIDbHelper {
     public static void validateParcelTable(Context context) {
 
         String tablename = DataUtils.TABLE_NAME_PARCEL;
-        String params[] = new String[]{DataUtils.COLUMN_ID, DataUtils.COLUMN_ID + " INTEGER PRIMARY KEY", DataUtils.PARCEL_BARCODE, DataUtils.PARCEL_BARCODE + " TEXT ", DataUtils.CONSIGNEE_NAME, DataUtils.CONSIGNEE_NAME + " TEXT ",
+        String params[] = new String[]{
+                DataUtils.COLUMN_ID,
+                DataUtils.COLUMN_ID + " INTEGER PRIMARY KEY",
+                DataUtils.PARCEL_BARCODE,
+                DataUtils.PARCEL_BARCODE + " TEXT ",
+                DataUtils.CONSIGNEE_NAME,
+                DataUtils.CONSIGNEE_NAME + " TEXT ",
                 DataUtils.PARCEL_WEIGHT,
                 DataUtils.PARCEL_WEIGHT + " INTEGER DEFAULT -1",
                 DataUtils.PARCEL_SPECIAL_INSTRUCTION,
@@ -611,6 +629,8 @@ public class DIDbHelper {
                 DataUtils.STATUS_TIME_STAMP + " TEXT ",
                 DataUtils.PARCEL_BARCODE,
                 DataUtils.PARCEL_BARCODE + " TEXT ",
+                DataUtils.UPDATE_STATUS,
+                DataUtils.UPDATE_STATUS + " INTEGER DEFAULT -1"
         };
         OpenHelper.validateDatabase(context, tablename, params);
 
@@ -641,5 +661,255 @@ public class DIDbHelper {
         OpenHelper.validateDatabase(context, tablename, params);
 
     }
+
+    public static void validatePickupParcelTable(Context context) {
+
+        String tablename = DataUtils.TABLE_NAME_PICKUP_DATA;
+        String params[] = new String[]{
+                DataUtils.COLUMN_ID,
+                DataUtils.COLUMN_ID + " INTEGER PRIMARY KEY",
+                DataUtils.PARCEL_BARCODE,
+                DataUtils.PARCEL_BARCODE + " TEXT ",
+                DataUtils.USER_FNAME,
+                DataUtils.USER_FNAME + " TEXT ",
+                DataUtils.USER_LNAME,
+                DataUtils.USER_LNAME + " TEXT",
+                DataUtils.USER_EMAIL,
+                DataUtils.USER_EMAIL + " TEXT ",
+                DataUtils.USER_PHONE,
+                DataUtils.USER_PHONE + " TEXT",
+                DataUtils.USER_lANDLINE,
+                DataUtils.USER_lANDLINE + " TEXT ",
+                DataUtils.USER_EXTENSION,
+                DataUtils.USER_EXTENSION + " TEXT",
+                DataUtils.PARCEL_PICKUP_STATUS,
+                DataUtils.PARCEL_PICKUP_STATUS + " INTEGER DEFAULT -1",
+
+                DataUtils.PARCEL_LENGTH,
+                DataUtils.PARCEL_LENGTH + " REAL ",
+                DataUtils.PARCEL_WIDTH,
+                DataUtils.PARCEL_WIDTH + " REAL ",
+                DataUtils.PARCEL_HEIGHT,
+                DataUtils.PARCEL_HEIGHT + " REAL ",
+                DataUtils.PARCEL_VOLUME_WEIGHT,
+                DataUtils.PARCEL_VOLUME_WEIGHT + " REAL ",
+                DataUtils.PARCEL_ACTUAL_WEIGHT,
+                DataUtils.PARCEL_ACTUAL_WEIGHT + " REAL ",
+                DataUtils.PARCEL_PRICE,
+                DataUtils.PARCEL_PRICE + " REAL ",
+                DataUtils.PARCEL_SPECIAL_INS,
+                DataUtils.PARCEL_SPECIAL_INS + " TEXT ",
+                DataUtils.PARCEL_DESCRIPTION,
+                DataUtils.PARCEL_DESCRIPTION + " TEXT ",
+                DataUtils.PARCEL_ASSIGN_DATE,
+                DataUtils.PARCEL_ASSIGN_DATE + " TEXT ",
+                DataUtils.PARCEL_CREATED_ON,
+                DataUtils.PARCEL_CREATED_ON + " TEXT ",
+                DataUtils.PARCEL_PICKUP_COMMENT,
+                DataUtils.PARCEL_PICKUP_COMMENT + " TEXT ",
+
+                DataUtils.PICKUP_ADD_FNAME,
+                DataUtils.PICKUP_ADD_FNAME + " TEXT ",
+                DataUtils.PICKUP_ADD_LNAME,
+                DataUtils.PICKUP_ADD_LNAME + " TEXT ",
+                DataUtils.PICKUP_ADD_EMAIL,
+                DataUtils.PICKUP_ADD_EMAIL + " TEXT ",
+                DataUtils.PICKUP_ADD_PHONE,
+                DataUtils.PICKUP_ADD_PHONE + " TEXT ",
+                DataUtils.PICKUP_ADD_lANDLINE,
+                DataUtils.PICKUP_ADD_lANDLINE + " TEXT ",
+                DataUtils.PICKUP_ADD_EXTENSION,
+                DataUtils.PICKUP_ADD_EXTENSION + " TEXT ",
+                DataUtils.PICKUP_ADD_ADDRESS1,
+                DataUtils.PICKUP_ADD_ADDRESS1 + " TEXT ",
+                DataUtils.PICKUP_ADD_ADDRESS2,
+                DataUtils.PICKUP_ADD_ADDRESS2 + " TEXT ",
+                DataUtils.PICKUP_ADD_COUNTRY,
+                DataUtils.PICKUP_ADD_COUNTRY + " TEXT ",
+                DataUtils.PICKUP_ADD_STATE,
+                DataUtils.PICKUP_ADD_STATE + " TEXT ",
+                DataUtils.PICKUP_ADD_CITY,
+                DataUtils.PICKUP_ADD_CITY + " TEXT ",
+                DataUtils.PICKUP_ADD_ZIP_CODE,
+                DataUtils.PICKUP_ADD_ZIP_CODE + " TEXT ",
+
+                DataUtils.DELIVERY_ADDRESS_FNAME,
+                DataUtils.DELIVERY_ADDRESS_FNAME + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_LNAME,
+                DataUtils.DELIVERY_ADDRESS_LNAME + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_EMAIL,
+                DataUtils.DELIVERY_ADDRESS_EMAIL + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_PHONE,
+                DataUtils.DELIVERY_ADDRESS_PHONE + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_lANDLINE,
+                DataUtils.DELIVERY_ADDRESS_lANDLINE + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_EXTENSION,
+                DataUtils.DELIVERY_ADDRESS_EXTENSION + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_ADDRESS1,
+                DataUtils.DELIVERY_ADDRESS_ADDRESS1 + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_ADDRESS2,
+                DataUtils.DELIVERY_ADDRESS_ADDRESS2 + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_COUNTRY,
+                DataUtils.DELIVERY_ADDRESS_COUNTRY + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_STATE,
+                DataUtils.DELIVERY_ADDRESS_STATE + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_CITY,
+                DataUtils.DELIVERY_ADDRESS_CITY + " TEXT ",
+                DataUtils.DELIVERY_ADDRESS_ZIP_CODE,
+                DataUtils.DELIVERY_ADDRESS_ZIP_CODE + " TEXT ",
+
+                DataUtils.UPDATE_STATUS,
+                DataUtils.UPDATE_STATUS + " INTEGER DEFAULT -1",
+                DataUtils.UPDATE_DATE,
+                DataUtils.UPDATE_DATE + " TEXT "
+
+
+        };
+
+
+//        DataUtils.KEY_ID
+        OpenHelper.validateDatabase(context, tablename, params);
+    }
+
+
+
+
+
+    /*==================================================Pickup Data=======================================================*/
+
+    public static void insertDataIntoDb(Context context, ParcelListingData parcelListingData) {
+        insertDeliveryAndStatusInfoListIntoDb(context, parcelListingData.getDeliveryData());
+//        insertPickupAndStatusInfoListIntoDb(context, parcelListingData.getPickupParcelDatas());
+    }
+
+    public static void insertPickupAndStatusInfoListIntoDb(Context context, ArrayList<PickupParcelData> list) {
+        String parcelmastervalues = "";
+        Log.i("insert", "start " + System.currentTimeMillis());
+        for (int i = 0; i < list.size(); i++) {
+            PickupParcelData parcelData = list.get(i);
+            parcelmastervalues += appendParcelValue(parcelData);
+            if (i + 1 != list.size()) {
+                parcelmastervalues += ",";
+            }
+
+
+            StatusDao statusDao = new StatusDao(context);
+            statusDao.insertMultipleDeliveryStatus(parcelData, parcelData.getStatus());
+
+
+//
+
+        }
+
+
+        PickupDao pickupDao = new PickupDao(context);
+        pickupDao.insertMultipleParcels(parcelmastervalues);
+    }
+
+    public static ArrayList<PickupParcelData> getPickupInfoForListing(Context context) {
+        PickupDao pickupDao = new PickupDao(context);
+
+        ArrayList<PickupParcelData> pickupParcelDatas = pickupDao.getPickupPendingParcelForListing();
+
+//        ArrayList<ParcelListingData.ParcelData> dataArrayListDelivered = deliveryDao.getDeliveredParcelForListing();
+//        ArrayList<ParcelListingData.ParcelData> dataArrayListPending = deliveryDao.getPendingParcelForListing();
+
+//        ArrayList<ParcelListingData.ParcelData> dataArrayListAll = new ArrayList<>();
+//        dataArrayListAll.addAll(dataArrayListPending);
+//        dataArrayListAll.addAll(dataArrayListDelivered);
+
+
+        return pickupParcelDatas;
+    }
+
+    public static void updatePickupStatus(Context ctx, PickupParcelData pickupParcelData, ParcelStatus parcelStatus) {
+
+        ParcelListingData parcelListingData = new ParcelListingData();
+        ParcelListingData.ParcelData parcelData = parcelListingData.new ParcelData(pickupParcelData.getParcel_barcode());
+
+        StatusDao statusDao = new StatusDao(ctx);
+        statusDao.insertDeliveryStatus(parcelData, parcelStatus);
+
+        PickupDao pickupDao = new PickupDao(ctx);
+        pickupDao.updatePickupComment(pickupParcelData.getColumn_id(), ParcelListingData.ParcelData.PICKUP_ATTEMPTED, parcelStatus.getStatus_comment());
+
+
+    }
+
+    public static ArrayList<UpdatedPickupParcelData> getPickupInfoForUpdateAndSYNC(Context context) {
+        PickupDao deliveryDao = new PickupDao(context);
+
+        return deliveryDao.getPickupInfoForUpdateAndSYNC(context);
+    }
+
+    public static void receivedParcel(Context ctx,PickupParcelData pickupParcelData, ParcelStatus parcelStatus) {
+
+
+        ParcelListingData parcelListingData = new ParcelListingData();
+        ParcelListingData.ParcelData parcelData = parcelListingData.new ParcelData(pickupParcelData.getParcel_barcode());
+
+        StatusDao statusDao = new StatusDao(ctx);
+        statusDao.insertDeliveryStatus(parcelData, parcelStatus);
+
+        PickupDao pickupDao = new PickupDao(ctx);
+        pickupDao.updatePickupComment(pickupParcelData.getColumn_id(), ParcelListingData.ParcelData.PICKUP_RECEIVED, parcelStatus.getStatus_comment());
+
+
+    }
+
+    public static String appendParcelValue(PickupParcelData parcelData) {
+
+        String query = "('" + parcelData.getParcel_barcode()
+                + "','" + parcelData.getCustomer_id()
+                + "','" + parcelData.getFname()
+                + "','" + parcelData.getLname()
+                + "','" + parcelData.getEmail()
+                + "','" + parcelData.getPhone()
+                + "','" + parcelData.getLandline()
+                + "','" + parcelData.getExt()
+                + "','" + parcelData.getPickup_status()
+
+                + "','" + parcelData.getPickParcelDetailData().getParcel_length()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_width()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_height()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_volum_weight()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_actual_weight()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_price()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_descrip()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_special_ins()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_assign_date()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_created_on()
+                + "','" + parcelData.getPickParcelDetailData().getParcel_pickup_comment()
+
+                + "','" + parcelData.getPickup_address().getfName()
+                + "','" + parcelData.getPickup_address().getlName()
+                + "','" + parcelData.getPickup_address().getEmail()
+                + "','" + parcelData.getPickup_address().getPhone()
+                + "','" + parcelData.getPickup_address().getLandline()
+                + "','" + parcelData.getPickup_address().getExt()
+                + "','" + parcelData.getPickup_address().getAddress1()
+                + "','" + parcelData.getPickup_address().getAddress2()
+                + "','" + parcelData.getPickup_address().getCountry()
+                + "','" + parcelData.getPickup_address().getState()
+                + "','" + parcelData.getPickup_address().getCity()
+                + "','" + parcelData.getPickup_address().getZipCode()
+
+                + "','" + parcelData.getDelivery_address().getfName()
+                + "','" + parcelData.getDelivery_address().getlName()
+                + "','" + parcelData.getDelivery_address().getEmail()
+                + "','" + parcelData.getDelivery_address().getPhone()
+                + "','" + parcelData.getDelivery_address().getLandline()
+                + "','" + parcelData.getDelivery_address().getExt()
+                + "','" + parcelData.getDelivery_address().getAddress1()
+                + "','" + parcelData.getDelivery_address().getAddress2()
+                + "','" + parcelData.getDelivery_address().getCountry()
+                + "','" + parcelData.getDelivery_address().getState()
+                + "','" + parcelData.getDelivery_address().getCity()
+                + "','" + parcelData.getDelivery_address().getZipCode()
+
+                + "')";
+        return query;
+    }
+
 
 }

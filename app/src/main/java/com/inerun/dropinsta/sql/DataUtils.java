@@ -71,6 +71,67 @@ public class DataUtils {
     public static final String STATUS_TIME_STAMP = "statusTimeStamp";
 
 
+    /*=================PickUp Data Table=====================*/
+    public static final String TABLE_NAME_PICKUP_DATA = "Pickup_Data";
+
+    public static final String CUSTOMER_ID = "customer_id";
+    public static final String USER_FNAME = "user_fname";
+    public static final String USER_LNAME = "user_lname";
+    public static final String USER_EMAIL = "user_email";
+    public static final String USER_PHONE = "user_phone";
+    public static final String USER_lANDLINE = "user_landline";
+    public static final String USER_EXTENSION = "user_extension";
+    public static final String PARCEL_PICKUP_STATUS = "pickup_status"; //Pending/pickedup
+
+    /*=================Address=====================*/
+
+
+    /*===================Pickup Address==========================*/
+
+    public static final String DELIVERY_ADDRESS_FNAME = "delivery_add_fname";
+    public static final String DELIVERY_ADDRESS_LNAME = "delivery_add_lname";
+    public static final String DELIVERY_ADDRESS_EMAIL = "delivery_add_email";
+    public static final String DELIVERY_ADDRESS_PHONE = "delivery_add_phone";
+    public static final String DELIVERY_ADDRESS_lANDLINE = "delivery_add_landline";
+    public static final String DELIVERY_ADDRESS_EXTENSION = "delivery_add_extension";
+    public static final String DELIVERY_ADDRESS_ADDRESS1 = "delivery_add_address1";
+    public static final String DELIVERY_ADDRESS_ADDRESS2 = "delivery_add_address2";
+    public static final String DELIVERY_ADDRESS_COUNTRY = "delivery_add_country";
+    public static final String DELIVERY_ADDRESS_STATE = "delivery_add_state";
+    public static final String DELIVERY_ADDRESS_CITY = "delivery_add_city";
+    public static final String DELIVERY_ADDRESS_ZIP_CODE = "delivery_add_zip_code";
+
+    /*===================Delivery Address==========================*/
+
+    public static final String PICKUP_ADD_FNAME = "pickup_add_fname";
+    public static final String PICKUP_ADD_LNAME = "pickup_add_lname";
+    public static final String PICKUP_ADD_EMAIL = "pickup_add_email";
+    public static final String PICKUP_ADD_PHONE = "pickup_add_phone";
+    public static final String PICKUP_ADD_lANDLINE = "pickup_add_landline";
+    public static final String PICKUP_ADD_EXTENSION = "pickup_add_extension";
+    public static final String PICKUP_ADD_ADDRESS1 = "pickup_add_address1";
+    public static final String PICKUP_ADD_ADDRESS2 = "pickup_add_address2";
+    public static final String PICKUP_ADD_COUNTRY = "pickup_add_country";
+    public static final String PICKUP_ADD_STATE = "pickup_add_state";
+    public static final String PICKUP_ADD_CITY = "pickup_add_city";
+    public static final String PICKUP_ADD_ZIP_CODE = "pickup_add_zip_code";
+
+    /*=================Parcel Detail Data=====================*/
+
+    public static final String PARCEL_WIDTH = "parcel_width";
+    public static final String PARCEL_HEIGHT= "parcel_height";
+    public static final String PARCEL_LENGTH = "parcel_length";
+    public static final String PARCEL_VOLUME_WEIGHT = "parcel_volume_weight";
+    public static final String PARCEL_ACTUAL_WEIGHT = "parcel_actual_weight";
+    public static final String PARCEL_PRICE = "parcel_price";
+    public static final String PARCEL_SPECIAL_INS = "parcel_special_instructions";
+    public static final String PARCEL_DESCRIPTION = "parcel_description";
+    public static final String PARCEL_ASSIGN_DATE = "parcel_assign_date";
+    public static final String PARCEL_CREATED_ON = "parcel_created_on";
+    public static final String PARCEL_PICKUP_COMMENT = "parcel_pickup_comment";
+
+
+
     //Put Barcode in each table
 
 

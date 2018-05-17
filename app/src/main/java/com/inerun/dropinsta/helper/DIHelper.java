@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.constant.UrlConstants;
+import com.inerun.dropinsta.data.PickupParcelData;
 import com.inerun.dropinsta.data.StatusData;
 
 import org.json.JSONException;
@@ -63,6 +64,16 @@ public class DIHelper {
         return true;
     }
 
+    public static boolean validatePickupComment(Context context, String comment) {
+        if (comment == null || comment.trim().length() < 1) {
+            Toast.makeText(context, R.string.error_comment, Toast.LENGTH_LONG).show();
+//            ((BaseActivity) context).showSnackbar(R.string.error_comment);
+            return false;
+        }
+
+        return true;
+    }
+
     public static boolean getStatus(JSONObject json) throws JSONException {
         if (json.has(UrlConstants.KEY_STATUS)) {
             return json.getBoolean(UrlConstants.KEY_STATUS);
@@ -99,6 +110,18 @@ public class DIHelper {
         return status;
     }
 
+    public static ArrayList<StatusData> getPickupStatusArrayList(){
+        ArrayList<StatusData> status = new ArrayList<>();
+        StatusData  statusData = new StatusData("0","Not present.");
+        status.add(statusData);
+        StatusData  statusData1 = new StatusData("1","Door Closed");
+        status.add(statusData1);
+        StatusData statusData3 = new StatusData("","Select Option");
+        status.add(statusData3);
+
+        return status;
+    }
+
     public static String getDateTime(String dateFormat) {
         SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 
@@ -115,5 +138,41 @@ public class DIHelper {
         ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
         toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
 
+    }
+
+
+    public static boolean validateLoginPickupAddParcel(Context context, PickupParcelData pickupParcelData) {
+
+        if(pickupParcelData.getFname().length() < 1){
+            ((BaseActivity) context).showSnackbar(R.string.error_password_field);
+            return false;
+        }else if(pickupParcelData.getLname().length() < 1){
+            ((BaseActivity) context).showSnackbar(R.string.error_password_field);
+            return false;
+        }else if(pickupParcelData.getLname().length() < 1){
+            ((BaseActivity) context).showSnackbar(R.string.error_password_field);
+            return false;
+        }else if(pickupParcelData.getLname().length() < 1){
+            ((BaseActivity) context).showSnackbar(R.string.error_password_field);
+            return false;
+        }
+
+
+//        if (email.length() < 1) {
+////            Toast.makeText(context, R.string.error_email_field, Toast.LENGTH_LONG).show();
+//            ((BaseActivity) context).showSnackbar(R.string.error_email_field);
+//            return false;
+//        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+////            Toast.makeText(context, R.string.error_invalid_email_field, Toast.LENGTH_LONG).show();
+//            ((BaseActivity) context).showSnackbar(R.string.error_invalid_email_field);
+//            return false;
+//        }
+//        if (pass.length() < 1) {
+////            Toast.makeText(context, R.string.error_password_field, Toast.LENGTH_LONG).show();
+//            ((BaseActivity) context).showSnackbar(R.string.error_password_field);
+//            return false;
+//        }
+
+        return true;
     }
 }

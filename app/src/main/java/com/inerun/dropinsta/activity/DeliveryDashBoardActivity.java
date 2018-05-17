@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.adapter.ParcelAdapter;
+import com.inerun.dropinsta.base.AlertUtil;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
@@ -46,8 +47,8 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
     private TextView username, location;
     private RelativeLayout search, all_parcels, payments;
     private TextView all_parcelscount;
-    private TextView deliveredparcelscount,pendingparcelscount,paymentparcelscount;
-    private RelativeLayout return_parcel_lay;
+    private TextView deliveredparcelscount,pendingparcelscount,paymentparcelscount, pickup_parcel_count;
+    private RelativeLayout return_parcel_lay, pickup_parcel_lay, add_parcel_lay;
     private TextView returnparcelscount;
 
     @Override
@@ -149,12 +150,15 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
         pendingparcelscount = (TextView) findViewById(R.id.dash_pending_num);
         returnparcelscount = (TextView) findViewById(R.id.return_count);
         paymentparcelscount = (TextView) findViewById(R.id.payment_count);
+        pickup_parcel_count = (TextView) findViewById(R.id.pickup_parcel_count);
         payments = (RelativeLayout) findViewById(R.id.payment_layout);
 
         delivery_parcel_lay = (LinearLayout) findViewById(R.id.delivery_parcel_lay);
         pending_parcel_lay = (LinearLayout) findViewById(R.id.pending_parcel_lay);
 
         return_parcel_lay = (RelativeLayout) findViewById(R.id.return_parcel_layout);
+        pickup_parcel_lay = (RelativeLayout) findViewById(R.id.pickup_parcel_lay);
+        add_parcel_lay = (RelativeLayout) findViewById(R.id.add_parcel_lay);
 
         search.setOnClickListener(this);
         all_parcels.setOnClickListener(this);
@@ -163,6 +167,8 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
         pending_parcel_lay.setOnClickListener(this);
 
         return_parcel_lay.setOnClickListener(this);
+        pickup_parcel_lay.setOnClickListener(this);
+        add_parcel_lay.setOnClickListener(this);
     }
 
 
@@ -299,8 +305,12 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
         if (id == R.id.action_refresh) {
 
 //            performRequestSyncData();
-            syncData();
-
+//            syncData();
+            if (Utils.isConnectingToInternet(this)) {
+                syncData();
+            }else{
+                AlertUtil.showAlertDialogWithBlackTheme(this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+            }
 //            parcelListingData = DIDbHelper.getParcelListData(this);
 //            parcelDataList = parcelListingData.getDeliveryData();
 //            Log.i("onOptionsItemSelected","" + parcelDataList.size());
@@ -399,6 +409,14 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
                 goToActivity(DeliveryReturnParcelActivity.class);
 
                 break;
+            case R.id.pickup_parcel_lay:
+                goToActivity(DeliveryPickupParcelActivity.class);
+
+                break;
+            case R.id.add_parcel_lay:
+                goToActivity(DeliveryAddParcelActivity.class);
+
+                break;
         }
 
 
@@ -422,6 +440,7 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
         returnparcelscount.setText(""+parcelListingData.getPending_num());
 
         paymentparcelscount.setText(""+DIDbHelper.getPaymentTotal(this));
+        pickup_parcel_count.setText("" + parcelListingData.getPickup_num());
 
 
 

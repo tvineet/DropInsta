@@ -126,4 +126,11 @@ public class WhRequestListAdapter extends BaseRecyclerViewAdapter {
     public void setRequestDataList(ArrayList<WhReadyParcelData.RequestData> requestDataList) {
         this.requestDataList = requestDataList;
     }
+
+
+    public void add(ArrayList<WhReadyParcelData.RequestData> items) {
+        int previousDataSize = this.requestDataList.size();
+        this.requestDataList.addAll(items);
+        notifyItemRangeInserted(previousDataSize, items.size());
+    }
 }

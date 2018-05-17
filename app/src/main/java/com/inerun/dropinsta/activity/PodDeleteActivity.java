@@ -13,6 +13,7 @@ import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
 import com.inerun.dropinsta.base.BaseActivity;
+import com.inerun.dropinsta.base.CheckConnectionUtil;
 import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.POD;
@@ -57,9 +58,12 @@ public class PodDeleteActivity extends BaseActivity {
 //            goFurther();
 //        }
 
-
-        AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute();
+        if (CheckConnectionUtil.checkMyConnectivity(PodDeleteActivity.this)) {
+            AsyncTaskRunner runner = new AsyncTaskRunner();
+            runner.execute();
+        }else{
+            goFurther();
+        }
 //        goFurther();
     }
 

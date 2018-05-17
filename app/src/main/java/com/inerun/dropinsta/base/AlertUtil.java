@@ -259,4 +259,32 @@ public class AlertUtil implements OnClickListener {
         public void dialogClicklistener(int dialog_id, int button);
     }
 
+    @SuppressWarnings("deprecation")
+    public static void showAlertDialogWithBlackTheme(final Context context,
+                                                     String alertMessage) {
+        // final Context context =
+        // MobileSaverBaseActivity.currentVisibleActivity;
+        AlertDialog alertDialog;
+        if (android.os.Build.VERSION.SDK_INT >= 11) {
+            alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(context,
+                    android.R.style.Theme_Holo_Dialog)).create();
+        } else {
+            alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(context,
+                    android.R.style.Theme_Dialog)).create();
+
+        }
+
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setMessage(alertMessage);
+        alertDialog.setButton("OK", new OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+
+            }
+        });
+
+        alertDialog.show();
+    }
+
+
 }

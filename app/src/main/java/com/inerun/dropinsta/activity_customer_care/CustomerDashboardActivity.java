@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.base.BaseActivity;
+import com.inerun.dropinsta.gcm.NotiHelper;
 
 /**
  * Created by vinay on 15/12/16.
@@ -28,10 +29,11 @@ public class CustomerDashboardActivity extends BaseActivity {
         Log.i("CustomerDashboard","customOnCreate");
         getSupportFragmentManager().beginTransaction().replace(R.id.container,
                 CustomerDashboardFragment.newInstance()).commit();
-//        if (NotiHelper.isNotificationIntent(getIntent())) {
-//            Log.i("CustomerDashboard","isNotificationIntent");
-//           processNotiIntent(CustomerDashboardActivity.this);
-//        }
+
+        if (NotiHelper.isNotificationIntent(getIntent())) {
+            Log.i("CustomerDashboard","isNotificationIntent");
+           processNotiIntent(CustomerDashboardActivity.this);
+        }
 
     }
 

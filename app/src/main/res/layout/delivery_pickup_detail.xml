@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E9E9E9">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearbottom"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/relative_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:id="@+id/pickup_detail_parcel_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="ParcelId" />
+
+                <TextView
+                    android:id="@+id/pickup_detail_reg_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_detail_parcel_id"
+                    android:padding="5dp"
+                    android:text="Registration Date" />
+
+                <TextView
+                    android:id="@+id/pickup_detail_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_detail_reg_date"
+                    android:padding="5dp"
+                    android:text="Name" />
+
+                <TextView
+                    android:id="@+id/pickup_detail_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_detail_name"
+                    android:padding="5dp"
+                    android:text="Phone" />
+
+                <TextView
+                    android:id="@+id/pickup_detail_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_detail_phone"
+                    android:maxLines="2"
+                    android:padding="5dp"
+                    android:text="Address " />
+                <TextView
+                    android:id="@+id/pickup_detail_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_detail_address"
+                    android:maxLines="2"
+                    android:padding="5dp"
+                    android:text="Parcel Weight " />
+
+                <TextView
+                    android:id="@+id/pickup_detail_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Price"
+                    android:layout_below="@+id/pickup_detail_weight"
+                   />
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:id="@+id/relative_detail1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_detail">
+
+                <TextView
+
+                    android:id="@+id/pickup_detail_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Comment" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearbottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/pickup_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00A54F"
+            android:text="PICK"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/not_pickup_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#F7941D"
+            android:text="NOT PICK"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</RelativeLayout>

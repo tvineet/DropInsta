@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -21,6 +23,7 @@ import com.inerun.dropinsta.adapter.WhRequestListAdapter;
 import com.inerun.dropinsta.base.BaseFragment;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.data.WhReadyParcelData;
+import com.inerun.dropinsta.helper.EndlessRecyclerViewScrollListener;
 import com.inerun.dropinsta.helper.SimpleDividerItemDecoration;
 import com.inerun.dropinsta.service.DIRequestCreator;
 
@@ -38,6 +41,11 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private WhRequestListAdapter adapter;
     private WhReadyParcelData whReadyParcelData;
+    private Drawable mDivider;
+    private ProgressBar progressBar_bootom;
+
+    // Store a member variable for the listener
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     public static Fragment newInstance() {
         WhReadyForExecutiveFragment fragment = new WhReadyForExecutiveFragment();
@@ -63,11 +71,15 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
     private void intView() {
         error_txt = (TextView) getViewById(R.id.error_textview);
         recyclerView = (RecyclerView) getViewById(R.id.ready_request_listview);
+        mDivider = getDrawable(R.drawable.payment_line_divider);
+        progressBar_bootom = (ProgressBar) getViewById(R.id.progressBar_bottom);
+
 
     }
 
     private void getData() {
-        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams();
+        Log.i("Start_TIME", "" + System.currentTimeMillis());
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(0,10);
 
         DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, getProgress(), response_listener, response_errorlistener, READY_REQUEST);
     }
@@ -79,7 +91,7 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
             Gson gson = new Gson();
 
             whReadyParcelData = gson.fromJson(response, WhReadyParcelData.class);
-
+            Log.i("END_TIME", "" + System.currentTimeMillis());
             setData(whReadyParcelData);
         }
     };
@@ -90,6 +102,7 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
             hideProgress();
             setData(null);
             showSnackbar(error.getMessage());
+            Log.i("Error_MSG", error.getMessage());
 
         }
     };
@@ -99,10 +112,25 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
         if (whReadyParcelData != null && whReadyParcelData.getCustRequestData() != null && whReadyParcelData.getCustRequestData().size() > 0) {
             adapter = new WhRequestListAdapter(getActivity(), whReadyParcelData.getCustRequestData(), searchlickListener);
             recyclerView.setHasFixedSize(true);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(mLayoutManager);
+
+
+            scrollListener = new EndlessRecyclerViewScrollListener(mLayoutManager) {
+                @Override
+                public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                    // Triggered only when new data needs to be appended to the list
+                    // Add whatever code is needed to append new items to the bottom of the list
+                    loadNextDataFromApi(page);
+                }
+            };
+            // Adds the scroll listener to RecyclerView
+            recyclerView.addOnScrollListener(scrollListener);
+
+
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-            Drawable mDivider = getDrawable(R.drawable.payment_line_divider);
+//            Drawable mDivider = getDrawable(R.drawable.payment_line_divider);
             recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), mDivider));
 
             recyclerView.setAdapter(adapter);
@@ -130,4 +158,39 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
     protected String getAnalyticsName() {
         return null;
     }
+
+
+    private void loadNextDataFromApi(int offset) {
+        Log.i("Start_TIME", "loadNextDataFromApi : " + System.currentTimeMillis());
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(0,10);
+
+        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, progressBar_bootom, response_listener1, response_errorlistener1, READY_REQUEST);
+    }
+
+    Response.Listener<String> response_listener1 =  new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+//            hideProgress();
+            progressBar_bootom.setVisibility(View.GONE);
+            Gson gson = new Gson();
+
+            whReadyParcelData = gson.fromJson(response, WhReadyParcelData.class);
+            Log.i("END_TIME", "" + System.currentTimeMillis());
+
+
+            adapter.add(whReadyParcelData.getCustRequestData());
+        }
+    };
+
+    Response.ErrorListener response_errorlistener1 = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+//            hideProgress();
+            progressBar_bootom.setVisibility(View.GONE);
+            setData(null);
+            showSnackbar(error.getMessage());
+            Log.i("Error_MSG", error.getMessage());
+
+        }
+    };
 }

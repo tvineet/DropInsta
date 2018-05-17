@@ -47,6 +47,8 @@
                     android:layout_marginRight="2dp"
                     android:text="@string/search_parcel_num"
                     android:textSize="@dimen/text_size18sp"
+                    android:layout_alignTop="@+id/search_num"
+                    android:layout_alignBottom="@+id/search_num"
                     />
 
                 <TextView
@@ -56,8 +58,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_toRightOf="@+id/search_num_title"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    android:maxLines="3"
+
                     android:textSize="@dimen/text_size18sp" />
 
 

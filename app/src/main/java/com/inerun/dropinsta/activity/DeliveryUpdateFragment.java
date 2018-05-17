@@ -1,5 +1,6 @@
 package com.inerun.dropinsta.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.adapter.StatusSpinnerAdapter;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.BaseFragment;
 import com.inerun.dropinsta.constant.UrlConstants;
+import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ParcelStatus;
 import com.inerun.dropinsta.data.StatusData;
@@ -36,6 +39,7 @@ public class DeliveryUpdateFragment extends BaseFragment implements View.OnClick
     private StatusSpinnerAdapter statusSpinnerAdapter;
     ArrayList<StatusData> status_options_List;
     ArrayList<ParcelListingData.ParcelData> arrayList;
+    private Context context;
 
     public static Fragment newInstance(ArrayList<ParcelListingData.ParcelData> arrayList) {
         DeliveryUpdateFragment fragment = new DeliveryUpdateFragment();
@@ -53,6 +57,7 @@ public class DeliveryUpdateFragment extends BaseFragment implements View.OnClick
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getActivity();
         arrayList = (ArrayList<ParcelListingData.ParcelData>) getArguments().getSerializable(UrlConstants.KEY_UPDATE_DATA);
     }
 
@@ -92,7 +97,16 @@ public class DeliveryUpdateFragment extends BaseFragment implements View.OnClick
 
             showProgress();
             DIDbHelper.updateDeliveryStatus(getActivity(), arrayList, new ParcelStatus(""+ParcelListingData.ParcelData.ATTEMPTED, comment));
-            ((BaseActivity)getActivity()).syncData();
+//            ((BaseActivity)getActivity()).syncData();
+            if (Utils.isConnectingToInternet(context)) {
+//            ((BaseActivity) getActivity()).syncData();
+                syncData();
+            }else{
+                hideProgress();
+                Toast.makeText(context, getString(R.string.saved_success), Toast.LENGTH_LONG).show();
+                getActivity().finish();
+            }
+
 
 
         }

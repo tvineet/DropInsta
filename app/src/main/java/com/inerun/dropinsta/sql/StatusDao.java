@@ -10,6 +10,7 @@ import android.util.Log;
 import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ParcelStatus;
+import com.inerun.dropinsta.data.PickupParcelData;
 import com.inerun.dropinsta.helper.DIHelper;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class StatusDao {
         values.put(DataUtils.STATUS_COMMENT, parcelStatus.getStatus_comment());
         values.put(DataUtils.STATUS_TIME_STAMP, parcelStatus.getStatus_timestamp());
         values.put(DataUtils.PARCEL_BARCODE, parcelData.getBarcode());
+        values.put(DataUtils.UPDATE_STATUS, 1);
 //        values.put(DataUtils.POD_RECEIVER_NAME, pod.getReceiverName() );
 
         //Log.i("values", values.toString());
@@ -68,6 +70,26 @@ public class StatusDao {
         for (int i=0;i<parcelStatus.size();i++) {
             ParcelStatus status = parcelStatus.get(i);
             query+="('"+status.getStatus_type()+"','"+status.getStatus_comment()+"','"+status.getStatus_timestamp()+"','"+parcelData.getBarcode()+ "')";
+            if(i+1!=parcelStatus.size()) {
+                query+=",";
+            }
+
+        }
+//        Log.i("INSERTMultipleDelivery", query);
+        mSQLiteDatabase = lOpenHelper.getWritableDatabase();
+        //Log.i("StatusDao","Deleting Table"+  DataUtils.TABLE_NAME_STATUS);
+//        Log.i("insertDeliveryStatus", "execSQL " + System.currentTimeMillis());
+        mSQLiteDatabase.execSQL(query);
+//        Log.i("insertDeliveryStatus", "end " + System.currentTimeMillis());
+
+    }
+
+    public void insertMultipleDeliveryStatus(PickupParcelData pickupParcelData, ArrayList<ParcelStatus> parcelStatus) {
+//        Log.i("insertDeliveryStatus", "start " + System.currentTimeMillis());
+        String query = " INSERT INTO " + DataUtils.TABLE_NAME_STATUS + "(" + DataUtils.STATUS_TYPE + "," + DataUtils.STATUS_COMMENT + "," + DataUtils.STATUS_TIME_STAMP + "," + DataUtils.PARCEL_BARCODE + ") VALUES ";
+        for (int i=0;i<parcelStatus.size();i++) {
+            ParcelStatus status = parcelStatus.get(i);
+            query+="('"+status.getStatus_type()+"','"+status.getStatus_comment()+"','"+status.getStatus_timestamp()+"','"+pickupParcelData.getParcel_barcode()+ "')";
             if(i+1!=parcelStatus.size()) {
                 query+=",";
             }
@@ -115,7 +137,7 @@ public class StatusDao {
         ArrayList<ParcelStatus> list = new ArrayList<>();
 
         // Select All Query
-        String selectQuery = "SELECT  *  FROM " + DataUtils.TABLE_NAME_STATUS + " WHERE " + DataUtils.PARCEL_BARCODE + " = '" + barcode.toString() + "'";
+        String selectQuery = "SELECT  *  FROM " + DataUtils.TABLE_NAME_STATUS + " WHERE " + DataUtils.PARCEL_BARCODE + " = '" + barcode.toString() + "' AND " + DataUtils.UPDATE_STATUS + " = 1" ;
         //Log.i("getStatusById", selectQuery);
 
         mSQLiteDatabase = lOpenHelper.getWritableDatabase();

@@ -24,6 +24,8 @@
             android:scaleY="1.5"
             android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/layout_margin5dp"
+            android:paddingRight="@dimen/layout_margin5dp"
             />
 
         <TextView

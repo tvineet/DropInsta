@@ -226,6 +226,7 @@ public class whParcelUploadService extends Service {
             requestParams.put("image", myFile);
 
             Log.i("embedded_url", embeddedurl);
+            Log.i("Params: ", "" + requestParams);
             AsyncHttpClient client = new SyncHttpClient();
 
             client.post(context, embeddedurl, requestParams, new AsyncHttpResponseHandler() {

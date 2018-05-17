@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -72,9 +74,10 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
     }
 
     private void setData() {
-
+        final String color = getResources().getColor(R.color.red) + "";
         if (isReceiverNameRequired()) {
             receiver_name.setVisibility(View.VISIBLE);
+            receiver_name.setHint(fromHtml( getString(R.string.collected_by), color));
         } else {
             receiver_name.setVisibility(View.GONE);
         }
@@ -82,6 +85,7 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
         if (isNationalIdRequired()) {
 
             national_id.setVisibility(View.VISIBLE);
+            national_id.setHint(fromHtml( getString(R.string.national_id), color));
         } else {
             national_id.setVisibility(View.GONE);
         }
@@ -90,6 +94,19 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
             receiver_name.setText(RECIEVERNAME);
         }
 
+    }
+
+
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String hint, String color){
+        Spanned result;
+        String html = hint +" <font color='"+ color +"'> * </font> ";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
     }
 
     public boolean isReceiverNameRequired() {
@@ -139,13 +156,13 @@ public class SignActivity extends Activity implements SignaturePad.OnSignedListe
                 if(isNationalIdRequired())
                 {
                     nationalid=""+national_id.getText();
-                    if(!RECIEVERNAME.equalsIgnoreCase(receiverName))
-                    {
+//                    if(!RECIEVERNAME.equalsIgnoreCase(receiverName)) {
+
                         if (nationalid == null || nationalid.length() == 0) {
                             Toast.makeText(this, R.string.error_national_id, Toast.LENGTH_LONG).show();
                             return;
                         }
-                    }
+//                    }
                 }
 
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();

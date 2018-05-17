@@ -36,6 +36,8 @@ public class OpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_STATUS_TABLE);
 
+        db.execSQL(CREATE_PICKUP_DATA_TABLE);
+
 
     }
 
@@ -58,13 +60,23 @@ public class OpenHelper extends SQLiteOpenHelper {
     }
 
 
+
+
     public static void validateDatabase(Context mContext, String tablename, String... params) {
         try {
 
 
             OpenHelper lOpenHelper = new OpenHelper(mContext);
             SQLiteDatabase db = lOpenHelper.getWritableDatabase();
+            db.execSQL(CREATE_PARCEL_TABLE);
 
+            db.execSQL(CREATE_POD_TABLE);
+
+            db.execSQL(CREATE_TRANSACTION_TABLE);
+
+            db.execSQL(CREATE_STATUS_TABLE);
+
+            db.execSQL(CREATE_PICKUP_DATA_TABLE);
 
             Cursor cursor = db.query(tablename, new String[]{}, null, null, null, null, null);
             ArrayList<HashMap<String, String>> hashMapArrayList = new ArrayList<>();
@@ -147,7 +159,8 @@ public class OpenHelper extends SQLiteOpenHelper {
             + DataUtils.POD_UPDATED_TIME + " TEXT ,"
             + DataUtils.POD_NAME_ON_SERVER + " TEXT ,"
             + DataUtils.POD_STATUS + " INTEGER DEFAULT -1 ,"
-            + DataUtils.PARCEL_BARCODE + " TEXT " + ")";
+            + DataUtils.PARCEL_BARCODE + " TEXT "
+            + ")";
 
 
     // ====Create Transaction Table====
@@ -169,7 +182,65 @@ public class OpenHelper extends SQLiteOpenHelper {
             + DataUtils.STATUS_TYPE + " TEXT ,"
             + DataUtils.STATUS_COMMENT + " TEXT ,"
             + DataUtils.STATUS_TIME_STAMP + " TEXT ,"
-            + DataUtils.PARCEL_BARCODE + " TEXT " + ")";
+            + DataUtils.PARCEL_BARCODE + " TEXT ,"
+            + DataUtils.UPDATE_STATUS + " INTEGER DEFAULT -1"
+            + ")";
+
+    // =====Create Pickup Table====
+    public static String CREATE_PICKUP_DATA_TABLE = "CREATE TABLE IF NOT EXISTS " + DataUtils.TABLE_NAME_PICKUP_DATA + "("
+            + DataUtils.COLUMN_ID + " INTEGER PRIMARY KEY," //0
+            + DataUtils.PARCEL_BARCODE + " TEXT ,"          //1
+            + DataUtils.CUSTOMER_ID + " INTEGER DEFAULT 0," //2
+            + DataUtils.USER_FNAME + " TEXT ,"              //3
+            + DataUtils.USER_LNAME + " TEXT ,"              //4
+            + DataUtils.USER_EMAIL + " TEXT ,"              //5
+            + DataUtils.USER_PHONE + " TEXT ,"              //6
+            + DataUtils.USER_lANDLINE + " TEXT ,"           //7
+            + DataUtils.USER_EXTENSION + " TEXT ,"          //8
+            + DataUtils.PARCEL_PICKUP_STATUS + " INTEGER ," //9
+
+            + DataUtils.PARCEL_LENGTH + " REAL ,"           //10
+            + DataUtils.PARCEL_WIDTH + " REAL ,"            //11
+            + DataUtils.PARCEL_HEIGHT + " REAL ,"           //12
+            + DataUtils.PARCEL_VOLUME_WEIGHT + " REAL ,"    //13
+            + DataUtils.PARCEL_ACTUAL_WEIGHT + " REAL ,"    //14
+            + DataUtils.PARCEL_PRICE + " REAL ,"            //15
+            + DataUtils.PARCEL_DESCRIPTION + " TEXT ,"      //16
+            + DataUtils.PARCEL_SPECIAL_INS + " TEXT ,"      //17
+            + DataUtils.PARCEL_ASSIGN_DATE + " TEXT ,"      //18
+            + DataUtils.PARCEL_CREATED_ON + " TEXT ,"       //19
+            + DataUtils.PARCEL_PICKUP_COMMENT + " TEXT ,"   //20
+
+            + DataUtils.PICKUP_ADD_FNAME + " TEXT ,"        //21
+            + DataUtils.PICKUP_ADD_LNAME + " TEXT ,"        //22
+            + DataUtils.PICKUP_ADD_EMAIL + " TEXT ,"        //23
+            + DataUtils.PICKUP_ADD_PHONE + " TEXT ,"        //24
+            + DataUtils.PICKUP_ADD_lANDLINE + " TEXT ,"     //25
+            + DataUtils.PICKUP_ADD_EXTENSION + " TEXT ,"    //26
+            + DataUtils.PICKUP_ADD_ADDRESS1 + " TEXT ,"     //27
+            + DataUtils.PICKUP_ADD_ADDRESS2 + " TEXT ,"     //28
+            + DataUtils.PICKUP_ADD_COUNTRY + " TEXT ,"      //29
+            + DataUtils.PICKUP_ADD_STATE + " TEXT ,"        //30
+            + DataUtils.PICKUP_ADD_CITY + " TEXT ,"         //31
+            + DataUtils.PICKUP_ADD_ZIP_CODE + " TEXT ,"     //32
+
+            + DataUtils.DELIVERY_ADDRESS_FNAME + " TEXT ,"  //33
+            + DataUtils.DELIVERY_ADDRESS_LNAME + " TEXT ,"  //34
+            + DataUtils.DELIVERY_ADDRESS_EMAIL + " TEXT ,"  //35
+            + DataUtils.DELIVERY_ADDRESS_PHONE + " TEXT ,"  //36
+            + DataUtils.DELIVERY_ADDRESS_lANDLINE + " TEXT ,"//37
+            + DataUtils.DELIVERY_ADDRESS_EXTENSION + " TEXT ,"//38
+            + DataUtils.DELIVERY_ADDRESS_ADDRESS1 + " TEXT ,"//39
+            + DataUtils.DELIVERY_ADDRESS_ADDRESS2 + " TEXT ,"//40
+            + DataUtils.DELIVERY_ADDRESS_COUNTRY + " TEXT ,"//41
+            + DataUtils.DELIVERY_ADDRESS_STATE + " TEXT ,"  //42
+            + DataUtils.DELIVERY_ADDRESS_CITY + " TEXT ,"   //43
+            + DataUtils.DELIVERY_ADDRESS_ZIP_CODE + " TEXT ,"//44
+
+            + DataUtils.UPDATE_STATUS + " INTEGER DEFAULT -1,"//45
+            + DataUtils.UPDATE_DATE + " TEXT "                //46
+            + ")";
+
 
 
 }

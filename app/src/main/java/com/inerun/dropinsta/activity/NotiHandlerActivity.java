@@ -51,32 +51,36 @@ public class NotiHandlerActivity extends BaseActivity {
 
         setDataToApplication();
         Log.i("SplashActivity", "" + getIntent().getExtras());
+        if (!NotiHelper.isNotificationIntent(getIntent())) {
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
 
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
 
-            @Override
-            public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.i("Timer", "NotiHandlerActivity");
+                            startActivity(getNotificationIntent(getIntent()));
+                            finish();
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i("Timer_else", "Splash");
-                        startActivity(getNotificationIntent(getIntent()));
-                        finish();
-
-                    }
-                });
+                        }
+                    });
 
 
-            }
-        }, 2500);
+                }
+            }, 2500);
+        } else {
+            Log.i("Timer_else", "NotiHandlerActivity");
+            startActivity(getNotificationIntent(getIntent()));
+            finish();
+        }
 //            startActivity(getNotificationIntent(getIntent()));
 //            finish();
 
 
     }
-
 
 
     private void setDataToApplication() {

@@ -9,6 +9,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.NotiHandlerActivity;
@@ -27,19 +28,29 @@ import java.util.Locale;
 
 public class NotiHelper {
 
-    public static final int NOTI_INVOICE_GENERATED = 101;
+    public static final int NOTI_REQUEST_GENERATED = 101;
+    public static final int NOTI_INVOICE_GENERATED = 102;
 
 
 
     public static void processNotification(Context context, String title, String text, String data, String big_picture) {
-        Intent resultIntent = new Intent(context, SplashActivity.class);
+//        Intent resultIntent = new Intent(context, SplashActivity.class);
+        Intent resultIntent = new Intent(context, NotiHandlerActivity.class);
         try {
 
 
             resultIntent.putExtra(UrlConstants.KEY_DATA, data);
             resultIntent.putExtra(UrlConstants.KEY_IS_NOTIFICATION, true);
 
-            if(Utils.isUserLoggedIn(context) && ("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_DELIVERY)) {
+//            showNotification(context, resultIntent, title, text, big_picture);
+            Log.i("UserType1", ("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_WAREHOUSE) + "");
+            Log.i("UserType2", ("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_CUSTOMER_CARE) + "");
+//            Utils.getUserType(context) == Integer.parseInt(LoginData.USER_TYPE_WAREHOUSE)
+            if(Utils.isUserLoggedIn(context) && ("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_WAREHOUSE)) {
+                Log.i("USER_TYPE_WAREHOUSE", Utils.getUserType(context)+ "");
+                showNotification(context, resultIntent, title, text, big_picture);
+            }  if(Utils.isUserLoggedIn(context) && ("" + Utils.getUserType(context)).equalsIgnoreCase(LoginData.USER_TYPE_CUSTOMER_CARE)){
+                Log.i("USER_TYPE_CUSTOMER_CARE", Utils.getUserType(context)+ "");
                 showNotification(context, resultIntent, title, text, big_picture);
             }
 

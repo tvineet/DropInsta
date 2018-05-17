@@ -42,6 +42,7 @@ public class DropInstaFirebaseMessagingService extends FirebaseMessagingService 
                 String text = params.get(UrlConstants.KEY_Text);
 
                 NotiHelper.processNotification(getApplicationContext(), title, text, string, big_picture);
+//                NotiHelperNew.getInstance(getApplicationContext(), params).processNotification();
             } catch (Exception e) {
                 e.printStackTrace();
             }

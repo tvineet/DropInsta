@@ -114,7 +114,7 @@ abstract public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseR
 
         objectlist = initObjectList();
         if (isListEmpty()) {
-            return 1;
+            return 0;
         } else {
             return objectlist.size();
         }

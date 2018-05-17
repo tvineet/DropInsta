@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
+
+    <include layout="@layout/progressbar_layout" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/black" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:id="@+id/comment_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:focusableInTouchMode="true"
+
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/pickup_status"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawSelectorOnTop="false"
+                android:spinnerMode="dialog" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/pickup_status"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/darkGray" />
+
+
+            <!-- <EditText
+                 android:id="@+id/pickup_comment"
+                 style="@style/desc_edittext_view_style"
+                 android:layout_width="fill_parent"
+                 android:layout_height="80dp"
+
+                 android:layout_below="@+id/divider2"
+                 android:gravity="top|left"
+                 android:hint="@string/comment_hint"
+
+                 android:maxLines="4"
+                 android:singleLine="false"
+                 android:layout_marginBottom="@dimen/layout_margin20dp"
+                 android:inputType="textMultiLine"
+                 />-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider2"
+
+                android:layout_marginBottom="@dimen/layout_margin20dp">
+
+                <EditText
+                    android:id="@+id/pickup_comment"
+                    style="@style/desc_edittext_view_style"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+
+                    android:background="@color/white"
+                    android:gravity="top|left"
+
+                    android:hint="@string/comment_hint"
+                    android:inputType="textMultiLine"
+
+                    android:maxLines="4"
+                    android:minHeight="80dp"
+                    android:padding="@dimen/layout_margin5dp"
+                    android:singleLine="false" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Submit" />
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

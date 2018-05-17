@@ -43,6 +43,7 @@ import com.inerun.dropinsta.Exception.ExceptionMessages;
 import com.inerun.dropinsta.Exception.MyExceptionHandler;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.LoginActivity;
+import com.inerun.dropinsta.activity_customer_care.CustReadyInvoiceDeliveryFragment;
 import com.inerun.dropinsta.activity_warehouse.WhInvoiceFragment;
 import com.inerun.dropinsta.activity_warehouse.WhReadyForExecutiveFragment;
 import com.inerun.dropinsta.constant.AppConstant;
@@ -51,6 +52,7 @@ import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.TransactionData;
 import com.inerun.dropinsta.data.UpdatedParcelData;
+import com.inerun.dropinsta.data.UpdatedPickupParcelData;
 import com.inerun.dropinsta.gcm.NotiHelper;
 import com.inerun.dropinsta.helper.DIHelper;
 import com.inerun.dropinsta.service.DIReceiver;
@@ -268,7 +270,12 @@ abstract public class BaseActivity extends AppCompatActivity {
 
                 return true;
             case R.id.action_refresh:
-                syncData();
+//                syncData();
+                if (Utils.isConnectingToInternet(this)) {
+                    syncData();
+                }else{
+                    AlertUtil.showAlertDialogWithBlackTheme(this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                }
 
                 return true;
 
@@ -685,6 +692,12 @@ abstract public class BaseActivity extends AppCompatActivity {
                 performRequestSyncData();
             }
 
+        } else {
+
+            hideProgress();
+//            finish();
+
+
         }
 
 //        performRequestSyncData();
@@ -705,7 +718,7 @@ abstract public class BaseActivity extends AppCompatActivity {
 
         @Override
         public void proccessCustParcelDelivered(boolean isSuccess) {
-            Log.i("proccessCustDelivered","Delivered");
+            Log.i("proccessCustDelivered", "Delivered");
             custParcelDelivered(isSuccess);
         }
 
@@ -719,6 +732,7 @@ abstract public class BaseActivity extends AppCompatActivity {
     public void whDeliveryUpdated() {
 
     }
+
     public void custParcelDelivered(boolean isSuccess) {
 
     }
@@ -727,8 +741,10 @@ abstract public class BaseActivity extends AppCompatActivity {
         showProgress();
         Log.i("performRequestSyncData", "start" + System.currentTimeMillis());
         ArrayList<UpdatedParcelData> parcelDatas = DIDbHelper.getDeliveryInfoForUpdateAndSYNC(this);
+        ArrayList<UpdatedPickupParcelData> pickupParcelDatas = DIDbHelper.getPickupInfoForUpdateAndSYNC(this);
         ArrayList<TransactionData> transcDatas = DIDbHelper.getInvoices(this);
-        Map<String, String> params = DIRequestCreator.getInstance(this).getSyncDataMapParams(parcelDatas, transcDatas);
+//        Map<String, String> params = DIRequestCreator.getInstance(this).getSyncDataMapParams(parcelDatas, transcDatas);
+        Map<String, String> params = DIRequestCreator.getInstance(this).getSyncDataMapParams_New(parcelDatas, transcDatas, pickupParcelDatas);
         DropInsta.serviceManager().postRequest(UrlConstants.URL_SYNC_AND_UPDATE, params, progress, response_listener, response_errorlistener, "SYNC_DATA");
 
     }
@@ -773,7 +789,7 @@ abstract public class BaseActivity extends AppCompatActivity {
                 //jsonObject.put("transdata", new JSONArray(transdata));
                 //response = jsonObject.toString();
 
-//                Toast.makeText(BaseActivity.this, DIHelper.getMessage(jsonObject), Toast.LENGTH_LONG).show();
+                //Toast.makeText(BaseActivity.this, DIHelper.getMessage(jsonObject), Toast.LENGTH_LONG).show();
                 showSnackbar(DIHelper.getMessage(jsonObject));
                 if (DIHelper.getStatus(jsonObject)) {
                     Gson gson = new Gson();
@@ -784,7 +800,8 @@ abstract public class BaseActivity extends AppCompatActivity {
                     Log.i("deleteTables", "starttime: " + System.currentTimeMillis());
                     if (parcelListingData != null) {
 
-                        DIDbHelper.insertDeliveryAndStatusInfoListIntoDb(BaseActivity.this, parcelListingData.getDeliveryData());
+//                        DIDbHelper.insertDeliveryAndStatusInfoListIntoDb(BaseActivity.this, parcelListingData.getDeliveryData()); // insert only delivery data
+                        DIDbHelper.insertDataIntoDb(BaseActivity.this, parcelListingData); // Insert delivery and pickup both data
                         Log.i("DIDbHelper", "starttime: " + System.currentTimeMillis());
                         DIDbHelper.insertTransactionInfoToDatabase(BaseActivity.this, parcelListingData.getTransdata());
                         Log.i("DB", "endtime: " + System.currentTimeMillis());
@@ -846,18 +863,23 @@ abstract public class BaseActivity extends AppCompatActivity {
     };
 
     public void showSnackbar(int msg) {
-        Snackbar snackbar = Snackbar.make(findViewById(R.id.root_appbar), msg, Snackbar.LENGTH_LONG);
+        View snakBarView = findViewById(R.id.root_appbar);
+        if (snakBarView != null) {
+            Snackbar snackbar = Snackbar.make(snakBarView, msg, Snackbar.LENGTH_LONG);
 //        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this,  R.color.colorPrimary));
 //        snackbar.getView().setBackgroundResource(R.color.colorPrimary);
-        snackbar.show();
+            snackbar.show();
+        }
     }
 
     public void showSnackbar(String msg) {
-
-        Snackbar snackbar = Snackbar.make(findViewById(R.id.root_appbar), msg, Snackbar.LENGTH_LONG);
+        View snakBarView = findViewById(R.id.root_appbar);
+        if (snakBarView != null) {
+            Snackbar snackbar = Snackbar.make(snakBarView, msg, Snackbar.LENGTH_LONG);
 //        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this,  R.color.colorPrimary));
 //        snackbar.getView().setBackgroundResource(R.color.colorPrimary);
-        snackbar.show();
+            snackbar.show();
+        }
     }
 
 //    NetworkChangeReceiver networkChangeReceiver = new NetworkChangeReceiver() {
@@ -953,8 +975,7 @@ abstract public class BaseActivity extends AppCompatActivity {
                     return false;
                 }
             }
-        }else
-        {
+        } else {
             return false;
         }
         return true;
@@ -1051,17 +1072,18 @@ abstract public class BaseActivity extends AppCompatActivity {
     /*
 Used to process
  */
-    public  void handleNotificationIntent(Context context, Intent intent) {
+    public void handleNotificationIntent(Context context, Intent intent) {
         Intent noti_intent = null;
         try {
 
-            Log.i("BaseActivity","handleNotificationIntent");
+            Log.i("BaseActivity", "handleNotificationIntent");
             String jsonstring = intent.getStringExtra(UrlConstants.KEY_DATA);
             JSONObject jsonObject = new JSONObject(jsonstring);
             String type = jsonObject.getString(UrlConstants.KEY_TYPE);
+            Log.i("BaseActivity", type + "");
             switch (Integer.parseInt(type)) {
-                case NotiHelper.NOTI_INVOICE_GENERATED:
-                    Log.i("Noti","NOTI_INVOICE_GENERATED");
+                case NotiHelper.NOTI_REQUEST_GENERATED:
+                    Log.i("Noti", "NOTI_REQUEST_GENERATED");
 //                    navigateToFragment(WhInvoiceFragment.newInstance());
                     navigateToFragment(WhReadyForExecutiveFragment.newInstance());
 
@@ -1076,6 +1098,12 @@ Used to process
 //                    noti_intent.putExtra(UrlConstants.KEY_DATA, bundle);
 
 
+                    break;
+
+                case NotiHelper.NOTI_INVOICE_GENERATED:
+                    Log.i("Noti", "NOTI_INVOICE_GENERATED");
+
+                    navigateToFragment(CustReadyInvoiceDeliveryFragment.newInstance());
 
 
                     break;
@@ -1098,5 +1126,6 @@ Used to process
 
         }
     };
+
 
 }
