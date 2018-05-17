@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#E9E9E9">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,21 +34,24 @@
                     android:text="Personal Details"
                     android:textSize="20sp" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_form_fname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/personal_details"
                     android:hint="First Name" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_form_lname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/pickup_form_fname"
                     android:hint="Last Name" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_form_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,7 +59,8 @@
                     android:hint="Email"
                     android:inputType="textEmailAddress" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_form_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,7 +68,8 @@
                     android:hint="Phone No"
                     android:inputType="phone" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_form_landline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +77,8 @@
                     android:hint="Landline No"
                     android:inputType="phone" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_form_extension"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,7 +169,8 @@
                     android:text="Parcel Type"
                     android:textSize="17sp" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_form_drop_down"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -228,7 +236,8 @@
                     </RadioGroup>
                 </LinearLayout>
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_parcel_length"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -236,7 +245,8 @@
                     android:hint="Length"
                     android:inputType="number" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_parcel_width"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -244,7 +254,8 @@
                     android:hint="Width"
                     android:inputType="number" />
 
-                <EditText
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    app:met_floatingLabel="highlight"
                     android:id="@+id/pickup_parcel_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -295,7 +306,8 @@
                         android:text="Actual Weight(Kg)"
                         android:textSize="17sp" />
 
-                    <EditText
+                    <com.inerun.dropinsta.fontlib.CustomFontEditText
+                        app:met_floatingLabel="highlight"
                         android:id="@+id/pickup_parcel_actual_weight_val"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -313,7 +325,8 @@
                         android:text="Content Type"
                         android:textSize="17sp" />
 
-                    <EditText
+                    <com.inerun.dropinsta.fontlib.CustomFontEditText
+                        app:met_floatingLabel="highlight"
                         android:id="@+id/content_type_val"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -404,13 +417,15 @@
                         android:layout_below="@+id/form_linear2"
                         android:orientation="horizontal">
 
-                        <EditText
+                        <com.inerun.dropinsta.fontlib.CustomFontEditText
+                            app:met_floatingLabel="highlight"
                             android:id="@+id/pickup_parcel_value"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Parcel Value" />
 
-                        <EditText
+                        <com.inerun.dropinsta.fontlib.CustomFontEditText
+                            app:met_floatingLabel="highlight"
                             android:id="@+id/pickup_parcel_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -419,7 +434,8 @@
                             android:hint="Description"
                             android:lines="2" />
 
-                        <EditText
+                        <com.inerun.dropinsta.fontlib.CustomFontEditText
+                            app:met_floatingLabel="highlight"
                             android:id="@+id/pickup_parcel_special_instruction"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

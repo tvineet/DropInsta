@@ -174,10 +174,10 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
             progressBar_bootom.setVisibility(View.GONE);
             Gson gson = new Gson();
 
-            whReadyParcelData = gson.fromJson(response, WhReadyParcelData.class);
+            WhReadyParcelData whReadyParcelData_new = gson.fromJson(response, WhReadyParcelData.class);
             Log.i("END_TIME", "" + System.currentTimeMillis());
 
-
+            whReadyParcelData.getCustRequestData().addAll(whReadyParcelData_new.getCustRequestData());
             adapter.add(whReadyParcelData.getCustRequestData());
         }
     };

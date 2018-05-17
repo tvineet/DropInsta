@@ -22,8 +22,8 @@ import android.widget.TextView;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.adapter.ParcelAdapter;
-import com.inerun.dropinsta.base.AlertUtil;
 import com.inerun.dropinsta.base.BaseActivity;
+import com.inerun.dropinsta.base.SweetAlertUtil;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.ParcelListingData;
@@ -309,7 +309,7 @@ public class DeliveryDashBoardActivity extends BaseActivity implements View.OnCl
             if (Utils.isConnectingToInternet(this)) {
                 syncData();
             }else{
-                AlertUtil.showAlertDialogWithBlackTheme(this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                SweetAlertUtil.showAlertDialogWithBlackTheme(this, getString(R.string.activity_base_alert_message_unknown_host_exception));
             }
 //            parcelListingData = DIDbHelper.getParcelListData(this);
 //            parcelDataList = parcelListingData.getDeliveryData();

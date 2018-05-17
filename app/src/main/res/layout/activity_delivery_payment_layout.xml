@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -86,7 +87,8 @@
         android:text="@string/payment_card" />
 
 
-    <EditText
+    <com.inerun.dropinsta.fontlib.CustomFontEditText
+        app:met_floatingLabel="highlight"
         android:id="@+id/payment_transcid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,7 +108,8 @@
         android:imeOptions="actionNext"
         />
 
-    <EditText
+    <com.inerun.dropinsta.fontlib.CustomFontEditText
+        app:met_floatingLabel="highlight"
         android:id="@+id/payment_collectedby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -122,7 +125,8 @@
 
         android:padding="10dp" />
 
-    <EditText
+    <com.inerun.dropinsta.fontlib.CustomFontEditText
+        app:met_floatingLabel="highlight"
         android:id="@+id/payment_national_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
