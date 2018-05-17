@@ -44,6 +44,9 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
     private Drawable mDivider;
     private ProgressBar progressBar_bootom;
 
+    private int start = 0;
+    private int limit =10;
+
     // Store a member variable for the listener
     private EndlessRecyclerViewScrollListener scrollListener;
 
@@ -79,7 +82,7 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
 
     private void getData() {
         Log.i("Start_TIME", "" + System.currentTimeMillis());
-        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(0,10);
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(start,limit);
 
         DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, getProgress(), response_listener, response_errorlistener, READY_REQUEST);
     }
@@ -120,9 +123,13 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
             scrollListener = new EndlessRecyclerViewScrollListener(mLayoutManager) {
                 @Override
                 public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+
+                    Log.i("page",""+page);
+                    Log.i("totalItemsCount",""+totalItemsCount);
                     // Triggered only when new data needs to be appended to the list
                     // Add whatever code is needed to append new items to the bottom of the list
-                    loadNextDataFromApi(page);
+                    start = page *limit;
+                    loadNextDataFromApi(start, limit);
                 }
             };
             // Adds the scroll listener to RecyclerView
@@ -160,9 +167,9 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
     }
 
 
-    private void loadNextDataFromApi(int offset) {
+    private void loadNextDataFromApi(int start, int limit) {
         Log.i("Start_TIME", "loadNextDataFromApi : " + System.currentTimeMillis());
-        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(0,10);
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(start, limit);
 
         DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, progressBar_bootom, response_listener1, response_errorlistener1, READY_REQUEST);
     }
@@ -178,7 +185,8 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
             Log.i("END_TIME", "" + System.currentTimeMillis());
 
             whReadyParcelData.getCustRequestData().addAll(whReadyParcelData_new.getCustRequestData());
-            adapter.add(whReadyParcelData.getCustRequestData());
+//            adapter.add(whReadyParcelData.getCustRequestData());
+            adapter.add(whReadyParcelData_new.getCustRequestData());
         }
     };
 
