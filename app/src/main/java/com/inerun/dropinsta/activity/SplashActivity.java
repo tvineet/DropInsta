@@ -11,14 +11,13 @@ import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
-import com.inerun.dropinsta.base.AlertUtil;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.CheckConnectionUtil;
+import com.inerun.dropinsta.base.SweetAlertUtil;
 import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.LoginData;
-import com.inerun.dropinsta.gcm.NotiHelper;
 import com.inerun.dropinsta.sql.DIDbHelper;
 
 import java.util.Timer;
@@ -89,7 +88,7 @@ public class SplashActivity extends BaseActivity {
                                     if (DropInsta.getUser().isDeliveryUser()) {
                                         gotoHomeActivity();
                                     } else {
-                                        AlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                                        SweetAlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
 
                                     }
                                 } else {

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:padding="2dp"
-    >
-    <EditText
+    android:padding="2dp">
+    <com.inerun.dropinsta.fontlib.CustomFontEditText
+        app:met_floatingLabel="highlight"
         android:id="@+id/receiver_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +16,8 @@
         android:visibility="visible"
         android:textSize="@dimen/text_size18sp"
         />
-    <EditText
+    <com.inerun.dropinsta.fontlib.CustomFontEditText
+        app:met_floatingLabel="highlight"
         android:id="@+id/nationalid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,7 +1,6 @@
 package com.inerun.dropinsta.activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
@@ -11,12 +10,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
-import com.inerun.dropinsta.base.AlertUtil;
 import com.inerun.dropinsta.base.BaseActivity;
+import com.inerun.dropinsta.base.SweetAlertUtil;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.service.DIRequestCreator;
 
 import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -47,7 +48,6 @@ public class ExceptionHandlerActivity extends BaseActivity {
         if (getIntent() != null && getIntent().hasExtra(UrlConstants.KEY_EXCEPTION)) {
             exception = getIntent().getStringExtra(UrlConstants.KEY_EXCEPTION);
             txt.setText(exception);
-            Log.e("exception",""+exception);
             prepareLogs(exception);
         }
 
@@ -56,31 +56,24 @@ public class ExceptionHandlerActivity extends BaseActivity {
     private void prepareLogs(String exception) {
 
 
-        AlertUtil.showDialogwithNeutralButton(context, context.getString(R.string.exception), context.getString(R.string.exception), context.getString(R.string.ok), listener, EXCEPTION_DIALOG).setCancelable(false).show();
+        SweetAlertDialog sweetAlertDialog = SweetAlertUtil.showDialogwithNeutralButton(context, context.getString(R.string.exception), context.getString(R.string.exception), context.getString(R.string.ok), listener);
+        sweetAlertDialog.setCancelable(false);
+        sweetAlertDialog.show();
 
     }
 
 
 
-    AlertUtil.ConnectionDialogClickListener listener = new AlertUtil.ConnectionDialogClickListener() {
+    SweetAlertDialog.OnSweetClickListener listener = new SweetAlertDialog.OnSweetClickListener() {
 
 
         @Override
-        public void dialogClicklistener(int dialog_id, int button) {
-            switch (dialog_id) {
-                case EXCEPTION_DIALOG:
-                    if (button == DialogInterface.BUTTON_NEUTRAL) {
-//                        if (client != null) {
-//                            client.cancelService();
-//                        }
-//                        client = TmService.uploadExceptionLogs(context, progress, servicecallback, exception);
-                        Map<String, String> params = DIRequestCreator.getInstance(context).getExceptionLogs(exception);
-                        DropInsta.serviceManager().postRequest(UrlConstants.URL_EXCEPTION, params, progress, response_listener, response_errorlistener, EXCEPTION_SERVICE);
-                    }
-                    break;
-            }
-
+        public void onClick(SweetAlertDialog sweetAlertDialog) {
+            Map<String, String> params = DIRequestCreator.getInstance(context).getExceptionLogs(exception);
+            DropInsta.serviceManager().postRequest(UrlConstants.URL_EXCEPTION, params, progress, response_listener, response_errorlistener, EXCEPTION_SERVICE);
         }
+
+
     };
     private Response.Listener<String> response_listener= new Response.Listener<String>() {
         @Override

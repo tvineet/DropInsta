@@ -23,17 +23,21 @@ import android.widget.Toast;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.constant.UrlConstants;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 abstract public class BaseFragment extends Fragment {
     View root;
 
 
     boolean showBackArrow = false;
-    private AlertDialogUtil.ConnectionDialogClickListener dailog_listener = new AlertDialogUtil.ConnectionDialogClickListener() {
+    private SweetAlertDialog.OnSweetClickListener dailog_listener = new SweetAlertDialog.OnSweetClickListener() {
         @Override
-        public void dialogClicklistener(int button) {
+        public void onClick(SweetAlertDialog sweetAlertDialog) {
 
         }
+
+
     };
     private ProgressBar progress;
     private Toolbar toolbar;
@@ -70,7 +74,7 @@ abstract public class BaseFragment extends Fragment {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                AlertDialogUtil.showDialogwithNeutralButton(getActivity(), getString(R.string.exception), e.getMessage(), getString(R.string.ok), dailog_listener).show();
+                SweetAlertUtil.showDialogwithNeutralButton(getActivity(), getString(R.string.exception), e.getMessage(), getString(R.string.ok), dailog_listener).show();
             }
         } else {
             Log.i("layout error", "Layout id cannot be zero");

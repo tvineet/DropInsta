@@ -2,7 +2,6 @@ package com.inerun.dropinsta.base;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -44,7 +43,6 @@ import com.inerun.dropinsta.Exception.MyExceptionHandler;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity.LoginActivity;
 import com.inerun.dropinsta.activity_customer_care.CustReadyInvoiceDeliveryFragment;
-import com.inerun.dropinsta.activity_warehouse.WhInvoiceFragment;
 import com.inerun.dropinsta.activity_warehouse.WhReadyForExecutiveFragment;
 import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
@@ -65,6 +63,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -195,7 +195,12 @@ abstract public class BaseActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            AlertDialogUtil.showDialogwithNeutralButton(BaseActivity.this, getString(R.string.exception), getString(ExceptionMessages.getExceptionMessage(e)) + "\n" + e.getMessage(), getString(R.string.ok), dailog_listener).show();
+            SweetAlertUtil.showDialogwithNeutralButton(BaseActivity.this, getString(R.string.exception), getString(ExceptionMessages.getExceptionMessage(e)) + "\n" + e.getMessage(), getString(R.string.ok), new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                }
+            }).show();
         }
 
 
@@ -274,7 +279,7 @@ abstract public class BaseActivity extends AppCompatActivity {
                 if (Utils.isConnectingToInternet(this)) {
                     syncData();
                 }else{
-                    AlertUtil.showAlertDialogWithBlackTheme(this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                    SweetAlertUtil.showAlertDialogWithBlackTheme(this, getString(R.string.activity_base_alert_message_unknown_host_exception));
                 }
 
                 return true;
@@ -331,7 +336,18 @@ abstract public class BaseActivity extends AppCompatActivity {
             case R.id.action_logout:
 
                 if (Utils.isUserLoggedIn(this)) {
-                    AlertUtil.showAlertDialogwithListener(this, R.string.logout, R.string.really_logout, R.string.yes, R.string.no, listener, DIALOG_LOGOUT).show();
+                    SweetAlertUtil.showAlertDialogwithListener(this, R.string.logout, R.string.really_logout, R.string.yes, R.string.no, listener, new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog
+                                    .setTitleText(getString(R.string.logout))
+                                    .setContentText(getString(R.string.logout_success))
+
+                                    .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                   SweetAlertUtil.hideDialogAutomatically(BaseActivity.this,sweetAlertDialog);
+
+                        }
+                    }).show();
                 } else {
                     goToActivity(LoginActivity.class);
                 }
@@ -583,52 +599,23 @@ abstract public class BaseActivity extends AppCompatActivity {
 
     }
 
-    AlertUtil.ConnectionDialogClickListener listener = new AlertUtil.ConnectionDialogClickListener() {
-        @Override
-        public void dialogClicklistener(int dialog_id, int button) {
-            switch (dialog_id) {
-                case DIALOG_LOGOUT:
-                    if (button == DialogInterface.BUTTON_POSITIVE) {
-
-                        Utils.deletePrefs(BaseActivity.this);
-                        DIDbHelper.deleteTables(BaseActivity.this);
+   SweetAlertDialog.OnSweetClickListener listener = new SweetAlertDialog.OnSweetClickListener() {
+       @Override
+       public void onClick(SweetAlertDialog sweetAlertDialog) {
+           Utils.deletePrefs(BaseActivity.this);
+           DIDbHelper.deleteTables(BaseActivity.this);
 //                        showShortToast(BaseActivity.this, R.string.logout_message);
 //                        CartApplication.getCart().setCartEmpty();
 //                        invalidateOptionsMenu();
 
-                        goToActivity(LoginActivity.class);
-                        finish();
+           goToActivity(LoginActivity.class);
+           finish();
+       }
 
 
-                    }
-                    break;
-
-//                case DIALOG_EXIT:
-////                    if (button == DialogInterface.BUTTON_POSITIVE) {
-////
-////                        sendExitIntent(BaseActivity.this, SplashActivity.class);
-////
-////                    }
-//                    break;
-//                case DIALOG_STORE:
-//                    if (button == DialogInterface.BUTTON_POSITIVE) {
-//
-//                        Utils.deletePrefs(BaseActivity.this);
-//
-//                        Toast.makeText(BaseActivity.this, R.string.logout_message, Toast.LENGTH_SHORT).show();
-//
-//                        Utils.deletePrefsStore(BaseActivity.this);
-//                        Intent intent = new Intent(BaseActivity.this, StoreActivity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent);
-//
-//
-//                    }
-//                    break;
-            }
 
 
-        }
+
     };
 
 
@@ -960,13 +947,7 @@ abstract public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private AlertDialogUtil.ConnectionDialogClickListener dailog_listener = new AlertDialogUtil.ConnectionDialogClickListener() {
-        @Override
-        public void dialogClicklistener(int button) {
 
-
-        }
-    };
 
     public boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
@@ -1002,7 +983,7 @@ abstract public class BaseActivity extends AppCompatActivity {
                     for (int i = 0; i < grantResults.length; i++) {
                         if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             notgranted = true;
-                            AlertDialogUtil.showDialogwithNeutralButton(this, "Permissions", "Some of permissions are not Granted,Please grand Permission to Continue", "ok", permissiondialoglistener).show();
+                            SweetAlertUtil.showDialogwithNeutralButton(this, "Permissions", "Some of permissions are not Granted,Please grand Permission to Continue", "ok", permissiondialoglistener).show();
                             break;
                         }
                     }
@@ -1065,7 +1046,12 @@ abstract public class BaseActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            AlertDialogUtil.showDialogwithNeutralButton(context, getString(R.string.exception), e.getMessage(), getString(R.string.ok), dailog_listener).show();
+            SweetAlertUtil.showDialogwithNeutralButton(context, getString(R.string.exception), e.getMessage(), getString(R.string.ok), new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                }
+            }).show();
         }
     }
 
@@ -1115,16 +1101,16 @@ Used to process
 
     }
 
-    private AlertDialogUtil.ConnectionDialogClickListener permissiondialoglistener = new AlertDialogUtil.ConnectionDialogClickListener() {
+    private SweetAlertDialog.OnSweetClickListener permissiondialoglistener = new SweetAlertDialog.OnSweetClickListener() {
         @Override
-        public void dialogClicklistener(int button) {
-//            getMultiplePermissions(AppConstant.MULTIPLE_PERMISSION_REQUESTCODE,AppConstant.requiredPermissions());
+        public void onClick(SweetAlertDialog sweetAlertDialog) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                     Uri.fromParts("package", getPackageName(), null));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-
         }
+
+
     };
 
 

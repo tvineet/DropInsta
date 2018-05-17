@@ -11,15 +11,11 @@ import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
-import com.inerun.dropinsta.base.AlertUtil;
 import com.inerun.dropinsta.base.BaseActivity;
-import com.inerun.dropinsta.base.CheckConnectionUtil;
-import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.LoginData;
 import com.inerun.dropinsta.gcm.NotiHelper;
-import com.inerun.dropinsta.sql.DIDbHelper;
 
 import java.util.Timer;
 import java.util.TimerTask;

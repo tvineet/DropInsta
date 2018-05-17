@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
 import com.inerun.dropinsta.R;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 
-public class CustomFontEditText extends EditText {
+public class CustomFontEditText extends MaterialEditText {
 
 	public CustomFontEditText(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);

@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
 
     android:orientation="vertical">
@@ -33,7 +34,8 @@
             android:layout_below="@+id/header_title"
             android:orientation="horizontal">
 
-            <EditText
+            <com.inerun.dropinsta.fontlib.CustomFontEditText
+                app:met_floatingLabel="highlight"
                 android:id="@+id/parcel_edt"
                 style="@style/search_edittext_view_style"
                 android:layout_width="match_parent"
@@ -65,7 +67,8 @@
 
         </RelativeLayout>
 
-        <EditText
+        <com.inerun.dropinsta.fontlib.CustomFontEditText
+            app:met_floatingLabel="highlight"
             android:id="@+id/name_edt"
             style="@style/search_edittext_view_style"
             android:layout_width="match_parent"
@@ -75,7 +78,8 @@
             android:maxLines="1"
             android:hint="@string/search_parcel_name" />
 
-        <EditText
+        <com.inerun.dropinsta.fontlib.CustomFontEditText
+            app:met_floatingLabel="highlight"
             android:id="@+id/email_edt"
             style="@style/search_edittext_view_style"
             android:layout_width="match_parent"
@@ -86,7 +90,8 @@
             android:maxLines="1"
             android:hint="@string/search_parcel_email" />
 
-        <EditText
+        <com.inerun.dropinsta.fontlib.CustomFontEditText
+            app:met_floatingLabel="highlight"
             android:id="@+id/phone_edt"
             style="@style/search_edittext_view_style"
             android:layout_width="match_parent"
@@ -97,7 +102,8 @@
             android:singleLine="true"
             android:hint="@string/search_parcel_contact" />
 
-        <EditText
+        <com.inerun.dropinsta.fontlib.CustomFontEditText
+            app:met_floatingLabel="highlight"
             android:id="@+id/custid_edt"
             style="@style/search_edittext_view_style"
             android:layout_width="match_parent"
@@ -108,7 +114,8 @@
             android:singleLine="true"
             android:hint="@string/search_parcel_custid" />
 
-        <EditText
+        <com.inerun.dropinsta.fontlib.CustomFontEditText
+            app:met_floatingLabel="highlight"
             android:id="@+id/invoice_edt"
             style="@style/search_edittext_view_style"
             android:layout_width="match_parent"

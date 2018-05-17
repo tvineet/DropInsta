@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="2dp">
@@ -16,7 +17,8 @@
         android:paddingLeft="@dimen/fragment_layout_margin10dp"
         android:paddingRight="@dimen/fragment_layout_margin10dp">
 
-        <EditText
+        <com.inerun.dropinsta.fontlib.CustomFontEditText
+            app:met_floatingLabel="highlight"
             android:id="@+id/invoiceno_edt"
             style="@style/search_edittext_view_style"
             android:layout_width="match_parent"
