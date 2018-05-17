@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:orientation="horizontal"
                 android:weightSum="2"
 
@@ -194,6 +194,7 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1.5"
+                android:visibility="visible"
                 android:background="@color/colorGray">
 
                 <TextView
@@ -222,8 +223,9 @@
                 android:id="@+id/return_parcel_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1.5"
+                android:visibility="visible"
                 android:background="@color/colorGray">
 
                 <TextView
@@ -242,6 +244,57 @@
                     android:layout_toRightOf="@+id/return_title"
                     android:text="10"
                     android:textSize="@dimen/text_size28sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/pickup_parcel_lay"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1.5"
+                android:background="@color/colorGray"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/pickup_parcel_title"
+                    style="@style/dash_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:text="@string/pickup_parcel" />
+
+                <TextView
+                    android:id="@+id/pickup_parcel_count"
+                    style="@style/dash_count_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/pickup_parcel_title"
+                    android:text="10"
+                    android:textSize="@dimen/text_size28sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/add_parcel_lay"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1.5"
+                android:background="@color/colorGray"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/add_parcel_title"
+                    style="@style/dash_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:text="@string/add_parcel" />
 
 
             </RelativeLayout>

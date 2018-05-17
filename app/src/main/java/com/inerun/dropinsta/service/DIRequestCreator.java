@@ -11,6 +11,7 @@ import com.inerun.dropinsta.data.ParcelSearchData;
 import com.inerun.dropinsta.data.ReadyParcelData;
 import com.inerun.dropinsta.data.TransactionData;
 import com.inerun.dropinsta.data.UpdatedParcelData;
+import com.inerun.dropinsta.data.UpdatedPickupParcelData;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -113,6 +114,7 @@ public class DIRequestCreator {
         mapParams.put(UrlConstants.KEY_GCM_REGID, gcm_id);
         if (Utils.isUserLoggedIn(context) ) {
             mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USER_TYPE, Utils.getUserType(context) +"");
 
         }
         mapParams.put(UrlConstants.KEY_ANDROID_ID, DeviceInfoUtil.getAndroidID(context));
@@ -353,11 +355,13 @@ public class DIRequestCreator {
         return mapParams;
     }
 
-    public Map<String,String> getReadyForExecutiveMapParams() {
+    public Map<String,String> getReadyForExecutiveMapParams(int start,int limit) {
         if(Utils.isUserLoggedIn(context)){
             mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
             mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
         }
+        mapParams.put(UrlConstants.KEY_START, ""+start);
+        mapParams.put(UrlConstants.KEY_LIMIT, ""+limit);
         return mapParams;
     }
 
@@ -383,6 +387,60 @@ public class DIRequestCreator {
 //        params.put(UrlConstants.KEY_ANDROID_ID, DeviceInfoUtil.getAndroidID(context));
 //        return params;
 //    }
+
+    public Map<String, String> getSyncDataMapParams_New(ArrayList<UpdatedParcelData> parcelDatas, ArrayList<TransactionData> transcDatas, ArrayList<UpdatedPickupParcelData> pickupParcelDatas) {
+
+        String android_version= DeviceInfoUtil.getDeviceAndroidVersionName(context);
+        String brand=DeviceInfoUtil.getBrandName(context);
+        String model=DeviceInfoUtil.getModelName(context);
+        String android_id=DeviceInfoUtil.getAndroidID(context);
+        String version_code=""+DeviceInfoUtil.getSelfVersionCode(context);
+
+        if(Utils.isUserLoggedIn(context)){
+            mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
+            mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
+        }
+
+        mapParams.put(UrlConstants.KEY_ANDROID_VERSION, android_version);
+        mapParams.put(UrlConstants.KEY_BRAND, brand);
+        mapParams.put(UrlConstants.KEY_MODEL, model);
+        mapParams.put(UrlConstants.KEY_ANDROID_ID, android_id);
+        mapParams.put(UrlConstants.KEY_VERSION_CODE, version_code);
+
+
+        if(parcelDatas != null && parcelDatas.size() > 0) {
+
+            Gson gson = new Gson();
+            String json = gson.toJson(parcelDatas);
+
+            mapParams.put(UrlConstants.KEY_UPDATE_DATA, json);
+        }else{
+
+            mapParams.put(UrlConstants.KEY_UPDATE_DATA, "[]");
+        }
+
+
+
+        Gson tgson = new Gson();
+        String tjson = tgson.toJson(transcDatas);
+
+
+        mapParams.put(UrlConstants.KEY_TRANS_DATA, tjson);
+
+        if(pickupParcelDatas != null && pickupParcelDatas.size() > 0) {
+
+            Gson gson = new Gson();
+            String json = gson.toJson(pickupParcelDatas);
+
+            mapParams.put(UrlConstants.KEY_PICKUP_UPDATE_DATA, json);
+        }else{
+
+            mapParams.put(UrlConstants.KEY_PICKUP_UPDATE_DATA, "[]");
+        }
+
+        return mapParams;
+
+    }
 
 
 }

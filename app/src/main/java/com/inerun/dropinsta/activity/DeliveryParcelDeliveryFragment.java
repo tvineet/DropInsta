@@ -1,6 +1,7 @@
 package com.inerun.dropinsta.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,12 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.BaseFragment;
 import com.inerun.dropinsta.constant.UrlConstants;
+import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.POD;
 import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ParcelStatus;
@@ -43,6 +46,7 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
     private TransactionData transcdata;
     private final int SIGN_REQUEST = 102;
     private ProgressBar progress;
+    private Context context;
 
 
     public static Fragment newInstance(ArrayList<ParcelListingData.ParcelData> arrayList) {
@@ -56,6 +60,7 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getActivity();
         arrayList = (ArrayList<ParcelListingData.ParcelData>) getArguments().getSerializable(UrlConstants.KEY_UPDATE_DATA);
     }
 
@@ -199,7 +204,14 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
     private void deliverParcel(boolean iscard, ArrayList<ParcelListingData.ParcelData> parcelDatas, String totalamount, String transcid, String collectedby, POD pod, String nationalId) {
 
         DIDbHelper.deliverParcelandUpdateTransaction(getActivity(),parcelDatas,new ParcelStatus(""+ParcelListingData.ParcelData.DELIVERED,"DELIVERED"),iscard,transcid,collectedby,totalamount,parcelDatas.get(0).getCurrency(),pod,nationalId);
-        ((BaseActivity)getActivity()).syncData();
+        if (Utils.isConnectingToInternet(context)) {
+//            ((BaseActivity) getActivity()).syncData();
+            syncData();
+        }else{
+            hideProgress();
+            Toast.makeText(context, getString(R.string.saved_success), Toast.LENGTH_LONG).show();
+            getActivity().finish();
+        }
 
 
     }

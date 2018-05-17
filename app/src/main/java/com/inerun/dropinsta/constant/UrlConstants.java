@@ -9,13 +9,21 @@ public class UrlConstants {
 //    public static final String BASE_ADDRESS = "http://192.168.1.129/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.117/dropinsta/app/";
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta/app/";
-    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta1/app/";
-//    public static final String BASE_ADDRESS = "http://tigmooshopnship.com/app/";
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta1/app/"; // Fist URL for Demo before implementing Pickup
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/courier/app/";   //Last Used URL
+//    public static final String BASE_ADDRESS = "http://tigmooshopnship.com/app/";        // Live
+//    public static final String BASE_ADDRESS = "https://tigmooshopnship.com/old/app/";        // OLD Live
+//    public static final String BASE_ADDRESS = "https://tigmooshopnship.com/app/";        // Live
 //    public static final String BASE_ADDRESS = "http://192.168.1.118/dropinsta/app/"; // Prabhat
 //    public static final String BASE_ADDRESS = "http://192.168.1.113/dropinsta/app/";  // Sumit
+//    public static final String BASE_ADDRESS = "http://192.168.1.105/dropinsta/app/";  // Shivani
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta001/app/";  // 4Apr2018
 
 
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta2/app/";
+//    public static final String BASE_ADDRESS = "http://192.168.1.33/dropinsta1/app/";
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/sns27feb/app/";  //6Apr2018
+    public static final String BASE_ADDRESS = "http://148.251.29.69/sns13ap/app/";  //6Apr2018
 
 
 
@@ -108,4 +116,9 @@ public class UrlConstants {
     public static final String KEY_EXECUTIVE_DATA = "executive_data";
     public static final String KEY_REQUEST_ID = "request_id";
     public static final String KEY_DELIVERY_STATUS_FLAG = "Delivery_flag";
+    public static final String KEY_USER_TYPE = "user_type";
+
+    public static final String KEY_PICKUP_UPDATE_DATA = "pickup_update_data";
+    public static final String KEY_START = "start";
+    public static final String KEY_LIMIT = "limit";
 }

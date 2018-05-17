@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E9E9E9">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearform"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/form_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#E1E1E1">
+
+                <TextView
+                    android:id="@+id/personal_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#696969"
+                    android:padding="5dp"
+                    android:text="Personal Details"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/pickup_form_fname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/personal_details"
+                    android:hint="First Name" />
+
+                <EditText
+                    android:id="@+id/pickup_form_lname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_form_fname"
+                    android:hint="Last Name" />
+
+                <EditText
+                    android:id="@+id/pickup_form_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_form_lname"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress" />
+
+                <EditText
+                    android:id="@+id/pickup_form_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_form_email"
+                    android:hint="Phone No"
+                    android:inputType="phone" />
+
+                <EditText
+                    android:id="@+id/pickup_form_landline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_form_phone"
+                    android:hint="Landline No"
+                    android:inputType="phone" />
+
+                <EditText
+                    android:id="@+id/pickup_form_extension"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_form_landline"
+                    android:hint="Ext."
+                    android:inputType="number" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/form_relative1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/form_relative"
+                android:layout_marginBottom="10dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:id="@+id/pickup_form_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="#696969"
+                    android:padding="5dp"
+                    android:text="Pickup Address"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/pickup_address_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_form_address"
+                    android:maxLines="2"
+                    android:padding="5dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/form_relative2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/form_relative1"
+                android:layout_marginBottom="10dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:id="@+id/delivery_form_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#696969"
+                    android:padding="5dp"
+                    android:text="Delivery Address"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/delivery_address_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/delivery_form_address"
+                    android:maxLines="2"
+                    android:padding="5dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/form_relative3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/form_relative2"
+                android:layout_marginBottom="10dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:id="@+id/parcel_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#696969"
+                    android:padding="5dp"
+                    android:text="Parcel Detail"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/pickup_form_parcel_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/parcel_detail"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:text="Parcel Type"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/pickup_form_drop_down"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_form_parcel_type"
+                    android:hint="Dropdown List" />
+
+                <LinearLayout
+                    android:id="@+id/linear_form1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_form_drop_down"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:id="@+id/relative_form"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".85">
+
+                        <TextView
+                            android:id="@+id/dimension"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:text="Dimension(cm)"
+                            android:textSize="17sp" />
+                    </RelativeLayout>
+
+                    <RadioGroup
+                        android:id="@+id/pickup_form_radio_dimen"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.15"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <RadioButton
+                            android:id="@+id/pickup_form_cm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="cm"
+                            android:textSize="17sp" />
+
+                        <RadioButton
+                            android:id="@+id/pickup_form_mm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="mm" />
+
+                        <RadioButton
+                            android:id="@+id/pickup_form_inch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="inch" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/pickup_parcel_length"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_form1"
+                    android:hint="Length"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/pickup_parcel_width"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_parcel_length"
+                    android:hint="Width"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/pickup_parcel_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_parcel_width"
+                    android:hint="Height"
+                    android:inputType="number" />
+
+                <LinearLayout
+                    android:id="@+id/form_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickup_parcel_height"
+                    android:background="#ffffff"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/volumetric_weight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="7"
+                        android:padding="5dp"
+                        android:text="Volumetric Weight(Kg):"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:id="@+id/pickup_parcel_volumetric_weight_val"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:padding="5dp"
+                        android:text="0"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/form_relative4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/form_linear">
+
+                    <TextView
+                        android:id="@+id/pickup_actual_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Actual Weight(Kg)"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:id="@+id/pickup_parcel_actual_weight_val"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pickup_actual_weight"
+                        android:layout_marginBottom="5dp"
+                        android:hint="Weight"
+                        android:inputType="number" />
+
+                    <TextView
+                        android:id="@+id/pickup_form_content_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pickup_parcel_actual_weight_val"
+                        android:padding="5dp"
+                        android:text="Content Type"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:id="@+id/content_type_val"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pickup_form_content_type"
+                        android:hint="Content type drop down list" />
+
+                    <LinearLayout
+                        android:id="@+id/form_linear1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/content_type_val"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:id="@+id/pickup_implication"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:padding="5dp"
+                            android:text="Implication"
+                            android:textSize="17dp" />
+
+                        <TextView
+                            android:id="@+id/pickup_parcel_implication_val"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:padding="5dp"
+                            android:text="0"
+                            android:textSize="17dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/form_linear2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/form_linear1"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:id="@+id/relative_form2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".9">
+
+                            <TextView
+                                android:id="@+id/parcel_val"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:text="Parcel Value($)"
+                                android:textSize="17dp" />
+                        </RelativeLayout>
+
+                        <RadioGroup
+                            android:id="@+id/pickup_price_radio"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.1"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <RadioButton
+                                android:id="@+id/pickup_form_usd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="USD"
+                                android:textSize="17sp" />
+
+                            <RadioButton
+                                android:id="@+id/pickup_form_inr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="INR"
+                                android:textSize="17sp" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/form_linear4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/form_linear2"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/pickup_parcel_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Parcel Value" />
+
+                        <EditText
+                            android:id="@+id/pickup_parcel_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pickup_parcel_value"
+                            android:layout_marginBottom="3dp"
+                            android:hint="Description"
+                            android:lines="2" />
+
+                        <EditText
+                            android:id="@+id/pickup_parcel_special_instruction"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pickup_parcel_description"
+                            android:hint="Special Instruction"
+                            android:lines="2" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearform"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00A54F"
+            android:text="Submit"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</RelativeLayout>

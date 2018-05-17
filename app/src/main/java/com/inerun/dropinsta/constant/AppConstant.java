@@ -185,6 +185,7 @@ public class AppConstant {
 
         public static final int DELIVERED_STATUS = 9;
         public static final int RETURN_STATUS = 18;
+        public static final int PICKEDUP_STATUS = 23;
         public static final String USER_ID = "userid";
 
     }

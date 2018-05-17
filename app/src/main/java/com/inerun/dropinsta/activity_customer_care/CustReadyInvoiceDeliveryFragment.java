@@ -42,6 +42,7 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
     private RecyclerView detaillistview;
     private CustInvoiceListAdapter adapter;
     private CustInvoiceParcelData whInvoiceParcelData;
+    private Drawable mDivider;
 
     public static Fragment newInstance() {
         CustReadyInvoiceDeliveryFragment fragment = new CustReadyInvoiceDeliveryFragment();
@@ -67,6 +68,7 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
     private void intView() {
         error_txt = (TextView) getViewById(R.id.error_textview);
         detaillistview = (RecyclerView) getViewById(R.id.detail_listview);
+        mDivider = getDrawable(R.drawable.payment_line_divider);
 
     }
 
@@ -106,7 +108,7 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
             detaillistview.setLayoutManager(mLayoutManager);
             detaillistview.setItemAnimator(new DefaultItemAnimator());
-            Drawable mDivider = getDrawable(R.drawable.payment_line_divider);
+//            Drawable mDivider = getDrawable(R.drawable.payment_line_divider);
             detaillistview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), mDivider));
 
             detaillistview.setAdapter(adapter);

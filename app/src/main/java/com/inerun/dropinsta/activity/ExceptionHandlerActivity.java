@@ -47,6 +47,7 @@ public class ExceptionHandlerActivity extends BaseActivity {
         if (getIntent() != null && getIntent().hasExtra(UrlConstants.KEY_EXCEPTION)) {
             exception = getIntent().getStringExtra(UrlConstants.KEY_EXCEPTION);
             txt.setText(exception);
+            Log.e("exception",""+exception);
             prepareLogs(exception);
         }
 

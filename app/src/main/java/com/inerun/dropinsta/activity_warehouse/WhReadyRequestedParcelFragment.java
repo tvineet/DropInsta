@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -272,6 +273,10 @@ public class WhReadyRequestedParcelFragment extends BaseFragment implements View
                 if (resultCode == Activity.RESULT_OK && data.hasExtra(CameraTestActivity.INTENT_BARCODE_VALUE)) {
 
                     String barcode = data.getStringExtra(CameraTestActivity.INTENT_BARCODE_VALUE);
+                    Log.i("BARCODE", "WhReadyRequestParcelFragment: with space "+barcode);
+                    barcode = barcode.replaceAll(" ","");
+                    barcode = barcode.replaceAll("\\x1d","");
+                    Log.i("BARCODE", "WhReadyRequestParcelFragment: "+barcode);
 //                    for(ParcelListingData.ParcelData parcelData:invoice.getParcelData()){
 //                        if(parcelData.getBarcode().equalsIgnoreCase(barcode)){
 //                            parcelData.setIsselected(true);

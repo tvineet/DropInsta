@@ -85,7 +85,18 @@ public class SplashActivity extends BaseActivity {
 //                            }
 
                             } else {
-                                AlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                                if (Utils.isUserLoggedIn(SplashActivity.this)) {
+                                    if (DropInsta.getUser().isDeliveryUser()) {
+                                        gotoHomeActivity();
+                                    } else {
+                                        AlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+
+                                    }
+                                } else {
+                                    gotoLoginActivity();
+
+                                }
+//                                AlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
                             }
 
                         }

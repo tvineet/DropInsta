@@ -1,5 +1,7 @@
 package com.inerun.dropinsta.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,8 +14,11 @@ public class ParcelListingData implements Serializable {
     private String message;
     private long delivered_num;
     private long pending_num;
+    private long pickup_num;
     private ArrayList<ParcelData> deliveryData;
     private ArrayList<TransactionData> transdata;
+    @SerializedName("assignParcel")
+    private ArrayList<PickupParcelData> pickupParcelDatas;
 
     public long getDelivered_num() {
         return delivered_num;
@@ -31,6 +36,14 @@ public class ParcelListingData implements Serializable {
         return deliveryData;
     }
 
+    public long getPickup_num() {
+        return pickup_num;
+    }
+
+    public ArrayList<PickupParcelData> getPickupParcelDatas() {
+        return pickupParcelDatas;
+    }
+
     public ParcelListingData(long delivered_num, long pending_num) {
         this.delivered_num = delivered_num;
         this.pending_num = pending_num;
@@ -40,6 +53,14 @@ public class ParcelListingData implements Serializable {
         this.delivered_num = delivered_num;
         this.pending_num = pending_num;
         this.deliveryData = deliveryData;
+    }
+
+    public ParcelListingData(long delivered_num, long pending_num, ArrayList<ParcelData> deliveryData, ArrayList<PickupParcelData> pickupParcelDatas, long pickup_num) {
+        this.delivered_num = delivered_num;
+        this.pending_num = pending_num;
+        this.deliveryData = deliveryData;
+        this.pickupParcelDatas = pickupParcelDatas;
+        this.pickup_num = pickup_num;
     }
 
     public ParcelListingData() {
@@ -79,6 +100,9 @@ public class ParcelListingData implements Serializable {
         private String transaction_timestamp;
         private String transc_type;
 
+        public ParcelData(String barcode) {
+            this.barcode = barcode;
+        }
 
         public ParcelData(String barcode, String amount, String currency) {
             this.barcode = barcode;
@@ -107,6 +131,8 @@ public class ParcelListingData implements Serializable {
 
         public final static int PENDING = 12;
         public final static int ATTEMPTED = 14;
+        public final static int PICKUP_ATTEMPTED = 24;
+        public final static int PICKUP_RECEIVED = 23;
         public final static int TRANSACTION_CARD = 1;
         public final static int TRANSACTION_CASH = 2;
 
