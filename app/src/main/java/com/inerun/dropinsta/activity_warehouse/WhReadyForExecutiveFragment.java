@@ -118,6 +118,11 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
 //            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+//            Drawable mDivider = getDrawable(R.drawable.payment_line_divider);
+            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), mDivider));
+
+            recyclerView.setAdapter(adapter);
 
 
             scrollListener = new EndlessRecyclerViewScrollListener(mLayoutManager) {
@@ -136,11 +141,7 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
             recyclerView.addOnScrollListener(scrollListener);
 
 
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-//            Drawable mDivider = getDrawable(R.drawable.payment_line_divider);
-            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), mDivider));
 
-            recyclerView.setAdapter(adapter);
 
 
         }else {
