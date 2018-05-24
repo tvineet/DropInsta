@@ -23,7 +23,8 @@ public class UrlConstants {
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta2/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.33/dropinsta1/app/";
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/sns27feb/app/";  //6Apr2018
-    public static final String BASE_ADDRESS = "http://148.251.29.69/sns13ap/app/";  //6Apr2018
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/sns13ap/app/";  //6Apr2018
+    public static final String BASE_ADDRESS = "http://192.168.1.33/sns13ap/app/";  //6Apr2018
 
 
 
@@ -47,6 +48,11 @@ public class UrlConstants {
 
     public static final String URL_READY_FOR_EXECUTIVE_LIST = BASE_ADDRESS + "requestlist";
     public static final String URL_RETURN_PARCEL_LIST = BASE_ADDRESS + "invoicelist";
+
+
+    public static final String BASE_ADDRESS_Demo = "http://148.251.29.69/tigmoo67/api/index/";  //6Apr2018
+
+    public static final String URL_DEMO = BASE_ADDRESS_Demo + "productlisting";
 
 
 

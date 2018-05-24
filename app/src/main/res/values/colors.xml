@@ -38,6 +38,7 @@
     <color name="homereadyparcel_back">#B3A52A2A</color>
     <color name="colorlightyellow">#F1F0C7</color>
     <color name="text_color">#7C7C7C</color>
+    <color name="rotating_progress_color">@color/colorPrimary</color>
 
 
     <integer-array name="color_array">

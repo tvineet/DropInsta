@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class CustInvoiceParcelData implements Serializable {
     private boolean status;
+    private int total;
     private ArrayList<Invoice> invoiceData;
 
 
@@ -21,6 +22,10 @@ public class CustInvoiceParcelData implements Serializable {
 
     public boolean isStatus() {
         return status;
+    }
+
+    public int getTotal() {
+        return total;
     }
 
     public ArrayList<Invoice> getInvoiceData() {

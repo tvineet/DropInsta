@@ -8,4 +8,5 @@
     <dimen name="dashtextsize">40sp</dimen>
     <dimen name="dashtexttitlesize">23sp</dimen>
     <dimen name="home_text_size">18dp</dimen>
+    <dimen name="rotating_progress_width">5dp</dimen>
 </resources>

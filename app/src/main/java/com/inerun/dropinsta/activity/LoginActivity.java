@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,6 +25,7 @@ import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.LoginData;
 import com.inerun.dropinsta.helper.DIHelper;
 import com.inerun.dropinsta.service.DIRequestCreator;
+import com.victor.loading.rotate.RotateLoading;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ import java.util.Map;
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String sTAG = "Login";
-    ProgressBar progress;
+    RotateLoading progress;
     private EditText email_edt, pass_edt;
     private Button login_btn;
 
@@ -49,6 +50,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private boolean mIntentInProgress;
 
     private boolean innerlaunch, forCart;
+    private RelativeLayout progress_layout;
 
 
     @Override
@@ -79,7 +81,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     private void initView() {
-        progress = (ProgressBar) findViewById(R.id.progressBar);
+        progress = (RotateLoading) findViewById(R.id.progressBar);
+        progress_layout = (RelativeLayout) findViewById(R.id.progressbar_layout);
         email_edt = (EditText) findViewById(R.id.login_email_edt);
         pass_edt = (EditText) findViewById(R.id.login_pass_edt);
         Typeface myTypeface = Typeface.createFromAsset(context
@@ -145,7 +148,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         Map<String, String> params = DIRequestCreator.getInstance(this).getLoginMapParams(email, pass);
-        DropInsta.serviceManager().postRequest(UrlConstants.URL_LOGIN, params, progress, response_listener, response_errorlistener, sTAG);
+        progress_layout.setVisibility(View.GONE);
+        progress.stop();
+        DropInsta.serviceManager().postRequest(UrlConstants.URL_LOGIN, params, null, response_listener, response_errorlistener, sTAG);
 
     }
 
@@ -157,7 +162,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //            Log.d("Response: ", response.toString());
 
             try {
-                progress.setVisibility(View.GONE);
+                progress_layout.setVisibility(View.GONE);
+                progress.stop();
                 JSONObject jsonObject = new JSONObject(response);
 //                Toast.makeText(LoginActivity.this, DIHelper.getMessage(jsonObject), Toast.LENGTH_LONG).show();
                 showSnackbar(DIHelper.getMessage(jsonObject));
@@ -201,7 +207,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         @Override
         public void onErrorResponse(VolleyError response) {
-            progress.setVisibility(View.GONE);
+            progress_layout.setVisibility(View.GONE);
+            progress.stop();
             Log.d("Response: ", response.toString());
             showSnackbar(response.toString());
             login_btn.setClickable(true);
