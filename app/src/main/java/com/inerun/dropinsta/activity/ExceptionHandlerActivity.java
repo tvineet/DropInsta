@@ -3,7 +3,6 @@ package com.inerun.dropinsta.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -14,6 +13,7 @@ import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.SweetAlertUtil;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.service.DIRequestCreator;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.util.Map;
 
@@ -29,7 +29,7 @@ public class ExceptionHandlerActivity extends BaseActivity {
     private TextView txt;
     String logs = "";
     Context context;
-    private ProgressBar progress;
+    private RotateLoading progress;
     private String exception;
 //    public ServiceClient client;
 

@@ -347,11 +347,13 @@ public class DIRequestCreator {
         return mapParams;
     }
 
-    public Map<String,String> getReadyInvoiceMapParams() {
+    public Map<String,String> getReadyInvoiceMapParams(int start, int limit) {
         if(Utils.isUserLoggedIn(context)){
             mapParams.put(UrlConstants.KEY_USER_ID, Utils.getUserId(context));
             mapParams.put(UrlConstants.KEY_USERTYPE, "" + Utils.getUserType(context));
         }
+        mapParams.put(UrlConstants.KEY_START, ""+start);
+        mapParams.put(UrlConstants.KEY_LIMIT, ""+limit);
         return mapParams;
     }
 
@@ -440,6 +442,26 @@ public class DIRequestCreator {
 
         return mapParams;
 
+    }
+
+    public Map<String,String> getReadyForExecutiveMapParams_exp(int start,int limit) {
+
+        mapParams.put("Start", ""+start);
+        mapParams.put("Limit", ""+limit);
+
+        mapParams.put("Order", "desc");
+        mapParams.put("StoreId", "1");
+        mapParams.put("SortBy", "price");
+//        mapParams.put("CatId", "348"); //total 342 item
+//        mapParams.put("CatId", "349");  //total 17 item
+//        mapParams.put("CatId", "350");  //total 88 item
+        mapParams.put("CatId", "343");  //total 3 item
+//        mapParams.put("CatId", "3");  //total 0 item
+
+
+        return mapParams;
+
+      //  Order=desc&StoreId=1&Start=0&UserID=&SortBy=price&CustomerId=&Limit=10&CatId=348&androidId=620594a06d5d399a
     }
 
 

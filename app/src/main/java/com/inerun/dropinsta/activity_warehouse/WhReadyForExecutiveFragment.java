@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -23,10 +22,10 @@ import com.inerun.dropinsta.adapter.WhRequestListAdapter;
 import com.inerun.dropinsta.base.BaseFragment;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.data.WhReadyParcelData;
-import com.inerun.dropinsta.helper.EndlessRecyclerViewScrollListener;
 import com.inerun.dropinsta.helper.SimpleDividerItemDecoration;
 import com.inerun.dropinsta.service.DIRequestCreator;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -42,13 +41,16 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
     private WhRequestListAdapter adapter;
     private WhReadyParcelData whReadyParcelData;
     private Drawable mDivider;
-    private ProgressBar progressBar_bootom;
 
     private int start = 0;
-    private int limit =10;
+    private int limit = 20;
 
-    // Store a member variable for the listener
-    private EndlessRecyclerViewScrollListener scrollListener;
+    boolean isLoading;
+    private LinearLayoutManager mLayoutManager;
+    private int visibleThreshold = 5;
+    int totalItemCount, lastVisibleItem;
+    int total;
+
 
     public static Fragment newInstance() {
         WhReadyForExecutiveFragment fragment = new WhReadyForExecutiveFragment();
@@ -62,6 +64,9 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
 
     @Override
     public void customOnCreateView(View root, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) throws Exception {
+        whReadyParcelData = new WhReadyParcelData();
+        ArrayList<WhReadyParcelData.RequestData> dataArrayList = new ArrayList<>();
+        whReadyParcelData.setCustRequestData(dataArrayList);
         setShowBackArrow(true);
         setToolBarTitle(R.string.ready_for_delivery);
         context = getActivity();
@@ -75,25 +80,29 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
         error_txt = (TextView) getViewById(R.id.error_textview);
         recyclerView = (RecyclerView) getViewById(R.id.ready_request_listview);
         mDivider = getDrawable(R.drawable.payment_line_divider);
-        progressBar_bootom = (ProgressBar) getViewById(R.id.progressBar_bottom);
 
 
     }
 
     private void getData() {
+//        showProgress();
         Log.i("Start_TIME", "" + System.currentTimeMillis());
-        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(start,limit);
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(start, limit);
 
-        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, getProgress(), response_listener, response_errorlistener, READY_REQUEST);
+//        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, null, response_listener, response_errorlistener, READY_REQUEST);
+        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, null, response_listener, response_errorlistener, READY_REQUEST, this);
     }
 
-    Response.Listener<String> response_listener =  new Response.Listener<String>() {
+    Response.Listener<String> response_listener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
             hideProgress();
             Gson gson = new Gson();
 
             whReadyParcelData = gson.fromJson(response, WhReadyParcelData.class);
+
+            total = whReadyParcelData.getTotal();
+            start = whReadyParcelData.getCustRequestData().size();
             Log.i("END_TIME", "" + System.currentTimeMillis());
             setData(whReadyParcelData);
         }
@@ -116,7 +125,7 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
             adapter = new WhRequestListAdapter(getActivity(), whReadyParcelData.getCustRequestData(), searchlickListener);
             recyclerView.setHasFixedSize(true);
 //            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            mLayoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 //            Drawable mDivider = getDrawable(R.drawable.payment_line_divider);
@@ -125,26 +134,43 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
             recyclerView.setAdapter(adapter);
 
 
-            scrollListener = new EndlessRecyclerViewScrollListener(mLayoutManager) {
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
-                public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
 
-                    Log.i("page",""+page);
-                    Log.i("totalItemsCount",""+totalItemsCount);
-                    // Triggered only when new data needs to be appended to the list
-                    // Add whatever code is needed to append new items to the bottom of the list
-                    start = page *limit;
-                    loadNextDataFromApi(start, limit);
+                    totalItemCount = mLayoutManager.getItemCount();
+                    lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+
+//                    Log.i("totalItemCount",""+totalItemCount);
+//                    Log.i("lastVisibleItem",""+lastVisibleItem);
+
+                    if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                        loadNextDataFromApi(start, limit);
+                        isLoading = true;
+                    }
+
                 }
-            };
-            // Adds the scroll listener to RecyclerView
-            recyclerView.addOnScrollListener(scrollListener);
+            });
 
 
+//            scrollListener = new EndlessRecyclerViewScrollListener(mLayoutManager) {
+//                @Override
+//                public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+//
+//                    Log.i("page",""+page);
+//                    Log.i("totalItemsCount",""+totalItemsCount);
+//                    // Triggered only when new data needs to be appended to the list
+//                    // Add whatever code is needed to append new items to the bottom of the list
+//                    start = page *limit;
+//                    loadNextDataFromApi(start, limit);
+//                }
+//            };
+//            // Adds the scroll listener to RecyclerView
+//            recyclerView.addOnScrollListener(scrollListener);
 
 
-
-        }else {
+        } else {
             error_txt.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
 //            showSnackbar(R.string.search_error);
@@ -152,11 +178,12 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
         }
     }
 
+
     View.OnClickListener searchlickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             int pos = (int) view.getTag();
-            navigateToFragment(getActivity(),WhReadyRequestedParcelFragment.newInstance(whReadyParcelData.getCustRequestData().get(pos), whReadyParcelData.getExecutivedata()));
+            navigateToFragment(getActivity(), WhReadyRequestedParcelFragment.newInstance(whReadyParcelData.getCustRequestData().get(pos), whReadyParcelData.getExecutivedata()));
 
         }
     };
@@ -169,25 +196,47 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
 
 
     private void loadNextDataFromApi(int start, int limit) {
+
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                whReadyParcelData.getCustRequestData().add(null);
+                adapter.notifyItemInserted(whReadyParcelData.getCustRequestData().size() - 1);
+            }
+        });
+
         Log.i("Start_TIME", "loadNextDataFromApi : " + System.currentTimeMillis());
         Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyForExecutiveMapParams(start, limit);
 
-        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, progressBar_bootom, response_listener1, response_errorlistener1, READY_REQUEST);
+        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_FOR_EXECUTIVE_LIST, params, null, response_listener1, response_errorlistener1, READY_REQUEST);
     }
 
-    Response.Listener<String> response_listener1 =  new Response.Listener<String>() {
+    Response.Listener<String> response_listener1 = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
 //            hideProgress();
-            progressBar_bootom.setVisibility(View.GONE);
             Gson gson = new Gson();
 
-            WhReadyParcelData whReadyParcelData_new = gson.fromJson(response, WhReadyParcelData.class);
+            final WhReadyParcelData whReadyParcelData_new = gson.fromJson(response, WhReadyParcelData.class);
             Log.i("END_TIME", "" + System.currentTimeMillis());
 
-            whReadyParcelData.getCustRequestData().addAll(whReadyParcelData_new.getCustRequestData());
-//            adapter.add(whReadyParcelData.getCustRequestData());
-            adapter.add(whReadyParcelData_new.getCustRequestData());
+            Log.i("whReadyParcelData_befor", whReadyParcelData.getCustRequestData().size() + "");
+
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    whReadyParcelData.getCustRequestData().remove(whReadyParcelData.getCustRequestData().size() - 1);
+                    adapter.notifyItemRemoved(whReadyParcelData.getCustRequestData().size());
+
+                    int end = start + limit;
+                    int size = (total > end) ? end : total;
+                    isLoading = total == size;
+
+                    adapter.add(isLoading, whReadyParcelData_new.getCustRequestData());
+                    start = whReadyParcelData.getCustRequestData().size();
+                }
+            });
+
         }
     };
 
@@ -195,7 +244,7 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
         @Override
         public void onErrorResponse(VolleyError error) {
 //            hideProgress();
-            progressBar_bootom.setVisibility(View.GONE);
+
             setData(null);
             showSnackbar(error.getMessage());
             Log.i("Error_MSG", error.getMessage());

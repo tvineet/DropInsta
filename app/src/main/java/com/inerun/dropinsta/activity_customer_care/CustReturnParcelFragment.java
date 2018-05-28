@@ -59,6 +59,9 @@ public class CustReturnParcelFragment extends BaseFragment implements View.OnCli
     private RelativeLayout checkbox_layout;
     private LinearLayout btn_layout;
 
+    private int start = 0;
+    private int limit = 20;
+
     public static Fragment newInstance() {
         CustReturnParcelFragment fragment = new CustReturnParcelFragment();
         return fragment;
@@ -98,7 +101,7 @@ public class CustReturnParcelFragment extends BaseFragment implements View.OnCli
 
     private void getData() {
 //        parcellist = DIDbHelper.getPendingParcelInfoForListing(getActivity());
-        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyInvoiceMapParams();
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyInvoiceMapParams(start, limit);
 
         DropInsta.serviceManager().postRequest(UrlConstants.URL_RETURN_PARCEL_LIST, params, getProgress(), return_response_listener, return_response_errorlistener, RETURN_PARCEL);
 

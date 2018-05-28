@@ -44,6 +44,16 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
     private CustInvoiceParcelData whInvoiceParcelData;
     private Drawable mDivider;
 
+
+    private int start = 0;
+    private int limit = 20;
+
+    boolean isLoading;
+    private LinearLayoutManager mLayoutManager;
+    private int visibleThreshold = 5;
+    int totalItemCount, lastVisibleItem;
+    int total;
+
     public static Fragment newInstance() {
         CustReadyInvoiceDeliveryFragment fragment = new CustReadyInvoiceDeliveryFragment();
         return fragment;
@@ -73,7 +83,7 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
     }
 
     private void getData() {
-        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyInvoiceMapParams();
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyInvoiceMapParams(start, limit);
 
         DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_INVOICE_LIST, params, getProgress(), response_listener, response_errorlistener, READY_INVOICE);
     }
@@ -85,6 +95,9 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
             Gson gson = new Gson();
 
             whInvoiceParcelData = gson.fromJson(response, CustInvoiceParcelData.class);
+
+            total = whInvoiceParcelData.getTotal();
+            start = whInvoiceParcelData.getInvoiceData().size();
 
             setData(whInvoiceParcelData);
         }
@@ -105,13 +118,35 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
         if (whInvoiceParcelData != null && whInvoiceParcelData.getInvoiceData() != null && whInvoiceParcelData.getInvoiceData().size() > 0) {
             adapter = new CustInvoiceListAdapter(getActivity(), whInvoiceParcelData.getInvoiceData(), searchlickListener);
             detaillistview.setHasFixedSize(true);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            mLayoutManager = new LinearLayoutManager(getActivity());
             detaillistview.setLayoutManager(mLayoutManager);
             detaillistview.setItemAnimator(new DefaultItemAnimator());
 //            Drawable mDivider = getDrawable(R.drawable.payment_line_divider);
             detaillistview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), mDivider));
 
             detaillistview.setAdapter(adapter);
+
+            detaillistview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    totalItemCount = mLayoutManager.getItemCount();
+                    lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+
+//                    Log.i("totalItemCount",""+totalItemCount);
+//                    Log.i("lastVisibleItem",""+lastVisibleItem);
+
+                    if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                        loadNextDataFromApi(start, limit);
+                        isLoading = true;
+                    }
+
+                }
+            });
+
+
 
 
         }else {
@@ -136,4 +171,55 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
     protected String getAnalyticsName() {
         return null;
     }
+
+
+    private void loadNextDataFromApi(int start, int limit) {
+
+        detaillistview.post(new Runnable() {
+            @Override
+            public void run() {
+                whInvoiceParcelData.getInvoiceData().add(null);
+                adapter.notifyItemInserted(whInvoiceParcelData.getInvoiceData().size() - 1);
+            }
+        });
+
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyInvoiceMapParams(start, limit);
+
+        DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_INVOICE_LIST, params, getProgress(), response_listener1, response_errorlistener1, READY_INVOICE);
+    }
+
+    Response.Listener<String> response_listener1 = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            hideProgress();
+            Gson gson = new Gson();
+
+            final CustInvoiceParcelData whInvoiceParcelData_new = gson.fromJson(response, CustInvoiceParcelData.class);
+
+            detaillistview.post(new Runnable() {
+                @Override
+                public void run() {
+                    whInvoiceParcelData.getInvoiceData().remove(whInvoiceParcelData.getInvoiceData().size() - 1);
+                    adapter.notifyItemRemoved(whInvoiceParcelData.getInvoiceData().size());
+
+                    int end = start + limit;
+                    int size = (total > end) ? end : total;
+                    isLoading = total == size;
+
+                    adapter.add(isLoading, whInvoiceParcelData_new.getInvoiceData());
+                    start = whInvoiceParcelData.getInvoiceData().size();
+                }
+            });
+        }
+    };
+
+    Response.ErrorListener response_errorlistener1 = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            hideProgress();
+            setData(null);
+//            showSnackbar(error.getMessage());
+            Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    };
 }

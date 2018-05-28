@@ -103,4 +103,12 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
     // Defines the process for actually loading more data based on page
     public abstract void onLoadMore(int page, int totalItemsCount, RecyclerView view);
 
+//    public void onFirstLoad(int i, int limit, RecyclerView recyclerView) {
+//
+//        currentPage=i;
+//        previousTotalItemCount=limit;
+//        loading = false;
+//
+//        onLoadMore(i,limit,recyclerView);
+//    }
 }

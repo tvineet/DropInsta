@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class WhReadyParcelData implements Serializable {
     private boolean status;
+    private int total;
     private ArrayList<RequestData> custRequestData;
     private ArrayList<CustomerExecutiveData> executivedata;
 
@@ -27,8 +28,16 @@ public class WhReadyParcelData implements Serializable {
         return status;
     }
 
+    public int getTotal() {
+        return total;
+    }
+
     public ArrayList<RequestData> getCustRequestData() {
         return custRequestData;
+    }
+
+    public void setCustRequestData(ArrayList<RequestData> custRequestData) {
+        this.custRequestData = custRequestData;
     }
 
     public class RequestData implements Serializable{
