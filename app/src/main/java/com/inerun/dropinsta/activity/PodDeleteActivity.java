@@ -1,17 +1,16 @@
 package com.inerun.dropinsta.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
+import com.inerun.dropinsta.activity_auction.AuctionHomeActivity;
 import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.CheckConnectionUtil;
 import com.inerun.dropinsta.constant.AppConstant;
@@ -61,7 +60,7 @@ public class PodDeleteActivity extends BaseActivity {
         if (CheckConnectionUtil.checkMyConnectivity(PodDeleteActivity.this)) {
             AsyncTaskRunner runner = new AsyncTaskRunner();
             runner.execute();
-        }else{
+        } else {
             goFurther();
         }
 //        goFurther();
@@ -71,11 +70,13 @@ public class PodDeleteActivity extends BaseActivity {
         if (Utils.isUserLoggedIn(this)) {
             if (DropInsta.getUser().isDeliveryUser()) {
                 gotoHomeActivity();
-            } else if(DropInsta.getUser().isWarehouseUser()){
+            } else if (DropInsta.getUser().isWarehouseUser()) {
                 gotoWarehouseActivity();
 
-            }else if(DropInsta.getUser().isCustomerCareUser()){
+            } else if (DropInsta.getUser().isCustomerCareUser()) {
                 gotoCustomreCareActivity();
+            } else if (DropInsta.getUser().isCashierUser()) {
+                gotoAuctionActivity();
             }
         } else {
             gotoLoginActivity();
@@ -116,6 +117,14 @@ public class PodDeleteActivity extends BaseActivity {
 
     }
 
+    private void gotoAuctionActivity() {
+
+        Intent intent = new Intent(this,
+                AuctionHomeActivity.class);
+        startActivity(intent);
+
+    }
+
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         private String resp;
@@ -145,7 +154,7 @@ public class PodDeleteActivity extends BaseActivity {
                     }
                 }
 
-            }  catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 resp = e.getMessage();
             }

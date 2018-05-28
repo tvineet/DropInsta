@@ -5,7 +5,6 @@ package com.inerun.dropinsta.network;
  */
 
 import android.util.Log;
-import android.widget.ProgressBar;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -14,13 +13,14 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 public class CustomRequest extends Request<String>{
 
-    private  ProgressBar progressBar;
+    private  RotateLoading progressBar;
     private Listener<String> listener;
     private Map<String, String> params;
 
@@ -36,7 +36,7 @@ public class CustomRequest extends Request<String>{
         super(method, url, errorListener);
         this.listener = reponseListener;
         this.params = params;
-    } public CustomRequest(int method, ProgressBar progressBar, String url, Map<String, String> params,
+    } public CustomRequest(int method, RotateLoading progressBar, String url, Map<String, String> params,
                            Listener<String> reponseListener, ErrorListener errorListener) {
         super(method, url, errorListener);
         this.listener = reponseListener;

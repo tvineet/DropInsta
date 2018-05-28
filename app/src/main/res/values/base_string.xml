@@ -44,6 +44,14 @@
     <string name="server_exception_error_message_resource_not_found">Requested resource does not exist on server.</string>
     <string name="server_exception_error_message_forbidden">Requested resource is forbidden.</string>
 
+
+
+    <!--Exception message string-->
+
+
+    <string name="server_exception_error_message_response_null">No Response From Server.</string>
+    <string name="server_exception_error_message_invalid_parameter">Invalid Parameters. Either key or value is missing</string>
+    <string name="server_exception_error_message_nullpointerr">Null Pointer Exceptions. Either some value or reference is null. </string>
 <!--Error message String-->
 
     <string name="error_email_field">Email cannot be empty.</string>
