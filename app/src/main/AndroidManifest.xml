@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -18,16 +19,30 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        tools:replace="android:icon"
         android:sharedUserId="android.uid.system"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
 
 
         <activity
             android:name=".activity.SplashActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar"
+
+            >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity
+            android:name=".activity_auction.AuctionSplashActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Auction"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar"
 
@@ -46,9 +61,9 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme_NoArrow">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
 
         </activity>
@@ -97,12 +112,14 @@
             android:label="@string/search_parcel_search"
             android:screenOrientation="sensorPortrait">
 
-        </activity> <activity
+        </activity>
+        <activity
             android:name=".activity.DeliverySearchActivity"
             android:label="@string/search_parcel_search"
             android:screenOrientation="sensorPortrait">
 
-        </activity> <activity
+        </activity>
+        <activity
             android:name=".activity.DeliveryPaymentsActivity"
             android:label="@string/search_parcel_search"
             android:screenOrientation="sensorPortrait">
@@ -120,7 +137,8 @@
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait">
 
-        </activity> <activity
+        </activity>
+        <activity
             android:name=".activity.DeliveryParcelDeliveryActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait">
@@ -130,58 +148,60 @@
         <activity
             android:name=".activity.DeliveryDeliveredParcelsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait" />
 
         <activity
             android:name=".activity.DeliveryPendingParcelsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".activity.DeliveryReturnParcelActivity"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".activity.DeliveryAddParcelActivity"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".activity.DeliveryPickupParcelActivity"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".activity.DeliveryPickupDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".activity.PodDeleteActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".activity_customer_care.CustomerDashboardActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait"
-            >
-        </activity>
-	
-	<activity
+            android:screenOrientation="sensorPortrait" />
+
+        <activity
             android:name=".activity_warehouse.WhSignActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".activity_auction.AuctionHomeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait" />
+
+
+        <activity
+            android:name=".activity_customer_care.CustSignActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait">
 
-        </activity>	<activity
-            android:name=".activity_customer_care.CustSignActivity"
-            android:label="@string/app_name"
+        </activity>
+        <activity
+            android:name=".printer.DiscoveryActivity"
+            android:label="@string/btn_discovery"
             android:screenOrientation="sensorPortrait">
 
         </activity>
@@ -193,8 +213,7 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar"
 
-            >
-            </activity>
+            />
 
         <service android:name=".service.UploadingService" />
         <service android:name=".service.whParcelUploadService" />
@@ -206,17 +225,22 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".service.DropInstaFirebaseService">
+        <service android:name=".service.DropInstaFirebaseService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".service.DropInstaFirebaseMessagingService">
+        <service android:name=".service.DropInstaFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
+        </service>
+
+        <service android:name=".printer.PrinterService">
+            <!--<action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />-->
+            <!--<meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"-->
+            <!--android:resource="@xml/usb_printer_filter" />-->
+
         </service>
 
     </application>

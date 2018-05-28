@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/setting_data_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/save_settings"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="@dimen/margin_16dp"
+        android:paddingRight="@dimen/margin_16dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/setting_url_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:orientation="vertical">
+
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
+
+                    style="@style/heading_text_view_style"
+                    android:id="@+id/setting_url_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/padding_8dp"
+                    android:paddingTop="@dimen/padding_16dp"
+                    android:text="@string/printer"
+
+                    android:textSize="@dimen/text_size20sp"
+                    android:textStyle="bold" />
+
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/settings_url_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/setting_url_txt"
+                    android:hint="@string/touch_to_scan"
+                    app:met_floatingLabel="highlight"
+                    android:enabled="false"
+
+
+                    />
+
+            </LinearLayout>
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/setting_device_name_lay"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/setting_url_lay"-->
+
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/setting_device_name_txt"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:paddingBottom="@dimen/padding_8dp"-->
+                    <!--android:paddingTop="@dimen/padding_16dp"-->
+                    <!--android:text="@string/device"-->
+
+                    <!--android:textSize="@dimen/text_size20sp"-->
+                    <!--android:textStyle="bold"-->
+
+                    <!--/>-->
+
+                <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+                    <!--android:id="@+id/settings_device_name_edt"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_below="@+id/setting_device_name_txt"-->
+                    <!--android:hint="@string/device_name"-->
+                    <!--app:met_floatingLabel="highlight"-->
+
+                    <!--/>-->
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/settings_device_id"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/settings_device_name_edt"-->
+
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:hint="@string/device_name"-->
+                    <!--android:paddingBottom="@dimen/padding_8dp"-->
+                    <!--android:paddingTop="@dimen/padding_16dp"-->
+
+
+                    <!--android:text="@string/setting_device_id_txtvalue" />-->
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/settings_device_version"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/settings_device_name_edt"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:paddingBottom="@dimen/padding_8dp"-->
+                    <!--android:paddingTop="@dimen/padding_16dp"-->
+
+
+                    <!--android:text="@string/setting_version_txt_val" />-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/setting_device_permission_lay1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/setting_device_name_lay"-->
+
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/setting_device_permission_label"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:paddingBottom="@dimen/padding_8dp"-->
+                    <!--android:paddingTop="@dimen/padding_16dp"-->
+                    <!--android:text="@string/permission"-->
+
+                    <!--android:textSize="@dimen/text_size20sp"-->
+                    <!--android:textStyle="bold"-->
+
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/settings_permission_grant"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/setting_device_permission_label"-->
+
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:hint="@string/device_name"-->
+                    <!--android:paddingBottom="@dimen/padding_8dp"-->
+                    <!--android:paddingTop="@dimen/padding_16dp"-->
+
+
+                    <!--android:text="@string/taptograntpermission" />-->
+
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/setting_language_lay"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/setting_device_permission_lay1"-->
+                <!--android:layout_weight="2"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/setting_language_label"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:maxLines="1"-->
+
+                    <!--android:paddingBottom="@dimen/padding_8dp"-->
+                    <!--android:paddingTop="@dimen/padding_16dp"-->
+                    <!--android:text="@string/language"-->
+
+                    <!--android:textSize="@dimen/text_size20sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:visibility="gone" />-->
+
+                <!--<Spinner-->
+                    <!--android:id="@+id/language_spinner"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:drawSelectorOnTop="false"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:spinnerMode="dropdown"-->
+                    <!--android:textColor="@color/textcolor_heading1"-->
+                    <!--android:textColorHint="@color/textcolor_heading2"-->
+                    <!--android:visibility="gone" />-->
+
+                <!--<com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner-->
+                    <!--android:id="@+id/android_material_design_spinner"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/language_hint"-->
+                    <!--android:textColorHint="@color/color_hint"-->
+                    <!--app:met_floatingLabel="normal" />-->
+
+
+            <!--</LinearLayout>-->
+
+
+            <!--<View-->
+            <!--android:id="@+id/setting_divider2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_1dp"-->
+            <!--android:layout_below="@+id/setting_device_name_lay"-->
+            <!--android:background="@color/fabfilterlayoutbackground" />-->
+
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/setting_general_lay"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!---->
+                <!--android:paddingBottom="@dimen/padding_20dp"-->
+                <!--android:paddingLeft="@dimen/padding_20dp"-->
+                <!--android:paddingRight="@dimen/padding_10dp"-->
+
+                <!--android:paddingTop="@dimen/padding_20dp"-->
+                <!--android:visibility="gone">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_toLeftOf="@+id/setting_general_switch1"-->
+                    <!--android:text="@string/setting_general_txt"-->
+                    <!--android:textColor="@color/daytextcolor" />-->
+
+                <!--<Switch-->
+                    <!--android:id="@+id/setting_general_switch1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerInParent="true" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<View-->
+            <!--android:id="@+id/setting_divider3"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_1dp"-->
+            <!--android:layout_below="@+id/setting_general_lay"-->
+            <!--android:background="@color/fabfilterlayoutbackground"-->
+            <!--android:visibility="gone" />-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/setting_general_lay2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/setting_general_lay"-->
+                <!--android:padding="@dimen/padding_20dp"-->
+                <!--android:visibility="gone">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_toLeftOf="@+id/setting_general_switch2"-->
+                    <!--android:text="@string/setting_general_txt"-->
+                    <!--android:textColor="@color/daytextcolor" />-->
+
+                <!--<Switch-->
+                    <!--android:id="@+id/setting_general_switch2"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerInParent="true" />-->
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/setting_deviceid_val"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:text="#12" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<View-->
+            <!--android:id="@+id/setting_divider4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_1dp"-->
+            <!--android:layout_below="@+id/setting_general_lay2"-->
+            <!--android:background="@color/fabfilterlayoutbackground" />-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/setting_deviceid_lay"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/setting_general_lay2"-->
+
+                <!--android:padding="@dimen/padding_20dp"-->
+                <!--android:visibility="gone">-->
+
+
+                <!--<TextView-->
+                <!--android:id="@+id/setting_deviceid_val"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:text="#12" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<View-->
+            <!--android:id="@+id/setting_divider5"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_1dp"-->
+            <!--android:layout_below="@+id/setting_deviceid_lay"-->
+            <!--android:background="@color/fabfilterlayoutbackground" />-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/setting_version_lay"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/setting_deviceid_lay"-->
+
+                <!--android:padding="@dimen/padding_20dp"-->
+                <!--android:visibility="gone">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_toLeftOf="@+id/setting_version_val"-->
+                    <!--android:text="@string/setting_version_txt"-->
+                    <!--android:textColor="@color/daytextcolor" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/setting_version_val"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:text="0.1" />-->
+            <!--</RelativeLayout>-->
+
+            <!--<View-->
+            <!--android:id="@+id/setting_divider6"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_1dp"-->
+            <!--android:layout_below="@+id/setting_version_lay"-->
+            <!--android:background="@color/fabfilterlayoutbackground" />-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/uploaddb_settings"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/setting_version_lay"-->
+                <!--android:padding="@dimen/padding_20dp"-->
+                <!--android:visibility="gone">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_toLeftOf="@+id/setting_developer_val"-->
+                    <!--android:text="@string/debugdb"-->
+                    <!--android:textColor="@color/daytextcolor" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/setting_developer_val"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:text="@string/debug" />-->
+            <!--</RelativeLayout>-->
+
+            <!--<View-->
+            <!--android:id="@+id/setting_divider7"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_1dp"-->
+            <!--android:layout_below="@+id/uploaddb_settings"-->
+            <!--android:background="@color/fabfilterlayoutbackground" />-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/permission_settings"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/uploaddb_settings"-->
+                <!--android:padding="@dimen/padding_20dp"-->
+                <!--android:visibility="gone">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_toLeftOf="@+id/permission_btn"-->
+                    <!--android:text="@string/permission_tag"-->
+                    <!--android:textColor="@color/daytextcolor" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/permission_btn"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:background="@color/buttonColor"-->
+                    <!--android:paddingBottom="@dimen/padding_3dp"-->
+                    <!--android:paddingLeft="@dimen/padding_7dp"-->
+                    <!--android:paddingRight="@dimen/padding_7dp"-->
+                    <!--android:paddingTop="@dimen/padding_3dp"-->
+                    <!--android:text="@string/permission"-->
+                    <!--android:textColor="@color/textcolor_heading2_white" />-->
+            <!--</RelativeLayout>-->
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.inerun.dropinsta.fontlib.CustomFontButton
+        android:id="@+id/save_settings"
+        style="@style/button_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_5dp"
+        android:layout_alignParentBottom="true"
+
+        android:text="@string/save"
+
+
+        />
+
+
+
+</RelativeLayout>

@@ -343,6 +343,7 @@ abstract public class BaseActivity extends AppCompatActivity {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
 
+                            sweetAlertDialog.dismiss();
 
                         }
                     }).show();
