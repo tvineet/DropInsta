@@ -10,7 +10,9 @@ import java.util.ArrayList;
 public class WhReadyParcelData implements Serializable {
     private boolean status;
     private int total;
+
     private int count;
+
     private ArrayList<RequestData> custRequestData;
     private ArrayList<CustomerExecutiveData> executivedata;
 
@@ -33,10 +35,9 @@ public class WhReadyParcelData implements Serializable {
         return total;
     }
 
-    public int getCount() {
+   public int getCount() {
         return count;
     }
-
     public ArrayList<RequestData> getCustRequestData() {
         return custRequestData;
     }

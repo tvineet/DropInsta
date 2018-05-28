@@ -78,6 +78,9 @@ public class WhDashboardFragment extends BaseFragment implements View.OnClickLis
                 navigateToFragment(context, WhReadyForExecutiveFragment.newInstance());
 //                navigateToFragment(context, WhReadyForExecutiveFragment_exp.newInstance());
 
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,
+//                        WhReadyForExecutiveFragment.newInstance()).commit();
+
                 break;
 //            case R.id.addparcel_image:
 //                navigateToFragment(context,WhAddParcelFragment.newInstance());

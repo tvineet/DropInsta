@@ -64,6 +64,9 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
 
     @Override
     public void customOnCreateView(View root, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) throws Exception {
+        whReadyParcelData = new WhReadyParcelData();
+        ArrayList<WhReadyParcelData.RequestData> dataArrayList = new ArrayList<>();
+        whReadyParcelData.setCustRequestData(dataArrayList);
         setShowBackArrow(true);
         setToolBarTitle(R.string.ready_for_delivery);
         context = getActivity();

@@ -463,8 +463,7 @@ public class DIRequestCreator {
 
       //  Order=desc&StoreId=1&Start=0&UserID=&SortBy=price&CustomerId=&Limit=10&CatId=348&androidId=620594a06d5d399a
     }
-
-    public Map<String, String> getRequestParcelMapParams(String customerId) {
+public Map<String, String> getRequestParcelMapParams(String customerId) {
 
         mapParams.put(UrlConstants.KEY_CUSTOMER_ID, customerId);
 

@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+
 import android.widget.TextView;
+
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -53,7 +55,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private boolean innerlaunch, forCart;
     private RelativeLayout progress_layout;
+
     private TextView gotoRequest_txt;
+
 
 
     @Override

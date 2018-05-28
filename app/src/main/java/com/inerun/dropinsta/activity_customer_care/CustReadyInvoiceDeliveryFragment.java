@@ -222,9 +222,7 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
             Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
         }
     };
-
-
-    @Override
+  @Override
     public void onResume() {
         start = 0;
         total = 0;
