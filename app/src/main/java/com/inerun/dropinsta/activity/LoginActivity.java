@@ -148,8 +148,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         Map<String, String> params = DIRequestCreator.getInstance(this).getLoginMapParams(email, pass);
-        progress_layout.setVisibility(View.GONE);
-        progress.stop();
+        progress_layout.setVisibility(View.VISIBLE);
+        progress.start();
         DropInsta.serviceManager().postRequest(UrlConstants.URL_LOGIN, params, null, response_listener, response_errorlistener, sTAG);
 
     }

@@ -3,6 +3,8 @@ package com.inerun.dropinsta;
 import android.app.Application;
 import android.util.Log;
 
+import com.inerun.dropinsta.activity_auction.IonServiceManager;
+import com.inerun.dropinsta.base.AuctionBaseActivity;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.data.LoginData;
@@ -22,7 +24,9 @@ public class DropInsta extends Application {
     private static final String EXCEPTION_SERVICE = "ExceptionService";
     public static LoginData user;
     static ServiceManager serviceManager;
+   public static IonServiceManager ionserviceManager;
     private DropInsta appcontext;
+    public AuctionBaseActivity currentActivity;
 
 
     @Override
@@ -67,5 +71,14 @@ public class DropInsta extends Application {
         DropInsta.user = user;
     }
 
+    public void setCurrentActivity(AuctionBaseActivity currentActivity) {
+        this.currentActivity = currentActivity;
+        if(ionserviceManager!=null)
+            ionserviceManager.setActivity(currentActivity);
+    }
+
+//    public void setCurrentFragment(Fragment currentFragment) {
+//        this.ionserviceManager = currentFragment;
+//    }
 
 }

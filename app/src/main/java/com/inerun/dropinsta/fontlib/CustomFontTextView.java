@@ -44,7 +44,14 @@ public class CustomFontTextView extends TextView {
 		}
 		else
 		{
-			setText("F");
+//			if (attrs != null) {
+//				setText("F" + attrs.getAttributeValue(Att));
+//			}else
+//			{
+//				setText("F" + attrs);
+//			}
+				setText("F" );
+
 		}
 	}
 }
