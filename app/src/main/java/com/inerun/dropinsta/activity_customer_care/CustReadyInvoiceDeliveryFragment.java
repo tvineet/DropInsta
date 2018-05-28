@@ -70,7 +70,7 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
         setToolBarTitle(R.string.invoices);
         context = getActivity();
         intView();
-        getData();
+//        getData();
 
     }
 
@@ -222,4 +222,14 @@ public class  CustReadyInvoiceDeliveryFragment extends BaseFragment {
             Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
         }
     };
+  @Override
+    public void onResume() {
+        start = 0;
+        total = 0;
+        totalItemCount = 0;
+        lastVisibleItem = 0;
+        isLoading = false;
+        getData();
+        super.onResume();
+    }
 }

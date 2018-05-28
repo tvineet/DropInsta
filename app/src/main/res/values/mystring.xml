@@ -37,4 +37,6 @@
     <string name="title_pickup_parcel">Pickup Parcel</string>
     <string name="title_add_parcel">Add Parcel</string>
     <string name="update_status">Update Status</string>
+    <string name="gotorequest_txt">Go to Customer Request? Click here</string>
+    <string name="gotologin_txt">Go to Login? Click here</string>
 </resources>

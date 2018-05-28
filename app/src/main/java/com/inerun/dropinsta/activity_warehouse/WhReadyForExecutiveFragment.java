@@ -71,7 +71,7 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
         setToolBarTitle(R.string.ready_for_delivery);
         context = getActivity();
         intView();
-        getData();
+//        getData();
 
     }
 
@@ -251,4 +251,14 @@ public class WhReadyForExecutiveFragment extends BaseFragment {
 
         }
     };
+    @Override
+    public void onResume() {
+        start = 0;
+        total = 0;
+        totalItemCount = 0;
+        lastVisibleItem = 0;
+        isLoading = false;
+        getData();
+        super.onResume();
+    }
 }

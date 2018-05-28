@@ -52,17 +52,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/logo_login"
-
-
                     android:layout_centerHorizontal="true"
-
-
-                    android:layout_marginTop="60dp"
-                    android:text="@string/action_login_caps"
-                    android:textSize="@dimen/text_size24sp" />
+                    android:text="Please enter your Customer ID to view your ready to collect parcels."
+                    android:textSize="14sp" />
 
                 <com.inerun.dropinsta.fontlib.CustomFontEditText
-                    android:id="@+id/login_email_edt"
+                    android:id="@+id/customerid_edt"
                     style="@style/desc_edittext_view_style"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -72,7 +67,7 @@
                     android:layout_marginTop="25dp"
                     app:met_floatingLabel="highlight"
 
-                    android:hint="@string/email_hint"
+                    android:hint="Customer Id"
 
 
                     android:imeOptions="actionNext"
@@ -81,43 +76,26 @@
                     android:textSize="18sp" />
 
 
-                <com.inerun.dropinsta.fontlib.CustomFontEditText
-                    android:id="@+id/login_pass_edt"
-                    style="@style/desc_edittext_view_style"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/login_email_edt"
-                    app:met_floatingLabel="highlight"
-                    android:layout_marginTop="@dimen/layout_margin10dp"
-
-                    android:hint="@string/password_hint"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:textSize="18sp"
-
-                    />
-
 
                 <com.inerun.dropinsta.fontlib.CustomFontButton
-                    android:id="@+id/login_btn"
+                    android:id="@+id/submit_btn"
                     style="@style/button_view_style"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/login_pass_edt"
+                    android:layout_below="@+id/customerid_edt"
                     android:layout_marginTop="@dimen/layout_margin10dp"
                     android:background="@color/buttonColor"
-                    android:text="@string/sign_in"
+                    android:text="@string/submit"
                     android:textColor="@android:color/white" />
 
 
                 <com.inerun.dropinsta.fontlib.CustomFontTextView
-                    android:id="@+id/gotorequest"
+                    android:id="@+id/gotologin"
                     style="@style/heading_text_view_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/login_btn"
-                    android:text="@string/gotorequest_txt"
+                    android:layout_below="@+id/submit_btn"
+                    android:text="@string/gotologin_txt"
 
                     android:textSize="@dimen/text_size16sp"
                     android:textColor="@android:color/holo_blue_dark"

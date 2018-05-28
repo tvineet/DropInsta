@@ -226,7 +226,7 @@ abstract public class BaseFragment extends Fragment {
 
         if (!fragmentPopped) { //fragment not in back stack, create it.
             FragmentTransaction ft = manager.beginTransaction();
-            ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
+//            ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
             ft.replace(R.id.container, fragment);
             ft.addToBackStack(backStateName);
 

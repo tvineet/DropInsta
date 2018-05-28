@@ -11,11 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import android.widget.TextView;
+
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.activity_auction.AuctionSplashActivity;
 import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
 import com.inerun.dropinsta.base.BaseActivity;
@@ -51,6 +55,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private boolean innerlaunch, forCart;
     private RelativeLayout progress_layout;
+
+    private TextView gotoRequest_txt;
+
 
 
     @Override
@@ -91,9 +98,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         pass_edt.setTransformationMethod(new PasswordTransformationMethod());
         login_btn = (Button) findViewById(R.id.login_btn);
+        gotoRequest_txt = findViewById(R.id.gotorequest);
 
 
         login_btn.setOnClickListener(this);
+        gotoRequest_txt.setOnClickListener(this);
 
     }
 
@@ -112,9 +121,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.login_btn:
                 performLogin();
                 break;
+            case R.id.gotorequest:
+                Utils.savePageType(this, UrlConstants.RREQUEST);
+                goToParcel_Request();
+                break;
 
         }
 
+    }
+
+    private void goToParcel_Request() {
+        finish();
+        goToActivity(ParcelRequestActivity.class);
     }
 
 
@@ -183,6 +201,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         DropInsta.setUser(loginData);
                         startActivity(new Intent(context, CustomerDashboardActivity.class));
                         finish();
+                    } else if (loginData.isCashierUser()) {
+                        DropInsta.setUser(loginData);
+                        startActivity(new Intent(context, AuctionSplashActivity.class));
+                        finish();
+                        Log.i("UserLogin","Cashier");
                     }else {
 //                     showLongToast(context, R.string.error_invalid_email_field);
                         showSnackbar(R.string.error_invalid_usertype);

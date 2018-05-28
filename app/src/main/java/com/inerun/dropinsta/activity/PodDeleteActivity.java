@@ -75,7 +75,7 @@ public class PodDeleteActivity extends BaseActivity {
 
             } else if (DropInsta.getUser().isCustomerCareUser()) {
                 gotoCustomreCareActivity();
-            } else if (DropInsta.getUser().isAuctionUser()) {
+ } else if (DropInsta.getUser().isCashierUser()) {
                 gotoAuctionActivity();
             }
         } else {
