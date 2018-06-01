@@ -25,7 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -57,6 +57,7 @@ import com.inerun.dropinsta.service.DIReceiver;
 import com.inerun.dropinsta.service.DIRequestCreator;
 import com.inerun.dropinsta.service.UploadingService;
 import com.inerun.dropinsta.sql.DIDbHelper;
+import com.victor.loading.rotate.RotateLoading;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,7 +127,8 @@ abstract public class BaseActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private boolean doubleBackToExitPressedOnce = false;
-    private ProgressBar progress;
+    private RotateLoading progress;
+    private RelativeLayout progress_layout;
 
 
     public boolean isWarehouse() {
@@ -162,7 +164,8 @@ abstract public class BaseActivity extends AppCompatActivity {
 //        if (actionbar != null) {
 
 //            actionbar.setIcon(R.mipmap.ic_launcher);
-            progress = (ProgressBar) findViewById(R.id.progressBar);
+            progress = (RotateLoading) findViewById(R.id.progressBar);
+            progress_layout = (RelativeLayout) findViewById(R.id.progressbar_layout);
             cordinatorLayout = (CoordinatorLayout) findViewById(R.id.root_appbar);
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             if (!isSplash) {
@@ -278,7 +281,7 @@ abstract public class BaseActivity extends AppCompatActivity {
 //                syncData();
                 if (Utils.isConnectingToInternet(this)) {
                     syncData();
-                }else{
+                } else {
                     SweetAlertUtil.showAlertDialogWithBlackTheme(this, getString(R.string.activity_base_alert_message_unknown_host_exception));
                 }
 
@@ -339,12 +342,8 @@ abstract public class BaseActivity extends AppCompatActivity {
                     SweetAlertUtil.showAlertDialogwithListener(this, R.string.logout, R.string.really_logout, R.string.yes, R.string.no, listener, new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            sweetAlertDialog
-                                    .setTitleText(getString(R.string.logout))
-                                    .setContentText(getString(R.string.logout_success))
 
-                                    .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                                   SweetAlertUtil.hideDialogAutomatically(BaseActivity.this,sweetAlertDialog);
+                            sweetAlertDialog.dismiss();
 
                         }
                     }).show();
@@ -599,21 +598,19 @@ abstract public class BaseActivity extends AppCompatActivity {
 
     }
 
-   SweetAlertDialog.OnSweetClickListener listener = new SweetAlertDialog.OnSweetClickListener() {
-       @Override
-       public void onClick(SweetAlertDialog sweetAlertDialog) {
-           Utils.deletePrefs(BaseActivity.this);
-           DIDbHelper.deleteTables(BaseActivity.this);
+    SweetAlertDialog.OnSweetClickListener listener = new SweetAlertDialog.OnSweetClickListener() {
+        @Override
+        public void onClick(SweetAlertDialog sweetAlertDialog) {
+            Utils.deletePrefs(BaseActivity.this);
+            DIDbHelper.deleteTables(BaseActivity.this);
 //                        showShortToast(BaseActivity.this, R.string.logout_message);
 //                        CartApplication.getCart().setCartEmpty();
 //                        invalidateOptionsMenu();
 
-           goToActivity(LoginActivity.class);
-           finish();
-       }
 
-
-
+            goToActivity(LoginActivity.class);
+            finish();
+        }
 
 
     };
@@ -737,18 +734,20 @@ abstract public class BaseActivity extends AppCompatActivity {
     }
 
     public void showProgress() {
-        if (progress != null) {
+        if (progress != null&&progress_layout!=null) {
             Log.i("Base", "Progress is visible");
-            progress.setVisibility(View.VISIBLE);
+            progress_layout.setVisibility(View.VISIBLE);
+            progress.start();
         } else {
             Log.i("Base", "Progress is null");
         }
     }
 
     public void hideProgress() {
-        if (progress != null) {
+        if (progress != null&&progress_layout!=null) {
             Log.i("Base", "Progress is invisible");
-            progress.setVisibility(View.GONE);
+            progress_layout.setVisibility(View.GONE);
+            progress.stop();
         } else {
             Log.i("Base", "Progress is null");
         }
@@ -946,7 +945,6 @@ abstract public class BaseActivity extends AppCompatActivity {
             ft.commit();
         }
     }
-
 
 
     public boolean hasPermissions(Context context, String... permissions) {

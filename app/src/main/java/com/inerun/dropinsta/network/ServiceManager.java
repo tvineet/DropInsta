@@ -4,7 +4,6 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -24,8 +23,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.base.BaseFragment;
 import com.loopj.android.http.RequestParams;
 import com.squareup.okhttp.OkHttpClient;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class ServiceManager {
     private final String TAG = "ServiceManager";
     static ServiceManager manager;
     static Application appInstance;
-    ProgressBar progressBar;
+    RotateLoading progressBar;
     private RequestQueue mRequestQueue;
     private LruBitmapCache mLruBitmapCache;
     private ImageLoader mImageLoader;
@@ -82,16 +83,20 @@ public class ServiceManager {
     }
 
     public void showProgress() {
-        if (progressBar != null)
+        if (progressBar != null){
             progressBar.setVisibility(View.VISIBLE);
+        progressBar.start();
+    }
     }
 
     public void hideProgress() {
-        if (progressBar != null)
+        if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
+            progressBar.stop();
+        }
     }
 
-    public ServiceManager setProgress(ProgressBar progressBar) {
+    public ServiceManager setProgress(RotateLoading progressBar) {
         this.progressBar = progressBar;
         return manager;
     }
@@ -268,7 +273,7 @@ public class ServiceManager {
         addRequest(jsObjRequest, tag);
 
     }
-    public void postRequest(String url, Map<String, String> params,ProgressBar progressBar, Response.Listener<String> response_listener, Response.ErrorListener response_errorlistener, String tag) {
+    public void postRequest(String url, Map<String, String> params, RotateLoading progressBar, Response.Listener<String> response_listener, Response.ErrorListener response_errorlistener, String tag) {
 
         Log.i("URL_POST", "" + url);
         RequestParams requestparams= new RequestParams(params);
@@ -278,10 +283,38 @@ public class ServiceManager {
         if(progressBar!=null)
         {
             progressBar.setVisibility(View.VISIBLE);
+            progressBar.start();
         }
         addRequest(jsObjRequest, tag);
 
     }
 
+    public void postRequest(String url, Map<String, String> params, RotateLoading progressBar, Response.Listener<String> response_listener, Response.ErrorListener response_errorlistener, String tag, BaseFragment baseFragment) {
+
+        Log.i("URL_POST", "" + url);
+        RequestParams requestparams= new RequestParams(params);
+        Log.i("Params", "" + requestparams);
+        Log.i("embeddedurl", "" + url+"?"+requestparams);
+        CustomRequest jsObjRequest = new CustomRequest(Request.Method.POST,progressBar, url, params, response_listener, response_errorlistener);
+        if(progressBar!=null)
+        {
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.start();
+        }
+        baseFragment.showProgress();
+        addRequest(jsObjRequest, tag);
+
+    }
+
+    /**
+     * Custom Class to Represent Exception caused due to Invalid Parameters
+     */
+    public class InvalidParametersException extends Exception {
+
+
+        public int message() {
+            return R.string.server_exception_error_message_invalid_parameter;
+        }
+    }
 
 }

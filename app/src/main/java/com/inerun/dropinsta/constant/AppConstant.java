@@ -16,6 +16,7 @@ public class AppConstant {
 
     private static final boolean LIVE = false;
 
+    public static final String DATEFORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final int LISTING_PAGING_LIMIT = 30;
     public static final int SLIDER_DURATION = 3000;
     public static final int DB_VERSION = 1;

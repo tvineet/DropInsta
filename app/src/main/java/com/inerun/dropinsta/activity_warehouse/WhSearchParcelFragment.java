@@ -258,7 +258,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     Response.Listener<String> response_listener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            hideProgress();
+//            hideProgress();
             Gson gson = new Gson();
 
             WhSearchParcelData data = gson.fromJson(response, WhSearchParcelData.class);
@@ -268,7 +268,7 @@ public class WhSearchParcelFragment extends BaseFragment implements View.OnClick
     Response.ErrorListener response_errorlistener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            hideProgress();
+//            hideProgress();
             setSearchData(null);
             showSnackbar(error.getMessage());
 

@@ -39,6 +39,8 @@ public class WhInvoiceFragment extends BaseFragment {
     private RecyclerView detaillistview;
     private InvoiceAdapter adapter;
     private WhInvoiceParcelData whInvoiceParcelData;
+    private int start = 0;
+    private int limit = 20;
 
     public static Fragment newInstance() {
         WhInvoiceFragment fragment = new WhInvoiceFragment();
@@ -68,7 +70,7 @@ public class WhInvoiceFragment extends BaseFragment {
     }
 
     private void getData() {
-        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyInvoiceMapParams();
+        Map<String, String> params = DIRequestCreator.getInstance(getActivity()).getReadyInvoiceMapParams(start, limit);
 
         DropInsta.serviceManager().postRequest(UrlConstants.URL_READY_INVOICE_LIST, params, getProgress(), response_listener, response_errorlistener, READY_INVOICE);
     }

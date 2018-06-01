@@ -1,0 +1,157 @@
+package com.inerun.dropinsta.adapter;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.data.CustInvoiceParcelData;
+
+import java.util.ArrayList;
+
+/**
+ * Created by vineet on 11/29/2016.
+ */
+
+
+public class AuctionInvoiceListAdapter extends RecyclerView.Adapter {
+    private Context context;
+    private ArrayList<CustInvoiceParcelData.Invoice> invoiceArrayList;
+    private static OnItemClickListener mItemClickListener;
+    View.OnClickListener onclickListener;
+    private LayoutInflater inflater;
+
+
+    private final int ITEM_VIEW_TYPE_BASIC = 0;
+    private final int ITEM_VIEW_TYPE_FOOTER = 1;
+    private boolean isLoading;
+
+
+    public AuctionInvoiceListAdapter(Context context, ArrayList<CustInvoiceParcelData.Invoice> invoiceArrayList, View.OnClickListener searchlickListener) {
+        this.invoiceArrayList = invoiceArrayList;
+        this.context = context;
+        this.onclickListener = searchlickListener;
+        inflater = LayoutInflater.from(context);
+    }
+
+    public class CustInvoiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView invoice_no, no_of_parcel;
+        public View parentView;
+
+
+        public CustInvoiceViewHolder(View view) {
+            super(view);
+            parentView = view;
+            invoice_no = (TextView) view.findViewById(R.id.invoice_no);
+            no_of_parcel = (TextView) view.findViewById(R.id.no_of_parcel);
+            view.setOnClickListener(onclickListener);
+        }
+
+        @Override
+        public void onClick(View view) {
+            // TODO Auto-generated method stub
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(view, getPosition());
+            }
+        }
+    }
+
+
+    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
+
+        public ProgressViewHolder(View v) {
+            super(v);
+            progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
+        }
+    }
+
+
+
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        RecyclerView.ViewHolder vh;
+        if (viewType == ITEM_VIEW_TYPE_BASIC) {
+            View view = inflater.inflate(R.layout.auction_invoice_list_item, parent, false);
+
+            vh = new AuctionInvoiceListAdapter.CustInvoiceViewHolder(view);
+        } else {
+            View view = inflater.inflate(R.layout.prograss_bar, parent, false);
+
+            vh = new AuctionInvoiceListAdapter.ProgressViewHolder(view);
+        }
+
+        return vh;
+    }
+
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof AuctionInvoiceListAdapter.CustInvoiceViewHolder) {
+
+
+
+
+            CustInvoiceParcelData.Invoice data = invoiceArrayList.get(position);
+
+            ((AuctionInvoiceListAdapter.CustInvoiceViewHolder) holder).invoice_no.setText(data.getInvoice_number());
+            ((AuctionInvoiceListAdapter.CustInvoiceViewHolder) holder).parentView.setTag(position);
+            if(data.getParcelData() != null && data.getParcelData().size() >= 0) {
+                ((AuctionInvoiceListAdapter.CustInvoiceViewHolder) holder).no_of_parcel.setText("" + data.getParcelData().size());
+            }else{
+                ((AuctionInvoiceListAdapter.CustInvoiceViewHolder) holder).no_of_parcel.setText("0");
+            }
+
+            ((AuctionInvoiceListAdapter.CustInvoiceViewHolder) holder).parentView.setTag(position);
+
+        } else {
+            if (!isLoading) {
+                ((AuctionInvoiceListAdapter.ProgressViewHolder) holder).progressBar.setVisibility(View.VISIBLE);
+                ((AuctionInvoiceListAdapter.ProgressViewHolder) holder).progressBar.setIndeterminate(true);
+            } else
+                ((AuctionInvoiceListAdapter.ProgressViewHolder) holder).progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return invoiceArrayList.get(position) != null ? ITEM_VIEW_TYPE_BASIC : ITEM_VIEW_TYPE_FOOTER;
+    }
+
+    @Override
+    public int getItemCount() {
+        return invoiceArrayList == null ? 0: invoiceArrayList.size();
+    }
+
+    public interface OnItemClickListener {
+        public void onItemClick(View v, int position);
+    }
+
+    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        AuctionInvoiceListAdapter.mItemClickListener = mItemClickListener;
+    }
+
+    public ArrayList<CustInvoiceParcelData.Invoice> getInvoiceArrayList() {
+        return invoiceArrayList;
+    }
+
+    public void setInvoiceArrayList(ArrayList<CustInvoiceParcelData.Invoice> invoiceArrayList) {
+        this.invoiceArrayList = invoiceArrayList;
+    }
+
+    public void add(boolean isLoading , ArrayList<CustInvoiceParcelData.Invoice> items) {
+        this.isLoading = isLoading;
+        int previousDataSize = this.invoiceArrayList.size();
+        this.invoiceArrayList.addAll(items);
+        notifyDataSetChanged();
+//        notifyItemRangeInserted(previousDataSize, items.size());
+    }
+}

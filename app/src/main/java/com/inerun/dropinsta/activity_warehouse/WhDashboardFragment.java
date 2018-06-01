@@ -1,5 +1,6 @@
 package com.inerun.dropinsta.activity_warehouse;
 
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -75,6 +76,7 @@ public class WhDashboardFragment extends BaseFragment implements View.OnClickLis
             case R.id.readyparcel_image_opacity:
 //                navigateToFragment(context, WhInvoiceFragment.newInstance());
                 navigateToFragment(context, WhReadyForExecutiveFragment.newInstance());
+//                navigateToFragment(context, WhReadyForExecutiveFragment_exp.newInstance());
 
                 break;
 //            case R.id.addparcel_image:

@@ -1,9 +1,12 @@
 package com.inerun.dropinsta.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.inerun.dropinsta.R;
@@ -17,18 +20,32 @@ import java.util.ArrayList;
  */
 
 
-public class CustInvoiceListAdapter extends BaseRecyclerViewAdapter {
+public class CustInvoiceListAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<CustInvoiceParcelData.Invoice> invoiceArrayList;
     private static OnItemClickListener mItemClickListener;
     View.OnClickListener onclickListener;
+    private LayoutInflater inflater;
 
-    public class ViewHolder extends BaseRecyclerViewAdapter.ViewHolder implements View.OnClickListener {
+
+    private final int ITEM_VIEW_TYPE_BASIC = 0;
+    private final int ITEM_VIEW_TYPE_FOOTER = 1;
+    private boolean isLoading;
+
+
+    public CustInvoiceListAdapter(Context context, ArrayList<CustInvoiceParcelData.Invoice> invoiceArrayList, View.OnClickListener searchlickListener) {
+        this.invoiceArrayList = invoiceArrayList;
+        this.context = context;
+        this.onclickListener = searchlickListener;
+        inflater = LayoutInflater.from(context);
+    }
+
+    public class CustInvoiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView invoice_no, no_of_parcel;
         public View parentView;
 
 
-        public ViewHolder(View view) {
+        public CustInvoiceViewHolder(View view) {
             super(view);
             parentView = view;
             invoice_no = (TextView) view.findViewById(R.id.invoice_no);
@@ -46,69 +63,73 @@ public class CustInvoiceListAdapter extends BaseRecyclerViewAdapter {
     }
 
 
-    public CustInvoiceListAdapter(Context context, ArrayList<CustInvoiceParcelData.Invoice> invoiceArrayList, View.OnClickListener searchlickListener) {
-        this.invoiceArrayList = invoiceArrayList;
-        this.context = context;
-        this.onclickListener = searchlickListener;
-    }
+    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
 
-
-
-    @Override
-    protected BaseRecyclerViewAdapter.ViewHolder getViewHolder(View itemView) {
-        ViewHolder viewHolder = new ViewHolder(itemView);
-        return viewHolder;
-    }
-
-    @Override
-    protected View oncreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView;
-
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.invoice_list_item, parent, false);
-        return itemView;
-    }
-
-    @Override
-    public void onbindViewHolder(BaseRecyclerViewAdapter.ViewHolder viewholder, int position) {
-        ViewHolder holder= (ViewHolder) viewholder.holder;
-        CustInvoiceParcelData.Invoice data = invoiceArrayList.get(position);
-
-        holder.invoice_no.setText(data.getInvoice_number());
-        holder.parentView.setTag(position);
-        if(data.getParcelData() != null && data.getParcelData().size() >= 0) {
-            holder.no_of_parcel.setText("" + data.getParcelData().size());
-        }else{
-            holder.no_of_parcel.setText("0");
+        public ProgressViewHolder(View v) {
+            super(v);
+            progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         }
-//        if(position % 2 == 0){
-//            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.colorlightyellow));
-//            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-//
-//        }else{
-//            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.sideMenuOptionDark));
-//            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-//        }
-
     }
 
 
 
-//    @Override
-//    public int getItemViewType(int position) {
-//
-//        if (parcelDataList.get(position).isDelivered()) {
-//            return ParcelListingData.ParcelData.DELIVERED;
-//        } else {
-//            return ParcelListingData.ParcelData.PENDING;
-//        }
-//
-//    }
 
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        RecyclerView.ViewHolder vh;
+        if (viewType == ITEM_VIEW_TYPE_BASIC) {
+            View view = inflater.inflate(R.layout.invoice_list_item, parent, false);
+
+            vh = new CustInvoiceListAdapter.CustInvoiceViewHolder(view);
+        } else {
+            View view = inflater.inflate(R.layout.prograss_bar, parent, false);
+
+            vh = new CustInvoiceListAdapter.ProgressViewHolder(view);
+        }
+
+        return vh;
+    }
 
 
     @Override
-    public ArrayList initObjectList() {
-        return invoiceArrayList;
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof CustInvoiceListAdapter.CustInvoiceViewHolder) {
+
+
+
+
+            CustInvoiceParcelData.Invoice data = invoiceArrayList.get(position);
+
+            ((CustInvoiceListAdapter.CustInvoiceViewHolder) holder).invoice_no.setText(data.getInvoice_number());
+            ((CustInvoiceListAdapter.CustInvoiceViewHolder) holder).parentView.setTag(position);
+            if(data.getParcelData() != null && data.getParcelData().size() >= 0) {
+                ((CustInvoiceListAdapter.CustInvoiceViewHolder) holder).no_of_parcel.setText("" + data.getParcelData().size());
+            }else{
+                ((CustInvoiceListAdapter.CustInvoiceViewHolder) holder).no_of_parcel.setText("0");
+            }
+
+            ((CustInvoiceListAdapter.CustInvoiceViewHolder) holder).parentView.setTag(position);
+
+        } else {
+            if (!isLoading) {
+                ((CustInvoiceListAdapter.ProgressViewHolder) holder).progressBar.setVisibility(View.VISIBLE);
+                ((CustInvoiceListAdapter.ProgressViewHolder) holder).progressBar.setIndeterminate(true);
+            } else
+                ((CustInvoiceListAdapter.ProgressViewHolder) holder).progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return invoiceArrayList.get(position) != null ? ITEM_VIEW_TYPE_BASIC : ITEM_VIEW_TYPE_FOOTER;
+    }
+
+    @Override
+    public int getItemCount() {
+        return invoiceArrayList == null ? 0: invoiceArrayList.size();
     }
 
     public interface OnItemClickListener {
@@ -125,5 +146,13 @@ public class CustInvoiceListAdapter extends BaseRecyclerViewAdapter {
 
     public void setInvoiceArrayList(ArrayList<CustInvoiceParcelData.Invoice> invoiceArrayList) {
         this.invoiceArrayList = invoiceArrayList;
+    }
+
+    public void add(boolean isLoading , ArrayList<CustInvoiceParcelData.Invoice> items) {
+        this.isLoading = isLoading;
+        int previousDataSize = this.invoiceArrayList.size();
+        this.invoiceArrayList.addAll(items);
+        notifyDataSetChanged();
+//        notifyItemRangeInserted(previousDataSize, items.size());
     }
 }

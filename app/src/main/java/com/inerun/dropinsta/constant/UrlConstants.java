@@ -23,7 +23,10 @@ public class UrlConstants {
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/dropinsta2/app/";
 //    public static final String BASE_ADDRESS = "http://192.168.1.33/dropinsta1/app/";
 //    public static final String BASE_ADDRESS = "http://148.251.29.69/sns27feb/app/";  //6Apr2018
-    public static final String BASE_ADDRESS = "http://148.251.29.69/sns13ap/app/";  //6Apr2018
+//    public static final String BASE_ADDRESS = "http://148.251.29.69/sns13ap/app/";  //6Apr2018
+//    public static final String BASE_ADDRESS = "http://192.168.1.33/sns13ap/app/";  //6Apr2018   Shabeena
+    public static final String BASE_ADDRESS = "http://192.168.1.32/oldsns/app/";  //6Apr2018  sumit OLD
+//    public static final String BASE_ADDRESS = "http://192.168.1.32/newsns/app/";  //6Apr2018  sumit NEW
 
 
 
@@ -47,6 +50,12 @@ public class UrlConstants {
 
     public static final String URL_READY_FOR_EXECUTIVE_LIST = BASE_ADDRESS + "requestlist";
     public static final String URL_RETURN_PARCEL_LIST = BASE_ADDRESS + "invoicelist";
+    public static final String URL_REQUEST_PARCEL_LIST = BASE_ADDRESS + "custrequestparcellist";
+
+
+    //Pagination Tigmoo Demo
+    public static final String BASE_ADDRESS_Demo = "http://148.251.29.69/tigmoo67/api/index/";  //6Apr2018
+    public static final String URL_DEMO = BASE_ADDRESS_Demo + "productlisting";
 
 
 
@@ -121,4 +130,8 @@ public class UrlConstants {
     public static final String KEY_PICKUP_UPDATE_DATA = "pickup_update_data";
     public static final String KEY_START = "start";
     public static final String KEY_LIMIT = "limit";
+    public static final String KEY_PAGETYPE = "pagetype";
+
+    public static final int LOGIN = 0;
+    public static final int RREQUEST = 1;
 }

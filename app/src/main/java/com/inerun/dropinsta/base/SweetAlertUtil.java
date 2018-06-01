@@ -1,6 +1,7 @@
 package com.inerun.dropinsta.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -273,5 +274,46 @@ public class SweetAlertUtil  {
             sweetAlertDialog.dismissWithAnimation();
             }
         },HIDE_DELAY);
+    }
+
+    /**
+     * function to show a message with Proceed and Cancel button ,with confirm callbacks
+     *
+     * @param context
+     * @param msg
+     * @param listener
+     */
+    public static void showWarningWithCallback(Context context, String msg, String positive, SweetAlertDialog.OnSweetClickListener listener) {
+
+        new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(context.getString(R.string.sweet_alert_warning_title))
+                .setContentText(msg)
+
+                .setConfirmText(positive)
+
+
+                .setConfirmClickListener(listener)
+                .show();
+    }
+
+    public static SweetAlertDialog getProgressDialog(Context context) {
+        SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor(context.getString(R.color.sweet_dialog_progress_color)));
+        pDialog.setTitleText(context.getString(R.string.service_progressdialog_title));
+        pDialog.setCancelable(false);
+        return pDialog;
+    }
+
+    /**
+     * function to show error message with ok button , without button callback
+     *
+     * @param context
+     * @param msg
+     */
+    public static void showErrorMessage(Context context, String msg) {
+        new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText(context.getString(R.string.sweet_alert_error_title))
+                .setContentText(msg)
+                .show();
     }
 }
