@@ -16,7 +16,10 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class SweetAlertUtil  {
 
+    public static final int TOAST_TYPE = 6;
     private static final long HIDE_DELAY = 1000;
+    private static final long DIALOG_VISIBLE_TIME = 1200;
+    private static final long ERROR_VISIBLE_TIME = 2000;
     /**
      * This method is used to show alert dialog.
      *
@@ -96,7 +99,7 @@ public class SweetAlertUtil  {
 
 
         new SweetAlertDialog(context)
-                .setContentText("Here's a message!")
+                .setContentText(alertMessage)
                 .show();
     }
 
@@ -316,4 +319,63 @@ public class SweetAlertUtil  {
                 .setContentText(msg)
                 .show();
     }
+
+    /**
+     * function to show a basic message with ok button , without button callback
+     *
+     * @param context
+     * @param msg
+     */
+    public static void showSweetMessageToast(Context context, String msg) {
+        final SweetAlertDialog sweetalert = new SweetAlertDialog(context,TOAST_TYPE)
+                .setContentText(msg);
+        sweetalert.show();
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sweetalert.dismiss();
+            }
+        }, DIALOG_VISIBLE_TIME);
+
+    }
+
+    /**
+     * function to show a basic message with ok button , without button callback
+     *
+     * @param context
+     * @param msg
+     */
+    public static void showSweetErrorToast(Context context, String msg) {
+        final SweetAlertDialog sweetalert = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                .setContentText(msg);
+        sweetalert.show();
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sweetalert.dismiss();
+            }
+        }, ERROR_VISIBLE_TIME);
+
+    }
+
+    /**
+     * function to show a message with Proceed and Cancel button ,with confirm callbacks
+     *
+     * @param context
+     * @param msg
+
+     */
+    public static void showMessageWithCallback(Context context, String title, String msg, String positive, String negative, SweetAlertDialog.OnSweetClickListener positivelistener, SweetAlertDialog.OnSweetClickListener negativelistener) {
+        new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(title)
+                .setContentText(msg)
+                .setCancelText(negative)
+                .setConfirmText(positive)
+                .showCancelButton(true)
+                .setCancelClickListener(negativelistener)
+                .setConfirmClickListener(positivelistener)
+                .show();
+    }
+
+
 }

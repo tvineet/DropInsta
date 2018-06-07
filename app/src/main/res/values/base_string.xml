@@ -17,7 +17,7 @@
     <string name="address_country_hint">Country *</string>
     <string name="action_skip">skip</string>
     <string name="welcome_register">REGISTER</string>
-    <string name="email_hint">Email Id</string>
+    <string name="auction_email_hint">Email Id</string>
     <string name="password_hint">Password</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>

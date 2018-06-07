@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.inerun.dropinsta">
 
+    <uses-feature android:name="android.hardware.usb.host" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -10,9 +11,28 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
+
+
+
+
+
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
 
     <application
         android:name=".DropInsta"
@@ -33,26 +53,13 @@
             android:theme="@style/AppTheme.NoActionBar"
 
             >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity
-            android:name=".activity_auction.AuctionSplashActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="Auction"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme.NoActionBar"
-
-            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity_auction.AuctionSplashActivity"
             android:configChanges="orientation|screenSize"
@@ -235,7 +242,15 @@
             android:screenOrientation="sensorPortrait">
 
         </activity>
+        <activity
+            android:name=".activity_auction.SyncActivity"
+            android:screenOrientation="sensorPortrait"
+            android:configChanges="orientation|screenSize"
+            android:label="Auction"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
 
+        </activity>
 
         <service android:name=".service.UploadingService" />
         <service android:name=".service.whParcelUploadService" />

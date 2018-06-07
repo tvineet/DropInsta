@@ -1,15 +1,24 @@
 package com.inerun.dropinsta.activity_warehouse;
 
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.base.BaseFragment;
+import com.inerun.dropinsta.base.DeviceInfoUtil;
+import com.inerun.dropinsta.helper.DIHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vinay on 15/12/16.
@@ -17,6 +26,7 @@ import com.inerun.dropinsta.base.BaseFragment;
 
 public class WhDashboardFragment extends BaseFragment implements View.OnClickListener {
 
+    private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
     Context context;
     public static Fragment newInstance() {
         WhDashboardFragment fragment = new WhDashboardFragment();
@@ -41,6 +51,8 @@ public class WhDashboardFragment extends BaseFragment implements View.OnClickLis
 
         getViewById(R.id.readyparcel_image_opacity).setOnClickListener(this);
 //        getViewById(R.id.searchparcel_image).setOnClickListener(this);
+
+        getViewById(R.id.stockparcel_image_opacity).setOnClickListener(this);
 
 
 
@@ -78,8 +90,10 @@ public class WhDashboardFragment extends BaseFragment implements View.OnClickLis
                 navigateToFragment(context, WhReadyForExecutiveFragment.newInstance());
 //                navigateToFragment(context, WhReadyForExecutiveFragment_exp.newInstance());
 
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,
-//                        WhReadyForExecutiveFragment.newInstance()).commit();
+                break;
+
+            case R.id.stockparcel_image_opacity:
+                navigateToFragment(context,WhPhysicalStockCheckFragment.newInstance());
 
                 break;
 //            case R.id.addparcel_image:
@@ -92,5 +106,41 @@ public class WhDashboardFragment extends BaseFragment implements View.OnClickLis
 //                break;
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isMarshMallow() && checkAndRequestPermissions()) {
+            // carry on the normal flow, as the case of  permissions  granted.
+            DIHelper.copyDBToAnotherLocation();
+        }
+    }
+
+    private boolean checkAndRequestPermissions() {
+        int locationPermission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
+        int permissionSendMessage = ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if (locationPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        if (permissionSendMessage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            requestPermissions(listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * function to Check Whether Device has Marshmallow or Above
+     *
+     * @return True if device has marshmallow or greater otherwise false
+     */
+    public boolean isMarshMallow() {
+        return DeviceInfoUtil.getDeviceApiVersion(getActivity()) >= Build.VERSION_CODES.M;
     }
 }

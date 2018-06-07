@@ -18,10 +18,14 @@ public class AppConstant {
     public static final String REG_INFO = "DE 162463073";
     public static final String STATUS_OPEN = "Geöffnet";
     public static final String STATUS_CLOSED = "Geschlossen";
-    public static final String NAME = "Dussmann Service Deutschland GmbH";
+    public static final String NAME = "Tigmoo Shop N Ship";
+    public static final String WEBSITE = "www.tigmooshopnship.com";
     public static final int LOGO_SIZE = 500;
     public static final int DEFAULT_TIMEOUT = 10 * 1000;
     public static final String READER_ALARM_ACTION ="com.pos.reader.alarm.ACTION" ;
+    public static final String ADDRESS = "Plot 6392 Dundudza Chididza Road Longacres";
+    public static final String CITY = "Lusaka";
+    public static final String TEL = "09712 69390";
 
     //    {"data":[{"type":"FL","lines":1},{"type":"text","text":"THE STORE 123 (555) 555 â€“ 5555"},{"type":"size","width":2,"height":2},{"type":"barcode","barcode":"01209457","width":2,"height":100}]}
     public static JSONObject getSampleJsonObject() throws JSONException {
@@ -163,6 +167,7 @@ public class AppConstant {
         public static final String cash_total = "cash_total";
         public static final String subtotal_net = "subtotal_net";
         public static final String total_incl_vat = "total_incl_vat";
+        public static final String payment_method = "payment_method";
         public static final String Guest = "Guest";
         public static final String SignOn = "Signon";
         public static final String Azubi = "Azubi";
@@ -180,6 +185,9 @@ public class AppConstant {
         public static final String End = "end";
         public static final String Style = "style";
         public static final String Cashier_name = "cashier_name";
+        public static final String Customer_name = "customer_name";
+        public static final String Customer_email = "customer_email";
+        public static final String Customer_phone = "customer_phone";
         public static final String Register_name = "register_name";
         public static final String Discount_Rate = "discount_rate";
         public static final String Discount_value = "discount_value";

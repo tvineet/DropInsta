@@ -71,7 +71,7 @@
                     android:layout_below="@+id/title_login"
                     android:layout_marginTop="25dp"
                     app:met_floatingLabel="highlight"
-                    android:hint="@string/email_hint"
+                    android:hint="@string/auction_email_hint"
 
 
                     android:imeOptions="actionNext"

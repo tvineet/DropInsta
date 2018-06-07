@@ -94,11 +94,13 @@ public class IonServiceManager {
 
 
     public class Address {
-        private String API="/api/";
-        public String RequestAuthentication = BaseUrl +API+ "deviceauthentication";
-        public String SyncData = BaseUrl +API+ "syncdata";
-        public String UploadDb = BaseUrl +API+ "uploaddb";
-        public String IMAGE_URL = BaseUrl +"/public/images/thumb/";
+//        private String API="/api/";
+//        public String RequestAuthentication = BaseUrl +API+ "deviceauthentication";
+//        public String SyncData = BaseUrl +API+ "syncdata";
+//        public String UploadDb = BaseUrl +API+ "uploaddb";
+//        public String IMAGE_URL = BaseUrl +"/public/images/thumb/";
+        public String SyncData = BaseUrl + "syncdata";
+        public String SyncPhysicalStockData = BaseUrl + "physicalstockcheck";
 
 
     }
@@ -311,13 +313,13 @@ public class IonServiceManager {
             if (status) {
 
 
-                String encryptedsdata = jsonObject.get(KEYS.DATA).getAsString();
-////                Object data = jsonObject.get(KEYS.DATA).getAsJsonObject();
+//                String encryptedsdata = jsonObject.get(KEYS.DATA).getAsString();
+                Object data = jsonObject.get(KEYS.DATA).getAsJsonObject();
 //                Log.i("decrpteddatastart", "st");
 //                String decrpteddata = new String(MCrypt.getInstance().decrypt(encryptedsdata));
 
 
-                Object data = encryptedsdata;
+//                Object data = encryptedsdata;
                 ;
                 Log.i("decrpteddataend", "end");
                 onResponse(status, message, data);

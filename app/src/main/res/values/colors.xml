@@ -36,6 +36,7 @@
     <color name="homeaddparcel_back">#B31B9F8D</color>
     <color name="homesearchparcel_back">#B3283C55</color>
     <color name="homereadyparcel_back">#B3A52A2A</color>
+    <color name="homestockparcel_back">#B3F59019</color>
     <color name="colorlightyellow">#F1F0C7</color>
     <color name="text_color">#7C7C7C</color>
     <color name="rotating_progress_color">@color/colorPrimary</color>
@@ -45,6 +46,7 @@
     <color name="textcolor_heading2">#78787E</color>
     <color name="textcolor_heading2_white">#FFFFFF</color>
     <color name="textcolor_heading2_white_80">#CCFFFFFF</color>
+    <color name="ringinnercolor">#57D1C1</color>
 
     <integer-array name="color_array">
         <item>@color/red</item>

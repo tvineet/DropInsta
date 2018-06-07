@@ -734,7 +734,7 @@ abstract public class BaseActivity extends AppCompatActivity {
     }
 
     public void showProgress() {
-        if (progress != null) {
+        if (progress != null&&progress_layout!=null) {
             Log.i("Base", "Progress is visible");
             progress_layout.setVisibility(View.VISIBLE);
             progress.start();
@@ -744,7 +744,7 @@ abstract public class BaseActivity extends AppCompatActivity {
     }
 
     public void hideProgress() {
-        if (progress != null) {
+        if (progress != null&&progress_layout!=null) {
             Log.i("Base", "Progress is invisible");
             progress_layout.setVisibility(View.GONE);
             progress.stop();
@@ -1110,6 +1110,15 @@ Used to process
 
 
     };
+
+    /**
+     * function to Check Whether Device has Marshmallow or Above
+     *
+     * @return True if device has marshmallow or greater otherwise false
+     */
+    public boolean isMarshMallow() {
+        return DeviceInfoUtil.getDeviceApiVersion(this) >= Build.VERSION_CODES.M;
+    }
 
 
 }

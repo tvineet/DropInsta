@@ -306,4 +306,15 @@ public class ServiceManager {
 
     }
 
+    /**
+     * Custom Class to Represent Exception caused due to Invalid Parameters
+     */
+    public class InvalidParametersException extends Exception {
+
+
+        public int message() {
+            return R.string.server_exception_error_message_invalid_parameter;
+        }
+    }
+
 }

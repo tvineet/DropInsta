@@ -10,16 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-
 import android.widget.TextView;
-
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
-import com.inerun.dropinsta.activity_auction.AuctionSplashActivity;
+import com.inerun.dropinsta.activity_auction.AuctionHomeActivity;
 import com.inerun.dropinsta.activity_customer_care.CustomerDashboardActivity;
 import com.inerun.dropinsta.activity_warehouse.WhDashboardActivity;
 import com.inerun.dropinsta.base.BaseActivity;
@@ -55,9 +53,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private boolean innerlaunch, forCart;
     private RelativeLayout progress_layout;
-
     private TextView gotoRequest_txt;
-
 
 
     @Override
@@ -166,8 +162,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         Map<String, String> params = DIRequestCreator.getInstance(this).getLoginMapParams(email, pass);
-        progress_layout.setVisibility(View.VISIBLE);
-        progress.start();
+        if (progress != null&&progress_layout!=null) {
+            progress_layout.setVisibility(View.VISIBLE);
+            progress.start();
+        }
         DropInsta.serviceManager().postRequest(UrlConstants.URL_LOGIN, params, null, response_listener, response_errorlistener, sTAG);
 
     }
@@ -180,8 +178,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //            Log.d("Response: ", response.toString());
 
             try {
-                progress_layout.setVisibility(View.GONE);
-                progress.stop();
+                if (progress != null&&progress_layout!=null) {
+                    progress_layout.setVisibility(View.GONE);
+                    progress.stop();
+                }
                 JSONObject jsonObject = new JSONObject(response);
 //                Toast.makeText(LoginActivity.this, DIHelper.getMessage(jsonObject), Toast.LENGTH_LONG).show();
                 showSnackbar(DIHelper.getMessage(jsonObject));
@@ -203,7 +203,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         finish();
                     } else if (loginData.isCashierUser()) {
                         DropInsta.setUser(loginData);
-                        startActivity(new Intent(context, AuctionSplashActivity.class));
+//                        startActivity(new Intent(context, AuctionSplashActivity.class));
+                        startActivity(new Intent(context, AuctionHomeActivity.class));
                         finish();
                         Log.i("UserLogin","Cashier");
                     }else {

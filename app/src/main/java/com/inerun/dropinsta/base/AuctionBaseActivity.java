@@ -1,6 +1,7 @@
 package com.inerun.dropinsta.base;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -23,11 +24,16 @@ import android.widget.Toast;
 
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.activity.LoginActivity;
 import com.inerun.dropinsta.activity_auction.AuctionHomeFragment;
 import com.inerun.dropinsta.activity_auction.AuctionSettingsFragment;
 import com.inerun.dropinsta.activity_auction.IonServiceManager;
+import com.inerun.dropinsta.activity_auction.SyncActivity;
+import com.inerun.dropinsta.constant.Utils;
+import com.inerun.dropinsta.sql.DIDbHelper;
 import com.ncapdevi.fragnav.FragNavController;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -48,8 +54,7 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
     private ActionBarDrawerToggle toggle;
     private DrawerArrowDrawable drawerArrow;
     private RecyclerView hospitalRecyclerView;
-
-
+    private boolean isShowAction = true;
 
 
     @Override
@@ -84,7 +89,7 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
 //            return BuffetHomeFragment.newInstance();
 //
 //        } else {
-            return AuctionHomeFragment.newInstance();
+        return AuctionHomeFragment.newInstance();
 //        }
     }
 
@@ -140,6 +145,11 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
                 onBackPressed();
             }
         });
+        if(isShowAction){
+            toolbar.setVisibility(View.VISIBLE);
+        }else {
+            toolbar.setVisibility(View.GONE);
+        }
 
 
     }
@@ -357,7 +367,7 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
         if (menuid != -1) {
             getMenuInflater().inflate(menuid, menu);
         } else {
-
+            getMenuInflater().inflate(R.menu.menu_warehouse, menu);
         }
         return true;
     }
@@ -392,7 +402,6 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
 //
 //        return super.onOptionsItemSelected(item);
 //    }
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -444,10 +453,10 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
 //                pushFragment(PateintOrdersFragment.newInstance());
 //                break;
 //
-//            case R.id.navigation_start_sync_button:
-//
-//                gotoSyncActivity();
-//                break;
+            case R.id.navigation_start_sync_button:
+
+                gotoSyncActivity();
+                break;
 
             case R.id.navigation_settings_layout:
 
@@ -464,9 +473,9 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
      * when synchronisation will happen. check for the result in onActivityResult with requestCode PERFORM_SYNC
      */
     private void gotoSyncActivity() {
-//        Intent intent = new Intent(this, SyncActivity.class);
-//
-//        startActivityForResult(intent, PERFORM_SYNC);
+        Intent intent = new Intent(this, SyncActivity.class);
+
+        startActivityForResult(intent, PERFORM_SYNC);
     }
 
 
@@ -517,7 +526,7 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
         Log.i("FragNavController", "getRootFragment Called with index" + i);
 
 
-            return AuctionHomeFragment.newInstance();
+        return AuctionHomeFragment.newInstance();
 
     }
 
@@ -560,7 +569,59 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_logout:
+                if (Utils.isUserLoggedIn(this)) {
+                    SweetAlertUtil.showAlertDialogwithListener(this, R.string.logout, R.string.really_logout, R.string.yes, R.string.no, listener, new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                            sweetAlertDialog.dismiss();
+
+                        }
+                    }).show();
+                } else {
+                    goToActivity(LoginActivity.class);
+                }
+                break;
+        }
+        return true;
+    }
+
+    SweetAlertDialog.OnSweetClickListener listener = new SweetAlertDialog.OnSweetClickListener() {
+        @Override
+        public void onClick(SweetAlertDialog sweetAlertDialog) {
+            Utils.deletePrefs(AuctionBaseActivity.this);
+            DIDbHelper.deleteTables(AuctionBaseActivity.this);
+
+            goToActivity(LoginActivity.class);
+            finish();
+        }
 
 
+    };
 
+    public void goToActivity(Class classobj) {
+        startActivity(new Intent(AuctionBaseActivity.this, classobj));
+    }
+
+    public boolean isShowAction() {
+        return isShowAction;
+    }
+
+    public void setShowAction(boolean showAction) {
+        isShowAction = showAction;
+    }
+
+
+    /**
+     * function to Check Whether Device has Marshmallow or Above
+     *
+     * @return True if device has marshmallow or greater otherwise false
+     */
+    public boolean isMarshMallow() {
+        return DeviceInfoUtil.getDeviceApiVersion(this) >= Build.VERSION_CODES.M;
+    }
 }

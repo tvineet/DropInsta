@@ -29,7 +29,9 @@ public class DiscoveryActivity extends BaseActivity implements View.OnClickListe
     private FilterOption mFilterOption = null;
     private TextView status;
 
-
+    static {
+        System.loadLibrary("epos2");
+    }
     @Override
     public int customSetContentView() {
         return R.layout.activity_discovery;
@@ -78,6 +80,7 @@ public class DiscoveryActivity extends BaseActivity implements View.OnClickListe
             setStatus("customOnCreate Discovery.start Done");
         }  catch (Epos2Exception e) {
             setStatus("customOnCreate Epos2Exception "+ e.getErrorStatus()+" "+e.getMessage());
+
 //                if (e.getErrorStatus() != Epos2Exception.ERR_PROCESSING) {
 //                    ShowMsg.showException(e, "restartDiscoverystop", mContext);
 
@@ -89,7 +92,7 @@ public class DiscoveryActivity extends BaseActivity implements View.OnClickListe
 //            ShowMsg.showException(e, "customOnCreatestart", mContext);
         }catch (UnsatisfiedLinkError e) {
             setStatus("customOnCreate Discovery.start Exception"+e.toString());
-
+e.printStackTrace();
 //            ShowMsg.showException(e, "customOnCreatestart", mContext);
         }
     }

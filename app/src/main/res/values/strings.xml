@@ -51,6 +51,7 @@
     <string name="navigation_location">Locations</string>
     <string name="device_name">Device Name</string>
     <string name="printer">Printer</string>
+    <string name="print">Print</string>
     <string name="printer_address">Printer Address</string>
     <string name="touch_to_scan">Touch to Scan</string>
     <string name="save">Save</string>
@@ -96,7 +97,7 @@
     <string name="lang_southasia">SOUTH ASIA</string>
 
 
-    <string name="dialog_printer_settings_error_msg">Drucker nicht verbunden...Jetzt einstellen?</string>
+    <string name="dialog_printer_settings_error_msg">Printer Settings are not Correct!! please provide correct and fill values</string>
     <string name="dialog_webview_null_error_msg">Webview Instance is null Please restart the app?</string>
     <string name="dialog_permission_denied_error_msg">App need these permissions to work normally? Please Restart app and provide permissions.</string>
     <string name="dialog_ftp_url_error_msg">Ftp Url either invalid or empty?</string>
@@ -139,8 +140,9 @@
     <string name="space29">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
     <string name="space30">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
     <string name="line">------------------------------\n</string>
-    <string name="qty">ME</string>
+    <string name="qty">Item Id</string>
     <string name="euro">&#8364;&#160;</string>
+    <string name="zmw">K</string>
     <string name="euro_without_space">&#8364;</string>
     <string name="black_star">&#9733;</string>
     <string name="white_star">&#9734;</string>
@@ -148,7 +150,7 @@
     <string name="positive">+</string>
     <string name="negative">-</string>
 
-    <string name="desc">Artikel</string>
+    <string name="desc">Description</string>
 
 
 
@@ -207,6 +209,7 @@
     <string name="connect">Connect</string>
     <string name="connected">Connected</string>
     <string name="connect_fail">Fail to connect</string>
+    <string name="printer_connect_fail">Fail to connect to the Printer</string>
     <string name="disconnect">Disconnect</string>
     <string name="disconnected">Disconnected</string>
     <string name="disconnecting">Disconnecting</string>
@@ -229,14 +232,14 @@
 
 
     <string name="header_name">Point of Sale - Delightful Express</string>
-    <string name="reciept">Rechnungsbeleg</string>
+    <string name="reciept">Invoice</string>
     <string name="cash_reciept_open">Kassenbestand</string>
     <string name="cash_reciept_closed">Abrechnung</string>
     <string name="summary_reciept_title">Abrechnung %1$s</string>
     <string name="cashmachine_reciept_title">Automatenentnahme</string>
     <string name="cancel_reciept">Stornobeleg</string>
     <string name="welcome">Welcome %1$s</string>
-    <string name="legal_info">USt-Nr.: %1$s</string>
+    <string name="legal_info">TPIN: %1$s</string>
     <string name="confirm_cash_msg">Cash Amount in Cash Drawer is %1$s.\nPlease confirm the cash.</string>
     <string name="place">Delightful Express, %1$s</string>
     <string name="place_address">Email: email@domain.com \nTel: 1234567890 \nFax: 1234567890 \nWebsite: www.shop.com</string>
@@ -246,7 +249,7 @@
     <string name="sub_amount_msg">&#160;&#160;Please withdraw %1$s amount from the \n&#160;&#160;Cash Drawer.</string>
     <string name="matched_amount_msg">Cash Matched !!</string>
     <string name="price">Einzelpreis</string>
-    <string name="amount">Gesamt</string>
+    <string name="amount">Amount</string>
     <string name="subtotal">Zwischensumme:&#160;</string>
     <string name="vat" formatted="false">MwSt. %1$s:&#160;</string>
     <string name="vat_without_colon" formatted="false">MwSt. %1$s&#160;</string>
@@ -257,21 +260,25 @@
     <string name="discount">Gästezuschlag:&#160;</string>
     <string name="discount2">Rabatt %1$s:&#160;</string>
     <string name="total">Summe</string>
-    <string name="total_incl_vat">Summe:&#160;</string>
-    <string name="cash_given">Bargeld erhalten:&#160;</string>
-    <string name="cash_recieve">Wechselgeld:&#160;</string>
+    <string name="total_incl_vat">Grand total:&#160;</string>
+    <string name="cash_given">Cash Given:&#160;</string>
+    <string name="payment_method">Payment by:&#160;</string>
+    <string name="cash_recieve">Cash Received:&#160;</string>
     <string name="deducted_value">Kartenzahlung:&#160;</string>
     <string name="card_balance">Guthaben Karte:&#160;</string>
     <string name="sales">Sales:&#160;</string>
     <string name="change">Change:&#160;</string>
     <string name="num_item">Number of Items:&#160;</string>
-    <string name="order_number">Bestellnummer:</string>
-    <string name="order_date">Datum:</string>
+    <string name="order_number">Invoice No:</string>
+    <string name="order_date">Date:</string>
     <string name="receipt_sno">Z-Bon:</string>
     <string name="cashmachine_receipt_sno">Belegnummer:</string>
     <string name="cashmachine_sno">Bargeldaufwerter:</string>
     <string name="monthly_receipt_sno">ZZ-Bon:</string>
-    <string name="served_by">Kassierer:</string>
+    <string name="served_by">Cashier:</string>
+    <string name="customer_email">Email:</string>
+    <string name="customer_mobile">Phone:</string>
+    <string name="customer_name">Name:</string>
     <string name="total_sales">Gesamtumsatz</string>
     <string name="sales_umsatz">Umsatz %1$s</string>
     <string name="sales_umsatz_normal">BAR Umsatz %1$s</string>
@@ -325,7 +332,7 @@
     <string name="btn_usbdiscovery">USB Discovery</string>
     <string name="title_printerseries">Printer Series</string>
     <string name="logo_size_hint">Size: 120*120, less than 500kb</string>
-    <string name="title_lang">Lang</string>
+    <string name="title_lang">Language</string>
     <string name="title_pin">Pin</string>
     <string name="title_pulse">Pulse</string>
     <string name="title_pos">POS</string>
@@ -377,7 +384,7 @@
     <string name="handlingmsg_err_offline">Printer is offline.\n</string>
     <string name="connecting">Connecting</string>
     <string name="printing">Printing</string>
-    <string name="thankyou_msg">Wir wünschen Ihnen \nGuten Appetit! \n</string>
+    <string name="thankyou_msg">Thank you for your purchase \nDownload Our App from Playstore \n</string>
     <string name="size_error">Logo must be less than %1$d Kb</string>
 
     <string name="value_updated">Karte aktualisiert</string>
@@ -419,4 +426,12 @@
     <string name="error_write_card">Unable to Write Card</string>
     <string name="web_error_desc">Server Down oder Ihr Netzwerk ist zu langsam. \n Error:%1$s description:%2$s</string>
     <string name="power_saving_message">Der Energiesparmodus ist aktiviert. Wir empfehlen Ihnen, den Energiesparmodus unter Verwendung von App zu deaktivieren</string>
+    <string name="test_printer">Test Printer</string>
+    <string name="invoice_header">Tigmoo Shop N Ship \n Plot 6392 Dundudza Chididza Road \n Longacres, Lusaka \n www.tigmooshopnship.com \n 0971269390\n\nTPIN: DE162463073</string>
+    <string name="invoice_title">Invoice</string>
+    <string name="invoice_detail_error">Unable to Fetch Invoice Detail. Please try Again</string>
+    <string name="invoice_amount_error_msg">Please enter valid amount.</string>
+    <string name="action_print">Print</string>
+    <string name="invoice_detail_json_date_error">Invalid Json,Unable to Print this data.</string>
+    <string name="create_invoice_success_message">Do you want to print this invoice</string>
 </resources>

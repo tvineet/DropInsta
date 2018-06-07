@@ -34,23 +34,23 @@ public class EPOSHelper {
 
 
 
-    public static void savePrintSettings(Context context, String target, String usbreader, int printerseries, int printerlang, int printerpulse, int printerpin, String pos, String exceptionurl, int pos_constant, String posurl, String readerAddress, boolean readeractive, boolean logsactive, boolean forceprinting) {
+    public static void savePrintSettings(Context context, String target, int printerseries, int printerlang, int printerpulse, int printerpin) {
 
         AppConstant.SharedPref.savePrinterTarget(context, target);
-        AppConstant.SharedPref.saveUSBReaderAddress(context, usbreader);
+//        AppConstant.SharedPref.saveUSBReaderAddress(context, usbreader);
         AppConstant.SharedPref.savePrinterSeries(context, printerseries);
         AppConstant.SharedPref.savePrinterLang(context, printerlang);
         AppConstant.SharedPref.savePrinterPulse(context, printerpulse);
         AppConstant.SharedPref.savePrinterPin(context, printerpin);
-        AppConstant.SharedPref.savePos(context, posurl);
-        AppConstant.SharedPref.saveExceptionUrl(context, exceptionurl);
-        AppConstant.SharedPref.savePosConstant(context, pos_constant);
-        AppConstant.SharedPref.saveReaderActive(context, readeractive);
-        AppConstant.SharedPref.saveLogsActive(context, logsactive);
-        AppConstant.SharedPref.saveForceSwitching(context, forceprinting);
-        if (readeractive) {
-            AppConstant.SharedPref.saveReaderAddress(context, readerAddress);
-        }
+//        AppConstant.SharedPref.savePos(context, posurl);
+//        AppConstant.SharedPref.saveExceptionUrl(context, exceptionurl);
+//        AppConstant.SharedPref.savePosConstant(context, pos_constant);
+//        AppConstant.SharedPref.saveReaderActive(context, readeractive);
+//        AppConstant.SharedPref.saveLogsActive(context, logsactive);
+//        AppConstant.SharedPref.saveForceSwitching(context, forceprinting);
+//        if (readeractive) {
+//            AppConstant.SharedPref.saveReaderAddress(context, readerAddress);
+//        }
         Toast.makeText(context, R.string.settings_saved, Toast.LENGTH_LONG).show();
 
 
@@ -232,15 +232,18 @@ public class EPOSHelper {
 
     public static boolean createPOSRecieptHeader(Context context, JSONObject json, Printer mPrinter, String receipt_header) throws Epos2Exception, JSONException {
 
+
+
         String method = "";
-        String website = json.getString(AppConstant.Keys.WEBSITE);
+        String website = AppConstant.WEBSITE;
 
 
-        String address = json.getString(AppConstant.Keys.Address);
+        String address = AppConstant.ADDRESS;
 
-        String post_code = json.getString(AppConstant.Keys.Postcode);
+//        String post_code = json.getString(AppConstant.Keys.Postcode);
 
-        String city = json.getString(AppConstant.Keys.City);
+        String city = AppConstant.CITY;
+        String tel = AppConstant.TEL;
 
         String reg_info = AppConstant.REG_INFO;
         String name = AppConstant.NAME;
@@ -251,9 +254,11 @@ public class EPOSHelper {
 
 
         mPrinter.addText(name + "\n");
-        mPrinter.addText(address + "\n");
-        mPrinter.addText(post_code + " " + city + "\n");
+        mPrinter.addText(address +" "+city+ "\n");
+//        mPrinter.addText(post_code + " " + city + "\n");
+//        mPrinter.addText( city + "\n");
         mPrinter.addText(website + "\n");
+        mPrinter.addText(tel + "\n");
         mPrinter.addFeedLine(1);
         mPrinter.addText(context.getString(R.string.legal_info, reg_info) + "\n");
 
@@ -302,7 +307,7 @@ public class EPOSHelper {
     public static boolean createPaymentSlip(Context mContext, Printer mPrinter, JSONObject json, boolean isrfid) throws Epos2Exception, JSONException, Exception {
         Log.i("Json", "" + json.toString());
         JSONArray items = json.getJSONArray(AppConstant.Keys.Items);
-        if (!addRecieptLogo(mContext, R.mipmap.logo, mPrinter)) {
+        if (!addRecieptLogo(mContext, R.mipmap.recieptlogo, mPrinter)) {
             return false;
         }
         if (!createPOSRecieptHeader(mContext, json, mPrinter, mContext.getString(R.string.reciept))) {
@@ -349,11 +354,14 @@ public class EPOSHelper {
     public static boolean addOrderInfo(Context context, Printer mPrinter, JSONObject json) throws Epos2Exception, JSONException {
         StringBuffer textData = new StringBuffer();
         String order_num = json.getString(AppConstant.Keys.Order_num);
-        String order_time = json.getString(AppConstant.Keys.Order_time);
-        String order_date = json.getString(AppConstant.Keys.Order_date);
+//        String order_time = json.getString(AppConstant.Keys.Order_time);
+        String order_date_time = json.getString(AppConstant.Keys.Order_date);
         String cashier_name = json.getString(AppConstant.Keys.Cashier_name);
-        String order_date_time = order_date + "    " + order_time;
-        String reg_name = json.getString(AppConstant.Keys.Register_name);
+        String customer_name = json.getString(AppConstant.Keys.Customer_name);
+        String customer_email = json.getString(AppConstant.Keys.Customer_email);
+        String customer_phone = json.getString(AppConstant.Keys.Customer_phone);
+//        String order_date_time = order_date + "  " + order_time;
+//        String reg_name = json.getString(AppConstant.Keys.Register_name);
 
         mPrinter.addTextSize(1, 1);
         mPrinter.addTextAlign(Printer.ALIGN_LEFT);
@@ -361,7 +369,7 @@ public class EPOSHelper {
         boldLine(mPrinter, true);
 
 
-        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.order_number) + context.getString(R.string.space15)).substring(0, 20));
+        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.order_number) + context.getString(R.string.space15)).substring(0, 15));
 
         boldLine(mPrinter, false);
 
@@ -369,7 +377,7 @@ public class EPOSHelper {
 
         boldLine(mPrinter, true);
 
-        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.order_date) + context.getString(R.string.space15)).substring(0, 20));
+        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.order_date) + context.getString(R.string.space21)).substring(0, 15));
 
         boldLine(mPrinter, false);
 
@@ -377,7 +385,7 @@ public class EPOSHelper {
 
         boldLine(mPrinter, true);
 
-        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.served_by) + context.getString(R.string.space15)).substring(0, 20));
+        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.served_by) + context.getString(R.string.space20)).substring(0, 15));
 
         boldLine(mPrinter, false);
 
@@ -385,12 +393,34 @@ public class EPOSHelper {
 
         boldLine(mPrinter, true);
 
-        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.register_name) + context.getString(R.string.space15)).substring(0, 20));
+        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.customer_name) + context.getString(R.string.space20)).substring(0, 15));
 
         boldLine(mPrinter, false);
 
+        mPrinter.addText(customer_name + "\n");
+        boldLine(mPrinter, true);
 
-        mPrinter.addText(reg_name + "\n");
+        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.customer_email) + context.getString(R.string.space20)).substring(0, 15));
+
+        boldLine(mPrinter, false);
+
+        mPrinter.addText(customer_email + "\n");
+        boldLine(mPrinter, true);
+
+        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.customer_mobile) + context.getString(R.string.space20)).substring(0, 15));
+
+        boldLine(mPrinter, false);
+
+        mPrinter.addText(customer_phone + "\n");
+
+//        boldLine(mPrinter, true);
+//
+//        mPrinter.addText(context.getString(R.string.space2) + (context.getString(R.string.register_name) + context.getString(R.string.space20)).substring(0, 20));
+//
+//        boldLine(mPrinter, false);
+//
+//
+//        mPrinter.addText(reg_name + "\n");
 
         addLine(mPrinter);
 
@@ -402,7 +432,8 @@ public class EPOSHelper {
         boldLine(mPrinter, true);
         String desc_head = context.getString(R.string.desc) + context.getString(R.string.space25);
         desc_head = desc_head.substring(0, 15);
-        textData.append(context.getString(R.string.space2) + context.getString(R.string.qty) + context.getString(R.string.space2) + desc_head + context.getString(R.string.space2) + context.getString(R.string.price) + context.getString(R.string.space2) + context.getString(R.string.amount) + "\n");
+//        textData.append(context.getString(R.string.space2) + context.getString(R.string.qty) + context.getString(R.string.space2) + desc_head + context.getString(R.string.space2) + context.getString(R.string.price) + context.getString(R.string.space2) + context.getString(R.string.amount) + "\n");
+        textData.append(context.getString(R.string.space2) + context.getString(R.string.qty) + context.getString(R.string.space6) + desc_head + context.getString(R.string.space5) + context.getString(R.string.amount) + "\n");
         mPrinter.addText(textData.toString());
         boldLine(mPrinter, false);
         textData.delete(0, textData.length());
@@ -421,24 +452,25 @@ public class EPOSHelper {
             JSONObject json = jsonarray.getJSONObject(i);
             String ordername = json.getString(AppConstant.Keys.Desc);
 
-            if (ordername.length() > 19) {
-                ordername = ordername.substring(0, 19);
+            if (ordername.length() > 17) {
+                ordername = ordername.substring(0, 17);
             } else {
-                ordername = ordername + context.getString(R.string.space25);
-                ordername = ordername.substring(0, 19);
+                ordername = ordername + context.getString(R.string.space18);
+                ordername = ordername.substring(0, 17);
             }
-            String price = context.getString(R.string.euro) + json.getString(AppConstant.Keys.Price) + context.getString(R.string.space11);
-            price = (price).substring(0, 7);
+//            String price = context.getString(R.string.euro) + json.getString(AppConstant.Keys.Price) + context.getString(R.string.space11);
+//            price = (price).substring(0, 7);
 
-            String amount = getFormattedPrice(context, json.getString(AppConstant.Keys.Amount));
-            amount = context.getString(R.string.euro) + amount + context.getString(R.string.space11);
-            amount = amount.substring(0, 7);
+            String amount = getFormattedPriceFor5DigitKwacha(context, json.getString(AppConstant.Keys.Amount));
+            amount = context.getString(R.string.zmw) + context.getString(R.string.space1)+ amount + context.getString(R.string.space11);
+            amount = amount.substring(0, 8);
 
-            String qty = json.getString(AppConstant.Keys.Qty) + context.getString(R.string.space2);
-            qty = qty.substring(0, 2);
+            String itemid = json.getString(AppConstant.Keys.Qty) + context.getString(R.string.space12);
+            itemid = itemid.substring(0, 12);
 
 
-            textData.append(context.getString(R.string.space2) + qty + context.getString(R.string.space2) + ordername + context.getString(R.string.space2) + price + context.getString(R.string.space1) + amount + "\n");
+//            textData.append(context.getString(R.string.space1) + itemid + context.getString(R.string.space2) + ordername + context.getString(R.string.space2) + price + context.getString(R.string.space1) + amount + "\n");
+            textData.append(context.getString(R.string.space1) + itemid + context.getString(R.string.space2) + ordername  + context.getString(R.string.space1) + amount + "\n");
 
 
         }
@@ -451,9 +483,10 @@ public class EPOSHelper {
 
     private static void addOrderPaymentDetails(Context context, Printer mPrinter, JSONObject json, boolean cancel, boolean isrfid) throws Epos2Exception, JSONException {
         StringBuffer textData = new StringBuffer();
-        String subtotal = json.getString(AppConstant.Keys.Subtotal);
-        String subtotal_net = json.getString(AppConstant.Keys.subtotal_net);
+//        String subtotal = json.getString(AppConstant.Keys.Subtotal);
+//        String subtotal_net = json.getString(AppConstant.Keys.subtotal_net);
         String total_incl_vat = json.getString(AppConstant.Keys.total_incl_vat);
+        String payment_method = json.getString(AppConstant.Keys.payment_method);
         String cash_given = "";
         String cash_received = "";
 //        boolean signon=true;
@@ -465,9 +498,9 @@ public class EPOSHelper {
         }
         String subt_heading = context.getString(R.string.subtotal) + context.getString(R.string.space29);
         subt_heading = subt_heading.substring(0, 28);
-        subtotal = getFormattedPrice(context, subtotal);
-        subtotal = context.getString(R.string.euro) + subtotal + context.getString(R.string.space7);
-        subtotal = subtotal.substring(0, 7);
+//        subtotal = getFormattedPrice(context, subtotal);
+//        subtotal = context.getString(R.string.euro) + subtotal + context.getString(R.string.space7);
+//        subtotal = subtotal.substring(0, 7);
         String discount_rate = "";
         String discount_value = "";
         if (json.has(AppConstant.Keys.Discount_Rate)) {
@@ -478,85 +511,101 @@ public class EPOSHelper {
         mPrinter.addTextSize(1, 1);
         mPrinter.addTextAlign(Printer.ALIGN_RIGHT);
 
-        if (signon) {
+//        if (signon) {
+////            if (json.has(AppConstant.Keys.Guest)) {
+////            }
+//            mPrinter.addText(context.getString(R.string.subtotal) + context.getString(R.string.space2) + subtotal + context.getString(R.string.space1) + "\n");
 //            if (json.has(AppConstant.Keys.Guest)) {
+//                addPaymentDetails(context, mPrinter, context.getString(R.string.discount), getFormattedPrice(context, json.getString(AppConstant.Keys.Guest)), false, false);
 //            }
-            mPrinter.addText(context.getString(R.string.subtotal) + context.getString(R.string.space2) + subtotal + context.getString(R.string.space1) + "\n");
-            if (json.has(AppConstant.Keys.Guest)) {
-                addPaymentDetails(context, mPrinter, context.getString(R.string.discount), getFormattedPrice(context, json.getString(AppConstant.Keys.Guest)), false, false);
-            }
-        } else {
-            mPrinter.addText(context.getString(R.string.subtotal) + context.getString(R.string.space2) + subtotal + context.getString(R.string.space1) + "\n");
-            if (json.has(AppConstant.Keys.Guest)) {
-                addPaymentDetails(context, mPrinter, context.getString(R.string.discount), getFormattedPrice(context, json.getString(AppConstant.Keys.Guest)), false, false);
-            }
-        }
-
-
-        if (json.has(AppConstant.Keys.vat1_amount)) {
-            String vat_percent = json.getString(AppConstant.Keys.vat1);
-            String vat_amt = json.getString(AppConstant.Keys.vat1_amount);
-            addPaymentDetails(context, mPrinter, context.getString(R.string.vat, vat_percent), getFormattedPrice(context, vat_amt), false, false);
-        }
-        if (json.has(AppConstant.Keys.vat2_amount)) {
-            String drink_percent = json.getString(AppConstant.Keys.vat2);
-            String drink_amount = json.getString(AppConstant.Keys.vat2_amount);
-            addPaymentDetails(context, mPrinter, context.getString(R.string.vat, drink_percent), getFormattedPrice(context, drink_amount), false, false);
-        }
-
-        addPaymentDetails(context, mPrinter, context.getString(R.string.sub_total_net), getFormattedPrice(context, subtotal_net), false, false);
-        if (signon) {
-//            addLine(mPrinter);
-            addPaymentDetails(context, mPrinter, context.getString(R.string.signon), getFormattedPrice(context, json.getString(AppConstant.Keys.SignOn)), false, false);
-        }
-        if (azubi) {
-//            addLine(mPrinter);
-            addPaymentDetails(context, mPrinter, context.getString(R.string.azubi), getFormattedPrice(context, json.getString(AppConstant.Keys.Azubi)), false, false);
-        }
-
-
-//        String one_time_fee="0,50";
-//        addPaymentDetails(context, mPrinter, context.getString(R.string.customer_onetime), getFormattedPrice(context, one_time_fee),false);
-
-//
-        if (!json.has("Guest")) {
-            if (discount_rate != null && discount_rate.length() > 0) {
-                addPaymentDetails(context, mPrinter, context.getString(R.string.discount2, discount_rate), getFormattedPrice(context, discount_value), true, false);
-            }
-        }
-
-
+//        } else {
+//            mPrinter.addText(context.getString(R.string.subtotal) + context.getString(R.string.space2) + subtotal + context.getString(R.string.space1) + "\n");
+//            if (json.has(AppConstant.Keys.Guest)) {
+//                addPaymentDetails(context, mPrinter, context.getString(R.string.discount), getFormattedPrice(context, json.getString(AppConstant.Keys.Guest)), false, false);
+//            }
 //        }
-
+//
+//
+//        if (json.has(AppConstant.Keys.vat1_amount)) {
+//            String vat_percent = json.getString(AppConstant.Keys.vat1);
+//            String vat_amt = json.getString(AppConstant.Keys.vat1_amount);
+//            addPaymentDetails(context, mPrinter, context.getString(R.string.vat, vat_percent), getFormattedPrice(context, vat_amt), false, false);
+//        }
+//        if (json.has(AppConstant.Keys.vat2_amount)) {
+//            String drink_percent = json.getString(AppConstant.Keys.vat2);
+//            String drink_amount = json.getString(AppConstant.Keys.vat2_amount);
+//            addPaymentDetails(context, mPrinter, context.getString(R.string.vat, drink_percent), getFormattedPrice(context, drink_amount), false, false);
+//        }
+//
+//        addPaymentDetails(context, mPrinter, context.getString(R.string.sub_total_net), getFormattedPrice(context, subtotal_net), false, false);
+//        if (signon) {
+////            addLine(mPrinter);
+//            addPaymentDetails(context, mPrinter, context.getString(R.string.signon), getFormattedPrice(context, json.getString(AppConstant.Keys.SignOn)), false, false);
+//        }
+//        if (azubi) {
+////            addLine(mPrinter);
+//            addPaymentDetails(context, mPrinter, context.getString(R.string.azubi), getFormattedPrice(context, json.getString(AppConstant.Keys.Azubi)), false, false);
+//        }
+//
+//
+////        String one_time_fee="0,50";
+////        addPaymentDetails(context, mPrinter, context.getString(R.string.customer_onetime), getFormattedPrice(context, one_time_fee),false);
+//
+////
+//        if (!json.has("Guest")) {
+//            if (discount_rate != null && discount_rate.length() > 0) {
+//                addPaymentDetails(context, mPrinter, context.getString(R.string.discount2, discount_rate), getFormattedPrice(context, discount_value), true, false);
+//            }
+//        }
+//
+//
+////        }
+//
         boldLine(mPrinter, true);
-        mPrinter.addFeedLine(1);
+//        mPrinter.addFeedLine(1);
 
 
-        addPaymentDetails(context, mPrinter, context.getString(R.string.total_incl_vat).toUpperCase(), getFormattedPrice(context, total_incl_vat), false, false);
+        addPaymentDetails(context, mPrinter, context.getString(R.string.total_incl_vat).toUpperCase(), getFormattedPriceFor5DigitKwacha(context, total_incl_vat), false, false);
 
 
         boldLine(mPrinter, false);
         mPrinter.addTextSize(1, 1);
-        mPrinter.addFeedLine(1);
-        if (!cancel) {
-            if (isrfid) {
-                addPaymentDetails(context, mPrinter, context.getString(R.string.deducted_value), getFormattedPrice(context, cash_given), true, false);
-                addPaymentDetailsfor4Digits(context, mPrinter, context.getString(R.string.card_balance), getFormattedPrice(context, cash_received), false, false);
-            } else {
-                addPaymentDetails(context, mPrinter, context.getString(R.string.cash_given), getFormattedPrice(context, cash_given), false, false);
-                addPaymentDetails(context, mPrinter, context.getString(R.string.cash_recieve), getFormattedPrice(context, cash_received), false, false);
-            }
-        } else {
-            addPaymentDetails(context, mPrinter, context.getString(R.string.cash_refunded), getFormattedPrice(context, total_incl_vat), true, false);
-        }
+//        mPrinter.addFeedLine(1);
+//        if (!cancel) {
+//            if (isrfid) {
+//                addPaymentDetails(context, mPrinter, context.getString(R.string.deducted_value), getFormattedPrice(context, cash_given), true, false);
+//                addPaymentDetailsfor4Digits(context, mPrinter, context.getString(R.string.card_balance), getFormattedPrice(context, cash_received), false, false);
+//            } else {
+
+//        addPaymentDetails(context, mPrinter, context.getString(R.string.payment_method),  payment_method, false, false);
+        mPrinter.addTextAlign(Printer.ALIGN_RIGHT);
+        payment_method =  payment_method + context.getString(R.string.space11);
+        payment_method = payment_method.substring(0, 8);
+
+            mPrinter.addText(context.getString(R.string.payment_method) + context.getString(R.string.space2));
+
+        mPrinter.addTextAlign(Printer.ALIGN_LEFT);
+        mPrinter.addText(payment_method + context.getString(R.string.space2) + "\n");
+                addPaymentDetails(context, mPrinter, context.getString(R.string.cash_given), getFormattedPriceFor5DigitKwacha(context, cash_given), false, false);
+        mPrinter.addTextAlign(Printer.ALIGN_LEFT);
+                addPaymentDetails(context, mPrinter, context.getString(R.string.cash_recieve), getFormattedPriceFor5DigitKwacha(context, cash_received), false, false);
+//            }
+//        } else {
+//            addPaymentDetails(context, mPrinter, context.getString(R.string.cash_refunded), getFormattedPrice(context, total_incl_vat), true, false);
+//        }
 
     }
 
     private static void addPaymentDetails(Context context, Printer mPrinter, String heading, String value, boolean negative, boolean positive) throws Epos2Exception {
 
+
+
+
+
+
         mPrinter.addTextAlign(Printer.ALIGN_RIGHT);
-        value = context.getString(R.string.euro) + value + context.getString(R.string.space7);
-        value = value.substring(0, 7);
+        value = context.getString(R.string.zmw) +context.getString(R.string.space1)+ value + context.getString(R.string.space11);
+        value = value.substring(0, 8);
         if (negative) {
             mPrinter.addText(heading + "-" + context.getString(R.string.space1));
         } else if (positive) {
@@ -565,7 +614,7 @@ public class EPOSHelper {
             mPrinter.addText(heading + context.getString(R.string.space2));
         }
         mPrinter.addTextAlign(Printer.ALIGN_LEFT);
-        mPrinter.addText(value + context.getString(R.string.space1) + "\n");
+        mPrinter.addText(value + context.getString(R.string.space2) + "\n");
     }
 
     private static void addPaymentDetailsfor4Digits(Context context, Printer mPrinter, String heading, String value, boolean negative, boolean positive) throws Epos2Exception {
@@ -636,16 +685,57 @@ public class EPOSHelper {
 
 
     private static String getFormattedPrice(Context context, String price) {
-        String[] split = price.split(",");
-        if (split[0].length() == 1) {
-            split[0] = context.getString(R.string.space1) + split[0];
+        if(price.contains(",")) {
+            String[] split = price.split(",");
+            if (split[0].length() == 1) {
+                split[0] = context.getString(R.string.space1) + split[0];
+            }
+            return (split[0] + "," + split[1]);
+        }else
+        {
+            return price;
         }
-        return (split[0] + "," + split[1]);
+
+    }
+    private static String getFormattedPriceFor5DigitKwacha(Context context, String price) {
+
+
+//        String hundreds="";
+//        String thousand="";
+//        if (!price.contains(",")&&price.length()>3)
+//        {
+//            DecimalFormat formatter = new DecimalFormat("#,###,###");
+//
+//            price = formatter.format(price);
+//        }
+        if (price.length() == 6) {
+            price =  price;
+        } else if (price.length() == 5) {
+            price = context.getString(R.string.space1) + price;
+        } else if (price.length() == 4) {
+            price = context.getString(R.string.space2) + price;
+        } else if (price.length() == 3) {
+            price = context.getString(R.string.space3) + price;
+        } else if (price.length() == 2) {
+            price = context.getString(R.string.space4) + price;
+        } else if (price.length() == 1) {
+            price = context.getString(R.string.space5) + price;
+        }
+
+
+return price;
+
+
+
+
+
+
+
 
     }
 
     private static String get4FormattedPriceFor5Digits(Context context, String price) {
-        String[] split = price.split(",");
+        String[] split = (price.contains(",")?price.split(","):new String[]{price});
         if (split[0].length() == 4) {
             split[0] = context.getString(R.string.space1) + split[0];
         } else if (split[0].length() == 3) {
@@ -655,20 +745,28 @@ public class EPOSHelper {
         } else if (split[0].length() == 1) {
             split[0] = context.getString(R.string.space4) + split[0];
         }
-        return (split[0] + "," + split[1]);
+        if(split.length>1) {
+            return (split[0] + "," + split[1]);
+        }
+        return (split[0] );
 
     }
 
     private static String get4FormattedPrice(Context context, String price) {
-        String[] split = price.split(",");
-        if (split[0].length() == 3) {
-            split[0] = context.getString(R.string.space1) + split[0];
-        } else if (split[0].length() == 2) {
-            split[0] = context.getString(R.string.space2) + split[0];
-        } else if (split[0].length() == 1) {
-            split[0] = context.getString(R.string.space3) + split[0];
-        }
-        return (split[0] + "," + split[1]);
+
+            String[] split = (price.contains(",")?price.split(","):new String[]{price});
+            if (split[0].length() == 3) {
+                split[0] = context.getString(R.string.space1) + split[0];
+            } else if (split[0].length() == 2) {
+                split[0] = context.getString(R.string.space2) + split[0];
+            } else if (split[0].length() == 1) {
+                split[0] = context.getString(R.string.space3) + split[0];
+            }
+            if(split.length>1) {
+                return (split[0] + "," + split[1]);
+            }
+            return (split[0] );
+
 
     }
 

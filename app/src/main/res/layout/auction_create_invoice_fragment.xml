@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.inerun.dropinsta.fontlib.CustomFontButton
+        android:id="@+id/create_invoice_btn"
+        style="@style/button_view_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/login_pass_edt"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@color/buttonColor"
+        android:text="@string/create_invoice_btn"
+        android:textColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/create_invoice_btn"
+        android:layout_alignLeft="@+id/wh_save_all"
+        android:layout_alignStart="@+id/wh_save_all"
+        android:layout_below="@+id/include">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.inerun.dropinsta.helper.ExpandableHeightListView
+                android:id="@+id/item_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin10dp" />
+
+            <LinearLayout
+                android:id="@+id/additem_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_listview"
+                android:layout_marginTop="@dimen/layout_margin5dp"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+
+                >
+
+                <TextView
+                    android:id="@+id/additem_num"
+                    style="@style/fontawesome_text_view_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:background="@color/colorGray"
+                    android:gravity="left|center_vertical"
+                    android:hint="Item #"
+                    android:paddingLeft="@dimen/layout_margin10dp"
+                    android:textSize="@dimen/text_size20sp" />
+
+                <ImageView
+                    android:id="@+id/additem_img"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@color/buttonColor"
+                    android:padding="@dimen/layout_margin10dp"
+                    android:src="@mipmap/addparcel"
+
+
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/devider1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_below="@+id/additem_layout"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/custinfo_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/devider1"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="vertical"
+
+                >
+
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/customer_info_title"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    android:id="@+id/cust_name_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/auction_name_hint"
+                    android:inputType="text"
+                    app:met_floatingLabel="highlight" />
+
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    android:id="@+id/cust_phone_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/auction_phone_hint"
+                    android:inputType="phone"
+                    app:met_floatingLabel="highlight" />
+
+                <com.inerun.dropinsta.fontlib.CustomFontEditText
+                    android:id="@+id/cust_email_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/auction_email_hint"
+                    android:inputType="textEmailAddress"
+                    app:met_floatingLabel="highlight" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/devider2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_below="@+id/custinfo_layout"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/paymentinfo_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/devider2"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.inerun.dropinsta.fontlib.CustomFontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/payment_info_title"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/_16ssp"
+                        android:textStyle="bold" />
+
+                    <com.inerun.dropinsta.fontlib.CustomFontTextView
+                        android:id="@+id/invoice_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="viewEnd"
+                        android:textSize="@dimen/_16ssp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey_100"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <CheckBox
+                            android:id="@+id/invoice_cash_chk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="@string/cash_prefix"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/cash_price_lay"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@+id/invoice_cash"
+                            android:layout_alignTop="@+id/invoice_cash"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="3"
+                            android:background="@drawable/rectangle_border"
+                            android:visibility="gone">
+
+                            <EditText
+                                android:id="@+id/cash_price_edt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:hint="@string/enter_val_hint"
+                                android:inputType="numberDecimal"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/text_size18sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey_300"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+
+                        <CheckBox
+                            android:id="@+id/invoice_card_chk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="@string/card_prefix"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/card_price_lay"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@+id/invoice_card"
+                            android:layout_alignTop="@+id/invoice_card"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="3"
+                            android:background="@drawable/rectangle_border"
+                            android:visibility="gone">
+
+                            <EditText
+                                android:id="@+id/card_price_edt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:hint="@string/enter_val_hint"
+                                android:inputType="numberDecimal"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/text_size18sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/card_trans_id_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <CheckBox
+                            android:id="@+id/invoice_card1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Card"
+                            android:textStyle="bold"
+                            android:visibility="invisible" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@+id/invoice_card1"
+                            android:layout_alignTop="@+id/invoice_card1"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="3"
+                            android:background="@drawable/rectangle_border">
+
+                            <EditText
+                                android:id="@+id/card_trans_id_edt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:hint="@string/transaction_id_hint"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/text_size18sp"
+                                android:visibility="visible"
+
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey_100"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+
+                        <CheckBox
+                            android:id="@+id/invoice_cheque_chk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="@string/cheque_prefix"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/cheque_price_lay"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@+id/invoice_cheque"
+                            android:layout_alignTop="@+id/invoice_cheque"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="3"
+                            android:background="@drawable/rectangle_border"
+                            android:visibility="gone">
+
+                            <EditText
+                                android:id="@+id/cheque_price_edt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:hint="@string/enter_val_hint"
+                                android:inputType="numberDecimal"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/text_size18sp"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cheque_trans_id_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+
+                        <CheckBox
+                            android:id="@+id/invoice_card2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Card"
+                            android:textStyle="bold"
+                            android:visibility="invisible" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@+id/invoice_card2"
+                            android:layout_alignTop="@+id/invoice_card2"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="3"
+                            android:background="@drawable/rectangle_border">
+
+                            <EditText
+                                android:id="@+id/cheque_trans_id_edt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:hint="@string/transaction_id_hint"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/text_size18sp"
+                                android:visibility="visible"
+
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey_300"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+
+                        <CheckBox
+                            android:id="@+id/invoice_bank_chk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="@string/bank_prefix"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/bank_price_lay"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@+id/invoice_bt"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignTop="@+id/invoice_bt"
+                            android:layout_centerHorizontal="true"
+                            android:layout_toRightOf="@+id/invoice_bt"
+                            android:layout_weight="3"
+                            android:background="@drawable/rectangle_border"
+                            android:visibility="gone">
+
+                            <EditText
+                                android:id="@+id/bank_trans_price_edt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:hint="@string/enter_val_hint"
+                                android:inputType="numberDecimal"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/text_size18sp"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bank_trans_id_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+
+                        <CheckBox
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Card"
+                            android:textStyle="bold"
+                            android:visibility="invisible" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="3"
+                            android:background="@drawable/rectangle_border">
+
+                            <EditText
+                                android:id="@+id/bank_trans_id_edt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:hint="@string/transaction_id_hint"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/text_size18sp"
+                                android:visibility="visible"
+
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,10 +1,12 @@
 package com.inerun.dropinsta.base;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,18 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.activity_auction.IonServiceManager;
+import com.inerun.dropinsta.constant.Utils;
 import com.inerun.dropinsta.helper.DIHelper;
+import com.inerun.dropinsta.model.AuctionInvoice;
+import com.inerun.dropinsta.model.AuctionItem;
+import com.inerun.dropinsta.printer.AppConstant;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.util.List;
 
 /**
  * Created by vinay on 09/09/17.
@@ -44,6 +57,7 @@ abstract public class AuctionBaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
 
     }
@@ -241,7 +255,55 @@ abstract public class AuctionBaseFragment extends Fragment {
         e.printStackTrace();
     }
 
+    public Drawable getDrawable(int id) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            return ContextCompat.getDrawable( getActivity(), id);
+//        } else {
+//            return getResources().getDrawable(id);
+//        }
+        return ContextCompat.getDrawable(getActivity(), id);
+    }
 
 
+    protected String preparePrintData(AuctionInvoice invoice, List<AuctionItem> itemList) throws JSONException {
+
+
+        JSONObject jsonObject = new JSONObject();
+
+
+        String stringDate = DateFormat.getDateTimeInstance().format(invoice.getCreated_on());
+        jsonObject.put(AppConstant.Keys.Date, stringDate);
+        jsonObject.put(AppConstant.Keys.Order_num, invoice.getInvoice_number());
+//        jsonObject.put(AppConstant.Keys.Order_time,stringDate);
+//        jsonObject.put(AppConstant.Keys.Order_time, "11:59");
+        jsonObject.put(AppConstant.Keys.Cashier_name, "" + Utils.getName(activity()));
+        jsonObject.put(AppConstant.Keys.Customer_name, "" + invoice.getCustomer_name());
+        jsonObject.put(AppConstant.Keys.Customer_email, "" + invoice.getCustomer_email());
+        jsonObject.put(AppConstant.Keys.Customer_phone, "" + invoice.getCustomer_phone());
+        jsonObject.put(AppConstant.Keys.total_incl_vat, "" + invoice.getGrand_total());
+        jsonObject.put(AppConstant.Keys.cash_given, "" + invoice.getCash_amount());
+        jsonObject.put(AppConstant.Keys.cash_received, "" + invoice.getAmount_returned());
+        jsonObject.put(AppConstant.Keys.payment_method, ""+invoice.getPaymentMethods());
+
+
+        if (itemList != null && itemList.size() > 0) {
+
+            JSONArray jsonArray = new JSONArray();
+            for (int i = 0; i < itemList.size(); i++) {
+                AuctionItem item = itemList.get(0);
+                JSONObject jsonObject1 = new JSONObject();
+                jsonObject1.put(AppConstant.Keys.Qty, "" + item.getItem_barcode());
+                jsonObject1.put(AppConstant.Keys.Desc, "" + item.getDescription());
+                jsonObject1.put(AppConstant.Keys.Amount, "" + item.getAap());
+                jsonArray.put(jsonObject1);
+
+            }
+            jsonObject.put(AppConstant.Keys.Items, jsonArray);
+
+        }
+
+
+        return jsonObject.toString();
+    }
 
 }

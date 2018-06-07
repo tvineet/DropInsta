@@ -21,8 +21,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.activity_auction.IonServiceManager;
 import com.inerun.dropinsta.constant.UrlConstants;
+import com.inerun.dropinsta.helper.DIHelper;
 import com.victor.loading.rotate.RotateLoading;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -299,6 +302,15 @@ abstract public class BaseFragment extends Fragment {
 
     public RotateLoading getProgress() {
         return progress;
+    }
+
+
+    public Gson getGsonInstance() {
+        return DIHelper.getGsonInstance();
+    }
+    public void showException(Exception e) {
+        SweetAlertUtil.showErrorMessage(getActivity(), IonServiceManager.ResponseCallback.getExceptionMessage(getActivity(), e));
+        e.printStackTrace();
     }
 
 }
