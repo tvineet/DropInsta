@@ -12,13 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inerun.dropinsta.DropInsta;
 import com.inerun.dropinsta.R;
-import com.inerun.dropinsta.base.BaseActivity;
 import com.inerun.dropinsta.base.BaseFragment;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.constant.Utils;
@@ -27,6 +25,7 @@ import com.inerun.dropinsta.data.ParcelListingData;
 import com.inerun.dropinsta.data.ParcelStatus;
 import com.inerun.dropinsta.data.TransactionData;
 import com.inerun.dropinsta.sql.DIDbHelper;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.util.ArrayList;
 
@@ -45,7 +44,7 @@ public class DeliveryParcelDeliveryFragment extends BaseFragment implements View
     boolean iscard;
     private TransactionData transcdata;
     private final int SIGN_REQUEST = 102;
-    private ProgressBar progress;
+    private RotateLoading progress;
     private Context context;
 
 

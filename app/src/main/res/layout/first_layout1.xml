@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:gravity="center"
+        >
+
+
+        <RelativeLayout
+            android:id="@+id/request_parcel_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="3"
+            android:background="@drawable/rectangle_border1"
+            android:orientation="horizontal"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            >
+
+            <ImageView
+                android:id="@+id/requestparcel_image_opacity"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/homeaddparcel_back"
+
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+
+            <ImageView
+                android:id="@+id/requestparcel_imgstyle"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="30dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/request"
+
+
+                />
+
+            <TextView
+                android:id="@+id/request_parcel"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/requestparcel_imgstyle"
+                android:text="Request Parcel"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+
+                />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/auction_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="3"
+            android:background="@drawable/rectangle_border2"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_below="@+id/request_parcel_layout"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            >
+
+            <ImageView
+                android:id="@+id/auction_image_opacity"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/homesearchparcel_back"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+
+            <ImageView
+                android:id="@+id/auction_imgstyle3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="30dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/auction"
+
+
+                />
+
+
+            <TextView
+                android:id="@+id/auction"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/auction_imgstyle3"
+                android:text="Auction"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/user_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="3"
+            android:background="@drawable/rectangle_border3"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_below="@+id/auction_layout"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+
+            >
+
+            <ImageView
+                android:id="@+id/user_image_opacity"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/homereadyparcel_back"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+
+            <ImageView
+                android:id="@+id/user_imgstyle"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="30dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/user"
+
+
+                />
+
+
+            <TextView
+                android:id="@+id/user"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/user_imgstyle"
+                android:text="Other User"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

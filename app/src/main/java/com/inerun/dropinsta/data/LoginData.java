@@ -10,6 +10,7 @@ public class LoginData implements Serializable {
     public static String USER_TYPE_WAREHOUSE = "11";
     public static String USER_TYPE_DELIVERY = "8";
     public static String USER_TYPE_CUSTOMER_CARE = "6";
+    public static String USER_TYPE_CASHIER = "9";
     private boolean status;
     private String message;
 
@@ -67,6 +68,10 @@ public class LoginData implements Serializable {
 
     public boolean isCustomerCareUser() {
         return getUsertype().equalsIgnoreCase(USER_TYPE_CUSTOMER_CARE);
+    }
+
+    public boolean isCashierUser() {
+        return getUsertype().equalsIgnoreCase(USER_TYPE_CASHIER);
     }
 
     public String getLocation() {

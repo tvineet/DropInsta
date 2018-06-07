@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/sync_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin5dp"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+                    android:id="@+id/sync_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="@color/deep_purple_500"
+                    android:gravity="center"
+                    android:text="Sync"
+                    android:textSize="@dimen/text_size30sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/addstockParcel_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:background="@color/light_blue_500"
+                    android:paddingTop="@dimen/_50sdp"
+                    android:paddingBottom="@dimen/_50sdp"
+                    >
+
+                    <TextView
+                        android:id="@+id/addstockparcel_num"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:gravity="center"
+                        android:text="Scan"
+                        android:textSize="@dimen/text_size30sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        />
+
+                    <ImageView
+                        android:id="@+id/addstockparcel_img"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@color/buttonColor"
+                        android:padding="@dimen/layout_margin10dp"
+                        android:src="@mipmap/addparcel"
+                        android:visibility="gone"
+
+                        />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+            <com.inerun.dropinsta.helper.ExpandableHeightListView
+                android:id="@+id/parcelstock_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sync_layout"
+                android:layout_marginTop="@dimen/layout_margin5dp" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -3,21 +3,38 @@ package com.inerun.dropinsta.helper;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.Environment;
+import android.util.Log;
 import android.util.Patterns;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.base.BaseActivity;
+import com.inerun.dropinsta.constant.AppConstant;
 import com.inerun.dropinsta.constant.UrlConstants;
 import com.inerun.dropinsta.data.PickupParcelData;
 import com.inerun.dropinsta.data.StatusData;
+import com.inerun.dropinsta.sqldb.AppDatabase;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by vinay on 23/11/16.
@@ -174,5 +191,111 @@ public class DIHelper {
 //        }
 
         return true;
+    }
+
+    public static Gson getGsonInstance() {
+        return new GsonBuilder().setDateFormat(AppConstant.DATEFORMAT)
+
+
+                .registerTypeAdapter(Float.class, new FloatTypeAdapter())
+                .registerTypeAdapter(float.class, new FloatTypeAdapter())
+                .registerTypeAdapter(Integer.class, new IntegerTypeAdapter())
+                .registerTypeAdapter(int.class, new IntegerTypeAdapter())
+                .create();
+    }
+
+
+    static class FloatTypeAdapter extends TypeAdapter<Float> {
+
+        @Override
+        public Float read(JsonReader reader) throws IOException {
+            if (reader.peek() == JsonToken.NULL) {
+                reader.nextNull();
+                return null;
+            }
+            String stringValue = reader.nextString();
+            try {
+                Float value = Float.valueOf(stringValue);
+                return value;
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+
+        @Override
+        public void write(JsonWriter writer, Float value) throws IOException {
+            if (value == null) {
+                writer.nullValue();
+                return;
+            }
+            writer.value(value);
+        }
+
+    }
+
+    static class IntegerTypeAdapter extends TypeAdapter<Integer> {
+        @Override
+        public void write(JsonWriter jsonWriter, Integer number) throws IOException {
+            if (number == null) {
+                jsonWriter.nullValue();
+                return;
+            }
+            jsonWriter.value(number);
+        }
+
+        @Override
+        public Integer read(JsonReader jsonReader) throws IOException {
+            if (jsonReader.peek() == JsonToken.NULL) {
+                jsonReader.nextNull();
+                return null;
+            }
+
+            try {
+                String value = jsonReader.nextString();
+                if ("".equals(value)) {
+                    return 0;
+                }
+                return Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+
+                throw new JsonSyntaxException(e);
+            }
+        }
+    }
+
+    public static String[] getPaymentModeArray() {
+
+        String[] array = {"Card","Cash","Cheque","Bank Transfer"};
+
+        return array;
+    }
+
+    public static void setSimpleText(TextView txtview, String text)
+    {
+        txtview.setText(text);
+
+    }
+
+    public static void copyDBToAnotherLocation() {
+
+        String sourcePath = FlowManager.getContext().getDatabasePath(AppDatabase.NAME) + ".db";
+        File source = new File(sourcePath);
+
+        String destinationPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + AppDatabase.NAME + ".db";
+        File destination = new File(destinationPath);
+        try {
+            Log.i("sourcepath", "" + sourcePath);
+            Log.i("file", "" + source.exists());
+            Log.i("file", "" + source.canWrite());
+            Log.i("file", "" + source.canWrite());
+//            destination.createNewFile();
+            if(source.exists()) {
+                FileUtils.copyFile(source, destination);
+            }else{
+                Log.i("Not Exist", "File not find");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

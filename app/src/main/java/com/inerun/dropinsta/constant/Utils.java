@@ -194,6 +194,24 @@ public class Utils {
     }
 
 
+    public static void savePageType(Context context, int pageType) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                AppConstant.USER_PREFRENCES_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(UrlConstants.KEY_PAGETYPE, pageType);
+        editor.commit();
+    }
+
+    public static int getPageType(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                AppConstant.USER_PREFRENCES_NAME,
+                Context.MODE_PRIVATE);
+        int value = sharedPref.getInt(UrlConstants.KEY_PAGETYPE, 0);
+        return value;
+    }
+
+
     public static void deletePrefs(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 AppConstant.USER_PREFRENCES_NAME,
