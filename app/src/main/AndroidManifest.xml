@@ -245,9 +245,9 @@
         <activity
             android:name=".activity_auction.SyncActivity"
             android:screenOrientation="sensorPortrait"
-            android:configChanges="orientation|screenSize"
-            android:label="Auction"
+
             android:theme="@style/AppTheme.NoActionBar"
+
             >
 
         </activity>

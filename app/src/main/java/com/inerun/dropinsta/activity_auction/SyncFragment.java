@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.arasthel.asyncjob.AsyncJob;
-
 import com.github.lzyzsd.circleprogress.DonutProgress;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -38,7 +37,6 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 import org.json.JSONException;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -97,7 +95,7 @@ public class SyncFragment extends AuctionBaseFragment implements View.OnClickLis
     }
 
     private void setData() {
-//        device_number.setText(getString(R.string.navigation_header_device, getApp().appData.getDeviceno()));
+        device_number.setText(getString(R.string.navigation_header_device, ""));
 //        Helper.setSimpleText(device_number,getApp().fcsPref.deviceName());
         start_btn.setOnClickListener(this);
         ok_btn.setOnClickListener(this);

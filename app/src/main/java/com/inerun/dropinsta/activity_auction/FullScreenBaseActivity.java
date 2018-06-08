@@ -19,7 +19,7 @@ abstract public class FullScreenBaseActivity extends AuctionBaseActivity {
     @Override
     public int initLayout() {
 
-        setTheme(R.style.AppTheme_NoActionBar);
+        setTheme(R.style.AppTheme1);
 
         return R.layout.activity_fullscreen_layout;
     }

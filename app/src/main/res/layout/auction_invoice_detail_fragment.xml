@@ -24,7 +24,7 @@
                 android:src="@mipmap/logo"
                 android:visibility="visible" />
 
-            <TextView
+            <com.inerun.dropinsta.fontlib.CustomFontTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/_50sdp"
@@ -40,7 +40,7 @@
                 android:background="@android:color/black" />
 
 
-            <TextView
+            <com.inerun.dropinsta.fontlib.CustomFontTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5dp"
@@ -66,7 +66,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/invoice_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/invoice_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/date_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/date_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/cashier_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/cashier_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/customer_name_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/customer_name_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/customer_email_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/customer_email_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -222,7 +222,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/customer_phone_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/customer_phone_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -282,7 +282,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -317,7 +317,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -329,7 +329,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/grandTotal_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -339,7 +339,7 @@
                     android:textAlignment="viewEnd"
                     android:textStyle="bold" />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/grandtotal_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -360,7 +360,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -372,7 +372,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/payment_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -382,7 +382,7 @@
 
                     android:textAlignment="viewEnd" />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/payment_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -402,7 +402,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -414,7 +414,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/cash_given_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -424,7 +424,7 @@
 
                     android:textAlignment="viewEnd" />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/cash_given_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -444,7 +444,7 @@
 
                 >
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -456,7 +456,7 @@
 
                     />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/cash_recieved_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -466,7 +466,7 @@
 
                     android:textAlignment="viewEnd" />
 
-                <TextView
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
                     android:id="@+id/cash_recieved_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -483,7 +483,7 @@
                 android:layout_marginTop="@dimen/dimen_5dp"
                 android:background="@android:color/black" />
 
-            <TextView
+            <com.inerun.dropinsta.fontlib.CustomFontTextView
                 android:id="@+id/thankyou_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

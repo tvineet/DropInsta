@@ -50,7 +50,7 @@ public class CustomFontTextView extends TextView {
 //			{
 //				setText("F" + attrs);
 //			}
-				setText("F" );
+//				setText("F" );
 
 		}
 	}

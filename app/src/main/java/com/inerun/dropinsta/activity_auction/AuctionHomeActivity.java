@@ -23,12 +23,14 @@ public class AuctionHomeActivity extends AuctionBaseActivity{
     @Override
     public int initLayout() {
 
-        return R.layout.activity_main_with_auction;
+//        return R.layout.activity_main_with_auction;
+        return R.layout.activity_main_wo_navigation;
     }
 
     @Override
     public void initView() {
 
+//        setUpFabMenu();
 
     }
 

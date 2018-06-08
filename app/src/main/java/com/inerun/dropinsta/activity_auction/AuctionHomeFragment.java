@@ -11,12 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.inerun.dropinsta.R;
 import com.inerun.dropinsta.base.AuctionBaseFragment;
 import com.inerun.dropinsta.model.AuctionDetail;
 import com.inerun.dropinsta.model.AuctionInvoice;
 import com.inerun.dropinsta.model.AuctionInvoice_Table;
-import com.inerun.dropinsta.model.AuctionItem;
 import com.inerun.dropinsta.sqldb.AppDatabase;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -39,8 +40,9 @@ public class AuctionHomeFragment extends AuctionBaseFragment implements View.OnC
     private LinearLayout totalCollection_lay;
 
     private TextView auction_detail, total_collection;
-    private  AuctionDetail auctionDetail;
-    private  List<AuctionInvoice> auctionInvoiceList;
+    private AuctionDetail auctionDetail;
+    private List<AuctionInvoice> auctionInvoiceList;
+    private FloatingActionsMenu floationbutton_menu;
 
 
     public static AuctionHomeFragment newInstance() {
@@ -66,7 +68,8 @@ public class AuctionHomeFragment extends AuctionBaseFragment implements View.OnC
         createInvoice_lay = rootview.findViewById(R.id.create_invoice_layout);
         invoiceList_lay = rootview.findViewById(R.id.all_invoice_layout);
         totalCollection_lay = rootview.findViewById(R.id.collection_layout);
-
+        floationbutton_menu = (FloatingActionsMenu) rootview.findViewById(R.id.floationbutton_menu);
+        setUpFabMenu();
         createInvoice_lay.setOnClickListener(this);
         invoiceList_lay.setOnClickListener(this);
         totalCollection_lay.setOnClickListener(this);
@@ -79,17 +82,59 @@ public class AuctionHomeFragment extends AuctionBaseFragment implements View.OnC
         setData();
     }
 
+
+    private void setUpFabMenu() {
+
+
+        FloatingActionButton actionSync = (FloatingActionButton) floationbutton_menu.findViewById(R.id.parcel_detail_sync);
+        actionSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                activity().gotoSyncActivity();
+
+//                menuMultipleActions.setEnabled(!menuMultipleActions.isEnabled());
+            }
+        });
+        FloatingActionButton actionSettings = (FloatingActionButton) floationbutton_menu.findViewById(R.id.parcel_detail_settings);
+        actionSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                pushFragment(AuctionSettingsFragment.newInstance());
+
+
+//                menuMultipleActions.setEnabled(!menuMultipleActions.isEnabled());
+            }
+        });
+
+
+        //        FloatingActionButton addedOnce = new FloatingActionButton(activity());
+//        addedOnce.setTitle("Added once");
+//        floationbutton_menu.addButton(addedOnce);
+
+//        FloatingActionButton addedTwice = new FloatingActionButton(activity());
+//        addedTwice.setTitle("Added twice");
+//        floationbutton_menu.addButton(addedTwice);
+//        floationbutton_menu.removeButton(addedTwice);
+//        floationbutton_menu.addButton(addedTwice);
+    }
+
+
     private void setData() {
 
-        if(auctionDetail != null) {
+        if (auctionDetail != null) {
 
             auction_detail.setText(auctionDetail.getAuction_name() + " / " + auctionDetail.getStart_date());
-        }else{
+        } else {
             auction_detail.setText(getString(R.string.auction_detail_val));
         }
 
 //        total_collection.setText(""+getInvoicesGrandTotal(auctionInvoiceList)+ " ZMW");
-        total_collection.setText(getString(R.string.auction_collection_val, ""+getInvoicesGrandTotal(auctionInvoiceList)));
+        total_collection.setText(getString(R.string.auction_collection_val, "" + getInvoicesGrandTotal(auctionInvoiceList)));
 
         if (activity().isMarshMallow() && checkAndRequestPermissions()) {
             // carry on the normal flow, as the case of  permissions  granted.
@@ -145,9 +190,9 @@ public class AuctionHomeFragment extends AuctionBaseFragment implements View.OnC
             Log.i("file", "" + source.canWrite());
             Log.i("file", "" + source.canWrite());
 //            destination.createNewFile();
-            if(source.exists()) {
+            if (source.exists()) {
                 FileUtils.copyFile(source, destination);
-            }else{
+            } else {
                 Log.i("Not Exist", "File not find");
             }
         } catch (IOException e) {
@@ -162,13 +207,13 @@ public class AuctionHomeFragment extends AuctionBaseFragment implements View.OnC
         getData();
     }
 
-   public float getInvoicesGrandTotal(List<AuctionInvoice> auctionInvoiceList){
+    public float getInvoicesGrandTotal(List<AuctionInvoice> auctionInvoiceList) {
         float total = 0;
-       if(auctionInvoiceList != null && auctionInvoiceList.size() > 0) {
-           for (AuctionInvoice auctionInvoice : auctionInvoiceList) {
-               total += auctionInvoice.getGrand_total();
-           }
-       }
+        if (auctionInvoiceList != null && auctionInvoiceList.size() > 0) {
+            for (AuctionInvoice auctionInvoice : auctionInvoiceList) {
+                total += auctionInvoice.getGrand_total();
+            }
+        }
         return total;
 
     }
