@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:weightSum="1">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/logo"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/_50sdp"
+                android:paddingRight="@dimen/_50sdp"
+                android:text="@string/invoice_header"
+                android:textAlignment="center"
+                android:visibility="visible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@android:color/black" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:paddingLeft="@dimen/_50sdp"
+                android:paddingRight="@dimen/_50sdp"
+                android:text="@string/invoice_title"
+                android:textAlignment="center"
+                android:textSize="@dimen/_19sdp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:background="@android:color/black" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+                    android:id="@+id/invoice_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/order_number"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/invoice_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:padding="@dimen/_5sdp"
+                    android:text="1330" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+                    android:id="@+id/date_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/date"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/date_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:padding="@dimen/_5sdp"
+                    android:text="01.04.2016 11:35" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+                    android:id="@+id/cashier_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/served_by"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/cashier_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:padding="@dimen/_5sdp"
+                    android:text="admin" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+                    android:id="@+id/customer_name_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/customer_name"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/customer_name_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Amit Rathi" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+                    android:id="@+id/customer_email_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/customer_email"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/customer_email_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Rathi_kota@yahoo.co.in" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+                    android:id="@+id/customer_phone_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/customer_mobile"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/customer_phone_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:padding="@dimen/_5sdp"
+                    android:text="9988998899" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@android:color/black" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/qty"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/desc"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/amount"
+                    android:textStyle="bold"
+
+                    />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:background="@android:color/black" />
+
+
+            <com.inerun.dropinsta.helper.ExpandableHeightListView
+                android:id="@+id/itemrecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:divider="@android:color/transparent"
+                 />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/customer_mobile"
+                    android:visibility="invisible"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/grandTotal_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/total_incl_vat"
+                    android:textAlignment="viewEnd"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/grandtotal_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="9988998899" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:visibility="visible"
+
+                >
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/customer_mobile"
+                    android:visibility="invisible"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/payment_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/payment_method"
+
+                    android:textAlignment="viewEnd" />
+
+                <TextView
+                    android:id="@+id/payment_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="9988998899" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cash_given_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/customer_mobile"
+                    android:visibility="invisible"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/cash_given_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/cash_given"
+
+                    android:textAlignment="viewEnd" />
+
+                <TextView
+                    android:id="@+id/cash_given_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="9988998899" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cash_recieved_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/customer_mobile"
+                    android:visibility="invisible"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/cash_recieved_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/cash_recieve"
+
+                    android:textAlignment="viewEnd" />
+
+                <TextView
+                    android:id="@+id/cash_recieved_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="@dimen/_5sdp"
+                    android:text="9988998899" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:id="@+id/thankyou_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/thankyou_msg" />
+            <com.inerun.dropinsta.fontlib.CustomFontButton
+                android:id="@+id/print_invoice_detail"
+                style="@style/button_view_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_20dp"
+                android:gravity="center"
+
+
+
+                android:text="@string/print" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>
+<!--
+
+<android.support.v7.widget.RecyclerView
+android:id="@+id/itemrecyclerView"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:visibility="visible" />-->

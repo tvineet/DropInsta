@@ -63,14 +63,17 @@ public class SplashActivity extends BaseActivity {
                         @Override
                         public void run() {
 
+//                            gotoFirstActivity();
 
-                            if (CheckConnectionUtil.checkMyConnectivity(SplashActivity.this)) {
+                            if(Utils.getPageType(SplashActivity.this) == UrlConstants.LOGIN){
 
-                                if (hasPermissions(context, AppConstant.requiredPermissions())) {
-                                    DIDbHelper.ensureDatabaseIsCorrect(context);
-                                }
+                                if (CheckConnectionUtil.checkMyConnectivity(SplashActivity.this)) {
+
+                                    if (hasPermissions(context, AppConstant.requiredPermissions())) {
+                                        DIDbHelper.ensureDatabaseIsCorrect(context);
+                                    }
 //
-                                gotoPodDeleteActivity();
+                                    gotoPodDeleteActivity();
 
 //                            if (Utils.isUserLoggedIn(SplashActivity.this)) {
 //                                if (DropInsta.getUser().isDeliveryUser()) {
@@ -83,22 +86,65 @@ public class SplashActivity extends BaseActivity {
 //
 //                            }
 
-                            } else {
-                                if (Utils.isUserLoggedIn(SplashActivity.this)) {
-                                    if (DropInsta.getUser().isDeliveryUser()) {
-                                        gotoHomeActivity();
+                                } else {
+                                    if (Utils.isUserLoggedIn(SplashActivity.this)) {
+                                        if (DropInsta.getUser().isDeliveryUser()) {
+                                            gotoHomeActivity();
+                                        } else {
+                                            SweetAlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+
+                                        }
                                     } else {
-                                        SweetAlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                                        gotoLoginActivity();
 
                                     }
-                                } else {
-                                    gotoLoginActivity();
-
-                                }
 //                                AlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+                                }
+
+
+                            }else if(Utils.getPageType(SplashActivity.this) == UrlConstants.RREQUEST){
+                                gotoParcelRequestActivity();
+                            }else{
+
                             }
 
+
+//                            if (CheckConnectionUtil.checkMyConnectivity(SplashActivity.this)) {
+//
+//                                if (hasPermissions(context, AppConstant.requiredPermissions())) {
+//                                    DIDbHelper.ensureDatabaseIsCorrect(context);
+//                                }
+////
+//                                gotoPodDeleteActivity();
+//
+////                            if (Utils.isUserLoggedIn(SplashActivity.this)) {
+////                                if (DropInsta.getUser().isDeliveryUser()) {
+////                                    gotoHomeActivity();
+////                                } else {
+////                                    gotoWarehouseActivity();
+////                                }
+////                            } else {
+////                                gotoLoginActivity();
+////
+////                            }
+//
+//                            } else {
+//                                if (Utils.isUserLoggedIn(SplashActivity.this)) {
+//                                    if (DropInsta.getUser().isDeliveryUser()) {
+//                                        gotoHomeActivity();
+//                                    } else {
+//                                        SweetAlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+//
+//                                    }
+//                                } else {
+//                                    gotoLoginActivity();
+//
+//                                }
+////                                AlertUtil.showAlertDialogFinishActivity(SplashActivity.this, getString(R.string.activity_base_alert_message_unknown_host_exception));
+//                            }
+
                         }
+
                     });
 
 
@@ -215,6 +261,23 @@ public class SplashActivity extends BaseActivity {
 //
 //
 //    }
+
+
+    private void gotoFirstActivity() {
+        Intent intent = new Intent(SplashActivity.this,
+                FirstActivity.class);
+        startActivity(intent);
+
+
+    }
+
+    private void gotoParcelRequestActivity() {
+        Intent intent = new Intent(SplashActivity.this,
+                ParcelRequestActivity.class);
+        startActivity(intent);
+
+
+    }
 
     private void gotoLoginActivity() {
         Intent intent = new Intent(SplashActivity.this,

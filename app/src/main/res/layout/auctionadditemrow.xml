@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+
+        <TextView
+            android:id="@+id/add_parcel_num"
+            style="@style/search_text_view_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:padding="@dimen/layout_margin10dp"
+            android:text="@string/search_parcel_num"
+            android:textSize="@dimen/text_size18sp"
+
+
+            />
+
+        <com.inerun.dropinsta.fontlib.CustomFontEditText
+            android:id="@+id/add_parcel_num_edt"
+            style="@style/search_text_view_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:background="@color/white"
+            android:padding="@dimen/layout_margin10dp"
+            android:text="@string/search_parcel_num"
+            android:textSize="@dimen/text_size18sp"
+            android:visibility="gone"
+            app:met_floatingLabel="highlight"
+
+
+            />
+
+
+        <ImageView
+            android:id="@+id/add_parcel_done"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/greenColor"
+            android:padding="@dimen/layout_margin10dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/done"
+            android:textSize="@dimen/text_size18sp"
+            android:visibility="gone"
+
+
+            />
+
+        <ImageView
+            android:id="@+id/add_parcel_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/layout_margin10dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/edit"
+            android:textSize="@dimen/text_size18sp"
+
+
+            />
+
+        <ImageView
+            android:id="@+id/add_parcel_delete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/redColor"
+            android:scaleType="centerInside"
+            android:src="@mipmap/delete"
+            android:textSize="@dimen/text_size18sp"
+
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+
+        <TextView
+            android:id="@+id/auction_price_title"
+            style="@style/search_text_view_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="Auction Price"
+            android:textSize="@dimen/text_size18sp"
+            android:padding="@dimen/_12sdp"
+
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="5"
+            android:background="@drawable/rectangle_border"
+            >
+
+        <EditText
+            android:id="@+id/add_item_price_edt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@null"
+            android:text="0.00"
+            android:textSize="@dimen/text_size18sp"
+            android:visibility="visible"
+            android:textAlignment="center"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            />
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+<!--<com.inerun.dropinsta.fontlib.CustomFontEditText-->
+<!--android:id="@+id/add_item_price_edt"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+
+<!--android:background="@null"-->
+<!--android:text="0.00"-->
+<!--android:textSize="@dimen/text_size18sp"-->
+<!--android:visibility="visible"-->
+<!--android:textAlignment="center"-->
+
+    <!--/>-->

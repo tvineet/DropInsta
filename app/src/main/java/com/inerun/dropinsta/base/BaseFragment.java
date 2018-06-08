@@ -1,5 +1,6 @@
 package com.inerun.dropinsta.base;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,11 +18,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.inerun.dropinsta.R;
+import com.inerun.dropinsta.activity_auction.IonServiceManager;
 import com.inerun.dropinsta.constant.UrlConstants;
+import com.inerun.dropinsta.helper.DIHelper;
+import com.victor.loading.rotate.RotateLoading;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -39,8 +44,9 @@ abstract public class BaseFragment extends Fragment {
 
 
     };
-    private ProgressBar progress;
+    private RotateLoading progress;
     private Toolbar toolbar;
+    private RelativeLayout progress_layout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,9 +62,10 @@ abstract public class BaseFragment extends Fragment {
 
 
                 toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-                progress = (ProgressBar) getActivity().findViewById(R.id.progressBar);
+                progress_layout = (RelativeLayout) getActivity().findViewById(R.id.progressbar_layout);
+                progress = (RotateLoading) getActivity().findViewById(R.id.progressBar);
                 customOnCreateView(root, inflater, container, savedInstanceState);
-                Log.i("showBackArrow",""+showBackArrow);
+                Log.i("showBackArrow", "" + showBackArrow);
                 if (toolbar != null) {
                     if (showBackArrow) {
 
@@ -178,15 +185,36 @@ abstract public class BaseFragment extends Fragment {
 //        }
 //    }
 
+    //    public void showProgress() {
+//        if (progress != null) {
+//            progress.setVisibility(View.VISIBLE);
+//            progress.start();
+//        }
+//    }
+//
+//    public void hideProgress() {
+//        if (progress != null) {
+//            progress.setVisibility(View.GONE);
+//            progress.stop();
+//        }
+//    }
     public void showProgress() {
         if (progress != null) {
-            progress.setVisibility(View.VISIBLE);
+            Log.i("Base", "Progress is visible");
+            progress_layout.setVisibility(View.VISIBLE);
+            progress.start();
+        } else {
+            Log.i("Base", "Progress is null");
         }
     }
 
     public void hideProgress() {
         if (progress != null) {
-            progress.setVisibility(View.GONE);
+            Log.i("Base", "Progress is invisible");
+            progress_layout.setVisibility(View.GONE);
+            progress.stop();
+        } else {
+            Log.i("Base", "Progress is null");
         }
     }
 
@@ -201,7 +229,7 @@ abstract public class BaseFragment extends Fragment {
 
         if (!fragmentPopped) { //fragment not in back stack, create it.
             FragmentTransaction ft = manager.beginTransaction();
-            ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
+//            ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
             ft.replace(R.id.container, fragment);
             ft.addToBackStack(backStateName);
 
@@ -272,8 +300,17 @@ abstract public class BaseFragment extends Fragment {
         }
     }
 
-    public ProgressBar getProgress() {
+    public RotateLoading getProgress() {
         return progress;
+    }
+
+
+    public Gson getGsonInstance() {
+        return DIHelper.getGsonInstance();
+    }
+    public void showException(Exception e) {
+        SweetAlertUtil.showErrorMessage(getActivity(), IonServiceManager.ResponseCallback.getExceptionMessage(getActivity(), e));
+        e.printStackTrace();
     }
 
 }

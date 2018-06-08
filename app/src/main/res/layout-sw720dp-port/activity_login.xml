@@ -71,7 +71,7 @@
                     android:layout_below="@+id/title_login"
                     android:layout_marginTop="25dp"
                     app:met_floatingLabel="highlight"
-                    android:hint="@string/email_hint"
+                    android:hint="@string/auction_email_hint"
 
 
                     android:imeOptions="actionNext"
@@ -112,6 +112,21 @@
                     android:paddingBottom="@dimen/layout_margin5dp"
                     android:paddingTop="@dimen/layout_margin5dp"
                     />
+
+                <com.inerun.dropinsta.fontlib.CustomFontTextView
+                    android:id="@+id/gotorequest"
+                    style="@style/heading_text_view_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/login_btn"
+                    android:text="Go to Customer Request? Click here"
+
+                    android:textSize="16sp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textAlignment="center"
+                    android:layout_marginTop="20dp"
+                    />
+
 
 
             </RelativeLayout>

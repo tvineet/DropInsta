@@ -1,13 +1,15 @@
 package com.inerun.dropinsta.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.inerun.dropinsta.R;
-import com.inerun.dropinsta.data.WhInvoiceParcelData;
 import com.inerun.dropinsta.data.WhReadyParcelData;
 
 import java.util.ArrayList;
@@ -17,18 +19,88 @@ import java.util.ArrayList;
  */
 
 
-public class WhRequestListAdapter extends BaseRecyclerViewAdapter {
+public class WhRequestListAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<WhReadyParcelData.RequestData> requestDataList;
     private static OnItemClickListener mItemClickListener;
     View.OnClickListener onclickListener;
+    private LayoutInflater inflater;
 
-    public class ViewHolder extends BaseRecyclerViewAdapter.ViewHolder implements View.OnClickListener {
+    private final int ITEM_VIEW_TYPE_BASIC = 0;
+    private final int ITEM_VIEW_TYPE_FOOTER = 1;
+    private boolean isLoading;
+
+
+    public WhRequestListAdapter(Context context, ArrayList<WhReadyParcelData.RequestData> requestDataList, View.OnClickListener searchlickListener) {
+        this.requestDataList = requestDataList;
+        this.context = context;
+        this.onclickListener = searchlickListener;
+        inflater = LayoutInflater.from(context);
+    }
+
+
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        RecyclerView.ViewHolder vh;
+        if (viewType == ITEM_VIEW_TYPE_BASIC) {
+            View view = inflater.inflate(R.layout.wh_request_list_item, parent, false);
+
+            vh = new WhRequestListAdapter.WhRequestViewHolder(view);
+        } else {
+            View view = inflater.inflate(R.layout.prograss_bar, parent, false);
+
+            vh = new WhRequestListAdapter.ProgressViewHolder(view);
+        }
+
+        return vh;
+    }
+
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof WhRequestListAdapter.WhRequestViewHolder) {
+
+            WhReadyParcelData.RequestData data = requestDataList.get(position);
+
+            ((WhRequestListAdapter.WhRequestViewHolder) holder).request_id.setText(data.getRequest_id());
+
+            if(data.getParcelData() != null && data.getParcelData().size() >= 0) {
+                ((WhRequestListAdapter.WhRequestViewHolder) holder).no_of_parcel.setText("" + data.getParcelData().size());
+            }else{
+                ((WhRequestListAdapter.WhRequestViewHolder) holder).no_of_parcel.setText("0");
+            }
+
+            ((WhRequestListAdapter.WhRequestViewHolder) holder).parentView.setTag(position);
+
+        } else {
+            if (!isLoading) {
+                ((WhRequestListAdapter.ProgressViewHolder) holder).progressBar.setVisibility(View.VISIBLE);
+                ((WhRequestListAdapter.ProgressViewHolder) holder).progressBar.setIndeterminate(true);
+            } else
+                ((WhRequestListAdapter.ProgressViewHolder) holder).progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return requestDataList.get(position) != null ? ITEM_VIEW_TYPE_BASIC : ITEM_VIEW_TYPE_FOOTER;
+    }
+
+    @Override
+    public int getItemCount() {
+        return requestDataList == null ? 0: requestDataList.size();
+    }
+
+
+    public class WhRequestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView request_id, no_of_parcel;
         public View parentView;
 
 
-        public ViewHolder(View view) {
+        public WhRequestViewHolder(View view) {
             super(view);
             parentView = view;
             request_id = (TextView) view.findViewById(R.id.request_id);
@@ -46,70 +118,16 @@ public class WhRequestListAdapter extends BaseRecyclerViewAdapter {
     }
 
 
-    public WhRequestListAdapter(Context context, ArrayList<WhReadyParcelData.RequestData> requestDataList, View.OnClickListener searchlickListener) {
-        this.requestDataList = requestDataList;
-        this.context = context;
-        this.onclickListener = searchlickListener;
-    }
+    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
 
-
-
-    @Override
-    protected BaseRecyclerViewAdapter.ViewHolder getViewHolder(View itemView) {
-        ViewHolder viewHolder = new ViewHolder(itemView);
-        return viewHolder;
-    }
-
-    @Override
-    protected View oncreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView;
-
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.wh_request_list_item, parent, false);
-        return itemView;
-    }
-
-    @Override
-    public void onbindViewHolder(BaseRecyclerViewAdapter.ViewHolder viewholder, int position) {
-        ViewHolder holder= (ViewHolder) viewholder.holder;
-        WhReadyParcelData.RequestData data = requestDataList.get(position);
-
-        holder.request_id.setText(data.getRequest_id());
-        holder.parentView.setTag(position);
-        if(data.getParcelData() != null && data.getParcelData().size() >= 0) {
-            holder.no_of_parcel.setText("" + data.getParcelData().size());
-        }else{
-            holder.no_of_parcel.setText("0");
+        public ProgressViewHolder(View v) {
+            super(v);
+            progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         }
-//        if(position % 2 == 0){
-//            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.colorlightyellow));
-//            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-//
-//        }else{
-//            holder.invoice_no.setBackgroundColor(context.getResources().getColor(R.color.sideMenuOptionDark));
-//            holder.no_of_parcel.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-//        }
-
     }
 
 
-
-//    @Override
-//    public int getItemViewType(int position) {
-//
-//        if (parcelDataList.get(position).isDelivered()) {
-//            return ParcelListingData.ParcelData.DELIVERED;
-//        } else {
-//            return ParcelListingData.ParcelData.PENDING;
-//        }
-//
-//    }
-
-
-
-    @Override
-    public ArrayList initObjectList() {
-        return requestDataList;
-    }
 
     public interface OnItemClickListener {
         public void onItemClick(View v, int position);
@@ -128,9 +146,11 @@ public class WhRequestListAdapter extends BaseRecyclerViewAdapter {
     }
 
 
-    public void add(ArrayList<WhReadyParcelData.RequestData> items) {
+    public void add(boolean isLoading , ArrayList<WhReadyParcelData.RequestData> items) {
+        this.isLoading = isLoading;
         int previousDataSize = this.requestDataList.size();
         this.requestDataList.addAll(items);
-        notifyItemRangeInserted(previousDataSize, items.size());
+        notifyDataSetChanged();
+//        notifyItemRangeInserted(previousDataSize, items.size());
     }
 }
