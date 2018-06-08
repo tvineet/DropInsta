@@ -9,7 +9,7 @@
     >
 
 
-    <TextView
+    <com.inerun.dropinsta.fontlib.CustomFontTextView
     android:id="@+id/invoice_detail_itemid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
 
         />
 
-    <TextView
+    <com.inerun.dropinsta.fontlib.CustomFontTextView
         android:id="@+id/invoice_detail_itemdesc"
 
         android:layout_width="0dp"
@@ -32,7 +32,7 @@
 
         />
 
-    <TextView
+    <com.inerun.dropinsta.fontlib.CustomFontTextView
         android:id="@+id/invoice_detail_itemamt"
 
         android:layout_width="0dp"

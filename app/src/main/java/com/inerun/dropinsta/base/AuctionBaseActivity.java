@@ -103,16 +103,19 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
 
         setUpToolbar();
 
-        setUpDrawer();
+//        setUpFabMenu();
+
+//        setUpDrawer();
 
 
 //        setUpFloatingActionButton();
 
 
-        setUpNavigationListener();
+//        setUpNavigationListener();
 
 
     }
+
 
 
     public void setUpToolbar() {
@@ -472,7 +475,7 @@ abstract public class AuctionBaseActivity extends AppCompatActivity implements N
      * open Sync Activity for Synchronisation
      * when synchronisation will happen. check for the result in onActivityResult with requestCode PERFORM_SYNC
      */
-    private void gotoSyncActivity() {
+    public void gotoSyncActivity() {
         Intent intent = new Intent(this, SyncActivity.class);
 
         startActivityForResult(intent, PERFORM_SYNC);
